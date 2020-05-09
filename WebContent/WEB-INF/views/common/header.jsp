@@ -49,9 +49,7 @@
 						$(".header").css("height", "130px");
 					}
 				});
-		$(".meorijom").click(function() {
-			location.href = "/";
-		});
+
 	});
 </script>
 
@@ -110,7 +108,7 @@
 	</div>
 	<div class="header3">
 		<ul class="hNavi">
-			<span class="meorijom">MEORIJOM HAIR</span>
+			<span class="meorijom" onclick="location.href = '/';">MEORIJOM HAIR</span>
 			<li><a href="#">회사소개</a></li>
 			<li><a href="#">지점소개</a></li>
 			<li><a href="#">공지사항</a></li>
