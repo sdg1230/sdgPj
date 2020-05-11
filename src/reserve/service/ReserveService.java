@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import reserve.dao.ReserveDao;
 import reserve.vo.Reserve;
+import reserve.vo.ReserveDetail;
 
 public class ReserveService {
 
@@ -14,6 +15,13 @@ public class ReserveService {
 		ArrayList<Reserve> list = new ReserveDao().selectAllReserve(conn);
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public ArrayList<ReserveDetail> selectAllReserveDetail() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<ReserveDetail> dlist = new ReserveDao().selectAllReserveDetail(conn);
+		JDBCTemplate.close(conn);
+		return dlist;
 	}
 	
 }
