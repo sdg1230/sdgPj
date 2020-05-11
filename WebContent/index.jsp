@@ -7,11 +7,6 @@
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <title>머리좀 헤어</title>
 </head>
-<style>
-.content {
-	
-}
-</style>
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
