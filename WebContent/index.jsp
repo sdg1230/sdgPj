@@ -16,7 +16,10 @@
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="content"></div>
+		<a href="/test" media="post">dd</a>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+		
 	</div>
+	
 </body>
 </html>
