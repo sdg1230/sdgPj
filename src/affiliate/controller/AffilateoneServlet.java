@@ -2,9 +2,6 @@ package affiliate.controller;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import affilate.service.AffilateService;
-import affilate.vo.Affilate;
 import affilate.vo.AffilateList;
 
 /**
- * Servlet implementation class BranchListServlet
+ * Servlet implementation class AffilateoneServlet
  */
-@WebServlet(name = "BranchList", urlPatterns = { "/branchList" })
-public class BranchListServlet extends HttpServlet {
+@WebServlet(name = "Affilateone", urlPatterns = { "/affilateone" })
+public class AffilateoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BranchListServlet() {
+    public AffilateoneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,12 +32,14 @@ public class BranchListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		AffilateList af = new	AffilateService().selectAffilate(reqPage);
+		String sq = request.getParameter("search1");
+		
+		AffilateList af = new	AffilateService().selectAffilate(sq);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
 		System.out.println(af.getReviewStar());
 		request.setAttribute("list", af.getAffilateList());
 		request.setAttribute("star", af.getReviewStar());
+		request.setAttribute("pageNavi", af.getPageNavi());
 		rd.forward(request, response);
 		
 	}
