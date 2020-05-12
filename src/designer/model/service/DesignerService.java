@@ -22,7 +22,33 @@ public class DesignerService {
 	public ArrayList<Designer> selectBySalon(String salonName) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Designer> list = new DesignerDao().selectBySalon(conn, salonName);
+		JDBCTemplate.close(conn);
+
 		return list;
+	}
+
+	public int insertDesigner(Designer d) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new DesignerDao().insertDesigner(conn, d);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteDesigner(int designerNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new DesignerDao().deleteDesigner(conn, designerNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

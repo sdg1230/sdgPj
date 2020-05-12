@@ -86,4 +86,41 @@ public class DesignerDao {
 		return list;
 	}
 
+	public int insertDesigner(Connection conn, Designer d) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query="insert into designer values(seq_designer_no.nextval,?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, d.getSalonName());
+			pstmt.setString(2, d.getDesignerName());
+			pstmt.setString(3, d.getDesignerInfo());
+			pstmt.setString(4, d.getDesignerFilename());
+			pstmt.setString(5, d.getDesignerFilepath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteDesigner(Connection conn, int designerNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query="delete from designer where designer_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, designerNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
 }

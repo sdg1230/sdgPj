@@ -21,7 +21,7 @@
 		</div>
 		<div class="content2">
 			<div class="cBody1">
-				<select name="salon">
+				<select name="salon" id="salonName">
 					<option value="">지점명</option>
 					<c:forEach items="${salonList }" var="s">
 					<option value="${s }">${s }</option>
@@ -29,30 +29,33 @@
 				</select>
 				<button type="button" class="add" id="myBtn">추가</button>
 			</div>
-			 <!-- Modal-------------------------------------------------------------- -->
+			 <!-- insert Modal-------------------------------------------------------------- -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog" id="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content" id="modal-content">
                        <div class="insertForm">
                 <div class="formTitle">디자이너 추가</div>
-                <form action="/insertDesigner" method="post">
+                <form action="/insertDesigner" method="post" enctype="multipart/form-data" onsubmit="return insertFunc();">
                     <table width="100%">
                         <tr>
                             <td width="35%"><span class="hash">#</span>지점명</td>
                             <td width="65%">
-                                <select name="salonName">
-                                    <option value="salon1">지점명</option>
-                                </select>
+                               <select name="salonName" id="insertSalonName">
+									<option value="">지점명</option>
+									<c:forEach items="${salonList }" var="s">
+									<option value="${s }">${s }</option>
+									</c:forEach>
+								</select>
                             </td>
                         </tr>
                         <tr>
                             <td><span class="hash">#</span>디자이너 이름</td>
-                            <td><input type="text" name="designerName" style="width:95%;"></td>
+                            <td><input type="text" name="designerName" style="width:95%;" required></td>
                         </tr>
                         <tr>
                             <td><span class="hash">#</span>디자이너 사진</td>
-                            <td><input type="file" name="designerFilename" style=""></td>
+                            <td><input type="file" name="designerFilename" required></td>
                         </tr>
                         <tr>
                             <td style="vertical-align:top;"><span class="hash">#</span>디자이너 소개</td>
@@ -62,7 +65,7 @@
                     </table>
                     <div class="insertBtn">
                         <button type="submit" class="btn btn-default">등록</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button></div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel">취소</button></div>
                 </form>
             </div>
                     </div>
@@ -77,7 +80,7 @@
                     <p class="designerContent">
                        ${d.designerInfo }</p>
                     <button type="button" id="myBtn2">수정</button>
-                    <button type="button" class="delete">삭제</button>
+                    <button type="button" class="delete" onclick="deleteFunc('${d.designerNo }');">삭제</button>
                 </div>
              	</c:forEach>
              </div>
@@ -95,11 +98,20 @@ $(function() {
     $("#myBtn").click(function() {
         $("#myModal").modal();
     });
-
 });
 
+//인서트모달 취소시 지우기
+ $("#cancel").click(function(){
+        $(".insertForm").find("[name=salonName]").val("");
+         $(".insertForm").find("[name=designerName]").val("");
+         $(".insertForm").find("[name=designerInfo]").val("");
+         $(".insertForm").find("input[type=file]").val("");
+     });
+
+
+
 //지점명별 검색..
-$("select").change(function(){
+$("#salonName").change(function(){
 	var salonName =$(this).val();
 	if(salonName==""){
 		location.href="/designerList";
@@ -118,7 +130,7 @@ $("select").change(function(){
 					  html += "<div class='designerName'>"+data[i].designerName+"</div>"
 					  html += "<p class='designerContent'>"+data[i].designerInfo+"</p>"
 					  html += "<button type='button' id='myBtn2'>수정</button>";
-					  html += "<button type='button' class='delete'>삭제</button></div>"
+					  html += "<button type='button' class='delete' onclick='deleteFunc("+data[i].designerNo+");'>삭제</button></div>"
 				  }
 				  $(".cBody2").append(html);
 			}
@@ -126,6 +138,19 @@ $("select").change(function(){
 	}
 	
 });
+
+function insertFunc(){
+	if($("#insertSalonName").val()==""){
+		alert("지점명을 선택하세요.");
+		return false;
+	}
+}
+function deleteFunc(designerNo){
+	var check=confirm("해당 디자이너를 삭제하시겠습니까?");
+	if(check){
+		location.href="/deleteDesigner?designerNo="+designerNo;
+	}
+}
 
 </script>
 <style>
@@ -170,6 +195,7 @@ $("select").change(function(){
 	float: right;
 	height: 35px;
 	border: none;
+	margin-right:30px;
 	background-color: #998778;
 	color: white;
 	font-size: 15px;
