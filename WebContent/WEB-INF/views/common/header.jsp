@@ -55,9 +55,9 @@
 
 <div class="sidebar">
 	<span class="sideicon"><img src="/imgs/sideicon.png"></span> <a
-		href="#">
-		<div class="sidemenu">
-			<img src="/imgs/reserve-icon.png">
+		href="reserveList">
+		<div class="sidemenu" >
+			<img src="/imgs/reserve-icon.png" >
 			<div>예약하기</div>
 		</div>
 	</a> 
