@@ -22,7 +22,7 @@
 		<div class="content2">
 			<div class="cBody1">
 				<select name="salon">
-					<option>지점명</option>
+					<option value="">지점명</option>
 					<c:forEach items="${salonList }" var="s">
 					<option value="${s }">${s }</option>
 					</c:forEach>
@@ -101,25 +101,30 @@ $(function() {
 //지점명별 검색..
 $("select").change(function(){
 	var salonName =$(this).val();
-	$.ajax({
-		url : "/designerList2",
-		data : {salonName : salonName},
-		type : "get",
-		success : function(data) {
-			$(".cBody2").empty();
-			 //list가 들어있는상태
-			  var html="";
-			  for(var i=0; i<data.length;i++){
-				  html += "<div class='designerInfo'>"
-				  html += "<img src='upload/designer/"+data[i].designerFilepath+"'>"
-				  html += "<div class='designerName'>"+data[i].designerName+"</div>"
-				  html += "<p class='designerContent'>"+data[i].designerInfo+"</p>"
-				  html += "<button type='button' id='myBtn2'>수정</button>";
-				  html += "<button type='button' class='delete'>삭제</button></div>"
-			  }
-			  $(".cBody2").append(html);
-		}
-	});
+	if(salonName==""){
+		location.href="/designerList";
+	}else{
+		$.ajax({
+			url : "/designerList2",
+			data : {salonName : salonName},
+			type : "get",
+			success : function(data) {
+				$(".cBody2").empty();
+				 //list가 들어있는상태
+				  var html="";
+				  for(var i=0; i<data.length;i++){
+					  html += "<div class='designerInfo'>"
+					  html += "<img src='upload/designer/"+data[i].designerFilepath+"'>"
+					  html += "<div class='designerName'>"+data[i].designerName+"</div>"
+					  html += "<p class='designerContent'>"+data[i].designerInfo+"</p>"
+					  html += "<button type='button' id='myBtn2'>수정</button>";
+					  html += "<button type='button' class='delete'>삭제</button></div>"
+				  }
+				  $(".cBody2").append(html);
+			}
+		});	
+	}
+	
 });
 
 </script>
@@ -227,6 +232,7 @@ $("select").change(function(){
         margin: 15px auto;
         margin-bottom: 20px;
         font-size: 25px;
+        font-weight:bold;
         text-decoration-color: #ee1c24;
         text-decoration-style: solid;
         text-decoration-line: underline;

@@ -15,7 +15,7 @@ public class DesignerDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Designer> list = new ArrayList<Designer>();
-		String query = "select * from designer";
+		String query = "select * from designer order by designer_name";
 		try {
 			pstmt=conn.prepareStatement(query);
 			rset=pstmt.executeQuery();
