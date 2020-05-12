@@ -1,5 +1,6 @@
 package designer.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import designer.model.service.DesignerService;
+import designer.model.vo.Designer;
 
 /**
  * Servlet implementation class DeleteDesignerServlet
@@ -31,10 +33,18 @@ public class DeleteDesignerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int designerNo = Integer.parseInt(request.getParameter("designerNo"));
+		Designer d = new DesignerService().selectByNo(designerNo);
 		int result = new DesignerService().deleteDesigner(designerNo);
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		request.setAttribute("loc","/designerList");
 		if(result>0) {
+			if(d.getDesignerFilepath() != null) {
+				String saveDirectory = getServletContext().getRealPath("/upload/designer/");
+				File delFile = new File(saveDirectory+d.getDesignerFilepath());
+				delFile.delete();
+			}
 			request.setAttribute("msg", "삭제성공");
 		}else {
 			request.setAttribute("msg", "삭제실패");

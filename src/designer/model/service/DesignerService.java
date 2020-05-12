@@ -51,4 +51,13 @@ public class DesignerService {
 		return result;
 	}
 
+	public Designer selectByNo(int designerNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Designer d = new DesignerDao().selectByNo(conn, designerNo);
+		JDBCTemplate.close(conn);
+		return d;
+	}
+
+	
+
 }
