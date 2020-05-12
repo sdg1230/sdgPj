@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import reserve.service.ReserveService;
 import reserve.vo.Reserve;
+import reserve.vo.ReserveDetail;
 
 /**
  * Servlet implementation class ReserveListServlet
@@ -36,10 +37,11 @@ public class AdminReserveListServlet extends HttpServlet {
 		//String memberId = request.getSession().getAttribute("member").getMemberId();
 		String memberId = "admin";
 		if(memberId.equals("admin")) {
-			ArrayList<Reserve> list = new ReserveService().searchAllReserve();
-			
+			ArrayList<Reserve> list = new ReserveService().selectAllReserve();
+			ArrayList<ReserveDetail> dlist = new ReserveService().selectAllReserveDetail();
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
-			rd.forward(request, response);
+			request.setAttribute("list", list);
+			request.setAttribute("dlist", dlist);
 			rd.forward(request, response);
 		}else {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");

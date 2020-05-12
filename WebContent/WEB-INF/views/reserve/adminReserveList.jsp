@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +33,7 @@
 }
 
 .listtable th {
-	width: 10%;
+	width: 120px;
 }
 
 .listtable th:nth-child(1) {
@@ -66,17 +67,47 @@
 	height: 30px;
 	width: 80px;
 }
+
+.cTitle {
+	margin-top: 130px;
+	padding-top: 50px;
+	padding-left: 100px;
+	font-size: 50px;
+	text-decoration: underline;
+	letter-spacing: 80%;
+	width: 100%;
+	height: 200px;
+	opacity: 90%;
+	color: white;
+	background-color: #998778;
+}
+
+.content1 {
+	width: 1200px;
+	overflow: hidden;
+	margin: 0 auto;
+}
 </style>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+<script>
+	$(function(){
+		$("#searchName").keyup(function(){
+			var val = $("#searchName").val();
+			if(val!=""&&val!=null){
+				
+			}
+		});
+	})
+</script>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-		<div class="content">
-			<h1 class="top">예약 리스트</h1>
+		<div class="cTitle">Reserve List</div>
+		<div class="content1">
 			<table class="listtable">
 				<tr>
-					<th>예약번호</th>
+					<th>번호</th>
 					<th>예약자</th>
 					<th>전화번호</th>
 					<th>지점</th>
@@ -88,10 +119,10 @@
 					<th>상태</th>
 				</tr>
 				<tr>
-					<th></th>
-					<th><input type="text" name=searchName></th>
-					<th><input type="text" name=searchPhone></th>
-					<th><select id="selectSalon" name="selectSalon">
+					<th><button class="search">찾기</button></th>
+					<th><input type="text" id=searchName></th>
+					<th><input type="text" id=searchPhone></th>
+					<th><select id="selectSalon" id="selectSalon">
 							<option value="a">a</option>
 					</select></th>
 					<th></th>
@@ -104,18 +135,28 @@
 			</table>
 			<div class="list-wrapper">
 				<table class="listtable">
-					<tr>
-						<th>1</th>
-						<th>박민수</th>
-						<th>010-2450-7644</th>
-						<th>홍대입구역점</th>
-						<th>아무개</th>
-						<th>2020-05-11</th>
-						<th>13:00</th>
-						<th>남성 컷</th>
-						<th>안함</th>
-						<th><button class="status-button">완료</button></th>
-					</tr>
+					<c:forEach items="${list }" var="r">
+						<tr class="list-tr">
+							<th>${r.reserveNo }</th>
+							<th>${r.memberName }</th>
+							<th>${r.memberPhone }</th>
+							<th>${r.salonName }</th>
+							<th>${r.designerName }</th>
+							<th>${r.reserveDate }</th>
+							<th>${r.startTime }</th>
+							<th style="font-size:12px;">
+								<c:forEach items="${dlist }" var="rd">
+									<c:if test="${r.reserveNo eq rd.reserveNo }">
+										${rd.hairName }
+									</c:if>
+								</c:forEach>
+							</th>
+							<th>${r.paymentStatus }</th>
+							<th>
+								${r.reserveStatus }
+							</th>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>

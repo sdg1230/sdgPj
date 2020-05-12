@@ -11,12 +11,15 @@ public class Reserve {
 	private int totalPrice;
 	private String memberName;
 	private String designerName;
+	private String memberPhone;
+	private String reserveStatus;
+	private String paymentStatus;
 	public Reserve() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Reserve(int reserveNo, String memberId, String salonName, int designerNo, String reserveDate, int startTime,
-			int reserveTime, int totalPrice, String memberName, String designerName) {
+			int reserveTime, int totalPrice, String memberName, String designerName, String memberPhone,String reserveStatus,String paymentStatus) {
 		super();
 		this.reserveNo = reserveNo;
 		this.memberId = memberId;
@@ -28,6 +31,9 @@ public class Reserve {
 		this.totalPrice = totalPrice;
 		this.memberName = memberName;
 		this.designerName = designerName;
+		this.memberPhone = memberPhone;
+		this.reserveStatus = reserveStatus;
+		this.paymentStatus = paymentStatus;
 	}
 	public int getReserveNo() {
 		return reserveNo;
@@ -88,5 +94,23 @@ public class Reserve {
 	}
 	public void setDesignerName(String designerName) {
 		this.designerName = designerName;
+	}
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+	public String getReserveStatus() {
+		return reserveStatus;
+	}
+	public void setReserveStatus(String reserveStatus) {
+		this.reserveStatus = reserveStatus;
+	}
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 }
