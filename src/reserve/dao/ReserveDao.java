@@ -78,6 +78,48 @@ public class ReserveDao {
 		return dlist;
 	}
 
+	public int changeReserveStatus(Connection conn, int reserveNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update reserve set reserve_status='true' where reserve_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
+
+	public ArrayList<Reserve> selectAllReserve(Connection conn) {
+		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "select * from reserve";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Reserve r = new Reserve();
+				r.setReserveNo(rset.getInt("reserve_no"));
+				r.setReserveDate(rset.getString("reserve_date"));
+				r.setReserveStatus(rset.getString("reserve_status"));
+				rlist.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return rlist;
+	}
+
 
 
 }

@@ -2,11 +2,11 @@ package reserve.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 
 import common.JDBCTemplate;
 import reserve.dao.ReserveDao;
 import reserve.vo.Reserve;
-import reserve.vo.ReserveDetail;
 
 public class ReserveService {
 
@@ -19,6 +19,28 @@ public class ReserveService {
 			}
 		}
 		JDBCTemplate.close(conn);
+		return rlist;
+	}
+
+	public int changeResultStatus(int reserveNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ReserveDao().changeReserveStatus(conn,reserveNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public ArrayList<Reserve> selectAllReserve() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Reserve> rlist = new ReserveDao().selectAllReserve(conn);
+		Date d = new Date();
+		for(Reserve r : rlist) {
+			
+		}
+		
 		return rlist;
 	}
 }

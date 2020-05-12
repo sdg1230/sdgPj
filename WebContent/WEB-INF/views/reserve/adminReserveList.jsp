@@ -112,6 +112,7 @@ p{
 <script>
 	$(function(){
 		$("#searchName").keyup(function(){
+			$("#searchDate").val("");
 			if($("#searchName").val()!=""&&$("#searchPhone").val()==""){
 				var val = $("#searchName").val();
 				$(".list-tr").css("display","none");
@@ -137,6 +138,7 @@ p{
 		});
 
 		$("#searchPhone").keyup(function(){
+			$("#searchDate").val("");
 			if($("#searchPhone").val()!="" && $("#searchName").val()!=""){
 				var val1 = $("#searchPhone").val();
 				var val2 = $("#searchName").val();
@@ -161,10 +163,26 @@ p{
 			}
 		});
 		
+
+		$("#searchDate").change(function(){
+			$("#searchName").val("");
+			$("#searchPhone").val("");
+			var val = $("#searchDate").val();
+			$(".list-tr").css("display","none");
+			$(".list-tr").each(function(index,item){
+				if($(item).children(".reserveDate").html().match(val)){
+					$(item).css("display","flex");
+				}
+			});
+		});
+		
 		$("#selectStatus").change(function(){
 			$("#selectSalon").change();
 		});
 		$("#selectSalon").change(function(){
+			$("#searchName").val("");
+			$("#searchPhone").val("");
+			$("#searchDate").val("");
 			var status = $("#selectStatus").val();
 			var salonName = $(this).val();
 			var param = {salonName:salonName,status:status};
@@ -181,12 +199,12 @@ p{
 							html2 += data[i].menuList[j].hairName+", ";
 						}
 						html += "<tr class='list-tr'>";
-						html += "<th>"+data[i].reserveNo+"</th>";
+						html += "<th class='reserveNo'>"+data[i].reserveNo+"</th>";
 						html += "<th class='memberName'>"+data[i].memberName+"</th>";
 						html += "<th class='memberPhone'>"+data[i].memberPhone+"</th>";
 						html += "<th class='salonName'>"+data[i].salonName+"</th>";
 						html += "<th>"+data[i].designerName+"</th>";
-						html += "<th class='date'>"+data[i].reserveDate+"</th>";
+						html += "<th class='reserveDate'>"+data[i].reserveDate+"</th>";
 						var time="";
 						switch(data[i].startTime){
 						case 1:
@@ -260,7 +278,7 @@ p{
 						}
 						html += "<th class='pay'>"+paymentStatus+"</th>";
 						if(data[i].reserveStatus=="false"){
-							html += "<th><button class='statusBtn stat'>방문</button></tr>"
+							html += "<th><button class='statusBtn stat' onclick='changefunc("+data[i].reserveNo+");'>방문</button></tr>"
 						}else{
 							html += "<th class='stat'>방문함</th></tr>";
 						}
@@ -272,12 +290,24 @@ p{
 				}
 			});
 		});
-		$(".statusBtn").click(function(){
-			
-		});
 		
 		$("#selectStatus").change();
 	})
+	function changefunc(reserveNo){
+		var param = {reserveNo:reserveNo};
+		$.ajax({
+			url : "/changeReserveStatus",
+			data : param,
+			type : "post",
+			dataType : "json",
+			success : function(data){
+				$("#selectStatus").change();
+			},
+			error : function(data){
+				alert("실패");
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -308,7 +338,7 @@ p{
 						</c:forEach>
 					</select></th>
 					<th></th>
-					<th><input type="date" name=searchDate style="width:130px;"></th>
+					<th><input type="date" id=searchDate style="width:130px;"></th>
 					<th></th>
 					<th></th>
 					<th></th>
