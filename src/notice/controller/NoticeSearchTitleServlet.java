@@ -1,6 +1,7 @@
 package notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import notice.model.service.NoticeService;
-import notice.model.vo.NoticePageData;
+import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class NoticeSearchTitleServlet
  */
-@WebServlet(name = "NoticeList", urlPatterns = { "/noticeList" })
-public class NoticeListServlet extends HttpServlet {
+@WebServlet(name = "NoticeSearchTitle", urlPatterns = { "/noticeSearchTitle" })
+public class NoticeSearchTitleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListServlet() {
+    public NoticeSearchTitleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +33,16 @@ public class NoticeListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 인코딩
-		request.setCharacterEncoding("utf-8");
-		//2. 변수에 값 저장
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		//3. 비지니스로직 처리
-		NoticePageData pd = new NoticeService().selectList(reqPage);
+		//2. 변수에 값저장
+		
+		String searchTitle = request.getParameter("searchTitle");
+		ArrayList<Notice> list = new NoticeService().searchTitle(searchTitle);
+		//3. 비지니스 로직 처리
+		request.setAttribute("list", list);
+		
+		request.setAttribute("searchTitle", searchTitle);
+		//4. 결과처리
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
-		request.setAttribute("list",pd.getList());
-		request.setAttribute("pageNavi",pd.getPageNavi());
-//		request.setAttribute("PageData", pd);
 		rd.forward(request, response);
 	}
 
