@@ -183,20 +183,23 @@
 		.selectBox{
 			border-radius: 5px;
 			width: 60px;
-			height : 25px;
+			height : 26px;
 			display: inline-block;
-			
+			border : 2px solid black;
 			-webkit-appearance: none;  /* 네이티브 외형 감추기 */
     		-moz-appearance: none;
     		appearance: none;
+    		text-align: center;
 		}
+		
+		
 </style>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		
-        <div class="subMenuColor">
+        <div class="subMenuColor  meorijom" style="font-size:50px;">
             Community
         </div>
 		<div class="content2">
@@ -240,7 +243,7 @@
             			<option value="noticeTitle" selected>제목</option>
             		</select>
             		<input type="text" class="noticeSearchInput" name="searchTitle">
-            		<button type="submit">검색</button>
+            		<button type="submit" class="noticeSearchBtn">검색</button>
             	</form>
             </div>
         </div>
