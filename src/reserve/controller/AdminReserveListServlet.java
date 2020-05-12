@@ -39,12 +39,10 @@ public class AdminReserveListServlet extends HttpServlet {
 		//String memberId = request.getSession().getAttribute("member").getMemberId();
 		String memberId = "admin";
 		if(memberId.equals("admin")) {
-			ArrayList<Reserve> rlist = new ReserveService().selectAllReserve();
-			
-			
-			
+			int result = new ReserveService().deleteOldReserve();
 			ArrayList<Salon> slist = new SalonService().selectSalon();
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
+			request.setAttribute("noshow", result);
 			request.setAttribute("slist", slist);
 			rd.forward(request, response);
 		}else {

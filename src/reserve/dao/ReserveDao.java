@@ -120,6 +120,22 @@ public class ReserveDao {
 		return rlist;
 	}
 
+	public int deleteOldReserve(Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from reserve where (sysdate-to_date(reserve_date,'yyyy-mm-dd'))>1 and reserve_status='false' and payment_status='false'";
+		try {
+			pstmt = conn.prepareStatement(query);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 
 
 }

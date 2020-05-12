@@ -33,14 +33,15 @@ public class ReserveService {
 		return result;
 	}
 
-	public ArrayList<Reserve> selectAllReserve() {
+	public int deleteOldReserve() {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Reserve> rlist = new ReserveDao().selectAllReserve(conn);
-		Date d = new Date();
-		for(Reserve r : rlist) {
-			
+		int result = new ReserveDao().deleteOldReserve(conn);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
 		}
-		
-		return rlist;
+		JDBCTemplate.close(conn);
+		return result;
 	}
 }

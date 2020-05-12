@@ -2,6 +2,7 @@ package reserve.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,6 +38,9 @@ public class SelectReserveListServlet extends HttpServlet {
 		String salonName = request.getParameter("salonName");
 		String status = request.getParameter("status");
 		ArrayList<Reserve> rlist = new ReserveService().selectAllReserve(salonName,status);
+		if(status.equals("false")) {
+			Collections.reverse(rlist);
+		}
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(rlist,response.getWriter());
 	}
