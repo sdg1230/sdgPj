@@ -10,18 +10,15 @@ import reserve.vo.ReserveDetail;
 
 public class ReserveService {
 
-	public ArrayList<Reserve> selectAllReserve() {
+	public ArrayList<Reserve> selectAllReserve(String salonName, String status) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Reserve> list = new ReserveDao().selectAllReserve(conn);
+		ArrayList<Reserve> rlist = new ReserveDao().selectAllReserve(conn, salonName,status);
+		if (!rlist.isEmpty()) {
+			for (Reserve r : rlist) {
+				r.setMenuList(new ReserveDao().selectAllReserveDetail(conn, r.getReserveNo()));
+			}
+		}
 		JDBCTemplate.close(conn);
-		return list;
+		return rlist;
 	}
-
-	public ArrayList<ReserveDetail> selectAllReserveDetail() {
-		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<ReserveDetail> dlist = new ReserveDao().selectAllReserveDetail(conn);
-		JDBCTemplate.close(conn);
-		return dlist;
-	}
-	
 }

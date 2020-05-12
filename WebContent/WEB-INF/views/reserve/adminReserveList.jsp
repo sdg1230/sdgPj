@@ -7,6 +7,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>머리좀 헤어</title>
 <style>
+.cTitle {
+	margin-top: 130px;
+	padding-top: 50px;
+	padding-left: 100px;
+	font-size: 50px;
+	text-decoration: underline;
+	letter-spacing: 80%;
+	width: 100%;
+	height: 200px;
+	opacity: 90%;
+	color: white;
+	background-color: #998778;
+	font-family: 'Anton', sans-serif;
+}
+
+.content1 {
+	width: 1200px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+p{
+	display:inline-block;
+	font-size:20px;
+}
 .top {
 	width: 100%;
 	height: 50px;
@@ -24,6 +48,7 @@
 	width: 100%;
 	border: 1px solid #e5e5e5;
 	border-collapse: collapse;
+	padding:0;
 }
 
 .listtable tr {
@@ -33,7 +58,10 @@
 }
 
 .listtable th {
-	width: 120px;
+	width: 12%;
+	line-height:40px;
+	padding:0;
+	text-align:center;
 }
 
 .listtable th:nth-child(1) {
@@ -68,44 +96,196 @@
 	width: 80px;
 }
 
-.cTitle {
-	margin-top: 130px;
-	padding-top: 50px;
-	padding-left: 100px;
-	font-size: 50px;
-	text-decoration: underline;
-	letter-spacing: 80%;
-	width: 100%;
-	height: 200px;
-	opacity: 90%;
-	color: white;
-	background-color: #998778;
+#searchDate{
+	width:50px;
 }
-
-.content1 {
-	width: 1200px;
-	overflow: hidden;
-	margin: 0 auto;
+.statusBtn{
+	color: white;
+    font-size: 15px;
+    background-color: #998778;
+    width: 80px;
+    height: 30px;
+    box-shadow: 2px 2px 2px gray;
 }
 </style>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <script>
 	$(function(){
 		$("#searchName").keyup(function(){
-			var val = $("#searchName").val();
-			if(val!=""&&val!=null){
-				
+			if($("#searchName").val()!=""&&$("#searchPhone").val()==""){
+				var val = $("#searchName").val();
+				$(".list-tr").css("display","none");
+				$(".list-tr").each(function(index,item){
+					if($(item).children(".memberName").html().match(val)){
+						$(item).css("display","flex");
+					}
+				});
+			}else if($("#searchName").val()!=""&&$("#searchPhone").val()!=""){
+				var val1 = $("#searchPhone").val();
+				var val2 = $("#searchName").val();
+				$(".list-tr").css("display","none");
+				$(".list-tr").each(function(index,item){
+					if($(item).children(".memberPhone").html().match(val1)&&$(item).children(".memberName").html().match(val2)){
+						$(item).css("display","flex");
+					}
+				});
+			}else if($("#searchName").val()==""&&$("#searchPhone").val()!=""){
+				$("#searchPhone").keyup();
+			}else{
+				$(".list-tr").css("display","flex");
 			}
 		});
+
+		$("#searchPhone").keyup(function(){
+			if($("#searchPhone").val()!="" && $("#searchName").val()!=""){
+				var val1 = $("#searchPhone").val();
+				var val2 = $("#searchName").val();
+				$(".list-tr").css("display","none");
+				$(".list-tr").each(function(index,item){
+					if($(item).children(".memberPhone").html().match(val1)&&$(item).children(".memberName").html().match(val2)){
+						$(item).css("display","flex");
+					}
+				});
+			}else if($("#searchName").val()=="" && $("#searchPhone").val()!=""){
+				var val1 = $("#searchPhone").val();
+				$(".list-tr").css("display","none");
+				$(".list-tr").each(function(index,item){
+					if($(item).children(".memberPhone").html().match(val1)){
+						$(item).css("display","flex");
+					}
+				});
+			}else if($("#searchPhone").val()==""){
+				$("#searchName").keyup();
+			}else{
+				$(".list-tr").css("display","flex");
+			}
+		});
+		
+		$("#selectStatus").change(function(){
+			$("#selectSalon").change();
+		});
+		$("#selectSalon").change(function(){
+			var status = $("#selectStatus").val();
+			var salonName = $(this).val();
+			var param = {salonName:salonName,status:status};
+			$.ajax({
+				url : "/selectReserveList",
+				data : param,
+				type : "post",
+				dataType : "json",
+				success : function(data){
+					var html="";
+					for(var i=0; i<data.length; i++){
+						var html2 = "";
+						for(var j=0; j<data[i].menuList.length; j++){
+							html2 += data[i].menuList[j].hairName+", ";
+						}
+						html += "<tr class='list-tr'>";
+						html += "<th>"+data[i].reserveNo+"</th>";
+						html += "<th class='memberName'>"+data[i].memberName+"</th>";
+						html += "<th class='memberPhone'>"+data[i].memberPhone+"</th>";
+						html += "<th class='salonName'>"+data[i].salonName+"</th>";
+						html += "<th>"+data[i].designerName+"</th>";
+						html += "<th class='date'>"+data[i].reserveDate+"</th>";
+						var time="";
+						switch(data[i].startTime){
+						case 1:
+							time="10:00";
+							break;
+						case 2:
+							time="10:30";
+							break;
+						case 3:
+							time="11:00";
+							break;
+						case 4:
+							time="11:30";
+							break;
+						case 5:
+							time="12:00";
+							break;
+						case 6:
+							time="12:30";
+							break;
+						case 7:
+							time="13:00";
+							break;
+						case 8:
+							time="13:30";
+							break;
+						case 9:
+							time="14:00";
+							break;
+						case 10:
+							time="14:30";
+							break;
+						case 11:
+							time="15:00";
+							break;
+						case 12:
+							time="15:30";
+							break;
+						case 13:
+							time="16:00";
+							break;
+						case 14:
+							time="16:30";
+							break;
+						case 15:
+							time="17:00";
+							break;
+						case 16:
+							time="17:30";
+							break;
+						case 17:
+							time="18:00";
+							break;
+						case 18:
+							time="18:30";
+							break;
+						case 19:
+							time="19:00";
+							break;
+						case 20:
+							time="19:30";
+							break;
+						}
+						html += "<th class='time'>"+time+"</th>";
+						html += "<th style='font-size:12px;'>"+html2+"</th>";
+						var paymentStatus = "";
+						if(data[i].paymentStatus=="true"){
+							paymentStatus = "했음";
+						}else{
+							paymentStatus = "안함";
+						}
+						html += "<th class='pay'>"+paymentStatus+"</th>";
+						if(data[i].reserveStatus=="false"){
+							html += "<th><button class='statusBtn stat'>방문</button></tr>"
+						}else{
+							html += "<th class='stat'>방문함</th></tr>";
+						}
+					}
+					$(".reserveList").html(html);
+				},
+				error : function(){
+					console.log("실패");
+				}
+			});
+		});
+		$(".statusBtn").click(function(){
+			
+		});
+		
+		$("#selectStatus").change();
 	})
 </script>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-		<div class="cTitle">Reserve List</div>
+		<div class="cTitle">#Reservation Manage<span style="font-size:20px;">예약관리</span></div>
 		<div class="content1">
-			<table class="listtable">
+			<table class="listtable" style="width:100%;">
 				<tr>
 					<th>번호</th>
 					<th>예약자</th>
@@ -119,44 +299,29 @@
 					<th>상태</th>
 				</tr>
 				<tr>
-					<th><button class="search">찾기</button></th>
+					<th></th>
 					<th><input type="text" id=searchName></th>
 					<th><input type="text" id=searchPhone></th>
-					<th><select id="selectSalon" id="selectSalon">
-							<option value="a">a</option>
+					<th><select id="selectSalon" name="selectSalon">
+						<c:forEach items="${slist }" var="s">
+							<option value="${s.salonName }">${s.salonName }</option>
+						</c:forEach>
 					</select></th>
 					<th></th>
-					<th><input type="text" name=searchDate></th>
+					<th><input type="date" name=searchDate style="width:130px;"></th>
 					<th></th>
 					<th></th>
 					<th></th>
-					<th></th>
+					<th><select id="selectStatus">
+						<option value="false">예약중</option>
+						<option value="true">방문함</option>
+					</select></th>
 				</tr>
 			</table>
 			<div class="list-wrapper">
 				<table class="listtable">
-					<c:forEach items="${list }" var="r">
-						<tr class="list-tr">
-							<th>${r.reserveNo }</th>
-							<th>${r.memberName }</th>
-							<th>${r.memberPhone }</th>
-							<th>${r.salonName }</th>
-							<th>${r.designerName }</th>
-							<th>${r.reserveDate }</th>
-							<th>${r.startTime }</th>
-							<th style="font-size:12px;">
-								<c:forEach items="${dlist }" var="rd">
-									<c:if test="${r.reserveNo eq rd.reserveNo }">
-										${rd.hairName }
-									</c:if>
-								</c:forEach>
-							</th>
-							<th>${r.paymentStatus }</th>
-							<th>
-								${r.reserveStatus }
-							</th>
-						</tr>
-					</c:forEach>
+					<tbody class="reserveList">
+					</tbody>
 				</table>
 			</div>
 		</div>

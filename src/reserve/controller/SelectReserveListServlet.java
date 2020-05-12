@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import reserve.service.ReserveService;
 import reserve.vo.Reserve;
-import reserve.vo.ReserveDetail;
-import salon.service.SalonService;
-import salon.vo.Salon;
 
 /**
- * Servlet implementation class ReserveListServlet
+ * Servlet implementation class SelectReserveListServlet
  */
-@WebServlet(name = "ReserveList", urlPatterns = { "/adminReserveList" })
-public class AdminReserveListServlet extends HttpServlet {
+@WebServlet(name = "SelectReserveList", urlPatterns = { "/selectReserveList" })
+public class SelectReserveListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReserveListServlet() {
+    public SelectReserveListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,21 +34,11 @@ public class AdminReserveListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		//String memberId = request.getSession().getAttribute("member").getMemberId();
-		String memberId = "admin";
-		if(memberId.equals("admin")) {
-			ArrayList<Salon> slist = new SalonService().selectSalon();
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
-			request.setAttribute("slist", slist);
-			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "관리자가 아닙니다");
-			request.setAttribute("loc", "/");
-			rd.forward(request, response);
-		}
-		
+		String salonName = request.getParameter("salonName");
+		String status = request.getParameter("status");
+		ArrayList<Reserve> rlist = new ReserveService().selectAllReserve(salonName,status);
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(rlist,response.getWriter());
 	}
 
 	/**

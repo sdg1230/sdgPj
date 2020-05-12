@@ -13,14 +13,16 @@ import reserve.vo.Reserve;
 import reserve.vo.ReserveDetail;
 
 public class ReserveDao {
-
-	public ArrayList<Reserve> selectAllReserve(Connection conn) {
-		ArrayList<Reserve> list = new ArrayList<Reserve>();
+	
+	public ArrayList<Reserve> selectAllReserve(Connection conn, String salonName, String status) {
+		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query="select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status from reserve join member using(member_id) join designer using(designer_no) order by reserve_date desc";
+		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status from reserve join member using(member_id) join designer using(designer_no) where reserve.salon_name=? and reserve_status=? order by reserve_date desc";
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, salonName);
+			pstmt.setString(2, status);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Reserve r = new Reserve();
@@ -37,7 +39,7 @@ public class ReserveDao {
 				r.setTotalPrice(rset.getInt("total_price"));
 				r.setReserveStatus(rset.getString("reserve_status"));
 				r.setPaymentStatus(rset.getString("payment_status"));
-				list.add(r);
+				rlist.add(r);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -46,17 +48,19 @@ public class ReserveDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return list;
+		
+		return rlist;
 	}
 
-	public ArrayList<ReserveDetail> selectAllReserveDetail(Connection conn) {
+	public ArrayList<ReserveDetail> selectAllReserveDetail(Connection conn, int reserveNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<ReserveDetail> dlist = new ArrayList<ReserveDetail>();
-		String query = "select * from reserve_detail";
+		String query = "select * from reserve_detail where reserve_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			rset = pstmt.executeQuery(); 
+			pstmt.setInt(1, reserveNo);
+			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				ReserveDetail rd = new ReserveDetail();
 				rd.setReserveNo(rset.getInt("reserve_no"));

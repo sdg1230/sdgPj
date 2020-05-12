@@ -1,5 +1,7 @@
 package reserve.vo;
 
+import java.util.ArrayList;
+
 public class Reserve {
 	private int reserveNo;
 	private String memberId;
@@ -14,12 +16,14 @@ public class Reserve {
 	private String memberPhone;
 	private String reserveStatus;
 	private String paymentStatus;
+	private ArrayList<ReserveDetail> menuList;
 	public Reserve() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Reserve(int reserveNo, String memberId, String salonName, int designerNo, String reserveDate, int startTime,
-			int reserveTime, int totalPrice, String memberName, String designerName, String memberPhone,String reserveStatus,String paymentStatus) {
+			int reserveTime, int totalPrice, String memberName, String designerName, String memberPhone,String reserveStatus,
+			String paymentStatus,ArrayList<ReserveDetail> menuList) {
 		super();
 		this.reserveNo = reserveNo;
 		this.memberId = memberId;
@@ -34,6 +38,7 @@ public class Reserve {
 		this.memberPhone = memberPhone;
 		this.reserveStatus = reserveStatus;
 		this.paymentStatus = paymentStatus;
+		this.menuList = menuList;
 	}
 	public int getReserveNo() {
 		return reserveNo;
@@ -112,5 +117,11 @@ public class Reserve {
 	}
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
+	}
+	public ArrayList<ReserveDetail> getMenuList(){
+		return menuList;
+	}
+	public void setMenuList(ArrayList<ReserveDetail> menuList) {
+		this.menuList = menuList;
 	}
 }

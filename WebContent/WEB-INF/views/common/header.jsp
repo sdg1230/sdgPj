@@ -7,7 +7,7 @@
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Anton&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="/css/header/hStyle.css">
+	<link rel="stylesheet" href="/css/header/hStyle.css">
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <script>
 	//사이드바
