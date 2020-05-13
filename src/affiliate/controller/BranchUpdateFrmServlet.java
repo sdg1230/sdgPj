@@ -2,9 +2,6 @@ package affiliate.controller;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,19 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import affilate.service.AffilateService;
 import affilate.vo.Affilate;
-import affilate.vo.AffilateList;
 
 /**
- * Servlet implementation class BranchListServlet
+ * Servlet implementation class BranchUpdateFrmServlet
  */
-@WebServlet(name = "BranchList", urlPatterns = { "/branchList" })
-public class BranchListServlet extends HttpServlet {
+@WebServlet(name = "BranchUpdateFrm", urlPatterns = { "/branchUpdateFrm" })
+public class BranchUpdateFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BranchListServlet() {
+    public BranchUpdateFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,15 +31,12 @@ public class BranchListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		AffilateList af = new	AffilateService().selectAffilate(reqPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
-		request.setAttribute("pageNavi", af.getPageNavi());
-		request.setAttribute("list", af.getAffilateList());
-		request.setAttribute("star", af.getReviewStar());
+		String salonName = request.getParameter("salonName");
+		Affilate aff = new AffilateService().salonUpdateFrm(salonName);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchupdate.jsp");
+		System.out.println(aff.getSalonFilename()+"ddd");
+		request.setAttribute("list", aff);
 		rd.forward(request, response);
-		
 	}
 
 	/**

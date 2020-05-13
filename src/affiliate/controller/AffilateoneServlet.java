@@ -36,10 +36,9 @@ public class AffilateoneServlet extends HttpServlet {
 		
 		AffilateList af = new	AffilateService().selectAffilate(sq);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
-		System.out.println(af.getReviewStar());
 		request.setAttribute("list", af.getAffilateList());
 		request.setAttribute("star", af.getReviewStar());
-		request.setAttribute("pageNavi", af.getPageNavi());
+		
 		rd.forward(request, response);
 		
 	}

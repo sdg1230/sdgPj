@@ -86,29 +86,46 @@
         }
 </style>
 <script>
+
+
 function loadImg(f) {
-	console.log(f.files);
-	if (f.files.length != 0 && f.files[0] != 0) {
-	    var reader = new FileReader();
-	    reader.readAsDataURL(f.files[0]);
-	    reader.onload = function(e) { //파일업로드 기달리는거
-	        $("#img-view").attr("src", e.target.result);
-	    }
-	} else {
-	    $("#img-view").attr("src", "");
-	}
-	}
-</script>
+console.log(f.files);
+if (f.files.length != 0 && f.files[0] != 0) {
+    var reader = new FileReader();
+    reader.readAsDataURL(f.files[0]);
+    reader.onload = function(e) { //파일업로드 기달리는거
+        $("#img-view").attr("src", e.target.result);
+    }
+} else {
+    $("#img-view").attr("src", "");
+}
+}
+$(function() {
+	
+$("#fileDelBtn").click(function() {
+    $(".delFile").hide();
+    $("#file").show();
+    $("input[name=status]").val('delete');
+    $("#img-view").attr("src", "");
+});
+$("#file1").change(function() {
+
+    $("#fileDelBtn").show();
+    $(".delFile").show();
+})
+});
+
+    </script>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 		<div class="content2 cTitle">designer</div>
-	<div class="content1">
-        <form action="/branchregistration" method="post" enctype="multipart/form-data" id="updateFrm">
+		<div class="content1">
+        <form action="/branchupdate" method="post" enctype="multipart/form-data" id="updateFrm">
             <div class="div3">
-                <h1>가맹점 등록</h1>
+                <h1>가맹점 수정</h1>
             </div>
 
             <table border="1">
@@ -129,16 +146,16 @@ function loadImg(f) {
                 <tr>
                     <th class="th1">첨부파일</th>
 
-                    <td class="td2">
-                    <input type="hidden" name="status" value="stay">
-                       
-                            
-                            <input type="file" name="salonFilename" id="file" onchange="loadImg(this);">
+                    <td class="td2"><input type="hidden" name="status" value="stay">
+                        <c:if test="${not empty list.salonFilename }">
+                            <img src="/upload/salon/${list.salonFilepath }" width="10px">
+                            <input type="file" name="salonFilename" id="file" style="display:none;" onchange="loadImg(this);">
 
-                            
-                            <span class="delFile"></span>
-                            
-                       
+                            <button type="button" id="fileDelBtn" class="delFile">파일 삭제</button>
+                            <span class="delFile">${list.salonFilepath }</span>
+                            <input type="hidden" name="oldFilename" value="${list.salonFilename }">
+                            <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
+                        </c:if>
 
 
                     </td>
@@ -147,22 +164,22 @@ function loadImg(f) {
                     <th class="th1">이미지 보기</th>
                     <td>
                         <div id="img-viewer">
-                            <img id="img-view"  width="350">
+                            <img id="img-view" src="/upload/salon/${list.salonFilepath }" width="350">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <th class="th1">소개글</th>
-                    <td class="td3" ><textarea id="salonInfo"name="salonInfo" rows="3" style="width: 99%;height:100%"></textarea></td>
+                    <td class="td3" ><textarea id="salonInfo"name="salonInfo" rows="3" style="width: 99%;height:100%"> ${list.salonInfo }</textarea></td>
                 </tr>
                 <tr>
-                    <th colspan="2" style="text-align: center"><button type="submit">등록하기</button><button type="reset">초기화</button></th>
+                    <th colspan="2" style="text-align: center"><button type="submit">수정하기</button><button type="reset">초기화</button></th>
 
                 </tr>
             </table>
         </form>
 </div>
-
+		
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	</div>

@@ -251,7 +251,7 @@
 
 						<tr>
 							<td class="salonname">${list1.salonName }<a class="statd1"
-								href="#">지점 상세 보기</a></td>
+								href="selectSalon?salonName=${list1.salonName }">지점 상세 보기</a></td>
 						</tr>
 					</c:forEach>
 				</table>
