@@ -55,7 +55,7 @@
 
 <div class="sidebar">
 	<span class="sideicon"><img src="/imgs/sideicon.png"></span> <a
-		href="#">
+		href="/reserveFrm">
 		<div class="sidemenu">
 			<img src="/imgs/reserve-icon.png">
 			<div>예약하기</div>
@@ -114,6 +114,7 @@
 			<li><a href="/noticeList?reqPage=1">공지사항</a></li>
 			<li><a href="javascript:void(0)" onclick="alert('준비중입니다.');">아카데미</a></li>
 			<li><a href="/branchmanagement?reqPage=1">지점관리</a></li>
+			<li><a href="/adminReserveList">예약관리</a></li>
 		</ul>
 	</div>
 </div>
