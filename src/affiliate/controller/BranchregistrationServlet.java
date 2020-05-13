@@ -56,7 +56,7 @@ public class BranchregistrationServlet extends HttpServlet {
 		System.out.println(jibunAddr);
 		System.out.println(detailAddr);
 		Affilate aff = new Affilate();
-		aff.setSalonAddr(mRequest.getParameter(roadAddr+jibunAddr+detailAddr));
+		aff.setSalonAddr(roadAddr+jibunAddr+detailAddr);
 		System.out.println(aff.getSalonAddr());
 		aff.setSalonFilename(mRequest.getOriginalFileName("salonFilename"));
 		aff.setSalonFilepath(mRequest.getFilesystemName("salonFilename"));

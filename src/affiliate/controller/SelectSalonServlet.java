@@ -25,8 +25,10 @@ public class SelectSalonServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String salonName = request.getParameter("salonName");
+		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp").forward(request, response);
 	}
 
 	/**
