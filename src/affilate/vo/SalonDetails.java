@@ -2,6 +2,8 @@ package affilate.vo;
 
 import java.util.ArrayList;
 
+import designer.model.vo.Designer;
+
 public class SalonDetails {
 	private Affilate affilate;
 	private String ageNavi;
