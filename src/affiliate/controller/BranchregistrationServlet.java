@@ -49,8 +49,15 @@ public class BranchregistrationServlet extends HttpServlet {
 		
 		int maxSize = 10*1024*1024;
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
+		String roadAddr = mRequest.getParameter("roadAddr");
+		String jibunAddr = mRequest.getParameter("jibunAddr");
+		String detailAddr = mRequest.getParameter("detailAddr");
+		System.out.println(roadAddr);
+		System.out.println(jibunAddr);
+		System.out.println(detailAddr);
 		Affilate aff = new Affilate();
-		aff.setSalonAddr(mRequest.getParameter("salonAddr"));
+		aff.setSalonAddr(mRequest.getParameter(roadAddr+jibunAddr+detailAddr));
+		System.out.println(aff.getSalonAddr());
 		aff.setSalonFilename(mRequest.getOriginalFileName("salonFilename"));
 		aff.setSalonFilepath(mRequest.getFilesystemName("salonFilename"));
 		aff.setSalonInfo(mRequest.getParameter("salonInfo"));
