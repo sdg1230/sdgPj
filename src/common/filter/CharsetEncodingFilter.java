@@ -27,7 +27,6 @@ public class CharsetEncodingFilter implements Filter {
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		System.out.println("필터객체 소멸");
 	}
 
 	/**
@@ -39,7 +38,6 @@ public class CharsetEncodingFilter implements Filter {
 		//서블릿 도착전에 처리할 사전작업/ 사전에 처리할작업
 		request.setCharacterEncoding("utf-8");
 		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.println("요정 url:"+req.getRequestURI());
 		//다음필터를 요청해, 다음필터가 없으면 나가
 		chain.doFilter(request, response);
 		//서블릿에서 클라이언트로 응답 나가기 전 사후작업
@@ -49,7 +47,6 @@ public class CharsetEncodingFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("필터객체생성");
 	}
 
 }
