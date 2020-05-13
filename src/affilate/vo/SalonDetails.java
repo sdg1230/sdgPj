@@ -3,6 +3,7 @@ package affilate.vo;
 import java.util.ArrayList;
 
 import designer.model.vo.Designer;
+import salonReview.vo.SalonReview;
 
 public class SalonDetails {
 	private Affilate affilate;
