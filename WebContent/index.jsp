@@ -10,8 +10,11 @@
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-		<div class="content"></div>
+		<div class="content">
+		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+		
 	</div>
+	
 </body>
 </html>
