@@ -24,4 +24,18 @@ public class ReserveService {
 		return list;
 	}
 
+	public ArrayList<Reserve> searchReserve(int reserveNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Reserve> list = new ReserveDao().reserveNo(conn,reserveNo);		
+		
+		if(!list.isEmpty()) {
+			for(Reserve rlist : list) {
+				rlist.setMenuList(new ReserveDao().reserveDetailList(conn, rlist.getReserveNo()));				
+			}						
+		}
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+
 }

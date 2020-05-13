@@ -78,4 +78,45 @@ public class ReserveDao {
 		return rlist;
 	}
 
+
+
+	public ArrayList<Reserve> reserveNo(Connection conn, int reserveNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reserve>list = new ArrayList<Reserve>(); 
+		String query = "select * from member,reserve,designer,salon,reserve_detail where member.member_id=reserve.member_id and reserve.reserve_no=reserve_detail.reserve_no and reserve.designer_no=designer.designer_no and reserve.salon_name=salon.salon_name and reserve.reserve_no=? order by reserve_date desc";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			System.out.println(reserveNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Reserve r = new Reserve();
+				System.out.println("test");
+				r.setDesignerNo(rset.getInt("designer_no"));
+				r.setDesignerName(rset.getString("designer_name"));
+				r.setMemberId(rset.getString("member_id"));
+				r.setMemberName(rset.getString("member_name"));
+				r.setReserveDate(rset.getString("reserve_date"));
+				r.setReserveNo(rset.getInt("reserve_no"));
+				r.setReserveTime(rset.getInt("reserve_time"));
+				r.setSalonName(rset.getString("salon_name"));
+				r.setMemberPhone(rset.getString("member_phone"));
+				r.setPaymentStatus(rset.getString("payment_status"));
+				r.setReserveStatus(rset.getString("reserve_status"));
+				r.setStartTime(rset.getInt("start_time"));
+				r.setTotalPrice(rset.getInt("total_price"));
+				list.add(r);
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
 }
