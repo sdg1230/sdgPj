@@ -78,7 +78,9 @@
 			<div class="ad"></div>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+		
 	</div>
+	
 </body>
 <script>
 //부트스트립에만

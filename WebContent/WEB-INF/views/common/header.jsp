@@ -109,10 +109,11 @@
 	<div class="header3">
 		<ul class="hNavi">
 			<span class="meorijom" onclick="location.href = '/';">MEORIJOM HAIR</span>
-			<li><a href="#">회사소개</a></li>
-			<li><a href="#">지점소개</a></li>
+			<li><a href="/company">회사소개</a></li>
+			<li><a href="/branchList?reqPage=1">지점소개</a></li>
 			<li><a href="/noticeList?reqPage=1">공지사항</a></li>
 			<li><a href="javascript:void(0)" onclick="alert('준비중입니다.');">아카데미</a></li>
+			<li><a href="/branchmanagement?reqPage=1">지점관리</a></li>
 		</ul>
 	</div>
 </div>
