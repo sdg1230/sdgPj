@@ -58,6 +58,27 @@ public class DesignerService {
 		return d;
 	}
 
+	public int updateDesigner(Designer d) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new DesignerDao().updateDesigner(conn, d);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Designer> moreDesigner(int start) {
+		Connection conn = JDBCTemplate.getConnection();
+		int length=4; 
+		int end = start+length-1;
+		ArrayList<Designer> list = new DesignerDao().moreDesigner(conn,start,end);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
 	
 
 }

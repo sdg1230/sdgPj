@@ -149,5 +149,55 @@ public class DesignerDao {
 		return d;
 	}
 
+	public int updateDesigner(Connection conn, Designer d) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query="update designer set salon_name=?, designer_name=?, designer_info=?, designer_filename=?, designer_filepath=? where designer_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, d.getSalonName());
+			pstmt.setString(2, d.getDesignerName());
+			pstmt.setString(3, d.getDesignerInfo());
+			pstmt.setString(4, d.getDesignerFilename());
+			pstmt.setString(5, d.getDesignerFilepath());
+			pstmt.setInt(6, d.getDesignerNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Designer> moreDesigner(Connection conn, int start, int end) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Designer> list = new ArrayList<Designer>();
+		String query = "select * from (select ROWNUM as rnum, d.* from (select * from designer order by designer_name)d) where rnum between ? and ?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				Designer d=new Designer();
+				d.setDesignerNo(rset.getInt("designer_no"));
+				d.setDesignerName(rset.getString("designer_name"));
+				d.setSalonName(rset.getString("salon_name"));
+				d.setDesignerInfo(rset.getString("designer_info"));
+				d.setDesignerFilename(rset.getString("designer_filename"));
+				d.setDesignerFilepath(rset.getString("designer_filepath"));
+				list.add(d);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
 
 }

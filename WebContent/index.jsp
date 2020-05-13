@@ -16,7 +16,6 @@
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="content">
-		<a href="/designerList">디자이너예약</a>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>

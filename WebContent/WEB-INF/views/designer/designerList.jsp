@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
-<!--    모달-->
 
 <title>디자이너 관리</title>
 </head>
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
+		<!--    모달-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -29,7 +29,14 @@
 				</select>
 				<button type="button" class="add" id="myBtn">추가</button>
 			</div>
-			 <!-- insert Modal-------------------------------------------------------------- -->
+			
+             <!--디자이너리스트출력------------------------------------------- -->
+             <div class="cBody2">
+             </div>
+             <div class="cBody3"><button type="button" class="more" id="more-btn" 
+         totalCount="${totalCount }" currentCount="0" value=""><img src="/imgs/more-icon.png"></button></div>
+		</div>
+		 <!-- insert Modal-------------------------------------------------------------- -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog" id="modal-dialog">
                     <!-- Modal content-->
@@ -65,26 +72,63 @@
                     </table>
                     <div class="insertBtn">
                         <button type="submit" class="btn btn-default">등록</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel">취소</button></div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="insertCancel">취소</button></div>
                 </form>
             </div>
                     </div>
                 </div>
             </div>
-             <!--디자이너리스트출력---------------------------------------------------------- -->
-             <div class="cBody2">
-             	<c:forEach items="${designerList }" var="d">
-             		<div class="designerInfo">
-                    <img src="/upload/designer/${d.designerFilepath }">
-                    <div class="designerName">${d.designerName }</div>
-                    <p class="designerContent">
-                       ${d.designerInfo }</p>
-                    <button type="button" id="myBtn2">수정</button>
-                    <button type="button" class="delete" onclick="deleteFunc('${d.designerNo }');">삭제</button>
+             <!-- update Modal-------------------------------------------------------------- -->
+            <div class="modal fade" id="myModal2" role="dialog">
+                <div class="modal-dialog" id="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content" id="modal-content">
+                       <div class="updateForm">
+                <div class="formTitle">디자이너 수정</div>
+                <form action="/updateDesigner" method="post" enctype="multipart/form-data" onsubmit="return updateFunc();">
+                    <table width="100%">
+                        <tr>
+                            <td width="35%"><span class="hash">#</span>지점명</td>
+                            <td width="65%">
+                               <select name="salonName" id="updateSalonName">
+									<option value="">지점명</option>
+									<c:forEach items="${salonList }" var="s">
+									<option value="${s }">${s }</option>
+									</c:forEach>
+								</select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="hash">#</span>디자이너 이름</td>
+                            <td><input type="text" name="designerName" style="width:95%;" required></td>
+                        </tr>
+                        <tr>
+                            <td><span class="hash">#</span>디자이너 사진</td>
+                            <td><img src = "/imgs/file.png" width="16px" class="delFile">
+						<input type="file" name="designerFilename" id="file" style="display:none;">
+						<span class="delFile"></span>
+						<button type="button"  class="btn btn-default delFile"  id="fileDelBtn">
+						파일삭제
+						</button>
+						</td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:top;"><span class="hash">#</span>디자이너 소개</td>
+                            <td><textarea name="designerInfo" rows="8" cols="39"  maxlength="165"></textarea></td>
+                        </tr>
+                        <input type="hidden" name="designerNo">
+                        <input type="hidden" name="status" value="stay">
+						<input type="hidden" name="oldFilename">
+						<input type="hidden" name="oldFilepath">
+                    </table>
+                    <div class="insertBtn">
+                        <button type="submit" class="btn btn-default">등록</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="updateCancel">취소</button></div>
+                </form>
+            </div>
+                    </div>
                 </div>
-             	</c:forEach>
-             </div>
-		</div>
+            </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
 </body>
@@ -93,22 +137,31 @@
 $("a").click(function() {
     $(this).css("text-decoration", "none").css("color", "#333333");
 });
-//모달
-$(function() {
-    $("#myBtn").click(function() {
-        $("#myModal").modal();
-    });
+
+//인서트모달
+$("#myBtn").click(function() {
+    $("#myModal").modal();
 });
 
-//인서트모달 취소시 지우기
- $("#cancel").click(function(){
+//모달 취소시 지우기
+ $("#insertCancel").click(function(){
         $(".insertForm").find("[name=salonName]").val("");
          $(".insertForm").find("[name=designerName]").val("");
          $(".insertForm").find("[name=designerInfo]").val("");
          $(".insertForm").find("input[type=file]").val("");
      });
+ $("#updateCancel").click(function(){
+	 $(".delFile").show();
+		$("#file").hide();
+		$("input[name=status]").val('stay');
+  });
 
-
+//수정시 파일 삭제버튼 눌렀을 때
+$("#fileDelBtn").click(function(){
+			$(".delFile").hide();
+			$("#file").show();
+			$("input[name=status]").val('delete');
+		});
 
 //지점명별 검색..
 $("#salonName").change(function(){
@@ -129,10 +182,11 @@ $("#salonName").change(function(){
 					  html += "<img src='upload/designer/"+data[i].designerFilepath+"'>"
 					  html += "<div class='designerName'>"+data[i].designerName+"</div>"
 					  html += "<p class='designerContent'>"+data[i].designerInfo+"</p>"
-					  html += "<button type='button' id='myBtn2'>수정</button>";
+					  html += "<button type='button' class='myBtn2' onclick='openModal("+data[i].designerNo+");'>수정</button>";
 					  html += "<button type='button' class='delete' onclick='deleteFunc("+data[i].designerNo+");'>삭제</button></div>"
 				  }
 				  $(".cBody2").append(html);
+				  $("#more-btn").hide();
 			}
 		});	
 	}
@@ -144,6 +198,10 @@ function insertFunc(){
 		alert("지점명을 선택하세요.");
 		return false;
 	}
+	if($("#myModal").find("[name=designerInfo]").val()==""){
+ 		alert("디자이너 소개글을 적어주세요.");
+ 		return false;
+ 	}
 }
 function deleteFunc(designerNo){
 	var check=confirm("해당 디자이너를 삭제하시겠습니까?");
@@ -151,6 +209,80 @@ function deleteFunc(designerNo){
 		location.href="/deleteDesigner?designerNo="+designerNo;
 	}
 }
+function openModal(designerNo) {
+	$("#myModal2").modal();
+	$.ajax({
+		url : "/selectOneDesigner",
+		data : {designerNo : designerNo},
+		type : "get",
+		success : function(data) {
+			$("#updateSalonName").val(data.salonName).attr("selected",true);
+			$("span.delFile").html(data.designerFilename);
+			$("#myModal2").find("[name=designerNo]").val(data.designerNo);
+			$("#myModal2").find("[name=designerName]").val(data.designerName);
+			$("#myModal2").find("[name=designerInfo]").val(data.designerInfo);
+			$("#myModal2").find("[name=oldFilename]").val(data.designerFilename);
+			$("#myModal2").find("[name=oldFilepath]").val(data.designerFilepath);
+		}
+	});		 
+}
+function updateFunc(){
+	if($("#updateSalonName").val()==""){
+		alert("지점명을 선택하세요.");
+		return false;
+	}
+ 	if($("input[name=status]").val()=="delete" && $("#file").val()==""){
+ 		alert("디자이너 사진을 첨부해야 합니다.");
+ 		return false;
+	}
+ 	if($("#myModal2").find("[name=designerInfo]").val()==""){
+ 		alert("디자이너 소개글을 적어주세요.");
+ 		return false;
+ 	}
+}
+//----------------------------------------더보기
+function fn_more(start){
+	  var param={start:start};
+	  $.ajax({
+		  url:"/designerMore",
+		  data : param,
+		  type:"post",
+		  dataType : "json",
+		  success:function(data){
+			  //list가 들어있는상태
+			  var html="";
+			  for(var i=0; i<data.length;i++){
+				  html += "<div class='designerInfo'>"
+				  html += "<img src='upload/designer/"+data[i].designerFilepath+"'>"
+				  html += "<div class='designerName'>"+data[i].designerName+"</div>"
+				  html += "<p class='designerContent'>"+data[i].designerInfo+"</p>"
+				  html += "<button type='button' class='myBtn2' onclick='openModal("+data[i].designerNo+");'>수정</button>";
+				  html += "<button type='button' class='delete' onclick='deleteFunc("+data[i].designerNo+");'>삭제</button></div>"
+			  }
+			  
+			  $(".cBody2").append(html);
+			  $("#more-btn").val(Number(start)+4);
+			  $("#more-btn").attr("currentCount", Number($("#more-btn").attr("currentCount"))+data.length);
+			  var totalCount= $("#more-btn").attr("totalCount");
+			  var currentCount = $("#more-btn").attr("currentCount");
+			  if(totalCount==currentCount){
+				  $("#more-btn").attr("disabled",true);
+				  $("#more-btn").css("cursor","not-allowed"); 				  
+			  }
+		  },
+		  error : function(){
+			  console.log("실패");
+		  }
+	  })
+}
+$(function(){
+	  $(".sideicon").click();
+	  fn_more(1);
+	  $("#more-btn").click(function(){
+		 fn_more($(this).val()); 
+	  });
+})
+
 
 </script>
 <style>
@@ -250,7 +382,20 @@ function deleteFunc(designerNo){
     button.delete {
         background-color: #333333;
     }
+/* cBody3 */
+ .cBody3 {
+        text-align: center;
+        margin-bottom: 150px;
+    }
 
+    .more {
+        width: 200px;
+        height: 60px;
+        font-size: 13px;
+        border: none;
+        background-color: #333333;
+        color: white;
+    }
 
 /* 모달내부 */
     .formTitle{
@@ -273,7 +418,7 @@ function deleteFunc(designerNo){
         padding: 2px;
         border: 1px solid lightgray;
     }
-    .insertForm {
+    .insertForm, .updateForm {
         width: 550px;
         height: 450px;
         padding: 20px;
@@ -281,7 +426,7 @@ function deleteFunc(designerNo){
         margin: 0 auto;
     }
 
-    .insertForm>table {
+    .insertForm>table,  {
         height: 100%;
     }
 
