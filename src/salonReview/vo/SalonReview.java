@@ -9,13 +9,20 @@ public class SalonReview {
 	private int reviewStar;
 	private String reviewComment;
 	private Date reviewDate;
+<<<<<<< HEAD
 	private double reviewStars;
+=======
+>>>>>>> hogilversion0.01
 	public SalonReview() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public SalonReview(int reserveNo, String salonName, String reviewWriter, int reviewStar, String reviewComment,
+<<<<<<< HEAD
 			Date reviewDate,double reviewStars) {
+=======
+			Date reviewDate) {
+>>>>>>> hogilversion0.01
 		super();
 		this.reserveNo = reserveNo;
 		this.salonName = salonName;
@@ -23,6 +30,7 @@ public class SalonReview {
 		this.reviewStar = reviewStar;
 		this.reviewComment = reviewComment;
 		this.reviewDate = reviewDate;
+<<<<<<< HEAD
 		this.reviewStars = reviewStars;
 	}
 	
@@ -31,6 +39,8 @@ public class SalonReview {
 	}
 	public void setReviewStars(double reviewStars) {
 		this.reviewStars = reviewStars;
+=======
+>>>>>>> hogilversion0.01
 	}
 	public int getReserveNo() {
 		return reserveNo;
@@ -68,5 +78,9 @@ public class SalonReview {
 	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> hogilversion0.01
 }
