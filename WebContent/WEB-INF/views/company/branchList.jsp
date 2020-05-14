@@ -192,14 +192,20 @@
 							${list1.salonName }<a
 								href="selectSalon?salonName=${list1.salonName }">지점 상세 보기</a>
 								</td>
+								<c:if test="${empty star[status.index].reviewStars}">
+								<td class="statd">
+							
+								<img class="sta" src="/upload/salon/star3.jpg">
+								<br> ${star[status.index].reviewStars }0점
+							
+							</td>
+							</c:if>
 							<c:forEach var="list1" items="${list }" varStatus="status1">
+							
 							<c:if test="${list1.salonName== star[status.index].salonName }">
 							<td class="statd">
 							
-							<c:if test="${empty star[status.index].reviewStars}">
-								<img class="sta" src="/upload/salon/star3.jpg">
-								<br> ${star[status.index].reviewStars }점
-							</c:if>
+							
 							<c:if
 									test="${star[status.index].reviewStars < 1 }">
 									
