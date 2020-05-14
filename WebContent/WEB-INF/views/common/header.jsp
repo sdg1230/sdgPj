@@ -102,7 +102,12 @@
 			<c:if test="${not empty sessionScope.member }">
 				<!--로그인되어있을때 -->
 				<li><a href="#">로그아웃</a></li>
+				<c:if test="${sessionScope.member.memberId eq 'admin' }">
+				<li><a href="/adminMenu">${sessionScope.member.memberName }</a></li>
+				</c:if>
+				<c:if test="${sessionScope.member.memberId ne 'admin' }">
 				<li><a href="#">${sessionScope.member.memberName }님</a></li>
+				</c:if>
 			</c:if>
 		</ul>
 	</div>
