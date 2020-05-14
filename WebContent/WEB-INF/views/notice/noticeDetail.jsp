@@ -160,6 +160,10 @@
         	background-color: rgba(102,102,102,0.3);
         	color: white;
         }
+        
+        .noticeContentTable0>table{
+        	width: 1200px;
+        }
 </style>
 </head>
 <body>
@@ -197,7 +201,7 @@
             	</div>
             	<br><hr style="border: 2px solid black;">
             	
-            	<div>
+            	<div style="text-align: center; width: 100%" class="noticeContentTable0">
             		${n.noticeContent }
             	</div>
             	<hr>
@@ -219,7 +223,7 @@ $(function() {
 	
 });
 function deleteNotice() {
-	if(confirm("탈퇴하시겠습니까?")){
+	if(confirm("삭제하시겠습니까?")){
 		location.href="/deleteNotice?noticeNo=${n.noticeNo}"
 	}else{
 		location.href="/noticeDetail?noticeNo=${n.noticeNo}"

@@ -136,7 +136,7 @@
 			</tr> 
 			<tr> 
 				<th style="background-color: #DDE3E9;">*내용</th> 
-				<td> <textarea rows="10" cols="30" id="p_content" name="noticeContent" style="width:100px; height:100px; resize: none; "></textarea> </td> 
+				<td> <textarea rows="10" cols="30" id="p_content" name="noticeContent" style="resize: none; "></textarea> </td> 
 			</tr> 
 		</table>
 		<div class="btnBoxN">
