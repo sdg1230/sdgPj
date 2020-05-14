@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import designer.model.vo.Designer;
 import salon.vo.Salon;
 import salonReview.vo.SalonReview;
 
@@ -82,8 +83,7 @@ public class SalonDao {
 				SalonReview s = new SalonReview();
 				s.setReviewStars(res.getDouble("avg(review_star)"));
 				s.setSalonName(res.getString("salon_name"));
-				System.out.println(s.getSalonName());
-				System.out.println(s.getReviewStars());
+				
 				list.add(s);
 				
 			}
@@ -110,7 +110,7 @@ public class SalonDao {
 				SalonReview s = new SalonReview();
 				s.setReviewStars(res.getDouble("avg(review_star)"));
 				s.setSalonName(res.getString("salon_name"));
-				System.out.println(s.getReviewStar());
+				
 				list.add(s);
 			}
 		} catch (SQLException e) {
@@ -293,12 +293,88 @@ public class SalonDao {
 				s.setSalonAddr(res.getString("salon_addr"));
 				s.setSalonFilename(res.getString("salon_filename"));
 				s.setSalonFilepath(res.getString("salon_filepath"));
+				s.setSalonInfo(res.getString("salon_info"));
+				s.setSalonName(res.getString("salon_name"));
+				s.setSalonNo(res.getInt("salon_no"));
+				s.setSalonPhone(res.getString("salon_phone"));
+				list.add(s);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(res);
+			JDBCTemplate.close(pstmt);
 		}
-		return null;
+		return list;
+	}
+
+	public ArrayList<SalonReview> salonSelect(Connection conn, int start, int end, String salonName) {
+		PreparedStatement pstmt = null;
+		ResultSet res = null;
+		ArrayList<SalonReview> sr = new ArrayList<SalonReview>();
+		SalonReview s = null;
+		String str ="select * from " + 
+				"(select rownum as rnum,n.* from " + 
+				"(select * from salon_review where salon_name=? order by reserve_no desc)n) " + 
+				"where rnum BETWEEN ? and ?";
+		try {
+			pstmt = conn.prepareStatement(str);
+			pstmt.setString(1, salonName);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			res = pstmt.executeQuery();
+			while (res.next()) {
+				s = new SalonReview();
+				s.setReserveNo(res.getInt("reserve_no"));
+				System.out.println(s.getReserveNo());
+				s.setReviewComment(res.getString("review_comment"));
+				s.setReviewDate(res.getDate("review_date"));
+				s.setReviewStar(res.getInt("review_star"));
+				s.setReviewWriter(res.getString("review_writer"));
+				s.setSalonName(res.getString("salon_name"));
+				sr.add(s);
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(res);
+			JDBCTemplate.close(pstmt);
+		}
+		return sr;
+	}
+
+	public ArrayList<Designer> salondesigner(Connection conn, String salonName) {
+		PreparedStatement pstmt = null;
+		ResultSet res = null;
+		ArrayList<Designer> ds = new ArrayList<Designer>();
+		Designer d = null;
+		String str = "select * from designer where salon_name=?";
+		try {
+			pstmt = conn.prepareStatement(str);
+			pstmt.setString(1, salonName);
+			res = pstmt.executeQuery();
+			while (res.next()) {
+				d = new Designer();
+				d.setDesignerFilename(res.getString("designer_filename"));
+				d.setDesignerFilepath(res.getString("designer_filepath"));
+				d.setDesignerInfo(res.getString("designer_info"));
+				d.setDesignerName(res.getString("designer_name"));
+				d.setDesignerNo(res.getInt("designer_no"));
+				d.setSalonName(res.getString("salon_name"));
+				ds.add(d);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(res);
+			JDBCTemplate.close(pstmt);
+		}
+		return ds;
 	}
 
 	

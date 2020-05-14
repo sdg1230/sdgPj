@@ -6,8 +6,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import designer.model.vo.Designer;
 import salon.dao.SalonDao;
 import salon.vo.Salon;
+import salon.vo.SalonDetails;
 import salon.vo.SalonList;
 import salonReview.vo.SalonReview;
 
@@ -24,7 +26,7 @@ public class SalonService {
 		}else {
 			totalPage = totalCount/numPerPage+1;
 		}
-		System.out.println(totalPage);
+		
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		ArrayList<Salon> list = new SalonDao().selectAffilate(conn,start,end);
@@ -76,7 +78,7 @@ public class SalonService {
 		}else {
 			totalPage = totalCount/numPerPage+1;
 		}
-		System.out.println(totalPage);
+		
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		ArrayList<Salon> list = new SalonDao().selectAffilates(conn,start,end);
@@ -103,7 +105,7 @@ public class SalonService {
 					"'>다음</a>";
 		}
 		
-		System.out.println(pageNavi);
+		
 		SalonList pd = new SalonList(list,pageNavi,null);
 		JDBCTemplate.close(conn);
 		return pd;
@@ -126,11 +128,12 @@ public class SalonService {
 		}else {
 			totalPage = totalCount/numPerPage+1;
 		}
-		System.out.println(totalPage);
+		
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		ArrayList<Salon> list = new SalonDao().selectAffilates(conn,start,end);
 		String pageNavi = "";
+		
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 		if(pageNo != 1) {
@@ -153,7 +156,7 @@ public class SalonService {
 					"'>다음</a>";
 		}
 		
-		System.out.println(pageNavi);
+		
 		SalonList pd = new SalonList(list,pageNavi,null);
 		JDBCTemplate.close(conn);
 		return pd;
@@ -201,6 +204,50 @@ public class SalonService {
 		ArrayList<Salon> list = new SalonDao().selectSalon(conn);
 		JDBCTemplate.close(conn);
 		return null;
+	}
+
+	public SalonDetails salonDetails(String salonName) {
+		Connection conn =  JDBCTemplate.getConnection();
+		Salon sa =  new SalonDao().salonSelect(conn, salonName);
+		int reqPage =1;
+		int numPerPage = 10;
+		int totalCount = new SalonDao().totalCount(conn);
+		int totalPage =0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		
+		int start = (reqPage-1)*numPerPage+1;
+		int end = reqPage*numPerPage;
+		ArrayList<SalonReview> list = new SalonDao().salonSelect(conn,start,end,salonName);
+		String pageNavi = "";
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		if(pageNo != 1) {
+			pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+(pageNo-pageNaviSize)+
+					"'>이전</a>";
+		}
+		for(int i=0;i<pageNaviSize;i++) {
+			if(reqPage == pageNo) {
+				pageNavi +="<span class='selectPage'>"+pageNo+"</span>";
+			}else {
+				pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+			if(pageNo>totalPage) {
+				break;
+			}
+		}
+		if(pageNo <= totalPage) {
+			pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+pageNo+
+					"'>다음</a>";
+		}
+		ArrayList<Designer> designerList = new SalonDao().salondesigner(conn, salonName);
+		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list);
+		return sd;
 	}
 
 }

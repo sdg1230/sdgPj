@@ -35,7 +35,8 @@
 		<div class="content">
 
 			<div>
-				<input type="hidden" id="salonName" value="역곡2동 49-13번지">
+			<input type="hidden" id="salonName" value="${salon.salonName }">
+				<input type="hidden" id="salonAddr" value="${salon.salonAddr }">
 				<div>
 					<div id="map" style="width: 100%; height: 500px;"></div>
 				</div>
@@ -107,7 +108,7 @@
 		var xx;
 		var yy;
 		var addr;
-	    
+	    var name;
 		
         var latitude;
         var longitude;
@@ -151,18 +152,19 @@
 				       var d = R * c;
 				       console.log(d);
 				       
-				    	   Math.round(d)+"km";
+				    	   Math.round(d/100)+"km";
 				    
 				       
 				    	    Math.round(d*1000)+"m";
 				    	    console.log(d);
 				      
-				       console.log(Math.round(d)+"km");
+				       console.log(Math.round(d/100)+"km");
 				       
 				
 				
 			});
-			addr = $("#salonName").val();
+			addr = $("#salonAddr").val();
+			name = $("#salonName").val();
 			console.log(addr);
 		
 		console.log(addr+"dd");
@@ -201,7 +203,7 @@
 				map : map
 			});
 			var contentString = [ "<div class='iw_inner'>",
-					" <h3>KH정보 교육원</h3>", " <p>"+addr+"</p>",
+					" <h3>"+name+"</h3>", " <p>"+addr+"</p>",
 					"</div>" ].join("");
 			var infoWindow = new naver.maps.InfoWindow({content : contentString});
 			infoWindow.open(map, marker);
