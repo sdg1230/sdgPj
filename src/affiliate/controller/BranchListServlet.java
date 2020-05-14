@@ -2,8 +2,8 @@ package affiliate.controller;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import affilate.service.AffilateService;
-import affilate.vo.Affilate;
+
 import affilate.vo.AffilateList;
 
 /**

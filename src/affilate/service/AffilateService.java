@@ -2,13 +2,15 @@ package affilate.service;
 
 import java.sql.Connection;
 
+
 import java.util.ArrayList;
 
 import affilate.dao.AffilateDao;
 import affilate.vo.Affilate;
 import affilate.vo.AffilateList;
-import affilate.vo.AffilateStar;
+
 import common.JDBCTemplate;
+import salonReview.vo.SalonReview;
 
 
 public class AffilateService {
@@ -49,7 +51,7 @@ public class AffilateService {
 			pageNavi +="<a class='btn' href='/branchList?reqPage="+pageNo+
 					"'>다음</a>";
 		}
-		ArrayList<AffilateStar> reviewStar = new AffilateDao().selectSolonRevuew(conn);
+		ArrayList<SalonReview> reviewStar = new AffilateDao().selectSolonRevuew(conn);
 		
 		AffilateList pd = new AffilateList(list,pageNavi,reviewStar);
 		JDBCTemplate.close(conn);
@@ -59,7 +61,7 @@ public class AffilateService {
 	public AffilateList selectAffilate(String sq) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Affilate> list = new AffilateDao().selectSolonRevuew(conn,sq);
-		ArrayList<AffilateStar> reviewStar = new AffilateDao().selectAffilate(conn,sq);
+		ArrayList<SalonReview> reviewStar = new AffilateDao().selectAffilate(conn,sq);
 		AffilateList pd = new AffilateList(list,null,reviewStar);
 		JDBCTemplate.close(conn);
 		return pd;

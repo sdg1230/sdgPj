@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
 
 import common.JDBCTemplate;
+import reserve.vo.HairMenu;
 import reserve.vo.Reserve;
 import reserve.vo.ReserveDetail;
 
@@ -134,6 +135,75 @@ public class ReserveDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<HairMenu> selectHairMenu(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HairMenu> hairMenuList = new ArrayList<HairMenu>();
+		String query = "select * from hair_menu";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				HairMenu h = new HairMenu();
+				h.setHairNo(rset.getInt("hair_no"));
+				h.setHairName(rset.getString("hair_name"));
+				h.setHairPay(rset.getInt("hair_pay"));
+				h.setHairTime(rset.getInt("hair_time"));
+				hairMenuList.add(h);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return hairMenuList;
+	}
+
+	public ArrayList<Reserve> selectReserveTime(Connection conn, String reserveDate, String salonName,
+			int designerNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
+		String query = "select start_time,reserve_time from reseve where reserve_date=? and salon_name=? and designer_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reserveDate);
+			pstmt.setString(2, salonName);
+			pstmt.setInt(3, designerNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Reserve r = new Reserve();
+				r.setStartTime(rset.getInt("start_time"));
+				r.setReserveTime(rset.getInt("reserve_time"));
+				rlist.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return rlist;
+	}
+
+	public ArrayList<Reserve> reserveList(Connection conn, String memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<ReserveDetail> reserveDetailList(Connection conn, int reserveNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<Reserve> reserveNo(Connection conn, int reserveNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

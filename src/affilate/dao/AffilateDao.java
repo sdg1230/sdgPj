@@ -2,14 +2,16 @@ package affilate.dao;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import affilate.vo.Affilate;
-import affilate.vo.AffilateStar;
+
 import common.JDBCTemplate;
+import salonReview.vo.SalonReview;
 
 
 public class AffilateDao {
@@ -69,19 +71,22 @@ public class AffilateDao {
 		return result;
 	}
 
-	public  ArrayList<AffilateStar> selectSolonRevuew(Connection conn) {
+	public  ArrayList<SalonReview> selectSolonRevuew(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
-		ArrayList<AffilateStar> list = new ArrayList<AffilateStar>();
+		ArrayList<SalonReview> list = new ArrayList<SalonReview>();
 		String str = "select salon_name,avg(review_star) from salon_review group by salon_name";
 		try {
 			pstmt = conn.prepareStatement(str);
 			res = pstmt.executeQuery();
 			while (res.next()) {
-				AffilateStar s = new AffilateStar();
-				s.setReviewStar(res.getDouble("avg(review_star)"));
-				System.out.println(s.getReviewStar());
+				SalonReview s = new SalonReview();
+				s.setReviewStars(res.getDouble("avg(review_star)"));
+				s.setSalonName(res.getString("salon_name"));
+				System.out.println(s.getSalonName());
+				System.out.println(s.getReviewStars());
 				list.add(s);
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -93,18 +98,19 @@ public class AffilateDao {
 		return list;
 	}
 
-	public ArrayList<AffilateStar> selectAffilate(Connection conn, String sq) {
+	public ArrayList<SalonReview> selectAffilate(Connection conn, String sq) {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
-		ArrayList<AffilateStar> list = new ArrayList<AffilateStar>();
+		ArrayList<SalonReview> list = new ArrayList<SalonReview>();
 		String str = "select salon_name,avg(review_star) from salon_review where salon_name like ? group by salon_name";
 		try {
 			pstmt = conn.prepareStatement(str);
 			pstmt.setString(1, "%"+sq+"%");
 			res = pstmt.executeQuery();
 			while (res.next()) {
-				AffilateStar s = new AffilateStar();
-				s.setReviewStar(res.getDouble("avg(review_star)"));
+				SalonReview s = new SalonReview();
+				s.setReviewStars(res.getDouble("avg(review_star)"));
+				s.setSalonName(res.getString("salon_name"));
 				System.out.println(s.getReviewStar());
 				list.add(s);
 			}
