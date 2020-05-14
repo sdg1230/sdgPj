@@ -96,8 +96,8 @@
 		<ul>
 			<c:if test="${empty sessionScope.member }">
 				<!--로그인되어있지않을때 -->
-				<li><a href="#">회원가입</a></li>
-				<li><a href="#">로그인</a></li>
+				<li><a href="/agree">회원가입</a></li>
+				<li><a href="/loginFrm">로그인</a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope.member }">
 				<!--로그인되어있을때 -->
