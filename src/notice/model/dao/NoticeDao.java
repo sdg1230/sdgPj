@@ -92,4 +92,53 @@ public class NoticeDao {
 		return list;
 	}
 
+	public int insertNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into notice values(seq_notice_no.nextval,'admin',sysdate,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, n.getNoticeContent());
+			pstmt.setString(2, n.getNoticeTitle());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Notice noticeDetail(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		Notice n = null;
+		ResultSet rset = null;
+		String query = "select * from notice where notice_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				n = new Notice();
+				n.setNoticeContent(rset.getString("notice_content"));
+				n.setNoticeDate(rset.getDate("notice_date"));
+				n.setNoticeNo(rset.getInt("notice_no"));
+				n.setNoticeTitle(rset.getString("notice_title"));
+				n.setNoticeWriter(rset.getString("notice_writer"));
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return n;
+	}
+
 }

@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title> 
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <style>
 	.content2 {
             /*-지우지마세요-*/
@@ -78,32 +75,90 @@
         .subMenuContent>.inner>ul>li:first-child>a{
             color: ghostwhite;
         }
+        .noticeText{
+        	margin-left: 350px;
+        	margin-bottom: 20px;
+        }
+        .noticeTable{
+        	width:100%;
+        	text-align: center;
+        	border-bottom: 3px solid grey;
+        }
         
-        #noticeTitle{
-        	margin-left: 20px;
-        	height: 22px;
-        	width: 930px;
+        .noticeTable>tbody>tr>th{
+        	background-color: grey;
+        	opacity: 0.6;
+        	color: ghostwhite;
+        	height: 50px;
+        }
+        
+        .noticeTable>tbody>tr>th:first-child{
+        	width: 250px;
+        }
+        
+        .noticeTable>tbody>tr>th:last-child{
+        	width: 250px;
+        }
+        
+        .noticeTable>tbody>tr>td{
+        	height: 50px;
+        	color: black;
+        }
+        
+
+
+
+
+        .noticeDetailSpan1{
+        	color : #BDCCD9;
+        	font-weight: bold;
+        	font-style: italic;
+        	margin-right: 10px;
+        	margin-left: 30px;
+        	font-size: 14px;
+        }
+        
+        .noticeDetailSpan2{
+        	color : #5E6062;
+        	font-size: 14px;
+        }
+        
+        .marker{
+        	background-color: yellow; 
+        }
+        
+        .adminNoticeBtn{
+        	display: inline-block;
+        	width: 90px;
+        	height: 28px;
+        	background-color: #ffffff;
+        	text-align: center;
+        	line-height: 30px;
+        	color : #666666;
+        	border: 1px solid #D4D4Cd;
+        	padding-left: 2px;
+        	padding-right: 2px;
+        	margin-left: 2px;
+        	margin-right: 2px;
         }
         
         .noticeBtn{
-        	width: 150px;
-        	height: 50px;
-        	background-color: #CD3C41;
-        	border: none;
-        	border-radius: 5px;
-        	color: white;
-        	margin-left: 10px;
-        	margin-right: 10px;
+        	border: 1px solid #D4D4Cd;
+        	width: 90px;
+        	line-height: 28px;
+        	vertical-align: center;
+        	color : #666666;
+        	padding-left: 2px;
+        	padding-right: 2px;
+        	margin-left: 2px;
+        	margin-right: 2px;
+        	background-color: #ffffff;
         }
         
         .noticeBtn:hover{
-        	opacity: 0.8;
-        }
-        
-        .btnBoxN{
-        	text-align: center;
-        	margin-top: 30px;
-        	margin-bottom: 30px;
+        	cursor: pointer;
+        	background-color: rgba(102,102,102,0.3);
+        	color: white;
         }
 </style>
 </head>
@@ -126,40 +181,36 @@
                     </ul>
                 </div>
             </div>
-            <br><br><hr>
-            <h2 style="margin-left: 70px;">공지사항 등록</h2>
-	<form id="frm" action="/insertNotice" method="post" >
-		<table width="100%">
-			<tr>
-				<th style="width: 200px; height: 50px; border-top: 2px solid red; background-color: #DDE3E9;">*제목</th> 
-				<td style="border-top: 2px solid red;"><input type="text" id="noticeTitle" name="noticeTitle" placeholder=" 제목을 입력하세요"></td> 
-			</tr> 
-			<tr> 
-				<th style="background-color: #DDE3E9;">*내용</th> 
-				<td> <textarea rows="10" cols="30" id="p_content" name="noticeContent" style="width:100px; height:100px; resize: none; "></textarea> </td> 
-			</tr> 
-		</table>
-		<div class="btnBoxN">
-			<input type="submit" class="noticeBtn" value="등록"> 
-			<input type="button" class="noticeBtn" value="취소"> 
-		</div>
-	</form>
-	</div>
+            
+            <div align="right" style="margin-top: 120px;">
+            	<a href="/modifyNotice" class="adminNoticeBtn">수정하기</a>
+            	<a href="/deleteNotice" class="adminNoticeBtn">삭제하기</a>
+            </div>
+            
+            <div class="noticeDetailContent" >
+            	<br><br><hr style="border: 2px solid black;">
+            	<h1 align="center">${n.noticeTitle}</h1>
+            	<div style="text-align: right">
+            		<span class="noticeDetailSpan2"><span class="noticeDetailSpan1">by</span>${n.noticeWriter}</span>
+            		<span class="noticeDetailSpan2"><span class="noticeDetailSpan1">posted</span>${n.noticeDate}</span>
+            	</div>
+            	<br><hr style="border: 2px solid black;">
+            	
+            	<div>
+            		${n.noticeContent }
+            	</div>
+            	<hr>
+            	<br><br>
+            	<button type="button" class="noticeBtn">목록보기</button>
+            	<br><br><br>
+            </div>
+            
+         </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
-<script type="text/javascript">
- 		CKEDITOR.replace('p_content', {
- 			height: 500,
- 			enterMode:'2',
- 			shiftEnterMode:'3'
-        });
- 		CKEDITOR.config.resize_enabled = false;
- 		CKEDITOR.instances.textarea.getData();
-</script>
+</body>
 <script>
 $(function() {
-	$("#noticeTitle").focus();
-	
 	$(".noticeBtn").click(function () {
 		history.back();
 	});
@@ -167,5 +218,4 @@ $(function() {
 	
 });
 </script>
-</body>
 </html>

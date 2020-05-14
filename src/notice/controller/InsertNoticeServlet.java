@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
+
 /**
- * Servlet implementation class NoticeViewServlet
+ * Servlet implementation class InsertNoticeServlet
  */
-@WebServlet(name = "NoticeView", urlPatterns = { "/noticeView" })
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet(name = "InsertNotice", urlPatterns = { "/insertNotice" })
+public class InsertNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public InsertNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +29,21 @@ public class NoticeViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Notice n = new Notice();
+		n.setNoticeTitle(request.getParameter("noticeTitle"));
+		n.setNoticeContent(request.getParameter("noticeContent"));
+		int result = new NoticeService().insertNotice(n);
 		
+		
+		if(result>0) {
+			request.setAttribute("msg", "공지사항 등록 성공");
+			request.setAttribute("loc", "/noticeList?reqPage=1");
+			
+		}else {
+			request.setAttribute("msg", "공지사항 등록 실패");
+			request.setAttribute("loc", "/noticeList?reqPage=1");
+		}
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

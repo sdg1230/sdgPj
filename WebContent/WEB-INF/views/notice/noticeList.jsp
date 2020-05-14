@@ -208,7 +208,7 @@
                 	<span class="spanbarSmall"></span>
                     <h1 align="center">공지사항</h1>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
+                        <li><a href="/noticeList?reqPage=1">공지사항</a></li>
                         <li><a href="#">이벤트</a></li>
                         <li><a href="#">1:1문의</a></li>
                     </ul>
@@ -228,11 +228,12 @@
                 </tr>
                 <c:forEach items="${list }" var="n">
 				<tr>
-					<td><a href="/noticeView?noticeNo=${n.noticeNo}">
-					${n.noticeWriter }</a></td>
-					<td>${n.noticeTitle }</td>
-					<td>${n.noticeDate }</td>
-				</tr>			
+					<td style="border-bottom: 0.1px solid #DDE3E9;">
+					${n.noticeWriter }</td>
+					<td style="border-bottom: 0.1px solid #DDE3E9;"><a href="/noticeDetail?noticeNo=${n.noticeNo}" style="font-weight: bold">${n.noticeTitle }</a></td>
+					<td style="border-bottom: 0.1px solid #DDE3E9;">${n.noticeDate }</td>
+				</tr>
+							
 			</c:forEach>
             </table>
             <a href="/noticeWrite" class="noticeWriteBtn">글쓰기</a>
