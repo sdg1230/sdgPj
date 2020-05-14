@@ -135,7 +135,7 @@
 <script>
 //부트스트립에만
 $("a").click(function() {
-    $(this).css("text-decoration", "none").css("color", "#333333");
+    $(this).css("text-decoration", "none").css("color", "");
 });
 
 //인서트모달
@@ -428,6 +428,9 @@ $(function(){
 
     .insertForm>table,  {
         height: 100%;
+    }
+    textarea{
+    resize:none;
     }
 
     .insertBtn {

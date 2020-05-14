@@ -156,7 +156,9 @@ $("#file1").change(function() {
                             <input type="hidden" name="oldFilename" value="${list.salonFilename }">
                             <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
                         </c:if>
-
+						<c:if test="${empty list.salonFilename }">
+							<input type="file" name="salonFilename" id="file" onchange="loadImg(this);">
+						</c:if>
 
                     </td>
                 </tr>
