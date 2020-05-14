@@ -16,6 +16,7 @@ public class Reserve {
    private String memberPhone;
    private String reserveStatus;
    private String paymentStatus;
+   private String reserveReview;
    private ArrayList<ReserveDetail> menuList;
 public Reserve() {
 	super();
@@ -23,7 +24,7 @@ public Reserve() {
 }
 public Reserve(int reserveNo, String memberId, String salonName, int designerNo, String reserveDate, int startTime,
 		int reserveTime, int totalPrice, String memberName, String designerName, String memberPhone,
-		String reserveStatus, String paymentStatus, ArrayList<ReserveDetail> menuList) {
+		String reserveStatus, String paymentStatus, String reserveReview, ArrayList<ReserveDetail> menuList) {
 	super();
 	this.reserveNo = reserveNo;
 	this.memberId = memberId;
@@ -38,6 +39,7 @@ public Reserve(int reserveNo, String memberId, String salonName, int designerNo,
 	this.memberPhone = memberPhone;
 	this.reserveStatus = reserveStatus;
 	this.paymentStatus = paymentStatus;
+	this.reserveReview = reserveReview;
 	this.menuList = menuList;
 }
 public int getReserveNo() {
@@ -118,12 +120,19 @@ public String getPaymentStatus() {
 public void setPaymentStatus(String paymentStatus) {
 	this.paymentStatus = paymentStatus;
 }
+public String getReserveReview() {
+	return reserveReview;
+}
+public void setReserveReview(String reserveReview) {
+	this.reserveReview = reserveReview;
+}
 public ArrayList<ReserveDetail> getMenuList() {
 	return menuList;
 }
 public void setMenuList(ArrayList<ReserveDetail> menuList) {
 	this.menuList = menuList;
 }
+
 
    
 }

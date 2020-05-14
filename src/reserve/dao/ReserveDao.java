@@ -38,6 +38,7 @@ public class ReserveDao {
 				r.setReserveStatus(rset.getString("reserve_status"));
 				r.setStartTime(rset.getInt("start_time"));
 				r.setTotalPrice(rset.getInt("total_price"));
+				r.setReserveReview(rset.getString("reserve_review"));
 				list.add(r);
 			
 			}

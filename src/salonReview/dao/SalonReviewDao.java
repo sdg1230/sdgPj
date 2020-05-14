@@ -55,5 +55,24 @@ public class SalonReviewDao {
 		return result;
 	}
 
+	public int updateReserveReview(Connection conn, String reserveReview, SalonReview s) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update reserve set reserve_review=? where reserve_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reserveReview);
+			pstmt.setInt(2, s.getReserveNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 }

@@ -40,8 +40,17 @@ public class ReserveListServlet extends HttpServlet {
 		ArrayList<Reserve>list = new ReserveService().reserveList(memberId);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
+		
+		
+		
 		if(!list.isEmpty()) {
+			
 			request.setAttribute("userReserveList", list);
+			
+		}else {
+			
+			request.setAttribute("userReserveList", list);
+			
 		}
 		System.out.println(list.get(0));
 		rd.forward(request, response);

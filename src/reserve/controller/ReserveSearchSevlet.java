@@ -37,7 +37,7 @@ public class ReserveSearchSevlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
-		System.out.println(reserveNo);
+		System.out.println("여기확인좀"+reserveNo);
 		ArrayList<Reserve> list = new ReserveService().searchReserve(reserveNo);
 		
 //		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
