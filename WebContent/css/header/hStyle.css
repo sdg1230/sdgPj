@@ -6,8 +6,6 @@
 
         .wrapper {
             overflow: hidden;
-            z-index: 1;
-            position: relative;
         }
 
         html {
@@ -174,7 +172,7 @@
 
         .meorijom {
             font-family: 'Anton', sans-serif;
-            font-size: 38px;
+            font-size:38px;
         }
 
         .hNavi>.meorijom:hover {

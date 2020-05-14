@@ -7,8 +7,8 @@
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Anton&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="/css/header/hStyle.css">
-<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+	<link rel="stylesheet" href="/css/header/hStyle.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
 	//사이드바
 	function up() {
@@ -55,7 +55,7 @@
 
 <div class="sidebar">
 	<span class="sideicon"><img src="/imgs/sideicon.png"></span> <a
-		href="#">
+		href="/reserveFrm">
 		<div class="sidemenu">
 			<img src="/imgs/reserve-icon.png">
 			<div>예약하기</div>
@@ -109,10 +109,12 @@
 	<div class="header3">
 		<ul class="hNavi">
 			<span class="meorijom" onclick="location.href = '/';">MEORIJOM HAIR</span>
-			<li><a href="#">회사소개</a></li>
-			<li><a href="#">지점소개</a></li>
-			<li><a href="#">공지사항</a></li>
+			<li><a href="/company">회사소개</a></li>
+			<li><a href="/branchList?reqPage=1">지점소개</a></li>
+			<li><a href="/noticeList?reqPage=1">공지사항</a></li>
 			<li><a href="javascript:void(0)" onclick="alert('준비중입니다.');">아카데미</a></li>
+			<li><a href="/branchmanagement?reqPage=1">지점관리</a></li>
+			<li><a href="/adminReserveList">예약관리</a></li>
 		</ul>
 	</div>
 </div>
