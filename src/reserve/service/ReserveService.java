@@ -2,7 +2,7 @@ package reserve.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-<<<<<<< HEAD
+
 import java.util.Date;
 
 

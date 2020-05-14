@@ -6,17 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
 
-=======
->>>>>>> hogilversion0.01
 import common.JDBCTemplate;
+import reserve.vo.HairMenu;
 import reserve.vo.Reserve;
 import reserve.vo.ReserveDetail;
 
 public class ReserveDao {
-<<<<<<< HEAD
 	
 	public ArrayList<Reserve> selectAllReserve(Connection conn, String salonName, String status) {
 		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
@@ -35,49 +32,16 @@ public class ReserveDao {
 				r.setMemberId(rset.getString("member_id"));
 				r.setMemberName(rset.getString("member_name"));
 				r.setMemberPhone(rset.getString("member_phone"));
-=======
-
-	public ArrayList<Reserve> reserveList(Connection conn, String memberId) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<Reserve>list = new ArrayList<Reserve>(); 
-		String query = "select * from member,reserve,designer,salon,reserve_detail where member.member_id=reserve.member_id and reserve.reserve_no=reserve_detail.reserve_no and reserve.designer_no=designer.designer_no and reserve.salon_name=salon.salon_name and member.member_id=? order by reserve_date desc";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, memberId);
-			System.out.println(memberId);
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				Reserve r = new Reserve();
-				System.out.println("test");
-				r.setDesignerNo(rset.getInt("designer_no"));
-				r.setDesignerName(rset.getString("designer_name"));
-				r.setMemberId(rset.getString("member_id"));
-				r.setMemberName(rset.getString("member_name"));
->>>>>>> hogilversion0.01
 				r.setReserveDate(rset.getString("reserve_date"));
 				r.setReserveNo(rset.getInt("reserve_no"));
 				r.setReserveTime(rset.getInt("reserve_time"));
 				r.setSalonName(rset.getString("salon_name"));
-<<<<<<< HEAD
 				r.setStartTime(rset.getInt("start_time"));
 				r.setTotalPrice(rset.getInt("total_price"));
 				r.setReserveStatus(rset.getString("reserve_status"));
 				r.setPaymentStatus(rset.getString("payment_status"));
 				rlist.add(r);
 			}
-=======
-				r.setMemberPhone(rset.getString("member_phone"));
-				r.setPaymentStatus(rset.getString("payment_status"));
-				r.setReserveStatus(rset.getString("reserve_status"));
-				r.setStartTime(rset.getInt("start_time"));
-				r.setTotalPrice(rset.getInt("total_price"));
-				r.setReserveReview(rset.getString("reserve_review"));
-				list.add(r);
-			
-			}
-			
->>>>>>> hogilversion0.01
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,7 +50,6 @@ public class ReserveDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
-<<<<<<< HEAD
 		return rlist;
 	}
 
@@ -95,41 +58,20 @@ public class ReserveDao {
 		ResultSet rset = null;
 		ArrayList<ReserveDetail> dlist = new ArrayList<ReserveDetail>();
 		String query = "select * from reserve_detail where reserve_no=?";
-=======
-		return list;
-	}
-
-	
-
-	public ArrayList<ReserveDetail> reserveDetailList(Connection conn, int reserveNo) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String query = "select * from reserve_detail where reserve_no=?";
-		ArrayList<ReserveDetail> rlist = new ArrayList<ReserveDetail>();
->>>>>>> hogilversion0.01
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, reserveNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-<<<<<<< HEAD
 				ReserveDetail rd = new ReserveDetail();
 				rd.setReserveNo(rset.getInt("reserve_no"));
 				rd.setHairNo(rset.getInt("hair_no"));
 				rd.setHairName(rset.getString("hair_name"));
 				dlist.add(rd);
-=======
-				ReserveDetail r = new ReserveDetail();
-				r.setReserveNo(rset.getInt("reserve_no"));
-				r.setHairNo(rset.getInt("hair_no"));
-				r.setHairName(rset.getString("hair_name"));
-				rlist.add(r);
->>>>>>> hogilversion0.01
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-<<<<<<< HEAD
 		}finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
@@ -168,42 +110,6 @@ public class ReserveDao {
 				r.setReserveDate(rset.getString("reserve_date"));
 				r.setReserveStatus(rset.getString("reserve_status"));
 				rlist.add(r);
-=======
-		}
-		return rlist;
-	}
-
-
-
-	public ArrayList<Reserve> reserveNo(Connection conn, int reserveNo) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<Reserve>list = new ArrayList<Reserve>(); 
-		String query = "select * from member,reserve,designer,salon,reserve_detail where member.member_id=reserve.member_id and reserve.reserve_no=reserve_detail.reserve_no and reserve.designer_no=designer.designer_no and reserve.salon_name=salon.salon_name and reserve.reserve_no=? order by reserve_date desc";
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, reserveNo);
-			System.out.println(reserveNo);
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				Reserve r = new Reserve();
-				System.out.println("test");
-				r.setDesignerNo(rset.getInt("designer_no"));
-				r.setDesignerName(rset.getString("designer_name"));
-				r.setMemberId(rset.getString("member_id"));
-				r.setMemberName(rset.getString("member_name"));
-				r.setReserveDate(rset.getString("reserve_date"));
-				r.setReserveNo(rset.getInt("reserve_no"));
-				r.setReserveTime(rset.getInt("reserve_time"));
-				r.setSalonName(rset.getString("salon_name"));
-				r.setMemberPhone(rset.getString("member_phone"));
-				r.setPaymentStatus(rset.getString("payment_status"));
-				r.setReserveStatus(rset.getString("reserve_status"));
-				r.setStartTime(rset.getInt("start_time"));
-				r.setTotalPrice(rset.getInt("total_price"));
-				list.add(r);
-			
->>>>>>> hogilversion0.01
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -212,7 +118,6 @@ public class ReserveDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-<<<<<<< HEAD
 		return rlist;
 	}
 
@@ -232,11 +137,75 @@ public class ReserveDao {
 		return result;
 	}
 
-
-
-=======
-		return list;
+	public ArrayList<HairMenu> selectHairMenu(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<HairMenu> hairMenuList = new ArrayList<HairMenu>();
+		String query = "select * from hair_menu";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				HairMenu h = new HairMenu();
+				h.setHairNo(rset.getInt("hair_no"));
+				h.setHairName(rset.getString("hair_name"));
+				h.setHairPay(rset.getInt("hair_pay"));
+				h.setHairTime(rset.getInt("hair_time"));
+				hairMenuList.add(h);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return hairMenuList;
 	}
 
->>>>>>> hogilversion0.01
+	public ArrayList<Reserve> selectReserveTime(Connection conn, String reserveDate, String salonName,
+			int designerNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
+		String query = "select start_time,reserve_time from reseve where reserve_date=? and salon_name=? and designer_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, reserveDate);
+			pstmt.setString(2, salonName);
+			pstmt.setInt(3, designerNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Reserve r = new Reserve();
+				r.setStartTime(rset.getInt("start_time"));
+				r.setReserveTime(rset.getInt("reserve_time"));
+				rlist.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return rlist;
+	}
+
+	public ArrayList<Reserve> reserveList(Connection conn, String memberId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<ReserveDetail> reserveDetailList(Connection conn, int reserveNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<Reserve> reserveNo(Connection conn, int reserveNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 }
