@@ -19,7 +19,7 @@ public class ReserveDao {
 		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status from reserve join member using(member_id) join designer using(designer_no) where reserve.salon_name=? and reserve_status=? order by reserve_date desc";
+		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status,reserve_review from reserve join member using(member_id) join designer using(designer_no) where reserve.salon_name=? and reserve_status=? order by reserve_date desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, salonName);
@@ -38,6 +38,7 @@ public class ReserveDao {
 				r.setSalonName(rset.getString("salon_name"));
 				r.setStartTime(rset.getInt("start_time"));
 				r.setTotalPrice(rset.getInt("total_price"));
+				r.setReserveReview(rset.getString("reserve_review"));
 				r.setReserveStatus(rset.getString("reserve_status"));
 				r.setPaymentStatus(rset.getString("payment_status"));
 				rlist.add(r);
@@ -280,6 +281,7 @@ public class ReserveDao {
 				r.setMemberPhone(rset.getString("member_phone"));
 				r.setPaymentStatus(rset.getString("payment_status"));
 				r.setReserveStatus(rset.getString("reserve_status"));
+				r.setReserveReview(rset.getString("reserve_review"));
 				r.setStartTime(rset.getInt("start_time"));
 				r.setTotalPrice(rset.getInt("total_price"));
 				list.add(r);
