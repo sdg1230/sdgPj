@@ -9,12 +9,13 @@ public class SalonReview {
 	private int reviewStar;
 	private String reviewComment;
 	private Date reviewDate;
+	private double reviewStars;
 	public SalonReview() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public SalonReview(int reserveNo, String salonName, String reviewWriter, int reviewStar, String reviewComment,
-			Date reviewDate) {
+			Date reviewDate,double reviewStars) {
 		super();
 		this.reserveNo = reserveNo;
 		this.salonName = salonName;
@@ -22,6 +23,14 @@ public class SalonReview {
 		this.reviewStar = reviewStar;
 		this.reviewComment = reviewComment;
 		this.reviewDate = reviewDate;
+		this.reviewStars = reviewStars;
+	}
+	
+	public double getReviewStars() {
+		return reviewStars;
+	}
+	public void setReviewStars(double reviewStars) {
+		this.reviewStars = reviewStars;
 	}
 	public int getReserveNo() {
 		return reserveNo;
