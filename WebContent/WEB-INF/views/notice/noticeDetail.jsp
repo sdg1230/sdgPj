@@ -183,8 +183,9 @@
             </div>
             
             <div align="right" style="margin-top: 120px;">
-            	<a href="/modifyNotice" class="adminNoticeBtn">수정하기</a>
-            	<a href="/deleteNotice" class="adminNoticeBtn">삭제하기</a>
+            	<a href="/modifyNoticeFrm?noticeNo=${n.noticeNo}" class="adminNoticeBtn">수정하기</a>
+            	<!-- <a href="/deleteNotice?noticeNo=${n.noticeNo}" class="adminNoticeBtn" onclick="deleteNotice()">삭제하기</a> -->
+            	<a href="javascript:void(0)" class="adminNoticeBtn" onclick="deleteNotice('${n.noticeNo}')">삭제하기</a>
             </div>
             
             <div class="noticeDetailContent" >
@@ -217,5 +218,12 @@ $(function() {
 	
 	
 });
+function deleteNotice() {
+	if(confirm("탈퇴하시겠습니까?")){
+		location.href="/deleteNotice?noticeNo=${n.noticeNo}"
+	}else{
+		location.href="/noticeDetail?noticeNo=${n.noticeNo}"
+	}
+};
 </script>
 </html>
