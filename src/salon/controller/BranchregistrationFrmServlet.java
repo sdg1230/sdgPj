@@ -1,4 +1,4 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CompanyServlet
+ * Servlet implementation class BranchregistrationFrmServlet
  */
-@WebServlet(name = "Company", urlPatterns = { "/company" })
-public class CompanyServlet extends HttpServlet {
+@WebServlet(name = "BranchregistrationFrm", urlPatterns = { "/branchregistrationFrm" })
+public class BranchregistrationFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CompanyServlet() {
+    public BranchregistrationFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class CompanyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/company/company.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/company/branchregistration.jsp").forward(request, response);
 	}
 
 	/**

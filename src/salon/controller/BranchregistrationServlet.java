@@ -1,4 +1,4 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,8 +15,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import affilate.service.AffilateService;
-import affilate.vo.Affilate;
+import salon.service.SalonService;
+import salon.vo.Salon;
 
 /**
  * Servlet implementation class BranchregistrationServlet
@@ -55,7 +55,7 @@ public class BranchregistrationServlet extends HttpServlet {
 		System.out.println(roadAddr);
 		System.out.println(jibunAddr);
 		System.out.println(detailAddr);
-		Affilate aff = new Affilate();
+		Salon aff = new Salon();
 		aff.setSalonAddr(roadAddr+jibunAddr+detailAddr);
 		System.out.println(aff.getSalonAddr());
 		aff.setSalonFilename(mRequest.getOriginalFileName("salonFilename"));
@@ -64,7 +64,7 @@ public class BranchregistrationServlet extends HttpServlet {
 		aff.setSalonName(mRequest.getParameter("salonName"));
 		aff.setSalonPhone(mRequest.getParameter("salonPhone"));
 		
-		int result = new AffilateService().insertAffilatr(aff);
+		int result = new SalonService().insertAffilatr(aff);
 		//4.결과 처리
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {

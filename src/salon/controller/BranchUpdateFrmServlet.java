@@ -1,4 +1,4 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import affilate.service.AffilateService;
-import affilate.vo.AffilateList;
+import salon.service.SalonService;
+import salon.vo.Salon;
 
 /**
- * Servlet implementation class BranchmanagementServlet
+ * Servlet implementation class BranchUpdateFrmServlet
  */
-@WebServlet(name = "Branchmanagement", urlPatterns = { "/branchmanagement" })
-public class BranchmanagementServlet extends HttpServlet {
+@WebServlet(name = "BranchUpdateFrm", urlPatterns = { "/branchUpdateFrm" })
+public class BranchUpdateFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BranchmanagementServlet() {
+    public BranchUpdateFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +31,12 @@ public class BranchmanagementServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		AffilateList af = new	AffilateService().selectAffilates(reqPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchmanagement.jsp");
-		
-		request.setAttribute("list", af.getAffilateList());
-		request.setAttribute("pageNavi", af.getPageNavi());
+		String salonName = request.getParameter("salonName");
+		Salon aff = new SalonService().salonUpdateFrm(salonName);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchupdate.jsp");
+		System.out.println(aff.getSalonFilename()+"ddd");
+		request.setAttribute("list", aff);
 		rd.forward(request, response);
-		
 	}
 
 	/**

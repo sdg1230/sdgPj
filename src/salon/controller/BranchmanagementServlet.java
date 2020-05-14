@@ -1,23 +1,28 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import salon.service.SalonService;
+import salon.vo.SalonList;
+
 /**
- * Servlet implementation class BranchregistrationFrmServlet
+ * Servlet implementation class BranchmanagementServlet
  */
-@WebServlet(name = "BranchregistrationFrm", urlPatterns = { "/branchregistrationFrm" })
-public class BranchregistrationFrmServlet extends HttpServlet {
+@WebServlet(name = "Branchmanagement", urlPatterns = { "/branchmanagement" })
+public class BranchmanagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BranchregistrationFrmServlet() {
+    public BranchmanagementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +31,14 @@ public class BranchregistrationFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/company/branchregistration.jsp").forward(request, response);
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		SalonList af = new	SalonService().selectAffilates(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchmanagement.jsp");
+		
+		request.setAttribute("list", af.getAffilateList());
+		request.setAttribute("pageNavi", af.getPageNavi());
+		rd.forward(request, response);
+		
 	}
 
 	/**

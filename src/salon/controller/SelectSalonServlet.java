@@ -1,28 +1,23 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import affilate.service.AffilateService;
-import affilate.vo.AffilateList;
-
 /**
- * Servlet implementation class AffilateoneServlet
+ * Servlet implementation class SelectSalonServlet
  */
-@WebServlet(name = "Affilateone", urlPatterns = { "/affilateone" })
-public class AffilateoneServlet extends HttpServlet {
+@WebServlet(name = "SelectSalon", urlPatterns = { "/selectSalon" })
+public class SelectSalonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AffilateoneServlet() {
+    public SelectSalonServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +25,13 @@ public class AffilateoneServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String sq = request.getParameter("search1");
-		
-		AffilateList af = new	AffilateService().selectAffilate(sq);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
-		request.setAttribute("list", af.getAffilateList());
-		request.setAttribute("star", af.getReviewStar());
-		
-		rd.forward(request, response);
-		
+		String salonName = request.getParameter("salonName");
+		String salonAddr = request.getParameter("salonAddr");
+		request.setAttribute("a", salonAddr);
+		request.setAttribute("b", salonName);
+		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp").forward(request, response);
 	}
 
 	/**
