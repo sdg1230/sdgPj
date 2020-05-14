@@ -1,11 +1,17 @@
 package reserve.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import reserve.service.ReserveService;
+import reserve.vo.Reserve;
 
 /**
  * Servlet implementation class ReserveListFrmServlet
@@ -26,7 +32,20 @@ public class ReserveListFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp").forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+		String memberId = "user01";
+		ArrayList<Reserve>list = new ReserveService().reserveList(memberId);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
+		
+		if(!list.isEmpty()) {
+			
+			request.setAttribute("userReserveList", list);
+			
+		}
+		System.out.println(list.get(0));
+		rd.forward(request, response);
+		
 	}
 
 	/**

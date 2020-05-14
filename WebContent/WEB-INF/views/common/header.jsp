@@ -61,7 +61,7 @@
 			<div>예약하기</div>
 		</div>
 	</a> 
-	<a href="/reserveList">
+	<a href="/reserveListFrm">
 		<div class="sidemenu">
 			<img src="/imgs/question-icon.png">
 			<div>1:1문의</div>
