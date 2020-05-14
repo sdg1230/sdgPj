@@ -8,6 +8,19 @@
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <title>Insert title here</title>
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	padding-top:4px;
+}
+/* 헤더 제대로적용------------------------ */
 #pageNavi {
 	text-align: center;
 	width: 1000px;
