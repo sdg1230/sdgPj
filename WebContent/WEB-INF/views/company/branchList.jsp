@@ -189,7 +189,7 @@
 				</form>
 
 			</div>
-
+	
 			<div>
 				<table>
 					<c:forEach var="list1" items="${list }" varStatus="status">
@@ -204,6 +204,7 @@
 							<td>
 							${list1.salonName }<a
 								href="selectSalon?salonName=${list1.salonName }">지점 상세 보기</a>
+								<input type="hidden" name="salonAddr" value="${ilst1.salonAddr }">
 								</td>
 								<c:if test="${empty star[status.index].reviewStars}">
 								<td class="statd">

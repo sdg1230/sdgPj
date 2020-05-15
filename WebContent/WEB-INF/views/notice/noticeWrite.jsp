@@ -5,35 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script> 
+<title>Insert title here</title> 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script>
-	var oEditors = []; 
-	$(function(){
-		nhn.husky.EZCreator.createInIFrame({
-		oAppRef: oEditors, elPlaceHolder: "ir1",
-		//SmartEditor2Skin.html 파일이 존재하는 경로 
-		sSkinURI: "/editor/SmartEditor2Skin.html",
-		htParams : {
-			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseToolbar : true,
-			// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseVerticalResizer : true,
-			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
-			bUseModeChanger : true,
-			fOnBeforeUnload : function(){
-					
-			}
-		}, 
-		fOnAppLoad : function(){
-			//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용 
-			oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
-			},
-			fCreator: "createSEditor2"
-		});
-	}); 
-</script>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+
 <style>
 /* 헤더 제대로적용------------------------ */
 .headermiddle input[type="text"] {
@@ -144,7 +119,7 @@
 			</tr> 
 			<tr> 
 				<td>내용</td> 
-				<td> <textarea rows="10" cols="30" id="ir1" name="content" style="width:100px; height:100px; "></textarea> </td> 
+				<td> <textarea rows="10" cols="30" id="p_content" name="noticeContent" style="width:100px; height:100px; "></textarea> </td> 
 			</tr> 
 			<tr> 
 				<td colspan="2">
@@ -157,5 +132,10 @@
 	</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
+	<script type="text/javascript">
+ 		CKEDITOR.replace('p_content'
+                , {height: 500                                                  
+                 });
+</script>
 </body>
 </html>
