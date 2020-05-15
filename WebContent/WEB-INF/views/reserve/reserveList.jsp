@@ -13,6 +13,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,6 +22,17 @@
 
 <title>Insert title here</title>
 <style>
+.glyphicon {
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+small {
+	display: block;
+	line-height: 1.428571429;
+	color: #999;
+}
+
 .content {
 	overflow: "hidden";
 	text-align: center;
@@ -36,7 +49,7 @@
 	height: 200px;
 	opacity: 90%;
 	color: white;
-	background-color: #998778;
+	background-color: #f5f5f5;
 }
 
 .hi {
@@ -105,193 +118,207 @@ th {
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="cTitle">
-			<p>예약확인</p>
+			<p>RESERVE & REVIEW</p>
 		</div>
 		<br> <br>
-		<div class="content">
-			<div class="userInfo">
-				<h2>고객정보</h2>
-				<table>
-					<tr>
-						<th>이름 :</th>
-						<td><span class="memberName">${userReserveList[0].memberName}</span></td>
-					</tr>
-					<tr>
-						<th>회원 아이디 :</th>
-						<td><span class="gender">${userReserveList[0].memberId}</span></td>
-					</tr>
-					<tr>
-						<th>전화번호:</th>
-						<td><span class="phone">${userReserveList[0].memberPhone}</span></td>
-						
-					</tr>
-					<br>
-					<tr>
-						<th><span class="comon">환영합니다 ${userReserveList[0].memberName} 고객님</span></th>
-						
-						
-					</tr>
-				</table>
 
-			</div>
-			<div class='hi'></div>
-
-			<c:forEach items="${userReserveList}" var='u'>
-				<c:if test="${u.reserveStatus==true}">
-					<div class="reserveok">
-						<div class="no">
-							<h4>방문완료</h4>
-						</div>
-						<table>
-							<tr>
-								<th>예약지점 : <span>${u.salonName}</span></th>
-								<td rowspan="6" class="img"><img
-									src="../upload/designer/designer${u.designerNo}.jpg"
-									width="150" height="150"></td>
-							</tr>
-							<tr>
-								<th>예약날짜 : <span>${u.reserveDate}</span></th>
-							</tr>
-							<tr>
-								<th>예약 디자이너 : <span>${u.designerName}</span></th>
-							</tr>
-							<tr>
-								<th>예약 시간 : 
-								<span>
-								<c:if test="${u.startTime==1}">10:00</c:if>
-								<c:if test="${u.startTime==2}">10:30</c:if>
-								<c:if test="${u.startTime==3}">11:00</c:if>
-								<c:if test="${u.startTime==4}">11:30</c:if>
-								<c:if test="${u.startTime==5}">12:00</c:if>
-								<c:if test="${u.startTime==6}">12:30</c:if>
-								<c:if test="${u.startTime==7}">13:00</c:if>
-								<c:if test="${u.startTime==8}">13:30</c:if>
-								<c:if test="${u.startTime==9}">14:00</c:if>
-								<c:if test="${u.startTime==10}">14:30</c:if>
-								<c:if test="${u.startTime==11}">15:00</c:if>
-								<c:if test="${u.startTime==12}">15:30</c:if>
-								<c:if test="${u.startTime==13}">16:00</c:if>
-								<c:if test="${u.startTime==14}">16:30</c:if>
-								<c:if test="${u.startTime==15}">17:00</c:if>
-								<c:if test="${u.startTime==16}">17:30</c:if>
-								<c:if test="${u.startTime==17}">18:00</c:if>
-								<c:if test="${u.startTime==18}">19:30</c:if>
-								<c:if test="${u.startTime==19}">19:00</c:if>
-								<c:if test="${u.startTime==20}">20:30</c:if>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-2 col-md-12">
+					<div class="well well-sm">
+						<div class="row">
+							<div class="col-sm-6 col-md-4">
+								<img src="http://placehold.it/280x200" 
+									class="img-rounded img-responsive" />
+							</div>
+							<div class="col-sm-4 col-md-4">
+								<h2>고객 정보</h2>
+								<h4><cite title="San Francisco, USA">${userReserveList[0].memberName}
+								</cite></h4>
 								
-								</span></th>
-							</tr>
-							<tr>
-								<th>예약 가격 : <span>
-								${u.totalPrice}</span></th>
-							</tr>
-							<tr>
-								<th>방문 확인 : <span>${u.reserveStatus}</span></th>
-							</tr>
-							<tr>
-								<th>예약번호 확인 : <span>${u.reserveNo}</span></th>
-							</tr>
-							<tr>
-								<th>리뷰작성여부 확인 : <span>${u.reserveReview}</span></th>
-							</tr>
-							<c:forEach items="${u.menuList}" var='uu'>
-								<tr>
-									<th>예약 시술 : <span>${uu.hairName}</span></th>
-								</tr>
-							</c:forEach>
-							<c:if test="${u.reserveReview==false}">
-								<!-- 여기서부터 리뷰를작성했냐 안했냐 갈라야함 -->
-								<td><button type="button"
-										onclick="reviewInsert('${u.reserveNo}','${u.salonName }','${u.memberId}');"
-										class="btn btn-primary" data-toggle="modal"
-										data-target="#exampleModal" data-whatever="@mdo">후기작성</button></td>
-
-								<%-- $바로위에 {u.memberId }값에 ${sessionScope.member.memberId }들어가야함 지금은 session이 없음으로 이렇게 대채 --%>
-							</c:if>
-							<c:if test="${u.reserveReview==true}">
-								<!-- 여기서부터 리뷰를작성했냐 안했냐 갈라야함 -->
-								<td><button type="button" readonly>후기작성완료</button></td>
-								<%-- $바로위에 {u.memberId }값에 ${sessionScope.member.memberId }들어가야함 지금은 session이 없음으로 이렇게 대채 --%>
-							</c:if>
-						</table>
-					</div>
-				</c:if>
-			</c:forEach>
-			<c:forEach items="${userReserveList}" var='u'>
-				<c:if test="${u.reserveStatus==false}">
-					<div class="reserveno">
-						<div class="yes">
-							<h4>방문하지않음</h4>
+								<p>회원 아이디 : ${userReserveList[0].memberId}</p>
+								<i class="glyphicon glyphicon-gift"></i>${userReserveList[0].memberPhone}
+								<br>
+								<!-- Split button -->
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary">Social</button>
+									<button type="button" class="btn btn-primary dropdown-toggle"
+										data-toggle="dropdown">
+										<span class="caret"></span><span class="sr-only">Social</span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Twitter</a></li>
+										<li><a
+											href="https://plus.google.com/+Jquery2dotnet/posts">Google
+												+</a></li>
+										<li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+										<li class="divider"></li>
+										<li><a href="#">Github</a></li>
+									</ul>
+								</div>
+							</div>
 						</div>
-						<table>
-							<tr>
-								<th>예약지점 : <span>${u.salonName}</span></th>
-								<td rowspan="6" class="img"><img
-									src="../upload/designer/designer${u.designerNo}.jpg"
-									width="150" height="150"></td>
-							</tr>
-							<tr>
-								<th>예약날짜 : <span>${u.reserveDate}</span></th>
-							</tr>
-							<tr>
-								<th>예약 디자이너 : <span>${u.designerName}</span></th>
-
-							</tr>
-							<tr>
-								<th>예약 시간 : <span>
-								<c:if test="${u.startTime==1}">10:00</c:if>
-								<c:if test="${u.startTime==2}">10:30</c:if>
-								<c:if test="${u.startTime==3}">11:00</c:if>
-								<c:if test="${u.startTime==4}">11:30</c:if>
-								<c:if test="${u.startTime==5}">12:00</c:if>
-								<c:if test="${u.startTime==6}">12:30</c:if>
-								<c:if test="${u.startTime==7}">13:00</c:if>
-								<c:if test="${u.startTime==8}">13:30</c:if>
-								<c:if test="${u.startTime==9}">14:00</c:if>
-								<c:if test="${u.startTime==10}">14:30</c:if>
-								<c:if test="${u.startTime==11}">15:00</c:if>
-								<c:if test="${u.startTime==12}">15:30</c:if>
-								<c:if test="${u.startTime==13}">16:00</c:if>
-								<c:if test="${u.startTime==14}">16:30</c:if>
-								<c:if test="${u.startTime==15}">17:00</c:if>
-								<c:if test="${u.startTime==16}">17:30</c:if>
-								<c:if test="${u.startTime==17}">18:00</c:if>
-								<c:if test="${u.startTime==18}">19:30</c:if>
-								<c:if test="${u.startTime==19}">19:00</c:if>
-								<c:if test="${u.startTime==20}">20:30</c:if>
-								</span></th>
-							</tr>
-							<tr>
-								<th>예약 가격 : <span>${u.totalPrice}</span></th>
-							</tr>
-							<tr>
-								<th>방문 확인 : <span>${u.reserveStatus}</span></th>
-							</tr>
-							<tr>
-								<th>리뷰작성여부 확인 : <span>${u.reserveReview}</span></th>
-							</tr>
-							<tr>
-								<th>예약번호 확인 : <span>${u.reserveNo}</span></th>
-							</tr>
-							<c:forEach items="${u.menuList}" var='uu'>
-								<tr>
-									<th>예약 시술 : <span>${uu.hairName}</span></th>
-								</tr>
-							</c:forEach>
-							<tr>
-								<td><button type="button"
-										onclick="reviewdelete1('${u.reserveNo}','${u.salonName }','${u.memberId}');"
-										class="btn btn-primary" data-toggle="modal"
-										data-target="#exampleModal" data-whatever="@mdo">예약취소</button></td>
-							</tr>
-
-						</table>
 					</div>
-					<div class='hi'></div>
-					<div class='hi'></div>
-					<div class='hi'></div>
-				</c:if>
-			</c:forEach>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="col-xs-6">
+				<c:forEach items="${userReserveList}" var='u'>
+
+					<c:if test="${u.reserveStatus==true}">
+						<div class="reserveok">
+							<div class="no">
+								<h4>방문완료</h4>
+							</div>
+							<table>
+								<tr>
+									<th>예약지점 : <span>${u.salonName}</span></th>
+									<td rowspan="6" class="img"><img
+										src="../upload/designer/designer${u.designerNo}.jpg"
+										width="150" height="150"></td>
+								</tr>
+								<tr>
+									<th>예약날짜 : <span>${u.reserveDate}</span></th>
+								</tr>
+								<tr>
+									<th>예약 디자이너 : <span>${u.designerName}</span></th>
+								</tr>
+								<tr>
+									<th>예약 시간 : <span> <c:if test="${u.startTime==1}">10:00</c:if>
+											<c:if test="${u.startTime==2}">10:30</c:if> <c:if
+												test="${u.startTime==3}">11:00</c:if> <c:if
+												test="${u.startTime==4}">11:30</c:if> <c:if
+												test="${u.startTime==5}">12:00</c:if> <c:if
+												test="${u.startTime==6}">12:30</c:if> <c:if
+												test="${u.startTime==7}">13:00</c:if> <c:if
+												test="${u.startTime==8}">13:30</c:if> <c:if
+												test="${u.startTime==9}">14:00</c:if> <c:if
+												test="${u.startTime==10}">14:30</c:if> <c:if
+												test="${u.startTime==11}">15:00</c:if> <c:if
+												test="${u.startTime==12}">15:30</c:if> <c:if
+												test="${u.startTime==13}">16:00</c:if> <c:if
+												test="${u.startTime==14}">16:30</c:if> <c:if
+												test="${u.startTime==15}">17:00</c:if> <c:if
+												test="${u.startTime==16}">17:30</c:if> <c:if
+												test="${u.startTime==17}">18:00</c:if> <c:if
+												test="${u.startTime==18}">19:30</c:if> <c:if
+												test="${u.startTime==19}">19:00</c:if> <c:if
+												test="${u.startTime==20}">20:30</c:if>
+
+									</span></th>
+								</tr>
+								<tr>
+									<th>예약 가격 : <span> ${u.totalPrice}</span></th>
+								</tr>
+								<tr>
+									<th>방문 확인 : <span>${u.reserveStatus}</span></th>
+								</tr>
+								<tr>
+									<th>예약번호 확인 : <span>${u.reserveNo}</span></th>
+								</tr>
+								<tr>
+									<th>리뷰작성여부 확인 : <span>${u.reserveReview}</span></th>
+								</tr>
+								<c:forEach items="${u.menuList}" var='uu'>
+									<tr>
+										<th>예약 시술 : <span>${uu.hairName}</span></th>
+									</tr>
+								</c:forEach>
+								<c:if test="${u.reserveReview==false}">
+									<!-- 여기서부터 리뷰를작성했냐 안했냐 갈라야함 -->
+									<td><button type="button"
+											onclick="reviewInsert('${u.reserveNo}','${u.salonName }','${sessionScope.member.memberId}');"
+											class="btn btn-primary" data-toggle="modal"
+											data-target="#exampleModal" data-whatever="@mdo">후기작성</button></td>
+
+									<%-- $바로위에 {u.memberId }값에 ${sessionScope.member.memberId }들어가야함 지금은 session이 없음으로 이렇게 대채 --%>
+								</c:if>
+								<c:if test="${u.reserveReview==true}">
+									<!-- 여기서부터 리뷰를작성했냐 안했냐 갈라야함 -->
+									<td><button type="button" readonly>후기작성완료</button></td>
+									<%-- $바로위에 {u.memberId }값에 ${sessionScope.member.memberId }들어가야함 지금은 session이 없음으로 이렇게 대채 --%>
+								</c:if>
+							</table>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+			<!-- <div class="reserveok col-xs-2"></div> -->
+			<div class="col-xs-6">
+				<c:forEach items="${userReserveList}" var='u'>
+					<c:if test="${u.reserveStatus==false}">
+						<div class="reserveno">
+							<div class="yes">
+								<h4>방문하지않음</h4>
+							</div>
+							<table>
+								<tr>
+									<th>예약지점 : <span>${u.salonName}</span></th>
+									<td rowspan="6" class="img"><img
+										src="../upload/designer/designer${u.designerNo}.jpg"
+										width="150" height="150"></td>
+								</tr>
+								<tr>
+									<th>예약날짜 : <span>${u.reserveDate}</span></th>
+								</tr>
+								<tr>
+									<th>예약 디자이너 : <span>${u.designerName}</span></th>
+
+								</tr>
+								<tr>
+									<th>예약 시간 : <span> <c:if test="${u.startTime==1}">10:00</c:if>
+											<c:if test="${u.startTime==2}">10:30</c:if> <c:if
+												test="${u.startTime==3}">11:00</c:if> <c:if
+												test="${u.startTime==4}">11:30</c:if> <c:if
+												test="${u.startTime==5}">12:00</c:if> <c:if
+												test="${u.startTime==6}">12:30</c:if> <c:if
+												test="${u.startTime==7}">13:00</c:if> <c:if
+												test="${u.startTime==8}">13:30</c:if> <c:if
+												test="${u.startTime==9}">14:00</c:if> <c:if
+												test="${u.startTime==10}">14:30</c:if> <c:if
+												test="${u.startTime==11}">15:00</c:if> <c:if
+												test="${u.startTime==12}">15:30</c:if> <c:if
+												test="${u.startTime==13}">16:00</c:if> <c:if
+												test="${u.startTime==14}">16:30</c:if> <c:if
+												test="${u.startTime==15}">17:00</c:if> <c:if
+												test="${u.startTime==16}">17:30</c:if> <c:if
+												test="${u.startTime==17}">18:00</c:if> <c:if
+												test="${u.startTime==18}">19:30</c:if> <c:if
+												test="${u.startTime==19}">19:00</c:if> <c:if
+												test="${u.startTime==20}">20:30</c:if>
+									</span></th>
+								</tr>
+								<tr>
+									<th>예약 가격 : <span>${u.totalPrice}</span></th>
+								</tr>
+								<tr>
+									<th>방문 확인 : <span>${u.reserveStatus}</span></th>
+								</tr>
+								<tr>
+									<th>리뷰작성여부 확인 : <span>${u.reserveReview}</span></th>
+								</tr>
+								<tr>
+									<th>예약번호 확인 : <span>${u.reserveNo}</span></th>
+								</tr>
+								<c:forEach items="${u.menuList}" var='uu'>
+									<tr>
+										<th>예약 시술 : <span>${uu.hairName}</span></th>
+									</tr>
+								</c:forEach>
+								<tr>
+									<td><button type="button"
+											onclick="reviewdelete1('${u.reserveNo}','${u.salonName }','${u.memberId}');"
+											class="btn btn-primary" data-toggle="modal"
+											data-target="#exampleModal" data-whatever="@mdo">예약취소</button></td>
+								</tr>
+
+							</table>
+
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
@@ -310,11 +337,11 @@ th {
 			console.log(reserveNo);
 			console.log(salonName);
 			console.log(memberId);
+			
 			var param = {
 				reserveNo : reserveNo
 			};
-			$
-					.ajax({
+					$.ajax({
 						url : "/reserveSearch",
 						data : param,
 						type : "get",
