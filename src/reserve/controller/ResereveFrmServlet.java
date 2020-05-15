@@ -9,24 +9,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import designer.model.service.DesignerService;
+import designer.model.vo.Designer;
+import designer.model.vo.DesignerListData;
 import reserve.service.ReserveService;
-import reserve.vo.Reserve;
-import reserve.vo.ReserveDetail;
+import reserve.vo.HairMenu;
 import salon.service.SalonService;
 import salon.vo.Salon;
 
 /**
- * Servlet implementation class ReserveListServlet
+ * Servlet implementation class ResereveFrmServlet
  */
-@WebServlet(name = "ReserveList", urlPatterns = { "/adminReserveList" })
-public class AdminReserveListServlet extends HttpServlet {
+@WebServlet(name = "ResereveFrm", urlPatterns = { "/reserveFrm" })
+public class ResereveFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReserveListServlet() {
+    public ResereveFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,23 +38,17 @@ public class AdminReserveListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		String memberId = "user01";
 		//String memberId = request.getSession().getAttribute("member").getMemberId();
-		String memberId = "admin";
-		if(memberId.equals("admin")) {
-			int result = new ReserveService().deleteOldReserve();
-			ArrayList<Salon> slist = new SalonService().selectSalon();
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
-			request.setAttribute("noshow", result);
-			request.setAttribute("slist", slist);
-			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "관리자가 아닙니다");
-			request.setAttribute("loc", "/");
-			rd.forward(request, response);
-		}
-		
+		ArrayList<Designer> dlist = new DesignerService().selectAllDesigner().getDesignerList();
+		ArrayList<Salon> slist = new SalonService().selectSalon();
+		ArrayList<HairMenu> hlist = new ReserveService().selectHairMenu();
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveFrm.jsp");
+		request.setAttribute("dlist", dlist);
+		request.setAttribute("slist", slist);
+		request.setAttribute("hlist", hlist);
+		request.setAttribute("memberId", memberId);
+		rd.forward(request, response);
 	}
 
 	/**
