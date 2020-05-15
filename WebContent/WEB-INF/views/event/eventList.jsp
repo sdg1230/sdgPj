@@ -125,8 +125,7 @@
         	padding: 20px 30px;
         	margin-top: 10px;
         	margin-bottom: 40px;
-        }
-        
+        }        
         
         .eventImage{
         	width: 100%;
@@ -215,8 +214,6 @@
             <div style="width: 100%">
             <c:forEach items="${list }" var="e">
             	<div class="eventListPart">
-            	
-            	
             		<div class="eventImage">
             		<img src="/ckstorage/photo/${e.eventFilepath }" width="100%" height="100%">
             		</div>
@@ -226,7 +223,6 @@
             		<div class="eventDate">
             			${e.eventDate }
             		</div>
-            	
             	</div>
             </c:forEach>
             </div>
