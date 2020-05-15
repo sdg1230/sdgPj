@@ -333,6 +333,9 @@ public class SalonDao {
 				s.setReviewStar(res.getInt("review_star"));
 				s.setReviewWriter(res.getString("review_writer"));
 				s.setSalonName(res.getString("salon_name"));
+				System.out.println(s.getReviewComment());
+				System.out.println(s.getReviewStar());
+				System.out.println("dd");
 				sr.add(s);
 				
 				
@@ -353,6 +356,7 @@ public class SalonDao {
 		ArrayList<Designer> ds = new ArrayList<Designer>();
 		Designer d = null;
 		String str = "select * from designer where salon_name=?";
+		System.out.println(salonName);
 		try {
 			pstmt = conn.prepareStatement(str);
 			pstmt.setString(1, salonName);
@@ -365,6 +369,7 @@ public class SalonDao {
 				d.setDesignerName(res.getString("designer_name"));
 				d.setDesignerNo(res.getInt("designer_no"));
 				d.setSalonName(res.getString("salon_name"));
+				
 				ds.add(d);
 			}
 		} catch (SQLException e) {

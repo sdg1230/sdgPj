@@ -32,8 +32,11 @@ public class SelectSalonServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String salonName = request.getParameter("salonName");
 		SalonDetails sd = new SalonService().salonDetails(salonName);
+		
 		request.setAttribute("salon", sd.getAffilate());
+		
 		request.setAttribute("pageNavi", sd.getAgeNavi());
+		
 		request.setAttribute("des", sd.getDesignerList());
 		request.setAttribute("rev", sd.getReviewList());
 		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage=1").forward(request, response);

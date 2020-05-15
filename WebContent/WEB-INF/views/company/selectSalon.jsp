@@ -50,7 +50,8 @@
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td></td>
+							<c:forEach items="${rev }" var="rev"><td>${rev.salonName }</td></c:forEach>
+							
 						</tr>
 						<tr>
 							<th>영업시간</th>
@@ -94,6 +95,7 @@
 							<td></td>
 						</tr>
 					</table>
+					<div id="pageNavi">${pageNavi }</div>
 					<button id="my">버튼</button>
 				</div>
 			</div>
