@@ -123,6 +123,13 @@ th {
 					<tr>
 						<th>전화번호:</th>
 						<td><span class="phone">${userReserveList[0].memberPhone}</span></td>
+						
+					</tr>
+					<br>
+					<tr>
+						<th><span class="comon">환영합니다 ${userReserveList[0].memberName} 고객님</span></th>
+						
+						
 					</tr>
 				</table>
 
@@ -149,10 +156,34 @@ th {
 								<th>예약 디자이너 : <span>${u.designerName}</span></th>
 							</tr>
 							<tr>
-								<th>예약 시간 : <span>${u.startTime}</span></th>
+								<th>예약 시간 : 
+								<span>
+								<c:if test="${u.startTime==1}">10:00</c:if>
+								<c:if test="${u.startTime==2}">10:30</c:if>
+								<c:if test="${u.startTime==3}">11:00</c:if>
+								<c:if test="${u.startTime==4}">11:30</c:if>
+								<c:if test="${u.startTime==5}">12:00</c:if>
+								<c:if test="${u.startTime==6}">12:30</c:if>
+								<c:if test="${u.startTime==7}">13:00</c:if>
+								<c:if test="${u.startTime==8}">13:30</c:if>
+								<c:if test="${u.startTime==9}">14:00</c:if>
+								<c:if test="${u.startTime==10}">14:30</c:if>
+								<c:if test="${u.startTime==11}">15:00</c:if>
+								<c:if test="${u.startTime==12}">15:30</c:if>
+								<c:if test="${u.startTime==13}">16:00</c:if>
+								<c:if test="${u.startTime==14}">16:30</c:if>
+								<c:if test="${u.startTime==15}">17:00</c:if>
+								<c:if test="${u.startTime==16}">17:30</c:if>
+								<c:if test="${u.startTime==17}">18:00</c:if>
+								<c:if test="${u.startTime==18}">19:30</c:if>
+								<c:if test="${u.startTime==19}">19:00</c:if>
+								<c:if test="${u.startTime==20}">20:30</c:if>
+								
+								</span></th>
 							</tr>
 							<tr>
-								<th>예약 가격 : <span>${u.totalPrice}</span></th>
+								<th>예약 가격 : <span>
+								${u.totalPrice}</span></th>
 							</tr>
 							<tr>
 								<th>방문 확인 : <span>${u.reserveStatus}</span></th>
@@ -207,7 +238,28 @@ th {
 
 							</tr>
 							<tr>
-								<th>예약 시간 : <span>${u.startTime}</span></th>
+								<th>예약 시간 : <span>
+								<c:if test="${u.startTime==1}">10:00</c:if>
+								<c:if test="${u.startTime==2}">10:30</c:if>
+								<c:if test="${u.startTime==3}">11:00</c:if>
+								<c:if test="${u.startTime==4}">11:30</c:if>
+								<c:if test="${u.startTime==5}">12:00</c:if>
+								<c:if test="${u.startTime==6}">12:30</c:if>
+								<c:if test="${u.startTime==7}">13:00</c:if>
+								<c:if test="${u.startTime==8}">13:30</c:if>
+								<c:if test="${u.startTime==9}">14:00</c:if>
+								<c:if test="${u.startTime==10}">14:30</c:if>
+								<c:if test="${u.startTime==11}">15:00</c:if>
+								<c:if test="${u.startTime==12}">15:30</c:if>
+								<c:if test="${u.startTime==13}">16:00</c:if>
+								<c:if test="${u.startTime==14}">16:30</c:if>
+								<c:if test="${u.startTime==15}">17:00</c:if>
+								<c:if test="${u.startTime==16}">17:30</c:if>
+								<c:if test="${u.startTime==17}">18:00</c:if>
+								<c:if test="${u.startTime==18}">19:30</c:if>
+								<c:if test="${u.startTime==19}">19:00</c:if>
+								<c:if test="${u.startTime==20}">20:30</c:if>
+								</span></th>
 							</tr>
 							<tr>
 								<th>예약 가격 : <span>${u.totalPrice}</span></th>
@@ -226,6 +278,12 @@ th {
 									<th>예약 시술 : <span>${uu.hairName}</span></th>
 								</tr>
 							</c:forEach>
+							<tr>
+								<td><button type="button"
+										onclick="reviewdelete1('${u.reserveNo}','${u.salonName }','${u.memberId}');"
+										class="btn btn-primary" data-toggle="modal"
+										data-target="#exampleModal" data-whatever="@mdo">예약취소</button></td>
+							</tr>
 
 						</table>
 					</div>
