@@ -181,11 +181,23 @@
 
 
         /*-----------------content-----------------------*/
-        .content {
+        .content2 {
             /*-지우지마세요-*/
+           /*-지우지마세요-*/
             width: 1200px;
             overflow: hidden;
-            margin: 130px auto 0 auto;
+            margin: 0 auto;
+            margin-top: 130px;
+            padding-top: 50px;
+            padding-left: 100px;
+            font-size:50px;    
+            
+            letter-spacing: 80%;
+            width: 100%;
+            
+            opacity: 90%;
+            color: white;
+            background-color: #998778;
         }
         .sidebar {
             position: fixed;
