@@ -39,8 +39,9 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(memberId);
 		System.out.println(memberPw);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		HttpSession session =request.getSession();
 		if(m!=null) {
-			HttpSession session =request.getSession();
+			
 			session.setAttribute("member", m);
 			request.setAttribute("msg", "환영합니다.");
 			request.setAttribute("loc", "/");

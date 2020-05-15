@@ -17,9 +17,85 @@
 	width: 1200px;
 	overflow: hidden;
 	margin: 0 auto;
-	height: 100%;
 	background-color: white;
 	text-align: center;
+}
+ .sidemenu1 {
+ display: inline-block;
+            width: 49.8%;
+            height: 120px;
+            background-color: #2a2829;
+            border: 1px solid #999999;
+            text-align: center;
+            display: inline-block;
+            line-height:120px;
+        }
+        .sidemenu1:hover{
+        	background-color: red;
+        }
+        .sidemenu2:hover{
+        	background-color: red;
+        }
+         .sidemenu2 {
+         display: inline-block;
+             width: 50%;
+            height: 122px;
+            background-color: #2a2829;
+            border: 1px solid #999999;
+            text-align: center;
+            padding-top: 25px;
+           float:left;
+        }
+        .sidemenu2>*{
+            color: white;
+            font-size: 1.2em;
+            opacity: 70%;
+            margin-bottom:4px;
+            }       
+ .sidemenu1>*{
+            color: white;
+            font-size: 1.2em;
+            opacity: 70%;
+            margin-bottom:4px;
+            }     
+            .map{
+            margin: 0 auto;
+            padding: 0;
+            width: 49%;
+            overflow:hidden;
+            display: inline-block;
+            float: left;
+            
+        }
+        .salon1{
+            width: 50%;
+            height: 500px;
+            float: right;
+        }
+        table{
+            width: 100%;
+            height: 100%;
+        }
+        .addrtit{
+            border: 1px solid white;
+        }  
+        .hh{
+        display: inline-block;
+        }
+        .affimg{
+        	width: 250px;
+        	height: 250px;
+        	
+        }
+        .statd {
+	overflow: hidden;
+	width: 120px;
+	text-align: center;
+	width: 120px;
+}
+.sta {
+	width: 20px;
+	height: 20px;
 }
 </style>
 
@@ -33,78 +109,232 @@
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="content">
-
-			<div>
+			
+			<div class="content1">
+			<h1>${salon.salonName }</h1>
 			<input type="hidden" id="salonName" value="${salon.salonName }">
 				<input type="hidden" id="salonAddr" value="${salon.salonAddr }">
 				<div>
+
+			
+				<div class="map">
 					<div id="map" style="width: 100%; height: 500px;"></div>
 				</div>
-				<div>
-					<table>
+				<div class="salon1">
+					<table border="1">
 						<tr>
-							<th>주소</th>
+							<th class="addrtit">주소</th>
 						</tr>
 						<tr>
-							<th>주소내용</th>
+							<th colspan="3">${salon.salonAddr }</th>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<c:forEach items="${rev }" var="rev"><td>${rev.salonName }</td></c:forEach>
+							<td  colspan="2">${salon.salonPhone }</td>
 							
 						</tr>
 						<tr>
 							<th>영업시간</th>
-							<td></td>
+							<td  colspan="2">09:00 ~ 18:00</td>
 						</tr>
 						<tr>
-							<th>매장소개</th>
-							<td></td>
+						<th>매장소개</th>
+						<td  colspan="2">${salon.salonInfo }</td>
 						</tr>
 						<tr>
 							<th>평점</th>
-							<td>점
-							<td>
+                            <td  class="statd">
+                            <c:if
+									test="${star.reviewStars < 1 }">
+									
+
+
+									<img class="sta" src="/upload/salon/star1.jpg">
+								</c:if> <c:if test="${star.reviewStars == 1}">
+									<img class="sta" src="/upload/salon/star2.jpg">
+
+
+								</c:if> <c:if
+										test="${star.reviewStars < 2 && star.reviewStars >1}">
+
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+
+									</c:if> <c:if test="${star.reviewStar == 2}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+								
+								</c:if> <c:if
+									test="${star.reviewStars < 3 && star.reviewStars >2}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star1.jpg">
+									
+								</c:if> <c:if test="${star.reviewStars == 3}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									
+								</c:if> <c:if
+									test="${star.reviewStars < 4 && star.reviewStars >3}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star1.jpg">
+						
+								</c:if> <c:if test="${star.reviewStars == 4}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									
+
+								</c:if> <c:if
+									test="${star.reviewStars < 5 && star.reviewStars >4}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star1.jpg">
+								
+								</c:if> <c:if test="${star.reviewStars == 5}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									
+								</c:if>
+                            </td>
+                            <td>${star.reviewStars }점</td>
 						</tr>
 					</table>
 				</div>
-
-			</div>
+				</div>
 			<div>
-				<div>
+                <a href="/reserveFrm">
+                <div class="sidemenu2">
+			<img src="/imgs/reserve-icon.png">
+			<div>예약하기</div>
+		</div>
+			</a>
+			<a class="sidemenu1"href="/branchList?reqPage=1">
+                <div>◀목록으로</div></a>
+            </div>
+            
+			<div class="content1">
+				<div class="map">
 					<table>
-						<tr>
-							<td>디자이너사진</td>
-							<td>디자이너이름</td>
-							<td>전문</td>
+					<tr>
+							<td colspan="2">디자이너</td>
+							
+							
 
+							<td>전문</td>
 						</tr>
+					<c:forEach var="d" items="${des }">
+						<tr>
+							
+							<td colspan="2" rowspan="2"><img class="affimg"
+								src="/upload/designer/${d.designerFilepath }">
+								</td>
+								<td>
+								<br>${d.designerName }
+								</td>
+								</tr>
+								<tr>
+								
+							
+
+							<td>${d.designerInfo }</td>
+						</tr>
+						
+						</c:forEach>
 					</table>
 				</div>
-				<div>
-					<h1>머리안헤어 후기글</h1>
+				<h1 class="hh">머리안헤어 후기글</h1>
+				<div class="salon1">
 					<table>
+					<c:forEach var="star" items="${rev }">
 						<tr>
-							<td>별점</td>
-							<td>점</td>
-							<th>아이디</th>
+							<td colspan="2" rowspan="5">${star.reviewComment }</td>
+							
 						</tr>
 						<tr>
-							<td>내용</td>
-							<td>등록일</td>
-							<td></td>
+						<td>
+							<c:if test="${star.reviewStar == 1}">
+									<img class="sta" src="/upload/salon/star2.jpg">
+
+
+								</c:if> <c:if
+									test="${star.reviewStar == 2}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									
+								</c:if> 
+								<c:if
+									test="${star.reviewStar == 3 }">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									
+								</c:if> 
+								<c:if test="${star.reviewStar == 4}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									
+									
+								</c:if> 
+								<c:if test="${star.reviewStar == 5}">
+
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									<img class="sta" src="/upload/salon/star2.jpg">
+									
+								</c:if>
+							</td>
+							
+							
 						</tr>
+						<tr>
+							<td>${star.reviewStar }점</td>
+						</tr>
+						<tr>
+							<th>${star.reviewWriter }</th>
+							
+						</tr>
+						<tr>
+							
+						<td>${star.reviewDate }</td>
+							
+						</tr>
+						</c:forEach>
 					</table>
 					<div id="pageNavi">${pageNavi }</div>
-					<button id="my">버튼</button>
 				</div>
+					
 			</div>
 
 		</div>
 		
-
+</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
+	
 	</div>
 	<script>
 		var xx;
@@ -131,40 +361,7 @@
         
         
 		$(function(){
-			$("#my").click(function(){
-				
-				var rad = (x) => {
-					   return (x * Math.PI) / 180;
-					};
-				       var lat1p = parseFloat(yy);
-				       var lon1p = parseFloat(37.533807);
-				       var lat2p = parseFloat(xx);
-				       var lon2p = parseFloat(126.896772);
-				      
-				       var R = 6371; // km (change this constant to get miles)
-				       var dLat = (lat2p-lat1p) * Math.PI / 180;
-				       var dLon = (lon2p-lon1p) * Math.PI / 180;
-				       console.log(lat1p);
-				       console.log(lat2p);
-				       console.log(lon1p);
-				       console.log(lon2p);
-				       var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1p * Math.PI / 180 ) * Math.cos(lat2p * Math.PI / 180 ) * Math.sin(dLon/2) * Math.sin(dLon/2);
-				          
-				       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-				       var d = R * c;
-				       console.log(d);
-				       
-				    	   Math.round(d/100)+"km";
-				    
-				       
-				    	    Math.round(d*1000)+"m";
-				    	    console.log(d);
-				      
-				       console.log(Math.round(d/100)+"km");
-				       
-				
-				
-			});
+			
 			addr = $("#salonAddr").val();
 			name = $("#salonName").val();
 			console.log(addr);

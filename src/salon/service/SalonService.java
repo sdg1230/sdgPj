@@ -3,6 +3,7 @@ package salon.service;
 import java.sql.Connection;
 
 
+
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
@@ -30,6 +31,11 @@ public class SalonService {
 		int start = (reqPage-1)*numPerPage+1;
 		int end = reqPage*numPerPage;
 		ArrayList<Salon> list = new SalonDao().selectAffilate(conn,start,end);
+		if(!list.isEmpty()) {
+			for(Salon s : list) {
+				s.setReviewStar(new SalonDao().selectSolonRevuew1(conn,s.getSalonName()));
+			}
+		}
 		String pageNavi = "";
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
@@ -52,9 +58,8 @@ public class SalonService {
 			pageNavi +="<a class='btn' href='/branchList?reqPage="+pageNo+
 					"'>다음</a>";
 		}
-		ArrayList<SalonReview> reviewStar = new SalonDao().selectSolonRevuew(conn);
 		
-		SalonList pd = new SalonList(list,pageNavi,reviewStar);
+		SalonList pd = new SalonList(list,pageNavi,null);
 		JDBCTemplate.close(conn);
 		return pd;
 	}
@@ -246,7 +251,8 @@ public class SalonService {
 					"'>다음</a>";
 		}
 		ArrayList<Designer> designerList = new SalonDao().salondesigner(conn, salonName);
-		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list);
+		SalonReview star = new SalonDao().salonstar(conn,salonName);
+		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list,star);
 		return sd;
 	}
 
