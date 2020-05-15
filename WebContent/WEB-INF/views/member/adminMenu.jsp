@@ -12,7 +12,7 @@
 		<div class="cTitle meorijom">#Admin page<span>관리자 페이지</span></div>
         <div class="content2">
            <a href="#"><span class="menuBox"><img src="/imgs/memberMan.png"><div>회원 관리</div></span></a>
-            <a href="#"><span class="menuBox"><img src="/imgs/reserveMan2.png" width="70%" height="70%"><div>예약 관리</div></span></a>
+            <a href="/adminReserveList"><span class="menuBox"><img src="/imgs/reserveMan2.png" width="70%" height="70%"><div>예약 관리</div></span></a>
             <a href="#"><span class="menuBox"><img src="/imgs/questionMan.jpg"><div>1:1문의</div></span></a><br>
             <a href="/branchmanagement?reqPage=1"><span class="menuBox"><img src="/imgs/company.png"><div>지점 관리</div></span></a>
             <a href="/designerList"><span class="menuBox"><img src="/imgs/designerIcon.png"><div>디자이너 관리</div></span></a>
