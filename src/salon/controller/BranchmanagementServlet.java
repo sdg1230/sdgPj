@@ -1,7 +1,6 @@
-package reserve.controller;
+package salon.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import reserve.service.ReserveService;
-import reserve.vo.Reserve;
+import salon.service.SalonService;
+import salon.vo.SalonList;
 
 /**
- * Servlet implementation class ReserveListFrmServlet
+ * Servlet implementation class BranchmanagementServlet
  */
-@WebServlet(name = "ReserveListFrm", urlPatterns = { "/reserveListFrm" })
-public class ReserveListFrmServlet extends HttpServlet {
+@WebServlet(name = "Branchmanagement", urlPatterns = { "/branchmanagement" })
+public class BranchmanagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReserveListFrmServlet() {
+    public BranchmanagementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,12 @@ public class ReserveListFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String memberId = "user01";
-		ArrayList<Reserve>list = new ReserveService().reserveList(memberId);
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		SalonList af = new	SalonService().selectAffilates(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchmanagement.jsp");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
-		
-		if(!list.isEmpty()) {
-			
-			request.setAttribute("userReserveList", list);
-			
-		}
-		System.out.println(list.get(0));
+		request.setAttribute("list", af.getAffilateList());
+		request.setAttribute("pageNavi", af.getPageNavi());
 		rd.forward(request, response);
 		
 	}

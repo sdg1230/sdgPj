@@ -1,7 +1,9 @@
-package reserve.controller;
+package salon.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
+
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import reserve.service.ReserveService;
-import reserve.vo.Reserve;
+import salon.service.SalonService;
+import salon.vo.SalonList;
 
 /**
- * Servlet implementation class ReserveListFrmServlet
+ * Servlet implementation class BranchListServlet
  */
-@WebServlet(name = "ReserveListFrm", urlPatterns = { "/reserveListFrm" })
-public class ReserveListFrmServlet extends HttpServlet {
+@WebServlet(name = "BranchList", urlPatterns = { "/branchList" })
+public class BranchListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReserveListFrmServlet() {
+    public BranchListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +34,13 @@ public class ReserveListFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String memberId = "user01";
-		ArrayList<Reserve>list = new ReserveService().reserveList(memberId);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
-		
-		if(!list.isEmpty()) {
-			
-			request.setAttribute("userReserveList", list);
-			
-		}
-		System.out.println(list.get(0));
+		request.setCharacterEncoding("utf-8");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		SalonList af = new	SalonService().selectAffilate(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
+		request.setAttribute("pageNavi", af.getPageNavi());
+		request.setAttribute("list", af.getAffilateList());
+		request.setAttribute("star", af.getReviewStar());
 		rd.forward(request, response);
 		
 	}

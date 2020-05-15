@@ -1,29 +1,26 @@
-package reserve.controller;
+package salon.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import reserve.service.ReserveService;
-import reserve.vo.Reserve;
+import salon.service.SalonService;
+import salon.vo.SalonDetails;
 
 /**
- * Servlet implementation class ReserveListFrmServlet
+ * Servlet implementation class SelectSalonServlet
  */
-@WebServlet(name = "ReserveListFrm", urlPatterns = { "/reserveListFrm" })
-public class ReserveListFrmServlet extends HttpServlet {
+@WebServlet(name = "SelectSalon", urlPatterns = { "/selectSalon" })
+public class SelectSalonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReserveListFrmServlet() {
+    public SelectSalonServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +28,18 @@ public class ReserveListFrmServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String memberId = "user01";
-		ArrayList<Reserve>list = new ReserveService().reserveList(memberId);
+		String salonName = request.getParameter("salonName");
+		SalonDetails sd = new SalonService().salonDetails(salonName);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
+		request.setAttribute("salon", sd.getAffilate());
 		
-		if(!list.isEmpty()) {
-			
-			request.setAttribute("userReserveList", list);
-			
-		}
-		System.out.println(list.get(0));
-		rd.forward(request, response);
+		request.setAttribute("pageNavi", sd.getAgeNavi());
 		
+		request.setAttribute("des", sd.getDesignerList());
+		request.setAttribute("rev", sd.getReviewList());
+		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage=1").forward(request, response);
 	}
 
 	/**
