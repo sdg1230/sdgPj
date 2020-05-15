@@ -49,19 +49,41 @@
 						$(".header").css("height", "130px");
 					}
 				});
-
+		
 	});
+	
+	function reserveFunc(memberId){
+		if(memberId==""){
+			alert("로그인이 필요합니다");
+		}else{
+			if(memberId=="admin"){
+				location.href="/adminReserveList";
+			}else{
+				location.href="/reserveFrm";
+			}
+		}
+	}
 </script>
 
 <div class="sidebar">
 	<span class="sideicon"><img src="/imgs/sideicon.png"></span> <a
-		href="/reserveFrm">
+		href="javascript:void(0);" onclick="reserveFunc('${sessionScope.member.memberId}');">
 		<div class="sidemenu">
 			<img src="/imgs/reserve-icon.png">
-			<div>예약하기</div>
+			<c:if test="${empty sessionScope.member }">
+				<div>예약하기</div>
+			</c:if>
+			<c:if test="${not empty sessionScope.member }">
+				<c:if test="${sessionScope.member.memberId ne 'admin' }">
+					<div>예약하기</div>
+				</c:if>
+				<c:if test="${sessionScope.member.memberId eq 'admin' }">
+					<div>예약관리</div>
+				</c:if>
+			</c:if>
 		</div>
 	</a> 
-	<a href="#">
+	<a href="/reserveListFrm">
 		<div class="sidemenu">
 			<img src="/imgs/question-icon.png">
 			<div>1:1문의</div>
@@ -101,7 +123,7 @@
 			</c:if>
 			<c:if test="${not empty sessionScope.member }">
 				<!--로그인되어있을때 -->
-				<li><a href="#">로그아웃</a></li>
+				<li><a href="/logOut">로그아웃</a></li>
 				<c:if test="${sessionScope.member.memberId eq 'admin' }">
 				<li><a href="/adminMenu">${sessionScope.member.memberName }</a></li>
 				</c:if>
@@ -118,7 +140,6 @@
 			<li><a href="/branchList?reqPage=1">지점소개</a></li>
 			<li><a href="/noticeList?reqPage=1">공지사항</a></li>
 			<li><a href="javascript:void(0)" onclick="alert('준비중입니다.');">아카데미</a></li>
-			<li><a href="/adminReserveList">예약관리</a></li>
 		</ul>
 	</div>
 </div>

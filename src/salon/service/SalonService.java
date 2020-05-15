@@ -208,7 +208,7 @@ public class SalonService {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Salon> list = new SalonDao().selectSalon(conn);
 		JDBCTemplate.close(conn);
-		return null;
+		return list;
 	}
 
 	public SalonDetails salonDetails(String salonName) {

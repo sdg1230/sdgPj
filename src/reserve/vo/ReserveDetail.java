@@ -1,6 +1,7 @@
 package reserve.vo;
 
 public class ReserveDetail {
+
 	private int reserveNo;
 	private int hairNo;
 	private String hairName;
@@ -32,4 +33,6 @@ public class ReserveDetail {
 	public void setHairName(String hairName) {
 		this.hairName = hairName;
 	}
+	
+
 }
