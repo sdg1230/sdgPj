@@ -335,7 +335,7 @@ $(function(){
 
 /* cBody2 */
    .cBody2 {
-        margin: 30px 0;
+        margin: 20px 0;
         overflow: hidden;
     }
 
@@ -386,6 +386,7 @@ $(function(){
  .cBody3 {
         text-align: center;
         margin-bottom: 150px;
+        margin-top:20px;
     }
 
     .more {
