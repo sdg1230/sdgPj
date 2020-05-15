@@ -288,6 +288,7 @@ public class SalonDao {
 		String str = "select * from salon";
 		try {
 			pstmt = conn.prepareStatement(str);
+			res=pstmt.executeQuery();
 			while (res.next()) {
 				s = new Salon();
 				s.setSalonAddr(res.getString("salon_addr"));
