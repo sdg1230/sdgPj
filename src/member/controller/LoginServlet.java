@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("loc", "/");
 		}else {
 			request.setAttribute("msg", "아이디 또는 패스워드를 다시 입력해주세요");
-			request.setAttribute("loc", "/login");
+			request.setAttribute("loc", "/loginFrm");
 		}
 		rd.forward(request, response);
 		

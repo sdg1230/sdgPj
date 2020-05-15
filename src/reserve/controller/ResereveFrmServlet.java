@@ -38,8 +38,6 @@ public class ResereveFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = "user01";
-		//String memberId = request.getSession().getAttribute("member").getMemberId();
 		ArrayList<Designer> dlist = new DesignerService().selectAllDesigner().getDesignerList();
 		ArrayList<Salon> slist = new SalonService().selectSalon();
 		ArrayList<HairMenu> hlist = new ReserveService().selectHairMenu();
@@ -47,7 +45,6 @@ public class ResereveFrmServlet extends HttpServlet {
 		request.setAttribute("dlist", dlist);
 		request.setAttribute("slist", slist);
 		request.setAttribute("hlist", hlist);
-		request.setAttribute("memberId", memberId);
 		rd.forward(request, response);
 	}
 

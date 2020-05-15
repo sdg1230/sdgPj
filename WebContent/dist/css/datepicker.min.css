@@ -83,7 +83,7 @@
 .datepicker--cell.-selected-,
 .datepicker--cell.-selected-.-current- {
     color: #fff;
-    background: #998778
+    background: #CD3C41
 }
 
 .datepicker--cell.-range-from-.-range-to- {
@@ -95,7 +95,7 @@
 }
 
 .datepicker--cell.-selected-.-focus- {
-    background: #998778
+    background: #CD3C41
 }
 
 .datepicker--cell:empty {

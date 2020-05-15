@@ -284,13 +284,12 @@ public class SalonDao {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
 		ArrayList<Salon> list = new ArrayList<Salon>();
-		Salon s = null;
 		String str = "select * from salon";
 		try {
 			pstmt = conn.prepareStatement(str);
-			res=pstmt.executeQuery();
+			res = pstmt.executeQuery();
 			while (res.next()) {
-				s = new Salon();
+				Salon s = new Salon();
 				s.setSalonAddr(res.getString("salon_addr"));
 				s.setSalonFilename(res.getString("salon_filename"));
 				s.setSalonFilepath(res.getString("salon_filepath"));
