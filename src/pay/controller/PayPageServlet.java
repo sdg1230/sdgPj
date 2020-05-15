@@ -1,6 +1,7 @@
 package pay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,12 +32,21 @@ public class PayPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		////String reserveNo = request.getParameter("reserveNo");
+		int reserveNo = 1;
+		//String reserveNo = request.getParameter("reserveNo");
 		//Reserve r = new ReserveService();
-		//예약정보 하나 가져오는거 만들어도되는지 혹시만들었는지
 		
+		ArrayList<String> reserveDetail = new ReserveService().selectDetailList(reserveNo);
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<reserveDetail.size();i++) {
+			sb.append(reserveDetail.get(i)+",");
+		}
+		sb.deleteCharAt(sb.length()-1);
+
+		Reserve r = new ReserveService().selectOneReserve(reserveNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pay/payPage.jsp");
-		//request.setAttribute("r", r);
+		request.setAttribute("r", r);
+		request.setAttribute("detail", sb);
 		rd.forward(request, response);
 	}
 

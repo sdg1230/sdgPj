@@ -35,9 +35,6 @@ public class LoginServlet extends HttpServlet {
 		String memberId=request.getParameter("memberId");
 		String memberPw=request.getParameter("memberPw");
 		Member m=new MemberService().selectOneMember(memberId,memberPw);
-		
-		System.out.println(memberId);
-		System.out.println(memberPw);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(m!=null) {
 			HttpSession session =request.getSession();
@@ -46,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("loc", "/");
 		}else {
 			request.setAttribute("msg", "아이디 또는 패스워드를 다시 입력해주세요");
-			request.setAttribute("loc", "/login");
+			request.setAttribute("loc", "/loginFrm");
 		}
 		rd.forward(request, response);
 		

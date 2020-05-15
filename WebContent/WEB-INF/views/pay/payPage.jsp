@@ -5,6 +5,7 @@
 <html>
 <head>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <meta charset="UTF-8">
 <title>선결제 페이지</title>
 </head>
@@ -23,27 +24,67 @@
 					<table class="reserveTable">
 						<tr>
 							<td style=""><span> 예약자명</span></td>
-							<td style="">연예진</td>
+							<td style="">${sessionScope.member.memberName }</td>
 						</tr>
 						<tr>
 							<td><span>지점명</span></td>
-							<td>당산본점</td>
+							<td>${r.salonName }</td>
 						</tr>
 						<tr>
 							<td><span>디자이너</span></td>
-							<td>예리 Stylist</td>
+							<td>${r.designerName }</td>
 						</tr>
 						<tr>
 							<td><span>예약날짜</span></td>
-							<td>2020-05-30</td>
+							<td>${r.reserveDate }</td>
 						</tr>
 						<tr>
 							<td><span>예약시간</span></td>
-							<td>10:00</td>
+							<td><c:if test="${r.startTime eq '1' }">
+							10:00
+							</c:if> <c:if test="${r.startTime eq '2' }">
+							10:30
+							</c:if> <c:if test="${r.startTime eq '3' }">
+							11:00
+							</c:if> <c:if test="${r.startTime eq '4' }">
+							11:30
+							</c:if> <c:if test="${r.startTime eq '5' }">
+							12:00
+							</c:if> <c:if test="${r.startTime eq '6' }">
+							12:30
+							</c:if> <c:if test="${r.startTime eq '7' }">
+							13:00
+							</c:if> <c:if test="${r.startTime eq '8' }">
+							13:30
+							</c:if> <c:if test="${r.startTime eq '9' }">
+							14:00
+							</c:if> <c:if test="${r.startTime eq '10' }">
+							14:30
+							</c:if> <c:if test="${r.startTime eq '11' }">
+							15:00
+							</c:if> <c:if test="${r.startTime eq '12' }">
+							15:30
+							</c:if> <c:if test="${r.startTime eq '13' }">
+							16:00
+							</c:if> <c:if test="${r.startTime eq '14' }">
+							16:30
+							</c:if> <c:if test="${r.startTime eq '15' }">
+							17:00
+							</c:if> <c:if test="${r.startTime eq '16' }">
+							17:30
+							</c:if> <c:if test="${r.startTime eq '17' }">
+							18:00
+							</c:if> <c:if test="${r.startTime eq '18' }">
+							18:30
+							</c:if> <c:if test="${r.startTime eq '19' }">
+							19:00
+							</c:if> <c:if test="${r.startTime eq '20' }">
+							19:30
+							</c:if></td>
 						</tr>
 						<tr>
 							<td><span>시술정보</span></td>
-							<td>여성 컷, 펌</td>
+							<td>${detail}</td>
 						</tr>
 					</table>
 				</div>
@@ -54,15 +95,15 @@
 					<table class="priceTable">
 						<tr>
 							<td>시술금액</td>
-							<td>30,000원</td>
+							<td>${r.totalPrice }원</td>
 						</tr>
 						<tr>
 							<td>선결제 할인</td>
-							<td>-6,000원</td>
+							<td id=dcPrice></td>
 						</tr>
 						<tr>
 							<td>총금액</td>
-							<td><span class="dc">30000원</span>&nbsp;&nbsp;->&nbsp;&nbsp;24,000원</td>
+							<td id=payPrice><span id="dc"></span>&nbsp;&nbsp;->&nbsp;&nbsp;</td>
 						</tr>
 					</table>
 				</div>
@@ -94,13 +135,22 @@
 					<button id="payBtn" onclick="return payFunc();">결제하기</button>
 				</div>
 			</div>
-
 		</div>
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
 </body>
 <script>
+	var payPrice = 0;
+	$(function() {
+		var dcPrice = Number('${r.totalPrice }');
+		dcPrice *= 0.2;
+		$("#dcPrice").html(dcPrice + "원");
+		payPrice = Number('${r.totalPrice }') - dcPrice;
+		$("#payPrice").append(payPrice + "원");
+		$("#dc").html(dcPrice + "원");
+	});
+
 	$("#chk").click(function() {
 		var input = document.getElementsByName("agree");
 		var chk = document.getElementById("chk");
@@ -117,17 +167,17 @@
 	});
 
 	function viewFunc1() {
-		window.open("agree1.html", "_blank",
+		window.open("/view/agree1.html", "_blank",
 				"width=500,height=500,top=100,left=400");
 		$("#agree1").attr("checked", true);
 	}
 	function viewFunc2() {
-		window.open("agree2.html", "_blank",
+		window.open("/view/agree2.html", "_blank",
 				"width=500,height=500,top=100,left=400");
 		$("#agree2").attr("checked", true);
 	}
 	function viewFunc3() {
-		window.open("agree3.html", "_blank",
+		window.open("/view/agree3.html", "_blank",
 				"width=500,height=500,top=100,left=400");
 		$("#agree3").attr("checked", true);
 	}
@@ -140,10 +190,40 @@
 				return false;
 			}
 		}
-		if ($("input[name=payMethod]").val() != 'card') {
+		if (!$("input[name=payMethod]").prop("checked")) {
 			alert("결제방법을 선택하세요.");
 			return false;
 		}
+		var d = new Date();
+		var date = d.getFullYear() + "" + (d.getMonth() + 1) + ""
+				+ d.getHours() + "" + d.getMinutes() + "" + d.getSeconds();
+		IMP.init("imp03735690");
+		IMP.request_pay({
+			//결제정보넘김
+			merchant_uid : '상품명_' + date,
+			name : '머리좀헤어',
+			amount : 1000,
+			buyer_email : 'test@naver.com',
+			buyer_name : '${sessionScope.member.memberName}',
+			buyer_tel : '010-1111-2222',
+			buyer_postcode : '01234'
+		}, function(rsp) {
+			if (rsp.success) {
+				//결제 성공햇을때
+				var r1 = rsp.imp_uid;
+				var r2 = rsp.merchant_uid;
+				var r3 = rsp.paid_amount;
+				var r4 = rsp.apply_num;
+				var memberId = "${r.memberId}";
+				var reserveNo = "${r.reserveNo}";
+				location.href="/insertPay?memberId="+memberId+"&reserveNo="+reserveNo+"&paymentPrice="+payPrice+"&paymentId="+r1+"&paymentNo="+r4;
+			} else {
+				alert("결제에러");
+			}
+		});
+		
+		
+		
 	}
 </script>
 <style>
@@ -250,7 +330,7 @@ td>span {
 	height: 55px;
 }
 
-.dc {
+#dc {
 	display: inline;
 	color: #ee1c24;
 	text-decoration: line-through;
