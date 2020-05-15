@@ -80,7 +80,7 @@
             border: 1px solid white;
         }  
         .hh{
-        display: inline-block;
+        display: block;
         }
         .affimg{
         	width: 250px;
@@ -108,10 +108,10 @@
 
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-		<div class="content">
+		<div class="content1">
 			
-			<div class="content1">
 			<h1>${salon.salonName }</h1>
+			<div class="content1">
 			<input type="hidden" id="salonName" value="${salon.salonName }">
 				<input type="hidden" id="salonAddr" value="${salon.salonAddr }">
 				<div>

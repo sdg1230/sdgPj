@@ -130,6 +130,15 @@
 .salonname {
 	text-align: center;
 }
+.content {
+            width: 1200px;
+            overflow: hidden;
+            margin: 0 auto;
+            height: 100%;
+            background-color: white;
+            text-align: center;
+            
+        }
 </style>
 <script>
 	$(function() {
@@ -278,13 +287,7 @@
 								</c:if>
 								
 								</td>
-								
-								
-							
-							
-							
-							
-							
+
 						</tr>
 
 
