@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
-
 import common.JDBCTemplate;
 import reserve.vo.HairMenu;
 import reserve.vo.Reserve;
@@ -19,7 +17,7 @@ public class ReserveDao {
 		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status,reserve_review from reserve join member using(member_id) join designer using(designer_no) where reserve.salon_name=? and reserve_status=? order by reserve_date desc";
+		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status,reserve_review from reserve join member using(member_id) join designer using(designer_no) where reserve.salon_name=? and reserve_status=? order by reserve_date desc, start_time desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, salonName);
@@ -169,7 +167,7 @@ public class ReserveDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
-		String query = "select start_time,reserve_time from reseve where reserve_date=? and salon_name=? and designer_no=?";
+		String query = "select start_time,reserve_time from reserve where reserve_date=? and salon_name=? and designer_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, reserveDate);
@@ -297,6 +295,69 @@ public class ReserveDao {
 		return list;
 	}
 
+	public int insertReserve(Connection conn, Reserve r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into reserve values(SEQ_RESERVE_NO.NEXTVAL,?,?,?,?,?,?,?,'false','false','false')";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, r.getMemberId());
+			pstmt.setString(2, r.getSalonName());
+			pstmt.setInt(3, r.getDesignerNo());
+			pstmt.setString(4, r.getReserveDate());
+			pstmt.setInt(5, r.getStartTime());
+			pstmt.setInt(6, r.getReserveTime());
+			pstmt.setInt(7, r.getTotalPrice());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int selectReserveBymemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int reserveNo = 0;
+		String query = "select reserve_no from reserve where member_id=? order by reserve_no desc";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				reserveNo = rset.getInt("reserve_no");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return reserveNo;
+	}
+
+	public int insertReserveDetail(Connection conn, int reserveNo, int nhair) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into reserve_detail values(?,?,(select hair_name from hair_menu where hair_no=?))";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			pstmt.setInt(2, nhair);
+			pstmt.setInt(3, nhair);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 
 }

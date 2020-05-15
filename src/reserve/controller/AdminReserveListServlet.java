@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import reserve.service.ReserveService;
 import reserve.vo.Reserve;
@@ -36,22 +38,12 @@ public class AdminReserveListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		//String memberId = request.getSession().getAttribute("member").getMemberId();
-		String memberId = "admin";
-		if(memberId.equals("admin")) {
-			int result = new ReserveService().deleteOldReserve();
-			ArrayList<Salon> slist = new SalonService().selectSalon();
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
-			request.setAttribute("noshow", result);
-			request.setAttribute("slist", slist);
-			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "관리자가 아닙니다");
-			request.setAttribute("loc", "/");
-			rd.forward(request, response);
-		}
-		
+		int result = new ReserveService().deleteOldReserve();
+		ArrayList<Salon> slist = new SalonService().selectSalon();
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
+		request.setAttribute("noshow", result);
+		request.setAttribute("slist", slist);
+		rd.forward(request, response);	
 	}
 
 	/**
