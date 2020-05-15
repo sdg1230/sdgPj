@@ -1,4 +1,4 @@
-package affilate.vo;
+package salon.vo;
 
 import java.util.ArrayList;
 
@@ -7,15 +7,15 @@ import salonReview.vo.SalonReview;
 
 
 
-public class AffilateList {
-	private ArrayList<Affilate> affilateList;
+public class SalonList {
+	private ArrayList<Salon> affilateList;
 	private ArrayList<SalonReview> reviewStar;
 	private String pageNavi;
-	public AffilateList() {
+	public SalonList() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public AffilateList(ArrayList<Affilate> affilateList, String pageNavi, ArrayList<SalonReview> reviewStar) {
+	public SalonList(ArrayList<Salon> affilateList, String pageNavi, ArrayList<SalonReview> reviewStar) {
 		super();
 		this.affilateList = affilateList;
 		this.reviewStar = reviewStar;
@@ -34,10 +34,10 @@ public class AffilateList {
 	public void setPageNavi(String pageNavi) {
 		this.pageNavi = pageNavi;
 	}
-	public ArrayList<Affilate> getAffilateList() {
+	public ArrayList<Salon> getAffilateList() {
 		return affilateList;
 	}
-	public void setAffilateList(ArrayList<Affilate> affilateList) {
+	public void setAffilateList(ArrayList<Salon> affilateList) {
 		this.affilateList = affilateList;
 	}
 	

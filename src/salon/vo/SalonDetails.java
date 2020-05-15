@@ -1,4 +1,4 @@
-package affilate.vo;
+package salon.vo;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import designer.model.vo.Designer;
 import salonReview.vo.SalonReview;
 
 public class SalonDetails {
-	private Affilate affilate;
+	private Salon affilate;
 	private String ageNavi;
 	private ArrayList<Designer> DesignerList;
 	private ArrayList<SalonReview> ReviewList;
@@ -14,7 +14,7 @@ public class SalonDetails {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SalonDetails(Affilate affilate, String ageNavi, ArrayList<Designer> designerList,
+	public SalonDetails(Salon affilate, String ageNavi, ArrayList<Designer> designerList,
 			ArrayList<SalonReview> reviewList) {
 		super();
 		this.affilate = affilate;
@@ -22,10 +22,10 @@ public class SalonDetails {
 		DesignerList = designerList;
 		ReviewList = reviewList;
 	}
-	public Affilate getAffilate() {
+	public Salon getAffilate() {
 		return affilate;
 	}
-	public void setAffilate(Affilate affilate) {
+	public void setAffilate(Salon affilate) {
 		this.affilate = affilate;
 	}
 	public String getAgeNavi() {

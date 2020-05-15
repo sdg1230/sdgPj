@@ -1,4 +1,4 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,8 +15,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import affilate.service.AffilateService;
-import affilate.vo.Affilate;
+import salon.service.SalonService;
+import salon.vo.Salon;
 
 
 /**
@@ -53,7 +53,7 @@ public class BranchupdateServlet extends HttpServlet {
 		//2)파일크기 지정
 		int maxSize = 10*1024*1024;
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
-		Affilate aff = new Affilate();
+		Salon aff = new Salon();
 		aff.setSalonAddr(mRequest.getParameter("salonAddr"));
 		aff.setSalonFilename(mRequest.getOriginalFileName("salonFilename"));
 		aff.setSalonFilepath(mRequest.getFilesystemName("salonFilename"));
@@ -74,7 +74,7 @@ public class BranchupdateServlet extends HttpServlet {
 			}
 		}
 		//3.비지니스로직
-		int result = new AffilateService().salonUpdate(aff);
+		int result = new SalonService().salonUpdate(aff);
 		//4.결과 처리
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {

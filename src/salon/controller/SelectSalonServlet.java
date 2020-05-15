@@ -1,32 +1,26 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.IOException;
-
-
-
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import affilate.service.AffilateService;
-
-import affilate.vo.AffilateList;
+import salon.service.SalonService;
+import salon.vo.SalonDetails;
 
 /**
- * Servlet implementation class BranchListServlet
+ * Servlet implementation class SelectSalonServlet
  */
-@WebServlet(name = "BranchList", urlPatterns = { "/branchList" })
-public class BranchListServlet extends HttpServlet {
+@WebServlet(name = "SelectSalon", urlPatterns = { "/selectSalon" })
+public class SelectSalonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BranchListServlet() {
+    public SelectSalonServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +28,18 @@ public class BranchListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		AffilateList af = new	AffilateService().selectAffilate(reqPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
-		request.setAttribute("pageNavi", af.getPageNavi());
-		request.setAttribute("list", af.getAffilateList());
-		request.setAttribute("star", af.getReviewStar());
-		rd.forward(request, response);
+		String salonName = request.getParameter("salonName");
+		SalonDetails sd = new SalonService().salonDetails(salonName);
 		
+		request.setAttribute("salon", sd.getAffilate());
+		
+		request.setAttribute("pageNavi", sd.getAgeNavi());
+		
+		request.setAttribute("des", sd.getDesignerList());
+		request.setAttribute("rev", sd.getReviewList());
+		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage=1").forward(request, response);
 	}
 
 	/**

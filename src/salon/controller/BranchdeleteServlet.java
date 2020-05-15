@@ -1,4 +1,4 @@
-package affiliate.controller;
+package salon.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import affilate.service.AffilateService;
-import affilate.vo.Affilate;
+import salon.service.SalonService;
+import salon.vo.SalonList;
 
 /**
- * Servlet implementation class BranchUpdateFrmServlet
+ * Servlet implementation class BranchdeleteServlet
  */
-@WebServlet(name = "BranchUpdateFrm", urlPatterns = { "/branchUpdateFrm" })
-public class BranchUpdateFrmServlet extends HttpServlet {
+@WebServlet(name = "Branchdelete", urlPatterns = { "/branchdelete" })
+public class BranchdeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BranchUpdateFrmServlet() {
+    public BranchdeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +31,13 @@ public class BranchUpdateFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String salonName = request.getParameter("salonName");
-		Affilate aff = new AffilateService().salonUpdateFrm(salonName);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchupdate.jsp");
-		System.out.println(aff.getSalonFilename()+"ddd");
-		request.setAttribute("list", aff);
+		SalonList af = new	SalonService().selectdelete(salonName);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchmanagement.jsp");
+		
+		request.setAttribute("list", af.getAffilateList());
+		request.setAttribute("pageNavi", af.getPageNavi());
 		rd.forward(request, response);
 	}
 

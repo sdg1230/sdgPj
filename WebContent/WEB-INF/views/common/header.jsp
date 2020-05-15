@@ -118,7 +118,6 @@
 			<li><a href="/branchList?reqPage=1">지점소개</a></li>
 			<li><a href="/noticeList?reqPage=1">공지사항</a></li>
 			<li><a href="javascript:void(0)" onclick="alert('준비중입니다.');">아카데미</a></li>
-			<li><a href="/branchmanagement?reqPage=1">지점관리</a></li>
 			<li><a href="/adminReserveList">예약관리</a></li>
 		</ul>
 	</div>
