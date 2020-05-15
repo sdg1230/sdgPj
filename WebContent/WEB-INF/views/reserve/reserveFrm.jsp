@@ -18,14 +18,6 @@ input[type=radio], input[type=checkbox] {
 	display: none;
 }
 
-.selectFrm {
-	margin: 20px;
-	float: left;
-	box-sizing: border-box;
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 30%);
-	overflow: auto;
-	background-color: #f5f5f5;
-}
 
 .cTitle {
 	margin-top: 130px;
@@ -38,7 +30,7 @@ input[type=radio], input[type=checkbox] {
 	height: 200px;
 	opacity: 90%;
 	color: white;
-	background-color: #998778;
+	background-color: #CD3C41;
 	font-family: 'Anton', sans-serif;
 }
 
@@ -49,15 +41,36 @@ input[type=radio], input[type=checkbox] {
 }
 
 .selectFrm-wrapper {
+    margin-top: 40px;
+    margin-bottom: 40px;
 	width: 75%;
 	overflow: hidden;
 	float: left;
 }
 
 .selectFrm-submit {
+    margin-top: 40px;
+    margin-bottom: 40px;
 	width: 25%;
 	overflow: hidden;
 	float: left;
+    border-left: 2px solid black;
+}
+
+.sel1{
+	float: left;
+	margin: 20px;
+    margin-bottom: 10px;
+}
+.sel1>p{
+    margin: 5px;
+    font-size: 20px;
+}
+.selectFrm {
+	box-sizing: border-box;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 30%);
+	overflow: auto;
+	background-color: #f5f5f5;
 }
 
 .date {
@@ -84,6 +97,7 @@ input[type=radio], input[type=checkbox] {
 	.time>label>span:hover {
 	background-color: #f0f0f0;
 	color: black;
+    cursor: pointer;
 }
 
 .menu {
@@ -103,7 +117,7 @@ input[type=radio], input[type=checkbox] {
 
 .salons input:checked+label>span, .designers input:checked+label>span,
 	.menu input:checked+label>span, .time input:checked+label>span {
-	background-color: #998778;
+	background-color: #CD3C41;
 	color: white;
 }
 .time input:disabled+label>span{
@@ -124,11 +138,16 @@ input[type=radio], input[type=checkbox] {
 .selectFrm-submit>input {
 	color: white;
 	font-size: 15px;
-	/*margin-top: 500px;*/
 	width: 100px;
 	height: 50px;
 	border: none;
-	background-color: #998778;
+	background-color: black;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.selectFrm-submit>input:hover{
+	background-color: #CD3C41;
+	cursor: pointer;
 }
 .designer{
 	display:none;
@@ -140,13 +159,54 @@ input[type=radio], input[type=checkbox] {
 	background-color:white;
 	box-shadow:none;
 }
-.totalPrice{
-	width:100%;
-	height:200px;
+.menuInfo{
+    width: 100%;
+    height: 500px;
+    margin-left: 0;
 }
-.totalPrice>span{
+.menuTable{
+    width: 70%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+.menuTable td{
+    border-bottom: 1px solid lightgray;
+    height: 35px;
+}
+.menuInfo>p{
+    margin-left: 40px;
+}
+.menuTable tr>td:first-child{
+    text-align: left;
+}
+.menuTable tr>td:last-child{
+    text-align: right;
+}
+.totalPrice{
+	width:80%;
+	height:50px;
+    text-align: right;
+    overflow: hidden;
+}
+.totalPrice>p{
+    margin: 5px;
+    padding: 0;
+    height: 30px;
 	font-size : 30px;
 }
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	padding-top:4px;
+}
+/* 헤더 제대로적용------------------------ */
 </style>
 <script>
 	$(function() {
@@ -156,6 +216,7 @@ input[type=radio], input[type=checkbox] {
 			var myDatepicker = $('.fun').datepicker().data('datepicker');
 			myDatepicker.clear();
 			checkTime();
+			$("#totalPrice").html("0");
 		});
 		
 		$("form").submit(function(){
@@ -340,68 +401,87 @@ input[type=radio], input[type=checkbox] {
 		</div>
 		<div class="content1">
 			<form action="/insertReserve" method="post">
-				<input type="text" name="memberId" value=${memberId } hidden>
+				<input type="text" name="memberId" value="${sessionScope.member.memberId}" hidden>
 				<input type="text" name="reserveTime" hidden>
 				<div class="selectFrm-wrapper">
 					<div>
-						<div class="date selectFrm">
-							<input id="cal" name="reserveDate" type='text' class="datepicker-here fun" data-position="right top" readonly />
+						<div class="sel1">
+							<p>날짜 선택</p>
+							<div class="date selectFrm">
+								<input id="cal" name="reserveDate" type='text' class="datepicker-here fun" data-position="right top" readonly />
+							</div>
 						</div>
-						<div class="salons selectFrm">
-						<c:forEach items="${slist }" var="s">
-							<input type="radio" id=${s.salonName } name="salonName" value=${s.salonName }><label for=${s.salonName }><span class="salon">${s.salonName }</span></label>
-						</c:forEach>
+						<div class="sel1">
+						<p>지점 선택</p>
+							<div class="salons selectFrm">
+							<c:forEach items="${slist }" var="s">
+								<input type="radio" id=${s.salonName } name="salonName" value=${s.salonName }><label for=${s.salonName }><span class="salon">${s.salonName }</span></label>
+							</c:forEach>
+							</div>
 						</div>
-						<div class="designers selectFrm">
-						<c:forEach items="${dlist }" var="d">
-							<input type="radio" id="designer${d.designerNo }" name="designerNo" value=${d.designerNo } salon=${d.salonName }><label for="designer${d.designerNo }"><span class="designer">${d.designerName }</span></label>
-						</c:forEach>
+						<div class="sel1">
+						<p>담당 디자이너 선택</p>
+							<div class="designers selectFrm">
+							<c:forEach items="${dlist }" var="d">
+								<input type="radio" id="designer${d.designerNo }" name="designerNo" value=${d.designerNo } salon=${d.salonName }><label for="designer${d.designerNo }"><span class="designer">${d.designerName }</span></label>
+							</c:forEach>
+							</div>
 						</div>
 					</div>
 					<div>
-						<div class="menu selectFrm">
-						<c:forEach items="${hlist }" var="h">
-							<input type="checkbox" id="hair${h.hairNo }" name="hairNo" value=${h.hairNo } time=${h.hairTime } pay=${h.hairPay } ><label for="hair${h.hairNo }"><span>${h.hairName }</span></label>
-						</c:forEach>
+						<div class="sel1">
+						<p>시술 선택</p>
+							<div class="menu selectFrm">
+							<c:forEach items="${hlist }" var="h">
+								<input type="checkbox" id="hair${h.hairNo }" name="hairNo" value=${h.hairNo } time=${h.hairTime } pay=${h.hairPay } ><label for="hair${h.hairNo }"><span>${h.hairName }</span></label>
+							</c:forEach>
+							</div>
 						</div>
-						<div class="time selectFrm">
-							<input type="radio" id="time1" name="startTime" value=1><label for="time1"><span class="selTime" >10:00</span></label>
-							<input type="radio" id="time2" name="startTime" value=2><label for="time2"><span class="selTime" >10:30</span></label>
-							<input type="radio" id="time3" name="startTime" value=3><label for="time3"><span class="selTime" >11:00</span></label>
-							<input type="radio" id="time4" name="startTime" value=4><label for="time4"><span class="selTime" >11:30</span></label>
-							<input type="radio" id="time5" name="startTime" value=5><label for="time5"><span class="selTime" >12:00</span></label>
-							<input type="radio" id="time6" name="startTime" value=6><label for="time6"><span class="selTime" >12:30</span></label>
-							<input type="radio" id="time7" name="startTime" value=7><label for="time7"><span class="selTime" >13:00</span></label>
-							<input type="radio" id="time8" name="startTime" value=8><label for="time8"><span class="selTime" >13:30</span></label>
-							<input type="radio" id="time9" name="startTime" value=9><label for="time9"><span class="selTime" >14:00</span></label>
-							<input type="radio" id="time10" name="startTime" value=10><label for="time10"><span class="selTime" >14:30</span></label>
-							<input type="radio" id="time11" name="startTime" value=11><label for="time11"><span class="selTime" >15:00</span></label>
-							<input type="radio" id="time12" name="startTime" value=12><label for="time12"><span class="selTime" >15:30</span></label>
-							<input type="radio" id="time13" name="startTime" value=13><label for="time13"><span class="selTime" >16:00</span></label>
-							<input type="radio" id="time14" name="startTime" value=14><label for="time14"><span class="selTime" >16:30</span></label>
-							<input type="radio" id="time15" name="startTime" value=15><label for="time15"><span class="selTime" >17:00</span></label>
-							<input type="radio" id="time16" name="startTime" value=16><label for="time16"><span class="selTime" >17:30</span></label>
-							<input type="radio" id="time17" name="startTime" value=17><label for="time17"><span class="selTime" >18:00</span></label>
-							<input type="radio" id="time18" name="startTime" value=18><label for="time18"><span class="selTime" >18:30</span></label>
-							<input type="radio" id="time19" name="startTime" value=19><label for="time19"><span class="selTime" >19:00</span></label>
-							<input type="radio" id="time20" name="startTime" value=20><label for="time20"><span class="selTime" >19:30</span></label>
+						<div class="sel1">
+						<p>시간 선택</p>
+							<div class="time selectFrm">
+								<input type="radio" id="time1" name="startTime" value=1><label for="time1"><span class="selTime" >10:00</span></label>
+								<input type="radio" id="time2" name="startTime" value=2><label for="time2"><span class="selTime" >10:30</span></label>
+								<input type="radio" id="time3" name="startTime" value=3><label for="time3"><span class="selTime" >11:00</span></label>
+								<input type="radio" id="time4" name="startTime" value=4><label for="time4"><span class="selTime" >11:30</span></label>
+								<input type="radio" id="time5" name="startTime" value=5><label for="time5"><span class="selTime" >12:00</span></label>
+								<input type="radio" id="time6" name="startTime" value=6><label for="time6"><span class="selTime" >12:30</span></label>
+								<input type="radio" id="time7" name="startTime" value=7><label for="time7"><span class="selTime" >13:00</span></label>
+								<input type="radio" id="time8" name="startTime" value=8><label for="time8"><span class="selTime" >13:30</span></label>
+								<input type="radio" id="time9" name="startTime" value=9><label for="time9"><span class="selTime" >14:00</span></label>
+								<input type="radio" id="time10" name="startTime" value=10><label for="time10"><span class="selTime" >14:30</span></label>
+								<input type="radio" id="time11" name="startTime" value=11><label for="time11"><span class="selTime" >15:00</span></label>
+								<input type="radio" id="time12" name="startTime" value=12><label for="time12"><span class="selTime" >15:30</span></label>
+								<input type="radio" id="time13" name="startTime" value=13><label for="time13"><span class="selTime" >16:00</span></label>
+								<input type="radio" id="time14" name="startTime" value=14><label for="time14"><span class="selTime" >16:30</span></label>
+								<input type="radio" id="time15" name="startTime" value=15><label for="time15"><span class="selTime" >17:00</span></label>
+								<input type="radio" id="time16" name="startTime" value=16><label for="time16"><span class="selTime" >17:30</span></label>
+								<input type="radio" id="time17" name="startTime" value=17><label for="time17"><span class="selTime" >18:00</span></label>
+								<input type="radio" id="time18" name="startTime" value=18><label for="time18"><span class="selTime" >18:30</span></label>
+								<input type="radio" id="time19" name="startTime" value=19><label for="time19"><span class="selTime" >19:00</span></label>
+								<input type="radio" id="time20" name="startTime" value=20><label for="time20"><span class="selTime" >19:30</span></label>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="selectFrm-submit">
-					<div class="menuInfo selectFrm">
-						<ul>
+					<div class="menuInfo selectFrm sel1">
+					<p>시술 가격</p>
+					<table class="menuTable">
 						<c:forEach items="${hlist }" var="h">
-							<li>${h.hairName } - ${h.hairPay }원</li>
+							<tr>
+								<td>${h.hairName }</td>
+								<td>${h.hairPay }원</td>
+							</tr>
 						</c:forEach>
-						</ul>
+					</table>
 					</div>
-					<div class="totalPrice selectFrm">
-						<span>가격 : <span id="totalPrice">0</span>원</span>
+					<div class="totalPrice selectFrm sel1">
+						<p><span id="totalPrice">0</span>원</p>
 						<input type="text" name="totalPrice" hidden>
 					</div>
-					<input class="selectFrm" type="reset" value="선택 초기화">
-					<input class="selectFrm" type="submit" value="예약하기">
+					<input class="selectFrm sel1" type="reset" value="선택 초기화">
+					<input class="selectFrm sel1" type="submit" value="예약하기">
 				</div>
 			</form>
 		</div>

@@ -17,7 +17,7 @@ public class ReserveDao {
 		ArrayList<Reserve> rlist = new ArrayList<Reserve>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status,reserve_review from reserve join member using(member_id) join designer using(designer_no) where reserve.salon_name=? and reserve_status=? order by reserve_date desc";
+		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status,reserve_review from reserve join member using(member_id) join designer using(designer_no) where reserve.salon_name=? and reserve_status=? order by reserve_date desc, start_time desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, salonName);
