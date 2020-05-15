@@ -73,7 +73,7 @@ public class InsertReviewServlet extends HttpServlet {
 			
 			
 			request.setAttribute("msg", "리뷰작성 성공");
-			request.setAttribute("loc", "/reserveList?memberId="+memberId);
+			request.setAttribute("loc", "/reserveListFrm?memberId="+memberId);
 			System.out.println("예약확인 여부 업데이트 / 리뷰작성 성공");			
 		}else {
 			
