@@ -134,7 +134,7 @@
                     <h1 align="center">공지사항</h1>
                     <ul>
                         <li><a href="/noticeList?reqPage=1">공지사항</a></li>
-                        <li><a href="#">이벤트</a></li>
+                        <li><a href="/eventList">이벤트</a></li>
                         <li><a href="#">1:1문의</a></li>
                     </ul>
                 </div>
@@ -167,7 +167,7 @@
  			shiftEnterMode:'3'
         });
  		CKEDITOR.config.resize_enabled = false;
- 		CKEDITOR.instances.textarea.getData();
+ 		
 </script>
 <script>
 $(function() {

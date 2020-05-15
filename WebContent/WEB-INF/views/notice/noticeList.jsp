@@ -182,15 +182,20 @@
 		}
 		
 		.noticeWriteBtn{
-			width: 70px;
-			height: 30px;
-			display: inline-block;
-			line-height: 30px;
-			background-color: grey;
-			color: ghostwhite;
-			float: right;
-			text-align: center;
-			
+			    display: inline-block;
+    			width: 90px;
+    			height: 28px;
+    			background-color: #ffffff;
+    			text-align: center;
+    			line-height: 30px;
+    			color: #666666;
+    			border: 1px solid #D4D4Cd;
+    			padding-left: 2px;
+    			padding-right: 2px;
+    			margin-left: 2px;
+    			margin-right: 2px;
+    			float: right;
+				margin-top: 10px;
 		}
 		
 		.selectBox{
@@ -222,7 +227,7 @@
                     <h1 align="center">공지사항</h1>
                     <ul>
                         <li><a href="/noticeList?reqPage=1">공지사항</a></li>
-                        <li><a href="#">이벤트</a></li>
+                        <li><a href="/eventList">이벤트</a></li>
                         <li><a href="#">1:1문의</a></li>
                     </ul>
                 </div>
@@ -247,7 +252,7 @@
 					<td style="border-bottom: 0.1px solid #DDE3E9;">${n.noticeDate }</td>
 				</tr>
 							
-			</c:forEach>
+				</c:forEach>
             </table>
             <a href="/noticeWrite" class="noticeWriteBtn">글쓰기</a>
             <div class="noticePageNavi">${pageNavi }</div>
