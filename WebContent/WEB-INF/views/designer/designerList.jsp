@@ -27,6 +27,7 @@
 					<option value="${s }">${s }</option>
 					</c:forEach>
 				</select>
+				<input type="text" name="keyword" placeholder="디자이너 이름을 검색하세요.">
 				<button type="button" class="add" id="myBtn">추가</button>
 			</div>
 			
@@ -193,6 +194,42 @@ $("#salonName").change(function(){
 	
 });
 
+//검색시
+$("input[name=keyword]").keyup(function(){
+   var keyword = $(this).val();
+   var salonName = $("#salonName").val();
+	   $.ajax({
+			url : "/searchDesigner",
+			data : {keyword : keyword, salonName : salonName},
+			type : "get",
+			success : function(data) {
+				$(".cBody2").html("");
+				 var html="";
+				  for(var i=0; i<data.length;i++){
+					  html += "<div class='designerInfo'>"
+					  html += "<img src='upload/designer/"+data[i].designerFilepath+"'>"
+					  html += "<div class='designerName'>"+data[i].designerName+"</div>"
+					  html += "<p class='designerContent'>"+data[i].designerInfo+"</p>"
+					  html += "<button type='button' class='myBtn2' onclick='openModal("+data[i].designerNo+");'>수정</button>";
+					  html += "<button type='button' class='delete' onclick='deleteFunc("+data[i].designerNo+");'>삭제</button></div>"
+				  }		  
+				  $(".cBody2").append(html);
+				  $("#more-btn").hide();
+				  
+			}
+	   });
+   
+});
+$("input[name=keyword]").focusout(function(){
+	var keyword = $(this).val();
+	var salonName = $("#salonName").val();
+	if(keyword=="" && salonName==""){
+		$(".cBody2").html("");
+		fn_more(1);
+		 $("#more-btn").show();
+	}
+})
+
 function insertFunc(){
 	if($("#insertSalonName").val()==""){
 		alert("지점명을 선택하세요.");
@@ -286,6 +323,20 @@ $(function(){
 
 </script>
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	line-height:30px;
+	padding-top:4px;
+}
+/* 헤더 제대로적용------------------------ */
 .content2 {
 	/*-지우지마세요-*/
 	width: 1200px;
@@ -320,6 +371,10 @@ $(function(){
 	width: 150px;
 	height: 35px;
 	margin-left: 30px;
+}
+input[name=keyword]{
+width: 200px;
+	height: 35px;
 }
 
 .add {

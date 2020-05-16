@@ -14,6 +14,20 @@
 <link href="https://fonts.googleapis.com/css?family=Anton&display=swap"
 	rel="stylesheet">
 <style>
+    /* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	line-height:30px;
+	padding-top:4px;
+}
+/* 헤더 제대로적용------------------------ */
 .cTitle {
 	margin-top: 130px;
 	padding-top: 50px;
@@ -46,12 +60,27 @@
 h1,p {
 	text-align: center;
 }
+    p{
+        margin-top: 50px;
+        margin-bottom: 50px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    h1{
+       text-decoration-line: underline;
+        text-decoration-color: #CD3C41;
+        
+    }
 table{
 	margin: 0 auto;
+    padding: 10px;
+    border-collapse: collapse;
+   
 }
 table td {
 	width: 150px;
 	height: 40px;
+    border-bottom: 1px solid lightgray;
 }
 </style>
 </head>
