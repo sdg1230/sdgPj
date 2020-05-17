@@ -60,8 +60,8 @@
         </div>
         <div class="content">
         	<h1 class="meorijom"># Best Salon<small>실시간 별점순 지점을 확인하세요</small></h1>
-            <div class="sortByStar">            
-            </div>
+            <div class="sortByStar"></div>
+            <h1 class="meorijom"># Notice<small>공지사항을 확인하세요</small></h1>
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -102,6 +102,10 @@
     }
     h1>small{
         font-size: 15px;
+    }
+    .sortByStar{
+    width:100%;
+    overflow:hidden;
     }
     .sBox{
    		 opacity:85%;
