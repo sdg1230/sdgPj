@@ -59,8 +59,8 @@
             <div class="ad"></div>
         </div>
         <div class="content">
-            <div class="sortByStar">
-            
+        	<h1 class="meorijom"># Best Salon<small>실시간 별점순 지점을 확인하세요</small></h1>
+            <div class="sortByStar">            
             </div>
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -74,13 +74,90 @@
         $(this).css("text-decoration", "none").css("color", "");
     });
 
+    $(function(){
+    	$.ajax({
+    		url : "/selectBestSalon",
+    		type : "get",
+    		success : function(data) {
+    			 var html="";
+   			  for(var i=0; i<data.length;i++){
+   				  html += "<a href='/selectSalon?salonName="+data[i].salonName+"'><div class='sBox'>"
+   				  html += "<img src='upload/salon/"+data[i].salonFilepath+"'>"
+   				  html += "<div class='rank meorijom'>"+(i+1)+".</div>"
+   				  html += "<div class='info'>"
+   				  html += "<span class='salonName'>"+data[i].salonName+"</span><br>";
+   				  html += "<span class='salonStar meorijom'>"+data[i].reviewStarAvg+"/5점</span><br>"
+   				  html +=" <small>클릭하시면 매장 상세 정보를 보실 수 있습니다</small></div></div></a>"
+   			  }
+   			  
+   			  $(".sortByStar").append(html);
+    		}
+    	});		 
+    });
 </script>
 <style>
+    h1{
+      opacity:90%;
+        font-size: 30px;
+    }
+    h1>small{
+        font-size: 15px;
+    }
+    .sBox{
+   		 opacity:85%;
+        width:400px;
+        float: left;
+        padding-top: 10px;
+        padding-bottom: 30px;
+        height:400px;
+    }
+    .sBox:hover{
+    	opacity:100%;
+    }
+    .sBox>img{
+        width: 100%;
+        height: 250px;
+    }
+    .sBox>div{
+        float: left;
+    }
+    .salonName{
+        font-size: 30px;
+        font-weight: bold;
+        display: inline-block;
+        height: 40px;
+        border-bottom: 10px solid lightgray;
+        
+    }
+    .salonStar{
+        font-size: 23px;
+        color: #cd3c41;
+    }
+    
+    .rank{
+        vertical-align: top;
+        width: 30%;
+        height: 110px;
+        line-height: 100px;
+        font-size: 110px;
+        color: #ee1c24;
+    }
+    .info{
+        width:70%;
+        text-align: right;
+    }
+    .info>small{
+        color: dodgerblue;
+        text-decoration: underline;
+        
+    }
+    
     /* 캐러셀 */
     .content2 {
         width: 100%;
         overflow: hidden;
-        margin: 120px auto;
+        margin: 0 auto;
+        margin-top:130px;
         text-align: center;
     }
     .content{
@@ -90,7 +167,7 @@
     }
     .container {
         width: 100%;
-        height: 800px;
+        overflow:hidden;
         padding: 0;
     }
 

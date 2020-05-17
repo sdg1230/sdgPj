@@ -247,7 +247,15 @@ public class SalonService {
 		}
 		ArrayList<Designer> designerList = new SalonDao().salondesigner(conn, salonName);
 		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list);
+		JDBCTemplate.close(conn);
 		return sd;
+	}
+
+	public ArrayList<Salon> selectBestSalon() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Salon> list = new SalonDao().selectBestSalon(conn);
+		JDBCTemplate.close(conn);
+		return list;
 	}
 
 }
