@@ -1,11 +1,16 @@
 package member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class JoinServlet
@@ -26,8 +31,32 @@ public class JoinServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		Member m=new Member();
+		m.setMemberId(request.getParameter("memberId"));
+		m.setMemberName(request.getParameter("memberName"));
+		m.setMemberPw(request.getParameter("memberPw"));
+		m.setMemberPhone(request.getParameter("phone"));
+		m.setGender(request.getParameter("gender"));
+		System.out.println(m.getGender());
+		m.setAge(Integer.parseInt(request.getParameter("age")));
+		System.out.println(m.getAge());
+		m.setAddress(request.getParameter("address"));
+		System.out.println(m.getAddress());
+		
+		int result=new MemberService().insertMember(m);
+		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		
+		if(result>0) { //회원가입성공시
+			
+			request.setAttribute("msg", "회원가입성공");
+			request.setAttribute("loc","/joinComplete");
+			
+		}else {
+			
+		}
+		rd.forward(request, response);
+		
 	}
 
 	/**

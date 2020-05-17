@@ -14,16 +14,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class UpdateServlet
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "Update", urlPatterns = { "/update" })
+public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public UpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +32,28 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("memberId");
-		String memberPw=request.getParameter("memberPw");
-		Member m=new MemberService().selectOneMember(memberId,memberPw);
+		request.setCharacterEncoding("utf-8");
+		Member m=new Member();
+		m.setMemberId(request.getParameter("memberId"));
+		m.setMemberName(request.getParameter("memberName"));
+		m.setMemberPw(request.getParameter("memberPw"));
+		m.setMemberPhone(request.getParameter("phone"));
+		m.setGender(request.getParameter("gender"));
+		System.out.println(m.getGender());
+		m.setAge(Integer.parseInt(request.getParameter("age")));
+		System.out.println(m.getAge());
+		m.setAddress(request.getParameter("address"));
+		System.out.println(m.getAddress());
 		
-		System.out.println(memberId);
-		System.out.println(memberPw);
-		
-			
+		int result=new MemberService().update(m);
+	
+		HttpSession session =request.getSession(false);
+		session.setAttribute("member", m);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		
-		if(m!=null) {
-			HttpSession session =request.getSession();
-			session.setAttribute("member", m);
-			request.setAttribute("msg", "환영합니다.");
-			request.setAttribute("loc", "/");
-		}else {
-			request.setAttribute("msg", "아이디 또는 패스워드를 다시 입력해주세요");
-			request.setAttribute("loc", "/loginFrm");
-		}
+		request.setAttribute("msg", "정보 변경 성공");
+		request.setAttribute("loc", "/mypage?memberId="+m.getMemberId());
 		rd.forward(request, response);
+		
 		
 		
 	}

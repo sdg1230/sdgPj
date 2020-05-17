@@ -100,9 +100,13 @@
 				<li><a href="/loginFrm">로그인</a></li>
 			</c:if>
 			<c:if test="${not empty sessionScope.member }">
+				
 				<!--로그인되어있을때 -->
-				<li><a href="#">로그아웃</a></li>
-				<li><a href="#">${sessionScope.member.memberName }님</a></li>
+				
+					<li><a href="#">로그아웃</a></li>
+					<li><a href="/mypage">${sessionScope.member.memberName }님</a></li>
+					
+				
 			</c:if>
 		</ul>
 	</div>

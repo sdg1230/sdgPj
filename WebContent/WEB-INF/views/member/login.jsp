@@ -18,8 +18,8 @@
                      <table >
                          <tr>
                              <td class="loginfont">아이디</td>
-                             <td><input type="text" id="id" name="memberId"></td>
-                             <td rowspan="2"><button type="submit" id="btn">로그인</button></td>
+                             <td><input type="text" id="id" name="memberId" ></td>
+                             <td rowspan="2"><button type="submit" id="btn" >로그인</button></td>
                          </tr>
                          <tr>
                              <td class="loginfont">비밀번호</td>
