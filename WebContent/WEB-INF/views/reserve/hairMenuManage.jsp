@@ -130,23 +130,23 @@ input[type=submit]:hover{
 		change();
 	})
 	
-	function modifyHair(No){
-		$(".menu").eq(No-1).find(".pay").css("display","none");
-		$(".menu").eq(No-1).find(".hairPay").css("display","inline-block");
-		$(".menu").eq(No-1).find(".hairPay").focus();
-		$(".menu").eq(No-1).find(".modifyHair").css("display","none");
-		$(".menu").eq(No-1).find(".deleteHair").css("display","none");
-		$(".menu").eq(No-1).find(".complete").css("display","inline-block");
-		$(".menu").eq(No-1).find(".cancel").css("display","inline-block");
+	function modifyHair(val){
+		$(val).parent().find(".pay").css("display","none");
+		$(val).parent().find(".hairPay").css("display","inline-block");
+		$(val).parent().find(".hairPay").focus();
+		$(val).parent().find(".modifyHair").css("display","none");
+		$(val).parent().find(".deleteHair").css("display","none");
+		$(val).parent().find(".complete").css("display","inline-block");
+		$(val).parent().find(".cancel").css("display","inline-block");
 	};
 	
-	function cancel(No){
-		$(".menu").eq(No-1).find(".pay").show();
-		$(".menu").eq(No-1).find(".hairPay").hide();
-		$(".menu").eq(No-1).find(".modifyHair").show();
-		$(".menu").eq(No-1).find(".deleteHair").show();
-		$(".menu").eq(No-1).find(".complete").hide();
-		$(".menu").eq(No-1).find(".cancel").hide();
+	function cancel(val){
+		$(val).parent().find(".pay").show();
+		$(val).parent().find(".hairPay").hide();
+		$(val).parent().find(".modifyHair").show();
+		$(val).parent().find(".deleteHair").show();
+		$(val).parent().find(".complete").hide();
+		$(val).parent().find(".cancel").hide();
 	};
 	
 	function deleteHair(hairNo){
@@ -170,8 +170,9 @@ input[type=submit]:hover{
 		}
 	};
 	
-	function complete(hairNo){
-		var nHairPay = $(".hairPay").eq(hairNo-1).val();
+	function complete(val){
+		var hairNo = $(val).parent().find(".hairNo").val();
+		var nHairPay = $(val).parent().find(".hairPay").val();
 		var param = {hairNo:hairNo,nHairPay:nHairPay};
 		$.ajax({
 			url : "/modifyHairMenu",
@@ -205,8 +206,8 @@ input[type=submit]:hover{
 					html += "<span class='name'>"+data[i].hairName+"</span>";
 					html += "<table><td>가격</td><td><input type='text' class='hairPay' style='display:none;'><span class='pay' style='display:inline-block'>"+data[i].hairPay+"</span>원</td></tr>";
 					html += "<tr><td>시술시간</td><td>"+(data[i].hairTime*30)+"분</td></tr></table>";
-					html += "<button class='modifyHair' onclick='modifyHair("+data[i].hairNo+");' style='display:inline-block'>수정</button><button class='deleteHair' onclick='deleteHair("+data[i].hairNo+");' style='display:inline-block'>삭제</button>";
-					html += "<button class='complete' onclick='complete("+data[i].hairNo+");' style='display:none'>수정하기</button><button class='cancel' onclick='cancel("+data[i].hairNo+");' style='display:none'>취소하기</button></div>";
+					html += "<button class='modifyHair' onclick='modifyHair(this);' style='display:inline-block'>수정</button><button class='deleteHair' onclick='deleteHair("+data[i].hairNo+");' style='display:inline-block'>삭제</button>";
+					html += "<button class='complete' onclick='complete(this);' style='display:none'>수정하기</button><button class='cancel' onclick='cancel(this);' style='display:none'>취소하기</button></div>";
 				}
 				$(".menu-wrapper").html(html);
 			},error:function(){
@@ -219,7 +220,7 @@ input[type=submit]:hover{
 		var html = "";
 		html += "<div class='menu'>";
 		html += "<form action='/insertHairMenu' method='post'>";
-		html += "시술명<input type='text' name='hairName' style='width:100px;'>";
+		html += "시술명<input type='text' name='hairName' style='width:100px;' placeholder='최대6글자'>";
 		html += "<table><td>가격</td><td><input type='number' name='hairPay' min=0>원</td></tr>";
 		html += "<tr><td>시술시간</td><td><input type='number' name='hairTime' min=0 step=30 placeholder='30분 단위'>분</td></tr></table>";
 		html += "<input type='submit' value='추가하기'></form>";
