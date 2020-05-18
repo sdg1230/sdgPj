@@ -53,11 +53,11 @@ public class BranchdeleteServlet extends HttpServlet {
 		Salon aff = new Salon();
 		String dd = mRequest.getParameter("dp");
 		System.out.println(dd);
-		if(dd.equals("삭제")) {
+		
 			
 			aff.setSalonName(mRequest.getParameter("salonName"));
 			
-			aff.setSalonNo(Integer.parseInt(mRequest.getParameter("salonNo")));
+			System.out.println(aff.getSalonName()+"ddddd아아");
 			SalonList af = new	SalonService().selectdelete(aff.getSalonName());
 			
 			
@@ -84,13 +84,7 @@ public class BranchdeleteServlet extends HttpServlet {
 			request.setAttribute("pageNavi", af.getPageNavi());
 			
 			rd.forward(request, response);
-		}else{
-			String salonName =  mRequest.getParameter("salonName");
-			System.out.println(salonName);
-			Salon af = new	SalonService().salonUpdateFrm(salonName);
-			request.setAttribute("list", af);
-			request.getRequestDispatcher("/WEB-INF/views/company/branchupdate.jsp").forward(request, response);
-		}
+		
 		
 	}
 

@@ -274,9 +274,8 @@ public class SalonService {
 				s.setReviewStar(new SalonDao().selectSolonRevuew1(conn,s.getSalonName()));
 			}
 		}
-		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list);
 		JDBCTemplate.close(conn);
-		return sd;
+		return list;
 	}
 
 	public ArrayList<Salon> selectBestSalon() {

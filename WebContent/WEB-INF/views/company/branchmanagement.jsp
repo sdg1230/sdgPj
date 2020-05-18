@@ -132,7 +132,6 @@
 		 <div class="content1">
             <div class="branchBox">지점 관리</div>
             <div class="branch1"><button class="branchbtn" onclick="location.href='/branchregistrationFrm'">지점등록</button></div>
-            <form  action="/branchdelete" method="post" enctype="multipart/form-data" id="updateFrm">
             <table border="2">
                 <tr>
                     <th class="th1">NO</th>
@@ -143,25 +142,29 @@
                 <c:forEach var="list" items="${list }">
                 <tr>
 				<td>
-				<input type="hidden" name="oldFilename" value="${list.salonFilename }">
-                            <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
                             <input type="hidden" name="salonNo" value="${list.salonNo }">
-                            <input type="hidden" name="salonName" value="${list.salonName }">
 				${list.salonNo }</td>
 				<td>${list.salonName }</td>
 				<td>
 				
+				<input type="hidden" name="oldFilename" value="${list.salonFilename }">
+                            <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
 					<button class="btn1" name="dp"
-						value="수정">수정</button>
+						onclick="location.href='/branchUpdateFrm?salonName=${list.salonName}'">수정</button>
 				</td>
                     <td>
+            <form  action="/branchdelete" method="post" enctype="multipart/form-data" id="updateFrm">
+				<input type="hidden" name="oldFilename" value="${list.salonFilename }">
+                            <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
+                            <input type="hidden" name="salonName" value="${list.salonName }">
 					<button class="btn1" name="dp"
 						type="submit" value="삭제">삭제</button>
+            </form>
 				</td>
 			</tr>
 			</c:forEach>
             </table>
-            </form>
+           
         </div>
 
 		<div id="pageNavi">${pageNavi }</div>
