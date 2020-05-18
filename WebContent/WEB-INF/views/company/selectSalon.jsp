@@ -197,7 +197,7 @@ text-align: center;
 							<th>평점</th>
                             <td  class="statd">
                             <c:if
-									test="${star.reviewStars < 1 }">
+									test="${empty star.reviewStars }">
 									
 
 
@@ -265,7 +265,14 @@ text-align: center;
 									
 								</c:if>
                             </td>
+                            <c:if
+									test="${not empty star.reviewStars }">
                             <td >${star.reviewStars }점</td>
+                            </c:if>
+                            <c:if
+									test="${empty star.reviewStars }">
+                            <td >0점</td>
+                            </c:if>
 						</tr>
 						
 					</table>

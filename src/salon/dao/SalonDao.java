@@ -392,7 +392,7 @@ public class SalonDao {
 				 s = new SalonReview();
 				s.setReviewStars(res.getDouble("avg(review_star)"));
 				
-				System.out.println(s.getReviewStars());
+				
 				
 			}
 		} catch (SQLException e) {

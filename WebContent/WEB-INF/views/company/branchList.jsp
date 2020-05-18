@@ -167,6 +167,7 @@ text-decoration: underline;
 }
 .tabb{
 	margin: 0 auto;
+	width: 100%;
 }
 </style>
 <script>
@@ -258,7 +259,7 @@ text-decoration: underline;
 
 
 
-							<td class="statd"><c:if test="${list.reviewStar == 0 }">
+							<td class="statd"><c:if test="${list.reviewStar < 1 }">
 									<img class="sta" src="/upload/salon/star3.jpg">
 									<br> ${list.reviewStar }0점
 								</c:if> <c:if test="${list.reviewStar < 1 && list.reviewStar >0}">

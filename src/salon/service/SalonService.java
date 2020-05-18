@@ -34,6 +34,7 @@ public class SalonService {
 		if(!list.isEmpty()) {
 			for(Salon s : list) {
 				s.setReviewStar(new SalonDao().selectSolonRevuew1(conn,s.getSalonName()));
+				System.out.println(s.getReviewStar());
 			}
 		}
 		String pageNavi = "";
@@ -221,6 +222,7 @@ public class SalonService {
 	public SalonDetails salonDetails(String salonName) {
 		Connection conn =  JDBCTemplate.getConnection();
 		Salon sa =  new SalonDao().salonSelect(conn, salonName);
+		
 		int reqPage =1;
 		int numPerPage = 10;
 		int totalCount = new SalonDao().totalCount(conn);
@@ -259,6 +261,7 @@ public class SalonService {
 		}
 		ArrayList<Designer> designerList = new SalonDao().salondesigner(conn, salonName);
 		SalonReview star = new SalonDao().salonstar(conn,salonName);
+		
 		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list,star);
 		return sd;
 	}

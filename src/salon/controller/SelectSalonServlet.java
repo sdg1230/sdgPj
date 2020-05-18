@@ -40,6 +40,7 @@ public class SelectSalonServlet extends HttpServlet {
 		
 		request.setAttribute("pageNavi", sd.getAgeNavi());
 		request.setAttribute("star", sd.getSatr());
+		System.out.println(sd.getSatr());
 		request.setAttribute("des", sd.getDesignerList());
 		request.setAttribute("rev", sd.getReviewList());
 		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage=1").forward(request, response);
