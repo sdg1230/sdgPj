@@ -181,12 +181,7 @@
 
 
         /*-----------------content-----------------------*/
-        .content {
-            /*-지우지마세요-*/
-            width: 1200px;
-            overflow: hidden;
-            margin: 130px auto 0 auto;
-        }
+        
         .sidebar {
             position: fixed;
             top: 130px;
@@ -239,3 +234,4 @@
         .sidemenu:hover>* {
             opacity: 100%;
         }
+        

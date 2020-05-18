@@ -8,6 +8,19 @@
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 <title>Insert title here</title>
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	padding-top:4px;
+}
+/* 헤더 제대로적용------------------------ */
 #pageNavi {
 	text-align: center;
 	width: 1000px;
@@ -176,84 +189,124 @@
 				</form>
 
 			</div>
-
+	
 			<div>
 				<table>
 					<c:forEach var="list1" items="${list }" varStatus="status">
-
+						
+						
+						
+						
 						<tr>
 							<td class="affimg" rowspan="2"><img class="affimg"
 								src="/upload/salon/${list1.salonFilepath }"></td>
 							<td class="affcontent" colspan="2" rowspan="2">${list1.salonInfo }</td>
-
-							<td class="statd"><c:if
-									test="${star[status.index].reviewStar < 1}">
+							<td>
+							${list1.salonName }<a
+								href="selectSalon?salonName=${list1.salonName }">지점 상세 보기</a>
+								<input type="hidden" name="salonAddr" value="${ilst1.salonAddr }">
+								</td>
+								<c:if test="${empty star[status.index].reviewStars}">
+								<td class="statd">
+							
+								<img class="sta" src="/upload/salon/star3.jpg">
+								<br> ${star[status.index].reviewStars }0점
+							
+							</td>
+							</c:if>
+							<c:forEach var="list1" items="${list }" varStatus="status1">
+							
+							<c:if test="${list1.salonName== star[status.index].salonName }">
+							<td class="statd">
+							
+							
+							<c:if
+									test="${star[status.index].reviewStars < 1 }">
+									
 
 									<img class="sta" src="/upload/salon/star1.jpg">
-								</c:if> <c:if test="${star[status.index].reviewStar == 1}">
+									<br> ${star[status.index].reviewStars }점
+								</c:if> <c:if test="${star[status.index].reviewStars == 1}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
+									<br> ${star[status.index].reviewStars }점
 								</c:if> <c:if
-									test="${star[status.index].reviewStar < 2 && star[status.index].reviewStar >1}">
+									test="${star[status.index].reviewStars < 2 && star[status.index].reviewStars >1}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star1.jpg">
+									<br> ${star[status.index].reviewStars }점
 								</c:if> <c:if test="${star[status.index].reviewStar == 2}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
+									<br> ${star[status.index].reviewStars }점
 								</c:if> <c:if
-									test="${star[status.index].reviewStar < 3 && star[status.index].reviewStar >2}">
+									test="${star[status.index].reviewStars < 3 && star[status.index].reviewStars >2}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star1.jpg">
-								</c:if> <c:if test="${star[status.index].reviewStar == 3}">
+									<br> ${star[status.index].reviewStars }점
+								</c:if> <c:if test="${star[status.index].reviewStars == 3}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
+									<br> ${star[status.index].reviewStars }점
 								</c:if> <c:if
-									test="${star[status.index].reviewStar < 4 && star[status.index].reviewStar >3}">
+									test="${star[status.index].reviewStars < 4 && star[status.index].reviewStars >3}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star1.jpg">
-								</c:if> <c:if test="${star[status.index].reviewStar == 4}">
+									<br> ${star[status.index].reviewStars }점
+								</c:if> <c:if test="${star[status.index].reviewStars == 4}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
+									<br> ${star[status.index].reviewStars }점
 
 								</c:if> <c:if
-									test="${star[status.index].reviewStar < 5 && star[status.index].reviewStar >4}">
+									test="${star[status.index].reviewStars < 5 && star[status.index].reviewStars >4}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star1.jpg">
-								</c:if> <c:if test="${star[status.index].reviewStar == 5}">
+									<br> ${star[status.index].reviewStars }점
+								</c:if> <c:if test="${star[status.index].reviewStars == 5}">
 
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
 									<img class="sta" src="/upload/salon/star2.jpg">
-
-								</c:if><br> ${star[status.index].reviewStar }점</td>
-
+									<br> ${star[status.index].reviewStars }점<br>
+						
+								</c:if></td>
+								
+								
+							</c:if>
+							
+							
+							</c:forEach>
+							
 						</tr>
 
 
 
 						<tr>
-							<td class="salonname">${list1.salonName }<a class="statd1"
-								href="selectSalon?salonName=${list1.salonName }">지점 상세 보기</a></td>
+							<td class="salonname"></td>
 						</tr>
-					</c:forEach>
+						
+						</c:forEach>
+						
+					
 				</table>
 			</div>
 		</div>

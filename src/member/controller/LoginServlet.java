@@ -35,13 +35,7 @@ public class LoginServlet extends HttpServlet {
 		String memberId=request.getParameter("memberId");
 		String memberPw=request.getParameter("memberPw");
 		Member m=new MemberService().selectOneMember(memberId,memberPw);
-		
-		System.out.println(memberId);
-		System.out.println(memberPw);
-		
-			
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		
 		if(m!=null) {
 			HttpSession session =request.getSession();
 			session.setAttribute("member", m);
@@ -52,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("loc", "/loginFrm");
 		}
 		rd.forward(request, response);
+		
 		
 	}
 

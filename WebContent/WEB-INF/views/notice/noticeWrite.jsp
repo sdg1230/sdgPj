@@ -5,36 +5,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="/editor/js/HuskyEZCreator.js" charset="utf-8"></script> 
+<title>Insert title here</title> 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script>
-	var oEditors = []; 
-	$(function(){
-		nhn.husky.EZCreator.createInIFrame({
-		oAppRef: oEditors, elPlaceHolder: "ir1",
-		//SmartEditor2Skin.html 파일이 존재하는 경로 
-		sSkinURI: "/editor/SmartEditor2Skin.html",
-		htParams : {
-			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseToolbar : true,
-			// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseVerticalResizer : true,
-			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
-			bUseModeChanger : true,
-			fOnBeforeUnload : function(){
-					
-			}
-		}, 
-		fOnAppLoad : function(){
-			//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용 
-			oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
-			},
-			fCreator: "createSEditor2"
-		});
-	}); 
-</script>
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
+
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	padding-top:4px;
+}
+/* 헤더 제대로적용------------------------ */
 	.content2 {
             /*-지우지마세요-*/
             width: 1200px;
@@ -102,6 +91,33 @@
         .subMenuContent>.inner>ul>li:first-child>a{
             color: ghostwhite;
         }
+        
+        #noticeTitle{
+        	margin-left: 20px;
+        	height: 22px;
+        	width: 930px;
+        }
+        
+        .noticeBtn{
+        	width: 150px;
+        	height: 50px;
+        	background-color: #CD3C41;
+        	border: none;
+        	border-radius: 5px;
+        	color: white;
+        	margin-left: 10px;
+        	margin-right: 10px;
+        }
+        
+        .noticeBtn:hover{
+        	opacity: 0.8;
+        }
+        
+        .btnBoxN{
+        	text-align: center;
+        	margin-top: 30px;
+        	margin-bottom: 30px;
+        }
 </style>
 </head>
 <body>
@@ -117,32 +133,52 @@
                 	<span class="spanbarSmall"></span>
                     <h1 align="center">공지사항</h1>
                     <ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">이벤트</a></li>
+                        <li><a href="/noticeList?reqPage=1">공지사항</a></li>
+                        <li><a href="/eventList">이벤트</a></li>
                         <li><a href="#">1:1문의</a></li>
                     </ul>
                 </div>
             </div>
-	<form id="frm" action="/insert.jsp" method="post" >
+            <br><br><hr>
+            <h2 style="margin-left: 70px;">공지사항 등록</h2>
+	<form id="frm" action="/insertNotice" method="post" >
 		<table width="100%">
 			<tr>
-				<td>제목</td> 
-				<td><input type="text" id="title" /></td> 
+				<th style="width: 200px; height: 50px; border-top: 2px solid red; background-color: #DDE3E9;">*제목</th> 
+				<td style="border-top: 2px solid red;"><input type="text" id="noticeTitle" name="noticeTitle" placeholder=" 제목을 입력하세요"></td> 
 			</tr> 
 			<tr> 
-				<td>내용</td> 
-				<td> <textarea rows="10" cols="30" id="ir1" name="content" style="width:100px; height:100px; "></textarea> </td> 
+				<th style="background-color: #DDE3E9;">*내용</th> 
+				<td> <textarea rows="10" cols="30" id="p_content" name="noticeContent" style="resize: none; "></textarea> </td> 
 			</tr> 
-			<tr> 
-				<td colspan="2">
-					<input type="button" id="save" value="저장"/> 
-					<input type="button" value="취소"/> 
-				</td> 
-			</tr>
 		</table>
+		<div class="btnBoxN">
+			<input type="submit" class="noticeBtn" value="등록"> 
+			<input type="button" class="noticeBtn" value="취소" id="reset"> 
+		</div>
 	</form>
 	</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
+<script type="text/javascript">
+ 		CKEDITOR.replace('p_content', {
+ 			height: 500,
+ 			enterMode:'2',
+ 			shiftEnterMode:'3'
+        });
+ 		CKEDITOR.config.resize_enabled = false;
+ 		
+</script>
+<script>
+$(function() {
+	$("#noticeTitle").focus();
+	
+	$("#reset").click(function () {
+		history.back();
+	});
+	
+	
+});
+</script>
 </body>
 </html>
