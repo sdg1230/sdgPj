@@ -36,6 +36,10 @@ small {
 .content {
 	overflow: "hidden";
 	text-align: center;
+	display : block;
+}
+.content>div{
+	float: left;
 }
 
 .cTitle {
@@ -52,14 +56,7 @@ small {
 	background-color: #f5f5f5;
 }
 
-.hi {
-	margin: 0 auto;
-	border: 1px solid white;
-	width: 10px;
-	height: 10px;
-	border-radius: 100px;
-	box-shadow: 5px 5px 5px grey;
-}
+
 
 .content p {
 	font-size: 50px;
@@ -85,16 +82,17 @@ small {
 }
 
 .userInfo {
-	box-shadow: 5px 5px 5px grey;
+	
 	margin: 0 auto;
-	padding: 30px;
+	padding: 10px;
 	width: 60%;
 	margin-bottom: 40px;
 	border-radius: 15px;
+	
 }
 
 td {
-	width: 50%;
+	width: 48%;
 }
 
 th {
@@ -112,6 +110,16 @@ th {
 .yes h4 {
 	text-shadow: 1px 1px 1px grey;
 }
+.row{
+		box-shadow: 5px 5px 15px grey;
+	
+	padding : 5px;
+	border-radius: 10px;
+	
+}
+.row>div{
+	background-color:#f5f5f5;
+}
 </style>
 </head>
 <body>
@@ -124,20 +132,20 @@ th {
 
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-2 col-md-12">
+				<div class="col-12 col-2 col-12">
 					<div class="well well-sm">
 						<div class="row">
-							<div class="col-sm-6 col-md-4">
-								<img src="http://placehold.it/280x200" 
+							<div class="col-sm-4 col-md-4">
+								<img src="http://placehold.it/280x200"
 									class="img-rounded img-responsive" />
 							</div>
 							<div class="col-sm-4 col-md-4">
 								<h2>고객 정보</h2>
-								<h4><cite title="San Francisco, USA">${userReserveList[0].memberName}
-								</cite></h4>
-								
+								<h4>
+									${userReserveList[0].memberName}
+								</h4>
 								<p>회원 아이디 : ${userReserveList[0].memberId}</p>
-								<i class="glyphicon glyphicon-gift"></i>${userReserveList[0].memberPhone}
+								<p>연락처 : ${userReserveList[0].memberPhone}</p>
 								<br>
 								<!-- Split button -->
 								<div class="btn-group">
@@ -153,7 +161,7 @@ th {
 												+</a></li>
 										<li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
 										<li class="divider"></li>
-										<li><a href="#">Github</a></li>
+										
 									</ul>
 								</div>
 							</div>
@@ -163,7 +171,7 @@ th {
 			</div>
 		</div>
 		<div class="content">
-			<div class="col-xs-6">
+			<div class="col-md-6">
 				<c:forEach items="${userReserveList}" var='u'>
 
 					<c:if test="${u.reserveStatus==true}">
@@ -211,15 +219,7 @@ th {
 								<tr>
 									<th>예약 가격 : <span> ${u.totalPrice}</span></th>
 								</tr>
-								<tr>
-									<th>방문 확인 : <span>${u.reserveStatus}</span></th>
-								</tr>
-								<tr>
-									<th>예약번호 확인 : <span>${u.reserveNo}</span></th>
-								</tr>
-								<tr>
-									<th>리뷰작성여부 확인 : <span>${u.reserveReview}</span></th>
-								</tr>
+								
 								<c:forEach items="${u.menuList}" var='uu'>
 									<tr>
 										<th>예약 시술 : <span>${uu.hairName}</span></th>
@@ -232,12 +232,13 @@ th {
 											class="btn btn-primary" data-toggle="modal"
 											data-target="#exampleModal" data-whatever="@mdo">후기작성</button></td>
 
+
 									<%-- $바로위에 {u.memberId }값에 ${sessionScope.member.memberId }들어가야함 지금은 session이 없음으로 이렇게 대채 --%>
 								</c:if>
 								<c:if test="${u.reserveReview==true}">
-									<!-- 여기서부터 리뷰를작성했냐 안했냐 갈라야함 -->
-									<td><button type="button" readonly>후기작성완료</button></td>
-									<%-- $바로위에 {u.memberId }값에 ${sessionScope.member.memberId }들어가야함 지금은 session이 없음으로 이렇게 대채 --%>
+									
+									<td><button type="button" class="btn btn-primary" readonly>후기작성완료</button></td>
+									
 								</c:if>
 							</table>
 						</div>
@@ -245,7 +246,7 @@ th {
 				</c:forEach>
 			</div>
 			<!-- <div class="reserveok col-xs-2"></div> -->
-			<div class="col-xs-6">
+			<div class="col-md-6">
 				<c:forEach items="${userReserveList}" var='u'>
 					<c:if test="${u.reserveStatus==false}">
 						<div class="reserveno">
@@ -292,25 +293,20 @@ th {
 								<tr>
 									<th>예약 가격 : <span>${u.totalPrice}</span></th>
 								</tr>
-								<tr>
-									<th>방문 확인 : <span>${u.reserveStatus}</span></th>
-								</tr>
-								<tr>
-									<th>리뷰작성여부 확인 : <span>${u.reserveReview}</span></th>
-								</tr>
-								<tr>
-									<th>예약번호 확인 : <span>${u.reserveNo}</span></th>
-								</tr>
+								
 								<c:forEach items="${u.menuList}" var='uu'>
 									<tr>
 										<th>예약 시술 : <span>${uu.hairName}</span></th>
 									</tr>
 								</c:forEach>
+								
 								<tr>
-									<td><button type="button"
-											onclick="reviewdelete1('${u.reserveNo}','${u.salonName }','${u.memberId}');"
-											class="btn btn-primary" data-toggle="modal"
-											data-target="#exampleModal" data-whatever="@mdo">예약취소</button></td>
+									<form action="/price" method="post">
+										<td><input type="submit" class="btn btn-primary"
+											value="선결제"></td>
+										<td><input type="hidden" name="reserveNo"
+											value="${u.reserveNo }"></td>
+									</form>
 								</tr>
 
 							</table>
@@ -337,11 +333,12 @@ th {
 			console.log(reserveNo);
 			console.log(salonName);
 			console.log(memberId);
-			
+
 			var param = {
 				reserveNo : reserveNo
 			};
-					$.ajax({
+			$
+					.ajax({
 						url : "/reserveSearch",
 						data : param,
 						type : "get",
@@ -359,10 +356,10 @@ th {
 									+ data[0].menuList[0].hairName + "</p>");
 							modal.append("<p> 예약 가격 : " + data[0].totalPrice
 									+ "</p>");
-							modal.append("<p> 예약 번호 : " + data[0].reserveNo
+							/* modal.append("<p> 예약 번호 : " + data[0].reserveNo
 									+ "</p>");
 							modal.append("<p> 예약완료여부 : "
-									+ data[0].reserveStatus + "</p>");
+									+ data[0].reserveStatus + "</p>"); */
 
 							/* 						modal.append("<input type='hidden' name='reserveNo' value='"+data[0].reserveNo+"'>"); */
 							$("#rating-ability-wrapper")
@@ -439,13 +436,13 @@ th {
 							<div class="form-group" id="rating-ability-wrapper">
 								<label class="control-label" for="rating"> <span
 									class="field-label-header">더욱 발전하는 서비스를 위해 만족하신만큼 별점
-										부탁드립니다</span><br> <span class="field-label-info"></span> <input
+										부탁드립니다.</span><br> <span class="field-label-info"></span> <input
 									type="hidden" id="selected_rating" name="selected_rating"
 									value="" required="required">
 								</label>
-								<h2 class="bold rating-header" style="">
+								<h4 class="bold rating-header" style="">
 									<span class="selected-rating">0</span><small> / 5</small>
-								</h2>
+								</h4>
 								<button type="button" class="btnrating btn btn-default btn-lg"
 									data-attr="1" id="rating-star-1" name="star">
 									<i class="fa fa-star" aria-hidden="true"></i>
