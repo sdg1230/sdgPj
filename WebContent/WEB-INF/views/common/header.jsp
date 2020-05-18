@@ -108,8 +108,8 @@
 				src="/imgs/home-icon.jpg"></span></a>
 	</div>
 	<div class="headermiddle">
-		<form action="/" method="get">
-			<input type="text" placeholder="가고싶은 지점에 대해 알아보세요~!" name="keyword"><input
+		<form action="/affilateone" method="get">
+			<input type="text" placeholder="가고싶은 지점에 대해 알아보세요~!" name="search1"><input
 				type="submit" id="search"><label for="search"><img
 				src="/imgs/dotwhite.png"></label>
 		</form>

@@ -147,6 +147,20 @@ IP주소, 쿠키, 서비스 이용기록, 방문기록 등
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 </body>
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	padding-top:4px;
+}
+/* 헤더 제대로적용------------------------ */
+
 	 .content {
             /*-지우지마세요-*/
             width: 1200px;

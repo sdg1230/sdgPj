@@ -53,8 +53,14 @@ public class BranchupdateServlet extends HttpServlet {
 		//2)파일크기 지정
 		int maxSize = 10*1024*1024;
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
+		
+		String roadAddr = mRequest.getParameter("roadAddr");
+		String jibunAddr = mRequest.getParameter("jibunAddr");
+		String detailAddr = mRequest.getParameter("detailAddr");
+		
 		Salon aff = new Salon();
-		aff.setSalonAddr(mRequest.getParameter("salonAddr"));
+		aff.setSalonAddr(roadAddr+jibunAddr+detailAddr);
+		
 		aff.setSalonFilename(mRequest.getOriginalFileName("salonFilename"));
 		aff.setSalonFilepath(mRequest.getFilesystemName("salonFilename"));
 		aff.setSalonInfo(mRequest.getParameter("salonInfo"));
@@ -66,7 +72,7 @@ public class BranchupdateServlet extends HttpServlet {
 		String oldFilepath = mRequest.getParameter("oldFilepath");
 		String oldFilename = mRequest.getParameter("oldFilename");
 		//기존 파일값을 유지하기 위한 설정
-		System.out.println(oldFilename);
+		
 		if(aff.getSalonFilename() == null) {
 			if(status.equals("stay")) {
 				aff.setSalonFilename(oldFilename);
@@ -82,7 +88,6 @@ public class BranchupdateServlet extends HttpServlet {
 			if(status.equals("delete")) {
 				
 				File delFile = new File(saveDirectory+"/"+oldFilepath);
-				System.out.println(delFile);
 				delFile.delete();
 			}
 			request.setAttribute("msg", "수정 성공!");

@@ -256,5 +256,31 @@ public class DesignerDao {
 		return list;
 	}
 
+	public Designer selectBestDesigner(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Designer d = null;
+		String query = "select * from (select count(*) as cnt , designer_no, row_number() over(order by count(*) desc) as rank from reserve group by designer_no) join designer using(designer_no) where rank=1";
+		try {
+			pstmt=conn.prepareStatement(query);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				d=new Designer();
+				d.setDesignerNo(rset.getInt("designer_no"));
+				d.setDesignerName(rset.getString("designer_name"));
+				d.setSalonName(rset.getString("salon_name"));
+				d.setDesignerInfo(rset.getString("designer_info"));
+				d.setDesignerFilename(rset.getString("designer_filename"));
+				d.setDesignerFilepath(rset.getString("designer_filepath"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return d;
+	}
+
 
 }

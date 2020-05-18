@@ -11,14 +11,16 @@
 /* 헤더 제대로적용------------------------ */
 .headermiddle input[type="text"] {
 	height: 25px;
-	margin-bottom:10px;
-	padding:0;
+	margin-bottom: 10px;
+	padding: 0;
 }
+
 .homeIcon>img {
-	margin-top:5px;
+	margin-top: 5px;
 }
-.headermiddle{
-	padding-top:4px;
+
+.headermiddle {
+	padding-top: 4px;
 }
 /* 헤더 제대로적용------------------------ */
 #pageNavi {
@@ -49,10 +51,10 @@
 	padding-top: 5px;
 	font-size: 1.5em;
 	text-align: center;
-	height: 250px;
-	background-image:
-		url("../imgs/%EC%A4%80%EC%96%B4%20%ED%97%A4%EC%96%B4.jpg");
-	background-size: 100%;
+	height: 350px;
+	background-image: url("/imgs/lsit.jpg");
+	background-size: 60%;
+	
 }
 
 .title>span {
@@ -94,21 +96,28 @@
 }
 
 .sub {
+display:block;
 	width: 100px;
-	height: 40px;
-	background-color: cornflowerblue;
+	height: 42px;
+	background-color:#998778 ;
+	padding: 0;
 }
 
 .affimg {
 	width: 300px;
 	height: 250px;
 }
+.affcontent{
+	font-size: 1.2em;
+	text-align: left;
+
+}
 
 .statd {
 	overflow: hidden;
 	width: 120px;
 	text-align: center;
-	width: 120px;
+	height: 30px;
 }
 
 .sta {
@@ -127,22 +136,84 @@
 	line-height: 60px;
 }
 
+.td1 {
+	display: block;
+	width: 300px;
+	height: 120px;
+	line-height: 120px;
+}
+.td1>h1{
+	margin: 0;
+	float: left;
+}
 .salonname {
 	text-align: center;
+}
+
+.content {
+	width: 1200px;
+	overflow: hidden;
+	margin: 0 auto;
+	height: 100%;
+	background-color: white;
+	text-align: center;
+}
+
+.content1 {
+	overflow: hidden;
+	margin: 130px auto;
+	margin-bottom: 0;
+	height: 100%;
+	background-color: white;
+	text-align: center;
+}
+
+.spann {
+	text-decoration: underline;
+}
+
+.salonSelect {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: darkgray;
+	margin: 0 auto;
+}
+
+.tabb {
+	margin: 0 auto;
+	width: 100%;
+}
+label:hover{
+	cursor:pointer;
 }
 </style>
 <script>
 	$(function() {
-		 $("#search1").click(function(){
-			 $("#search1").val("");
-             $("#search1").css("color","black");
-         });
+		$("#search1").click(function() {
+			$("#search1").val("");
+			$("#search1").css("color", "black");
+		});
 		$("form").submit(function() {
-			if ($("#search1").val()=="") {
+			if ($("#search1").val() == "") {
 				$("#search1").val("아무것도 입력 되지 않았습니다.");
 				$("#search1").css("color", "red");
 				return false;
 			}
+
+		});
+		$("label").mouseenter(function() {
+			$(this).find(".tabb").css("border", "3px solid red");
+			$(this).find(".salonSelect").css("background-color", "red");
+			$(this).find("h1").css("font-size", "2.5em");
+			$(this).find("h1").css("color", "#EE1C24");
+			
+		});
+		$("label").mouseleave(function() {
+			$(this).find(".tabb").css("border", "1px solid white");
+			$(this).find(".salonSelect").css("background-color", "darkgray");
+			$(this).find("h1").css("font-size", "2em");
+			$(this).find("h1").css("color", "black");
 			
 		});
 	});
@@ -151,163 +222,135 @@
 <body>
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-
-		<div class="content">
+		<div class="content1">
 			<div class="title">
+				<br>
 				<h1>SALON INFORMATION</h1>
-				<span>MEORIJOM HAIR만의 뷰티 서비스 퀄리티와 브랜드 가치를 높이기 위해서</span><br> <span>MEORIJOM
-					HAIR는 체인 시스템이 아닌 직영시스텝을 고집합니다.</span>
+				<span>MEORIJOM HAIR만의 뷰티 서비스 퀄리티와 브랜드 가치를 높이기 위해서</span><br> <span
+					class="spann">MEORIJOM HAIR는 체인 시스템이 아닌 직영시스텝을 고집합니다.</span>
 			</div>
+		</div>
+		<div class="content">
 			<br>
 			<div class="affmenu">
-				<form action="/affilateone" method="get">
+
+				<form action="/salononeServlet" method="get">
 					<table class="tab">
-						<td class="search1">
-						<select class="sele">
-								<option class="sele">광역시/군</option>
-								<option class="sele">서울특별시</option>
-								<option class="sele">인천광역시</option>
-								<option class="sele">대전광역시</option>
-								<option class="sele">광주광역시</option>
-								<option class="sele">대구광역시</option>
-								<option class="sele">울산광역시</option>
-								<option class="sele">부산광역시</option>
-								<option class="sele">경기도</option>
-								<option class="sele">강원도</option>
-								<option class="sele">충청북도</option>
-								<option class="sele">충청남도</option>
-								<option class="sele">전라북도</option>
-								<option class="sele">전라남도</option>
-								<option class="sele">경상북도</option>
-								<option class="sele">경상남도</option>
-								<option class="sele">제주도</option>
+						<td class="search1"><select name="type" class="sele">
+								<c:if test="${type eq 'salonName2' }">
+									<option value="salonName2" selected>매장명</option>
+									<option value="salonMap">지역명</option>
+								</c:if>
+								<c:if test="${type eq 'salonMap' }">
+									<option value="salonName2">매장명</option>
+									<option value="salonMap" selected>지역명</option>
+								</c:if>
+								<c:if test="${empty type}">
+									<option value="salonName2">매장명</option>
+									<option value="salonMap">지역명</option>
+								</c:if>
 						</select></td>
 						<td class="search1"><input type="text" id="search1"
-							name="search1" placeholder="지역이나 매장명을 입력해주세요."></td>
-						<td><input class="sub" id="sub" type="submit" value="검색"></td>
+							name="search1" value="${key }"></td>
+						<td>
+							<input class="sub" id="sub" type="submit" value="조회">
+						</td>
 					</table>
 				</form>
 
 			</div>
-	
+
 			<div>
-				<table>
-					<c:forEach var="list1" items="${list }" varStatus="status">
-						
-						
-						
-						
-						<tr>
-							<td class="affimg" rowspan="2"><img class="affimg"
-								src="/upload/salon/${list1.salonFilepath }"></td>
-							<td class="affcontent" colspan="2" rowspan="2">${list1.salonInfo }</td>
-							<td>
-							${list1.salonName }<a
-								href="selectSalon?salonName=${list1.salonName }">지점 상세 보기</a>
-								<input type="hidden" name="salonAddr" value="${ilst1.salonAddr }">
-								</td>
-								<c:if test="${empty star[status.index].reviewStars}">
-								<td class="statd">
-							
-								<img class="sta" src="/upload/salon/star3.jpg">
-								<br> ${star[status.index].reviewStars }0점
-							
-							</td>
-							</c:if>
-							<c:forEach var="list1" items="${list }" varStatus="status1">
-							
-							<c:if test="${list1.salonName== star[status.index].salonName }">
-							<td class="statd">
-							
-							
-							<c:if
-									test="${star[status.index].reviewStars < 1 }">
+
+				<c:forEach var="list" items="${list }" varStatus="status">
+
+					<a href="selectSalon?salonName=${list.salonName }&reqPage=1">
+					<label>
+						<table class="tabb">
+
+							<tr>
+								<td class="affimg" rowspan="2"><img class="affimg"
+									src="/upload/salon/${list.salonFilepath }"></td>
+								<td colspan="2"  class="td1"><h1>${list.salonName }</h1>
+									<input type="hidden" name="salonAddr" value="${ilst.salonAddr }">
 									
+								</td>
+									
+								<td class="statd"><c:if test="${list.reviewStar < 1 }">
+										<img class="sta" src="/upload/salon/star3.jpg">
+										<br> ${list.reviewStar }0점
+								</c:if> <c:if test="${list.reviewStar < 1 && list.reviewStar >0}">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar == 1}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar < 2 && list.reviewStar >1}">
 
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if test="${star[status.index].reviewStars == 1}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar == 2}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar < 3 && list.reviewStar >2}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar == 3}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar < 4 && list.reviewStar >3}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar == 4}">
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if
-									test="${star[status.index].reviewStars < 2 && star[status.index].reviewStars >1}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar < 5 && list.reviewStar >4}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
+								</c:if> <c:if test="${list.reviewStar == 5}">
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if test="${star[status.index].reviewStar == 2}">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점<br>
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if
-									test="${star[status.index].reviewStars < 3 && star[status.index].reviewStars >2}">
+									</c:if></td>
+							</tr>
+							<tr>
+									<td class="affcontent" colspan="2" >${list.salonInfo }</td>
+									</tr>
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if test="${star[status.index].reviewStars == 3}">
+							<tr>
+								<td class="salonname"></td>
+							</tr>
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if
-									test="${star[status.index].reviewStars < 4 && star[status.index].reviewStars >3}">
+						</table>
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if test="${star[status.index].reviewStars == 4}">
-
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${star[status.index].reviewStars }점
-
-								</c:if> <c:if
-									test="${star[status.index].reviewStars < 5 && star[status.index].reviewStars >4}">
-
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${star[status.index].reviewStars }점
-								</c:if> <c:if test="${star[status.index].reviewStars == 5}">
-
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${star[status.index].reviewStars }점<br>
-						
-								</c:if></td>
-								
-								
-							</c:if>
-							
-							
-							</c:forEach>
-							
-						</tr>
+					</label>
+</a>
+					<br>
+				</c:forEach>
 
 
-
-						<tr>
-							<td class="salonname"></td>
-						</tr>
-						
-						</c:forEach>
-						
-					
-				</table>
 			</div>
 		</div>
 		<div id="pageNavi">${pageNavi }</div>
