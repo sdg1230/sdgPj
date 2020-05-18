@@ -471,6 +471,7 @@ public class SalonDao {
 				s.setSalonName(rset.getString("salon_name"));
 				s.setSalonNo(rset.getInt("salon_no"));
 				s.setReviewStarAvg(rset.getDouble("review_star"));
+				
 				list.add(s);
 
 			}

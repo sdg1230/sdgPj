@@ -130,8 +130,7 @@
 	});
 
 	$(function() {
-		$
-				.ajax({
+		$.ajax({
 					url : "/selectBestSalon",
 					type : "get",
 					success : function(data) {
@@ -155,8 +154,7 @@
 					}
 				});
 
-		$
-				.ajax({
+		$.ajax({
 					url : "/selectBestDesigner",
 					type : "get",
 					success : function(data) {
