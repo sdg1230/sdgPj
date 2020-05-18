@@ -20,6 +20,20 @@
 
 <title>Insert title here</title>
 <style>
+    /* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	padding-top:6px;
+}
+/* 헤더 제대로적용------------------------ */
+
 .content {
 	overflow: "hidden";
 	text-align: center;

@@ -282,13 +282,12 @@ public class SalonDao {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
 		ArrayList<Salon> list = new ArrayList<Salon>();
-		Salon s = null;
 		String str = "select * from salon";
 		try {
 			pstmt = conn.prepareStatement(str);
-			res=pstmt.executeQuery();
+			res = pstmt.executeQuery();
 			while (res.next()) {
-				s = new Salon();
+				Salon s = new Salon();
 				s.setSalonAddr(res.getString("salon_addr"));
 				s.setSalonFilename(res.getString("salon_filename"));
 				s.setSalonFilepath(res.getString("salon_filepath"));
@@ -424,6 +423,7 @@ public class SalonDao {
 				a.setSalonNo(res.getInt("salon_no"));
 				a.setSalonPhone(res.getString("salon_phone"));
 				list.add(a);
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -435,6 +435,30 @@ public class SalonDao {
 		return list;
 	}
 
-	
-	
+	public ArrayList<Salon> selectBestSalon(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Salon> list = new ArrayList<Salon>();
+		String query = "select * from (select salon_name,avg(review_star) as review_star,row_number() over(order by avg(review_star)desc) as rank from salon_review group by salon_name) join salon using(salon_name)  where rank between 1 and 3  order by rank";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Salon s = new Salon();
+				s.setSalonFilepath(rset.getString("salon_filepath"));
+				s.setSalonName(rset.getString("salon_name"));
+				s.setSalonNo(rset.getInt("salon_no"));
+				s.setReviewStarAvg(rset.getDouble("review_star"));
+				list.add(s);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 }

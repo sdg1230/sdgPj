@@ -9,12 +9,14 @@ public class Salon {
 	private String salonFilename;
 	private String salonFilepath;
 	private double reviewStar;
+	private double reviewStarAvg;
+
 	public Salon() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Salon(int salonNo, String salonName, String salonPhone, String salonAddr, String salonInfo,
-			String salonFilename, String salonFilepath, double reviewStar) {
+			String salonFilename, String salonFilepath, double reviewStar,double reviewStarAvg) {
 		super();
 		this.reviewStar = reviewStar;
 		this.salonNo = salonNo;
@@ -24,6 +26,7 @@ public class Salon {
 		this.salonInfo = salonInfo;
 		this.salonFilename = salonFilename;
 		this.salonFilepath = salonFilepath;
+		this.reviewStarAvg = reviewStarAvg;
 	}
 	
 	public double getReviewStar() {
@@ -73,6 +76,12 @@ public class Salon {
 	}
 	public void setSalonFilepath(String salonFilepath) {
 		this.salonFilepath = salonFilepath;
+	}
+	public double getReviewStarAvg() {
+		return reviewStarAvg;
+	}
+	public void setReviewStarAvg(double reviewStarAvg) {
+		this.reviewStarAvg = reviewStarAvg;
 	}
 	
 }

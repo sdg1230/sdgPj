@@ -1,4 +1,4 @@
-package salon.service;
+﻿package salon.service;
 
 import java.sql.Connection;
 
@@ -274,7 +274,14 @@ public class SalonService {
 				s.setReviewStar(new SalonDao().selectSolonRevuew1(conn,s.getSalonName()));
 			}
 		}
-		
+		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list);
+		JDBCTemplate.close(conn);
+		return sd;
+	}
+
+	public ArrayList<Salon> selectBestSalon() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Salon> list = new SalonDao().selectBestSalon(conn);
 		JDBCTemplate.close(conn);
 		return list;
 	}

@@ -114,5 +114,19 @@ public class ReserveService {
 		JDBCTemplate.close(conn);
 		return result1;
 	}
+	//예진
+	public ArrayList<String> selectDetailList(int reserveNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<String> reserveDetail = new ReserveDao().selectDetailList(conn, reserveNo);
+		JDBCTemplate.close(conn);
+		return reserveDetail;
+	}
+
+	public Reserve selectOneReserve(int reserveNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Reserve r = new ReserveDao().selectOneReserve(conn, reserveNo);
+		JDBCTemplate.close(conn);
+		return r;
+	}
 
 }
