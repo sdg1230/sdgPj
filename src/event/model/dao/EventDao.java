@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import evnet.model.vo.Event;
+import event.model.vo.Event;
 
 public class EventDao {
 

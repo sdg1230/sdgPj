@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import event.model.service.EventService;
-import evnet.model.vo.Event;
+import event.model.vo.Event;
 
 /**
  * Servlet implementation class EventListServlet

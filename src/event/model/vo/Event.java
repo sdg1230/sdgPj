@@ -1,4 +1,4 @@
-package evnet.model.vo;
+package event.model.vo;
 
 import java.sql.Date;
 

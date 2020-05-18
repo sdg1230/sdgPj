@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import event.model.dao.EventDao;
-import evnet.model.vo.Event;
+import event.model.vo.Event;
 
 public class EventService {
 
