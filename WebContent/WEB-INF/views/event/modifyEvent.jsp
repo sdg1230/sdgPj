@@ -71,21 +71,21 @@
         }
         
         /* 첫번째 선택 */
-        .subMenuContent>.inner>ul>li:first-child{
+        .subMenuContent>.inner>ul>li:nth-child(2){
             background-color: #ed1c24;
         }
         
-        .subMenuContent>.inner>ul>li:first-child>a{
+        .subMenuContent>.inner>ul>li:nth-child(2)>a{
             color: ghostwhite;
         }
         
-        #noticeTitle{
+        #eventTitle{
         	margin-left: 20px;
         	height: 22px;
         	width: 930px;
         }
         
-        .noticeBtn{
+        .eventBtn{
         	width: 150px;
         	height: 50px;
         	background-color: #CD3C41;
@@ -96,7 +96,7 @@
         	margin-right: 10px;
         }
         
-        .noticeBtn:hover{
+        .eventBtn:hover{
         	opacity: 0.8;
         }
         
@@ -127,23 +127,23 @@
                 </div>
             </div>
             <br><br><hr>
-            <h2 style="margin-left: 70px;">공지사항 수정</h2>
-	<form id="frm" action="/modifyNotice?noticeNo=${n.noticeNo}" method="post" >
+            <h2 style="margin-left: 70px;">이벤트 페이지 수정</h2>
+	<form id="frm" action="/modifyEvent?eventNo=${e.eventNo}" method="post" >
 		<table width="100%">
 			<tr>
 				<th style="width: 200px; height: 50px; border-top: 2px solid red; background-color: #DDE3E9;">*제목</th> 
 				<td style="border-top: 2px solid red;">
-				<input type="text" id="noticeTitle" name="noticeTitle" placeholder=" 제목을 입력하세요" value="${n.noticeTitle }">
+				<input type="text" id="eventTitle" name="eventTitle" placeholder=" 제목을 입력하세요" value="${e.eventTitle }">
 				</td> 
 			</tr> 
 			<tr> 
 				<th style="background-color: #DDE3E9;">*내용</th> 
-				<td> <textarea rows="10" cols="30" id="p_content" name="noticeContent" style="width:100px; height:100px; resize: none; ">${n.noticeContent }</textarea> </td> 
+				<td> <textarea rows="10" cols="30" id="p_content" name="eventContent" style="width:100px; height:100px; resize: none; ">${e.eventContent }</textarea> </td> 
 			</tr> 
 		</table>
 		<div class="btnBoxN">
-			<input type="submit" class="noticeBtn" value="수정"> 
-			<input type="button" class="noticeBtn" value="취소" id="reset"> 
+			<input type="submit" class="eventBtn" value="수정"> 
+			<input type="button" class="eventBtn" value="취소" id="reset"> 
 		</div>
 	</form>
 	</div>
@@ -160,7 +160,7 @@
 </script>
 <script>
 $(function() {
-	$("#noticeTitle").focus();
+	$("#eventTitle").focus();
 	
 	$("#reset").click(function () {
 		history.back();

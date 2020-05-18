@@ -13,16 +13,16 @@ import event.model.service.EventService;
 import event.model.vo.Event;
 
 /**
- * Servlet implementation class ModifyEventFrmServlet
+ * Servlet implementation class ModifyEventServlet
  */
-@WebServlet(name = "ModifyEventFrm", urlPatterns = { "/modifyEventFrm" })
-public class ModifyEventFrmServlet extends HttpServlet {
+@WebServlet(name = "ModifyEvent", urlPatterns = { "/modifyEvent" })
+public class ModifyEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyEventFrmServlet() {
+    public ModifyEventServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +32,18 @@ public class ModifyEventFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int eventNo = Integer.parseInt(request.getParameter("eventNo"));
-		Event e = new EventService().selectEventOne(eventNo);
-		request.setAttribute("e", e);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/event/modifyEvent.jsp");
+		Event e = new Event();
+		e.setEventContent(request.getParameter("eventContent"));
+		e.setEventTitle(request.getParameter("eventTitle"));
+		int result = new EventService().modifyEvent(eventNo,e);
+		if(result>0) {
+			request.setAttribute("msg", "수정 완료");
+			request.setAttribute("loc", "/eventList");
+		}else {
+			request.setAttribute("msg", "수정 실패");
+			request.setAttribute("loc", "/eventList");
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		rd.forward(request, response);
 	}
 

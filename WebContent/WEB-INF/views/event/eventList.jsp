@@ -141,12 +141,13 @@
         }
         
         .eventDate{
-        	font-size: 20px;
+        	font-size: 17px;
         	width: 100%;
         	white-space: nowrap;
         	overflow: hidden;
         	text-overflow: ellipsis;
         	text-align: right;
+        	padding-right: 20px;
         }
         
         
@@ -237,7 +238,7 @@
             		<div class="eventTitle">
             			${e.eventTitle }
             		</div>
-            		<div class="eventDate">
+            		<div class="eventDate" >
             			${e.eventDate }
             		</div>
             		<div class="eventListPart2">

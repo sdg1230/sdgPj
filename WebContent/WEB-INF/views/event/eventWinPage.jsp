@@ -113,7 +113,7 @@
         	border : 2px solid #dcdcdc;
         }
         
-        .eventColumn:nth-child(2)>a{
+        .eventColumn:nth-child(3)>a{
         	color : #000;
         	border : 2px solid #000;
         }
@@ -137,11 +137,7 @@
         	font-weight: bold;
         	font-size: 20px;
         	text-align: center;
-        	cursor: pointer;
-        }
-        
-        .eventTitle:hover{
-        	text-decoration: underline;
+        	
         }
         
         .eventDate{
@@ -231,29 +227,12 @@
             </div>
             <br><br>
             <br><hr>
-            <div style="width: 100%; ">
-            <c:forEach items="${endlist }" var="ee">
-            	<div class="eventListPart" style="position: relative;">
-            		<div class="eventImage">
-            		<img src="/ckstorage/photo/${ee.eventFilepath }" width="100%" height="100%">
-            		</div>
-            		<div class="eventTitle" onclick="eventTitle();">
-            			${ee.eventTitle }
-            		</div>
-            		<div class="eventDate">
-            			<span style="display: inline-block; width: 50px; border-radius: 5px; background-color: rgba(140,140,140,0.8); text-align: center; margin-right: 10px; color: white; font-size: 16px;">종료</span>${ee.eventDate }
-            		</div>
-            	</div>
-            	
-            </c:forEach>
+            <div style="width: 100%; height: 500px; text-align: center;">
+            	<span style="margin: 0 auto; font-size: 20px; margin-top: 100px; display: block;">당첨자 발표가 없습니다.</span>
             </div>
          </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
-	<script>
-		function eventTitle() {
-			alert("종료된 이벤트 입니다.");
-		}
-	</script>
+	
 </body>
 </html>

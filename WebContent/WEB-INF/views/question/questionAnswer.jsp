@@ -80,11 +80,11 @@
         }
         
         /* 첫번째 선택 */
-        .subMenuContent>.inner>ul>li:first-child{
+        .subMenuContent>.inner>ul>li:nth-child(3){
             background-color: #ed1c24;
         }
         
-        .subMenuContent>.inner>ul>li:first-child>a{
+        .subMenuContent>.inner>ul>li:nth-child(3)>a{
             color: ghostwhite;
         }
         .noticeText{
@@ -108,9 +108,7 @@
         	width: 250px;
         }
         
-        .noticeTable>tbody>tr>th:last-child{
-        	width: 250px;
-        }
+        
         
         .noticeTable>tbody>tr>td{
         	height: 50px;
@@ -238,7 +236,7 @@ function questionFunc(memberId){
             <div class="subMenuContent">
                 <div class="inner">
                 	<span class="spanbarSmall"></span>
-                    <h1 align="center">공지사항</h1>
+                    <h1 align="center">1:1 문의</h1>
                     <ul>
                         <li><a href="/noticeList?reqPage=1">공지사항</a></li>
                         <li><a href="/eventList">이벤트</a></li>
@@ -247,7 +245,7 @@ function questionFunc(memberId){
                 </div>
             </div>
             <br><br>
-            <h2 align="center">공지사항 목록</h2>
+            <h2 align="center">문의 목록</h2>
             <div class="noticeText">
             	저희 MEORIJOM HAIR의 공지사항을 한눈에 살펴보세요.<br>
             	궁금한 점이 있으시거나 자세한 사항은 1:1문의를 통해 질문하시면 친절하게 답변해드립니다.
@@ -255,20 +253,17 @@ function questionFunc(memberId){
             <table class="noticeTable">
                 <tr>
                     <th>작성자</th>
-                    <th>제목</th>
-                    <th>작성일</th>
+                    <th>내용</th>
                 </tr>
                 <c:forEach items="${list }" var="n">
 				<tr>
 					<td style="border-bottom: 0.1px solid #DDE3E9;">
 					${n.noticeWriter }</td>
 					<td style="border-bottom: 0.1px solid #DDE3E9;"><a href="/noticeDetail?noticeNo=${n.noticeNo}" style="font-weight: bold">${n.noticeTitle }</a></td>
-					<td style="border-bottom: 0.1px solid #DDE3E9;">${n.noticeDate }</td>
 				</tr>
 							
 				</c:forEach>
             </table>
-            <a href="/noticeWrite" class="noticeWriteBtn">글쓰기</a>
             <div class="noticePageNavi">${pageNavi }</div>
             <div class="noticeSearch">
             	<form action="/noticeSearchTitle">

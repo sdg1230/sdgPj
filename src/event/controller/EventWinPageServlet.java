@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import event.model.service.EventService;
-import event.model.vo.Event;
-
 /**
- * Servlet implementation class ModifyEventFrmServlet
+ * Servlet implementation class EventWinPageServlet
  */
-@WebServlet(name = "ModifyEventFrm", urlPatterns = { "/modifyEventFrm" })
-public class ModifyEventFrmServlet extends HttpServlet {
+@WebServlet(name = "EventWinPage", urlPatterns = { "/eventWinPage" })
+public class EventWinPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyEventFrmServlet() {
+    public EventWinPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,10 +28,7 @@ public class ModifyEventFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int eventNo = Integer.parseInt(request.getParameter("eventNo"));
-		Event e = new EventService().selectEventOne(eventNo);
-		request.setAttribute("e", e);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/event/modifyEvent.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/event/eventWinPage.jsp");
 		rd.forward(request, response);
 	}
 

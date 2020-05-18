@@ -55,4 +55,23 @@ public class EventService {
 		return endlist;
 	}
 
+	public Event selectEventOne(int eventNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Event e = new EventDao().selectEventOne(conn,eventNo);
+		JDBCTemplate.close(conn);
+		return e;
+	}
+
+	public int modifyEvent(int eventNo, Event e) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new EventDao().modifyEvent(conn,eventNo,e);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }
