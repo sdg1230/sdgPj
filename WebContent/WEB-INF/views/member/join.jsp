@@ -174,9 +174,10 @@
         
         
         
+        /*
         
-         
-       /* var genderNum=$("input:radio[name='gender']:checked").length;
+         $("input:radio[name='gender']:checked")
+        var genderNum=$("input:radio[name='gender']:checked").length;
         if(genderNum==0){
             comments[6].innerHTML="성별을 체크해주세요";
             count[5]=false;
@@ -185,9 +186,15 @@
             console.log("a");
         }
       
-       */ 
         
+        if($("#address").val()==""){
+        	
+        	count[6]=false;
+        }else{
+        	count[6]=true;
+        }
         
+        */
         
         $('#age').focusout(function(){
             var ageReg=/^[0-9]{1,3}$/;
@@ -205,6 +212,22 @@
         });
        
         $("form").submit(function(){
+        	
+
+           
+           var genderNum=$("input:radio[name='gender']:checked").length;
+           console.log(genderNum);
+           if(genderNum==0){
+               comments[6].innerHTML="성별을 체크해주세요";
+               count[5]=false;
+           }else{
+               count[5]=true;
+               console.log("a");
+           }
+           
+           
+           
+        	
             var num=0;
             for(var i=0; i<count.length; i++){
                 if(count[i]==false){
@@ -269,14 +292,7 @@
             border-collapse: collapse;
             border-spacing: 0;
         }
-        #form{
-           
-            
-        }
-        #id{
-           
-            
-        }
+        
         .title{
             text-align:left;
             width: 150px;

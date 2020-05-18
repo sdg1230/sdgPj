@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div id="bottomBtn">
-            <a href="#"><input type="button" id="main"value="메인으로"></a>
+            <a href="/"><input type="button" id="main"value="메인으로"></a>
             <a href="/loginFrm"><input type="button" id="login"value="로그인"></a>
             </div>
         </div>

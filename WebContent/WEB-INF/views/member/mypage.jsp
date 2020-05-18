@@ -17,9 +17,10 @@
             <table>
                     <tr>
                         <td id="top-c1"><p id="nameF">${sessionScope.member.memberName }</p></td>
-                        <td id="top-c2"><p>님</p><a id="updatebtn" href="/updateFrm">정보변경</a></td>
-                        <td id="top-c3"><a href="/reserveFrm">예약하기</a></td>
+                        <td id="top-c2"><p>님</p></td>
+                        <td id="top-c3"><a href="#">예약확인</a></td>
                         <td id="top-c4"><a href="#">1:1문의</a></td>
+                        <td> <a id="updatebtn" href="/updateFrm">정보변경</a></td>
                     </tr>
                 </table>
             
@@ -63,7 +64,7 @@
                     
                  </table>
                  <div id="bottomBtn">
-                     <button type="submit" id="main" value="메인">메인으로</button>
+                  <a href="/">  <button type="submit" id="main" value="메인">메인으로</button></a> 
                      <button type="button" id="delete" value="회원탈퇴" onclick="deleteMember('${m.memberId}')">회원탈퇴</button>
                  </div>
             
@@ -126,13 +127,21 @@
         }
       
         #updatebtn{
-        	 height:50px;
+        	/* height:50px;
         	 display:block;
-        	 color:#bebebf;
+        	 color:#bebebf;*/
+        	 width:150px;
+        	height:100px;
+        	 background-color: #F2F2F2;
+        	 display:block;
+        	 text-align:center;
+        	 line-height: 100px;
+        	 border-radius:20px;
+        	 margin-left: 10px;
 			       
         }
         #top-c2>p{
-        	margin-top:100px;
+        	margin-top:50px;
         	font-size:20px;
         	color:white;
         }
@@ -140,7 +149,6 @@
         	width:160px;
 			height:200px;
 			
-			font-size:30px;
 			
         }#top-c3>a{
         	width:150px;
@@ -211,12 +219,14 @@
             
             width: 150px;
             border-radius: 5px;
-            border: 1px;
+            border: 1px solid black;
            
         }
         #main{
             color: white;
-            background-color: red;
+            border-radius: 5px;
+            background-color: #CD3C41;
+             border: 1px;
             margin-top: 0px;
             margin-left: 400px;
             width: 150px;

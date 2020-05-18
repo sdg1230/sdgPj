@@ -17,13 +17,13 @@ import member.model.vo.Member;
  * Servlet implementation class AdminDeleteMembeServlet
  */
 @WebServlet(name = "AdminDeleteMembe", urlPatterns = { "/adminDeleteMembe" })
-public class AdminDeleteMembeServlet extends HttpServlet {
+public class AdminDeleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDeleteMembeServlet() {
+    public AdminDeleteMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +32,21 @@ public class AdminDeleteMembeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession(false);
-		Member m=(Member)session.getAttribute("member");
-		String memberId=m.getMemberId();
-		int result=new MemberService().deleteMember(memberId);
-		RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/views/common/admin.jsp");
-		if(result>0) {
-			request.setAttribute("msg", "탈퇴되셨습니다");
-			request.setAttribute("loc", "/");
-		}else {
-			request.setAttribute("msg", "탈퇴실패");
-			request.setAttribute("loc", "/mypage");
-			
-		}
-		rd.forward(request, response);
+		String memberId = request.getParameter("memberId");
+		
+	      //3.비지니스 로직
+	      int result = new MemberService().deleteMember(memberId);
+	      
+	      //4.결과 처리
+	      RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+	      if(result>0) {
+	         request.setAttribute("msg", "회원탈퇴 성공");
+	         request.setAttribute("loc", "/adminPage");
+	      }else {
+	         request.setAttribute("msg", "회원탈퇴 실패");
+	         request.setAttribute("loc", "/adminPage");
+	      }
+	      rd.forward(request, response);
 		
 	}
 

@@ -53,7 +53,8 @@ public class JoinServlet extends HttpServlet {
 			request.setAttribute("loc","/joinComplete");
 			
 		}else {
-			
+			request.setAttribute("msg", "회원가입실패");
+			request.setAttribute("loc", "/joinFrm");
 		}
 		rd.forward(request, response);
 		

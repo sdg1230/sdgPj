@@ -50,8 +50,14 @@ public class UpdateServlet extends HttpServlet {
 		HttpSession session =request.getSession(false);
 		session.setAttribute("member", m);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		request.setAttribute("msg", "정보 변경 성공");
-		request.setAttribute("loc", "/mypage?memberId="+m.getMemberId());
+		if(result>0) {
+			request.setAttribute("msg", "정보 변경 성공");
+			request.setAttribute("loc", "/mypage?memberId="+m.getMemberId());
+		}else {
+			request.setAttribute("msg", "정보 변경 실패");
+			request.setAttribute("loc", "/updateFrm?memberId="+m.getMemberId());
+		}
+		
 		rd.forward(request, response);
 		
 		

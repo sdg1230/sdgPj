@@ -22,7 +22,7 @@
                         
                     </tr>
                     <tr class="tr">
-                        <td class="title">이름</td><td><input type="text" id="name" name="memberName" class="t-con" value="${member.memberName }"><span class="comment"></span></td>
+                        <td class="title">이름</td><td><input type="text" id="name" name="memberName" class="t-con" value="${member.memberName }"readonly></td>
                         
                     </tr>
                     
@@ -78,11 +78,12 @@
     
     
     $(function(){
-    	 var count=[false,false,false,false,false];
+    	 var count=[false,false,false];
     	 var comments = document.getElementsByClassName("comment");
     	 for(var i=0; i<comments.length; i++){
              comments[i].innerHTML="";
          }
+    	 /*
     	 $('#name').focusout(function(){
              var nameReg=/^[가-힣]{1,5}$/;
              if(!nameReg.test($(this).val())){
@@ -90,7 +91,7 @@
                  count[0]=false;
                  
              }else{
-             	count[1]=true;
+             	count[0]=true;
              	console.log("a");
              }
              $(this).focus(function(){
@@ -100,46 +101,48 @@
               
              
          });
+    	 
+    	 */
     	 $('#pw').focusout(function(){
              var pwReg=/^[a-zA-Z0-9]{8,12}/;
              if(!pwReg.test($(this).val())){
-                 comments[1].innerHTML="대문자,소문자,숫자로 8~12글자";
+                 comments[0].innerHTML="대문자,소문자,숫자로 8~12글자";
                  
                  
-                 count[1]=false;
+                 count[0]=false;
                 
              }else{
-             	count[1]=true;
+             	count[0]=true;
              	console.log("a");
+             }
+              $(this).focus(function(){
+                     comments[0].innerHTML="";
+                 });
+         });
+         $('#rePw').focusout(function(){
+             if($(this).val()==$("#pw").val()){
+                 comments[1].innerHTML="";
+                 count[1]=true;
+                 console.log("a");
+             }else{
+             	comments[2].innerHTML="비밀번호를 확인해주세요";
+             	count[1]=false;
              }
               $(this).focus(function(){
                      comments[1].innerHTML="";
                  });
          });
-         $('#rePw').focusout(function(){
-             if($(this).val()==$("#pw").val()){
-                 comments[2].innerHTML="";
-                 count[2]=true;
-                 console.log("a");
-             }else{
-             	comments[2].innerHTML="비밀번호를 확인해주세요";
-             	count[2]=false;
-             }
-              $(this).focus(function(){
-                     comments[2].innerHTML="";
-                 });
-         });
          $('#phone').focusout(function(){
             var phoneReg=/^(010)-?([0-9]{3,4})-?([0-9]{4})$/;
              if(!phoneReg.test($(this).val())){
-                 comments[3].innerHTML="0xx-xxxx-xxxx로 입력해주세요";
-                 count[3]=false;
+                 comments[2].innerHTML="0xx-xxxx-xxxx로 입력해주세요";
+                 count[2]=false;
              }else{
-             	count[3]=true;
+             	count[2]=true;
              	console.log("a");
              }
               $(this).focus(function(){
-                     comments[3].innerHTML="";
+                     comments[2].innerHTML="";
                  });
          });
          
@@ -155,7 +158,8 @@
              if(num==0){
                  return true;
              }else{
-             	alert("회원가입불가");
+             	alert("정보수정실패");
+             	
                  return false;
              }
          });

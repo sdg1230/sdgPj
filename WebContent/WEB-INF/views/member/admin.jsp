@@ -38,8 +38,8 @@
 	    			<td id="addr"class="addr">${m.address }</td>
 	    			<td id="age"class="age">${m.age }</td>
 	    			<td class="date">${m.enrollDate }</td>
-	    			<td class="del"><button onclick="location.href='/adminDeleteMember?memberId=${m.memberId }'">삭제</button>
-	    			<button><a href="/oneReserveInfo">예약확인</a></button>
+	    			<td class="del"><button id="delBtn" onclick="location.href='/adminDeleteMembe?memberId=${m.memberId }'">삭제</button>
+	    			<button><a href="/adminReserveList">예약확인</a></button>
 	    			</td>
 	    		</tr>
     		</c:forEach>
@@ -58,6 +58,8 @@
              $(temp).parent().show();
              
          });
+         
+        
      });
      </script>
 </body>
@@ -67,7 +69,7 @@
             width: 1200px;
             overflow: hidden;
             margin: 0px auto 0 auto;
-            height: 1200px;
+            
             
         }
         #img1{
@@ -153,7 +155,7 @@
         
         .mtable{
         	width:100%;
-        	
+        	margin-bottom: 100px;
         	border-collapse: collapse;
             border-spacing: 0;
         }
