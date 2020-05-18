@@ -16,7 +16,7 @@
 .content1 {
 	width: 1200px;
 	overflow: hidden;
-	margin: 130px;
+	margin: 130px auto;
 	background-color: white;
 	text-align: center;
 }
