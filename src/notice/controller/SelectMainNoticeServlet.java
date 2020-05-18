@@ -1,27 +1,30 @@
-package salon.controller;
+package notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 
-import salon.service.SalonService;
-import salon.vo.SalonDetails;
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class SelectSalonServlet
+ * Servlet implementation class SelectMainNoticeServlet
  */
-@WebServlet(name = "SelectSalon", urlPatterns = { "/selectSalon" })
-public class SelectSalonServlet extends HttpServlet {
+@WebServlet(name = "SelectMainNotice", urlPatterns = { "/selectMainNotice" })
+public class SelectMainNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectSalonServlet() {
+    public SelectMainNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,24 +32,11 @@ public class SelectSalonServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String salonName = request.getParameter("salonName");
-		
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-	
-			SalonDetails sd = new SalonService().salonDetails(salonName,reqPage);
-			
-			request.setAttribute("salon", sd.getAffilate());
-			
-			request.setAttribute("pageNavi", sd.getAgeNavi());
-			request.setAttribute("star", sd.getSatr());
-			
-			request.setAttribute("des", sd.getDesignerList());
-			request.setAttribute("rev", sd.getReviewList());
-			request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage="+reqPage).forward(request, response);
-	
-		
+		ArrayList<Notice> list = new NoticeService().selectMainNotice();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
