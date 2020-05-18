@@ -61,7 +61,8 @@
         <div class="content">
         	<h1 class="meorijom"># Best Salon<small>실시간 별점순 지점을 확인하세요</small></h1>
             <div class="sortByStar"></div>
-            <h1 class="meorijom"># Notice<small>공지사항을 확인하세요</small></h1>
+            <div class= "sort notice"><h1 class="meorijom"># Notice<small>공지사항을 확인하세요</small></h1></div>
+         	<div class="sort designer"><h1 class="meorijom"># Best Designer<small>가장 예약자 수가 많은 디자이너 입니다.</small></h1></div>
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
@@ -103,10 +104,18 @@
     h1>small{
         font-size: 15px;
     }
+      .sort{
+    width:50%;
+    float:left;
+    border:1px solid black;
+    overflow:hidden;
+    }
     .sortByStar{
     width:100%;
     overflow:hidden;
     }
+  
+    
     .sBox{
    		 opacity:85%;
         width:400px;
