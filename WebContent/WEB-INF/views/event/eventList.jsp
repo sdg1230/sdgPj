@@ -122,15 +122,15 @@
         	float: left;
         	width: 400px;
         	height: 500px;
-        	padding: 20px 30px;
+        	
         	margin-top: 10px;
         	margin-bottom: 40px;
         }        
         
         .eventImage{
-        	width: 100%;
+        	width: 90%;
         	height: 350px;
-        	
+        	margin-left: 20px;
         }
         
         .eventTitle{
@@ -166,6 +166,23 @@
     		float: right;
 			
         }
+        
+        .eventListPart2{ 
+        	position: absolute; 
+        	top: 0;
+        	float: left;
+        	width: 400px;
+        	height: 430px;
+        	background-color: rgba(0,0,0,0.8);
+        	opacity: 0;
+        	
+        }
+        
+        .eventListPart2:hover{
+        	opacity: 1;
+        	transition : 0.7s;
+        }
+        
 </style>
 </head>
 <body>
@@ -211,9 +228,9 @@
             <br><br>
             <a href="/eventWriteFrm" class="eventWriteBtn">글쓰기</a>
             <br><hr>
-            <div style="width: 100%">
+            <div style="width: 100%; ">
             <c:forEach items="${list }" var="e">
-            	<div class="eventListPart">
+            	<div class="eventListPart" style="position: relative;">
             		<div class="eventImage">
             		<img src="/ckstorage/photo/${e.eventFilepath }" width="100%" height="100%">
             		</div>
@@ -223,11 +240,22 @@
             		<div class="eventDate">
             			${e.eventDate }
             		</div>
+            		<div class="eventListPart2">
+            			<div style="width: 150px; height: 50px; background-color: red; text-align: center; margin: 0 auto;">
+            				<span style="line-height: 50px; color: white; font-weight: bold;">NOTICE</span>
+            			</div>
+            			<div style="margin: 0 auto; text-align: center; padding-top: 140px;">
+            				<a style="font-size: 30px; color: red; font-weight: bold;" href="/eventDetail?eventNo=${e.eventNo }">상세보기  →</a>
+            			</div>
+            			
+            		</div>
             	</div>
+            	
             </c:forEach>
             </div>
          </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
+	
 </body>
 </html>
