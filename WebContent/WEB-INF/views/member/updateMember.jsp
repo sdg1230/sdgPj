@@ -142,6 +142,23 @@
                      comments[3].innerHTML="";
                  });
          });
+         
+         
+         $("form").submit(function(){
+             var num=0;
+             for(var i=0; i<count.length; i++){
+                 if(count[i]==false){
+                     num++;
+                 }
+             }
+             console.log(num);
+             if(num==0){
+                 return true;
+             }else{
+             	alert("회원가입불가");
+                 return false;
+             }
+         });
     });
     
     </script>

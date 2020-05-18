@@ -52,7 +52,7 @@
                     </tr>
                     
                     <tr class="tr">
-                        <td class="title">성별</td><td colspan="2"><input type="radio" id="m" name="gender" class="t-con2" value="남">남
+                        <td class="title">성별<td colspan="1"></</td><input type="radio" id="m" name="gender" class="t-con2" value="남">남
                         <input type="radio" id="f" name="gender"class="t-con2" value="여">여</td>
                         <td><span class="comment"></span></td>
                     </tr>
@@ -170,15 +170,25 @@
                 });
         });
         
-        /*var addrNum=$('input:radio[name:gender]').length;
-        if(addNum==0){
-            comments[5].innerHTML="성별을 체크해주세요";
+        //var genderNum=$('input:radio[name:"gender"]').length;
+        
+        
+        
+        
+         
+       /* var genderNum=$("input:radio[name='gender']:checked").length;
+        if(genderNum==0){
+            comments[6].innerHTML="성별을 체크해주세요";
             count[5]=false;
         }else{
             count[5]=true;
             console.log("a");
         }
+      
        */ 
+        
+        
+        
         $('#age').focusout(function(){
             var ageReg=/^[0-9]{1,3}$/;
             if(!ageReg.test($(this).val())){
