@@ -86,7 +86,6 @@ master
 
 .ctitle p {
 	font-size: 60px;
-	font-weight: 900;
 }
 
 .reserveno {
@@ -154,7 +153,7 @@ th {
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="cTitle">
-			<p>RESERVATION & REVIEW</p>
+			<p class="meorijom"># RESERVATION & REVIEW</p>
 		</div>
 		<br> <br>
 
@@ -281,11 +280,32 @@ th {
 				</div>
 				<div class="col-md-6">
 					<h4 style="text-align: center">
+						방문완료 목록
+						<c:set var="falseCnt" value="0" />
+						<c:forEach items="${userReserveList}" var='uuu' varStatus="status">
+							<c:if test="${(uuu.reserveStatus==true)}">
+								<c:set var="falseCnt" value="${falseCnt + 1}" />
+							</c:if>
+						</c:forEach>
+						<c:out value="${falseCnt}" />개
 						
-						방문완료 목록(총${userReserveList.size()}개)
 						<button type="button" class="btn" id="openBtn"
 							onclick="testopen();">(펼치기)</button>
-						
+						<h5 style="text-align: center">
+							리뷰 미작성
+
+							<c:set var="falseCnt" value="0" />
+							<c:forEach items="${userReserveList}" var='uuu'
+								varStatus="status">
+								<c:if test="${(uuu.reserveReview==false)}">
+									<c:set var="falseCnt" value="${falseCnt + 1}" />
+								</c:if>
+							</c:forEach>
+
+							<c:out value="${falseCnt}" />
+							개
+						</h5>
+
 					</h4>
 					<br> <br>
 					<c:forEach items="${userReserveList}" var='u'>
