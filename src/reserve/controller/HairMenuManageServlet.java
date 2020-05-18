@@ -9,27 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-import member.model.vo.Member;
 import reserve.service.ReserveService;
-import reserve.vo.Reserve;
-import reserve.vo.ReserveDetail;
-import salon.service.SalonService;
-import salon.vo.Salon;
+import reserve.vo.HairMenu;
 
 /**
- * Servlet implementation class ReserveListServlet
+ * Servlet implementation class HairMenuManageServlet
  */
-@WebServlet(name = "ReserveList", urlPatterns = { "/adminReserveList" })
-public class AdminReserveListServlet extends HttpServlet {
+@WebServlet(name = "HairMenuManage", urlPatterns = { "/hairMenuManage" })
+public class HairMenuManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReserveListServlet() {
+    public HairMenuManageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,13 +32,8 @@ public class AdminReserveListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int result = new ReserveService().deleteOldReserve();
-		ArrayList<Salon> slist = new SalonService().selectSalon();
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
-		request.setAttribute("slist", slist);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/hairMenuManage.jsp");
 		rd.forward(request, response);
-
 	}
 
 	/**

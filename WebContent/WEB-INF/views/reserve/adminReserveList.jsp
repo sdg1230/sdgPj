@@ -329,19 +329,25 @@ p{
 	}
 	
 	function deleteReserve(reserveNo){
-		var param = {reserveNo:reserveNo};
-		$.ajax({
-			url : "/deleteReserve",
-			data : param,
-			type : "post",
-			dataType : "json",
-			success : function(data){
-				$("#selectStatus").change();
-			},
-			error : function(data){
-				alert("실패");
-			}
-		});
+		if(confirm("예약을 취소시키겠습니까?")){
+			var param = {reserveNo:reserveNo};
+			$.ajax({
+				url : "/adminDeleteReserve",
+				data : param,
+				type : "post",
+				dataType : "json",
+				success : function(data){
+					if(data==0){
+						alert("삭제실패");
+					}else{
+						$("#selectStatus").change();
+					}
+				},
+				error : function(data){
+					alert("실패");
+				}
+			});
+		}
 	}
 </script>
 </head>
