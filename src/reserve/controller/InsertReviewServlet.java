@@ -42,7 +42,7 @@ public class InsertReviewServlet extends HttpServlet {
 		String salonName = request.getParameter("salonName");
 		
 		String reserveReview = "true";
-		String reserveStatus = "false";
+		
 		int number = Integer.parseInt(request.getParameter("number"));
 		//		HttpSession session = request.getSession(false);
 //		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
@@ -63,10 +63,10 @@ public class InsertReviewServlet extends HttpServlet {
 		System.out.println("지점 이름 : "+salonName);
 		System.out.println("유저 id : "+memberId);
 		
-		System.out.println("예약확인여부 : "+reserveStatus);
+		
 		System.out.println("리뷰작성여부 : 1or0"+number);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		int result = new ReviewService().insertReview(s,reserveStatus,reserveReview);
+		int result = new ReviewService().insertReview(s,reserveReview);
 		System.out.println("result값 확인 : "+result);
 		
 		if(result>0) {
