@@ -130,8 +130,7 @@
 	});
 
 	$(function() {
-		$
-				.ajax({
+		$.ajax({
 					url : "/selectBestSalon",
 					type : "get",
 					success : function(data) {
@@ -155,18 +154,14 @@
 					}
 				});
 
-		$
-				.ajax({
+		$.ajax({
 					url : "/selectBestDesigner",
 					type : "get",
 					success : function(data) {
 						var html = "";
 						html += "<div class='dInfo' style='width:70%;'>";
-						html += " <h2><span class='salonName'>"
-								+ data.designerName + "</span>/"
-								+ data.salonName + "</h2>";
-						html += " <div class='dIntroduce'>" + data.designerInfo
-								+ "</div></div>";
+						html += " <h2><span class='salonName'>"+ data.designerName + "</span>/"+ data.salonName + "</h2>";
+						html += " <div class='dIntroduce'>" + data.designerInfo+ "</div></div>";
 						html += " <div class='dPhoto' style='width:30%;'>";
 						html += " <img src='/upload/designer/"+data.designerFilepath+"'></div>";
 						$(".designer").append(html);

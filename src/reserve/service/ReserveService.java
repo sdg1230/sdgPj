@@ -141,4 +141,38 @@ public class ReserveService {
 		return result;
 	}
 
+	public int deleteHairMenu(int hairNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ReserveDao().deleteHairMenu(conn,hairNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int modifyHairMenu(int hairNo, int hairPay) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ReserveDao().modifyHairMenu(conn,hairNo,hairPay);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int insertHairMenu(String hairName, int hairPay, int hairTime) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ReserveDao().insertHairMenu(conn,hairName,hairPay,hairTime);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }

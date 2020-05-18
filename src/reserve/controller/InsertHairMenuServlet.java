@@ -1,7 +1,6 @@
 package reserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,27 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-import member.model.vo.Member;
 import reserve.service.ReserveService;
-import reserve.vo.Reserve;
-import reserve.vo.ReserveDetail;
-import salon.service.SalonService;
-import salon.vo.Salon;
 
 /**
- * Servlet implementation class ReserveListServlet
+ * Servlet implementation class InsertHairMenuServlet
  */
-@WebServlet(name = "ReserveList", urlPatterns = { "/adminReserveList" })
-public class AdminReserveListServlet extends HttpServlet {
+@WebServlet(name = "InsertHairMenu", urlPatterns = { "/insertHairMenu" })
+public class InsertHairMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReserveListServlet() {
+    public InsertHairMenuServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,12 +31,11 @@ public class AdminReserveListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int result = new ReserveService().deleteOldReserve();
-		ArrayList<Salon> slist = new SalonService().selectSalon();
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
-		request.setAttribute("slist", slist);
-		rd.forward(request, response);
-
+		String hairName = request.getParameter("hairName");
+		int hairPay = Integer.parseInt(request.getParameter("hairPay"));
+		int hairTime = Integer.parseInt(request.getParameter("hairTime"))/30;
+		int result = new ReserveService().insertHairMenu(hairName,hairPay,hairTime);
+		response.sendRedirect("/hairMenuManage");
 	}
 
 	/**

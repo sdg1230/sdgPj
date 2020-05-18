@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import common.JDBCTemplate;
 import reserve.vo.HairMenu;
 import reserve.vo.Reserve;
@@ -422,6 +423,60 @@ public class ReserveDao {
 			pstmt.setInt(1, reserveNo);
 			result = pstmt.executeUpdate();
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteHairMenu(Connection conn, int hairNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from hair_menu where hair_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, hairNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int modifyHairMenu(Connection conn, int hairNo, int hairPay) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update hair_menu set hair_pay = ? where hair_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, hairPay);
+			pstmt.setInt(2, hairNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertHairMenu(Connection conn, String hairName, int hairPay, int hairTime) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "INSERT INTO HAIR_MENU VALUES(SEQ_HAIR_NO.NEXTVAL,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, hairName);
+			pstmt.setInt(2, hairPay);
+			pstmt.setInt(3, hairTime);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
