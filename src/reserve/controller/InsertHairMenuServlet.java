@@ -30,6 +30,7 @@ public class InsertHairMenuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String hairName = request.getParameter("hairName");
 		int hairPay = Integer.parseInt(request.getParameter("hairPay"));
 		int hairTime = Integer.parseInt(request.getParameter("hairTime"))/30;
