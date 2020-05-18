@@ -94,7 +94,7 @@
 					</ol>
 
 					<!-- Wrapper for slides -->
-					<div class="carousel-inner">
+					<div class="carousel-inner" id="carousel-inner">
 
 					</div>
 
@@ -194,7 +194,7 @@
 					}
 					
 				}
-				$(".carousel-inner").append(html);
+				$("#carousel-inner").append(html);
 			}
 		});
 	});
