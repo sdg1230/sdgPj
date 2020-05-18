@@ -268,6 +268,7 @@ public class SalonService {
 		return sd;
 	}
 
+
 	public ArrayList<Salon> selectAffilateAddr(String sq) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Salon> list = new SalonDao().selectSolonRevuewAddr(conn,sq);
@@ -279,6 +280,7 @@ public class SalonService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+
 
 	public ArrayList<Salon> selectBestSalon() {
 		Connection conn = JDBCTemplate.getConnection();
