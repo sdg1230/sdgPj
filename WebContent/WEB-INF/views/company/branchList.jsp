@@ -52,8 +52,7 @@
 	font-size: 1.5em;
 	text-align: center;
 	height: 350px;
-	background-image:
-		url("/upload/salon/lsit.jpg");
+	background-image: url("/upload/salon/lsit.jpg");
 	background-size: 100%;
 }
 
@@ -105,12 +104,16 @@
 	width: 300px;
 	height: 250px;
 }
+.affcontent{
+	font-size: 1.2em;
+
+}
 
 .statd {
 	overflow: hidden;
 	width: 120px;
 	text-align: center;
-	width: 120px;
+	height: 30px;
 }
 
 .sta {
@@ -128,11 +131,16 @@
 	text-align: center;
 	line-height: 60px;
 }
-.td1{
+
+.td1 {
 	display: block;
-	width: 120px;
+	width: 300px;
 	height: 120px;
 	line-height: 120px;
+}
+.td1>h1{
+	margin: 0;
+	float: left;
 }
 .salonname {
 	text-align: center;
@@ -141,13 +149,13 @@
 .content {
 	width: 1200px;
 	overflow: hidden;
-	margin : 0 auto;
+	margin: 0 auto;
 	height: 100%;
 	background-color: white;
 	text-align: center;
 }
+
 .content1 {
-	
 	overflow: hidden;
 	margin: 130px auto;
 	margin-bottom: 0;
@@ -155,19 +163,25 @@
 	background-color: white;
 	text-align: center;
 }
-.spann{
-text-decoration: underline;
+
+.spann {
+	text-decoration: underline;
 }
-.salonSelect{
+
+.salonSelect {
 	display: block;
 	width: 100%;
 	height: 100%;
 	background-color: darkgray;
 	margin: 0 auto;
 }
-.tabb{
+
+.tabb {
 	margin: 0 auto;
 	width: 100%;
+}
+label:hover{
+	cursor:pointer;
 }
 </style>
 <script>
@@ -184,13 +198,16 @@ text-decoration: underline;
 			}
 
 		});
-		$(".tabb").mouseenter(function () {
-			$(this).css("border", "3px solid red");
+		$("label").mouseenter(function() {
+			$(this).find(".tabb").css("border", "3px solid red");
 			$(this).find(".salonSelect").css("background-color", "red");
+			$(this).find("h1").css("font-size", "1.2em");
+			
 		});
-		$(".tabb").mouseleave(function () {
-			$(this).css("border", "1px solid white");
+		$("label").mouseleave(function() {
+			$(this).find(".tabb").css("border", "1px solid white");
 			$(this).find(".salonSelect").css("background-color", "darkgray");
+			$(this).find("h1").css("background-color", "white");
 		});
 	});
 </script>
@@ -200,20 +217,19 @@ text-decoration: underline;
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="content1">
 			<div class="title">
-			<br>
+				<br>
 				<h1>SALON INFORMATION</h1>
-				<span>MEORIJOM HAIR만의 뷰티 서비스 퀄리티와 브랜드 가치를 높이기 위해서</span><br> <span class="spann">MEORIJOM
-					HAIR는 체인 시스템이 아닌 직영시스텝을 고집합니다.</span>
+				<span>MEORIJOM HAIR만의 뷰티 서비스 퀄리티와 브랜드 가치를 높이기 위해서</span><br> <span
+					class="spann">MEORIJOM HAIR는 체인 시스템이 아닌 직영시스텝을 고집합니다.</span>
 			</div>
-			</div>
+		</div>
 		<div class="content">
 			<br>
 			<div class="affmenu">
-				
+
 				<form action="/salononeServlet" method="get">
 					<table class="tab">
-						<td class="search1">
-						<select name="type"class="sele">
+						<td class="search1"><select name="type" class="sele">
 								<c:if test="${type eq 'salonName2' }">
 									<option value="salonName2" selected>매장명</option>
 									<option value="salonMap">지역명</option>
@@ -227,14 +243,10 @@ text-decoration: underline;
 									<option value="salonMap">지역명</option>
 								</c:if>
 						</select></td>
-						<td class="search1">
-						<input type="text"id="search1"
-							name="search1"
-					value="${key }">
-				
-						</td>
+						<td class="search1"><input type="text" id="search1"
+							name="search1" value="${key }"></td>
 						<td>
-						<button  class="sub" id="sub"type="submit">조회</button>
+							<button class="sub" id="sub" type="submit">조회</button>
 						</td>
 					</table>
 				</form>
@@ -243,92 +255,100 @@ text-decoration: underline;
 
 			<div>
 
-					<c:forEach var="list" items="${list }" varStatus="status">
-				<table class="tabb">
+				<c:forEach var="list" items="${list }" varStatus="status">
 
-						<tr>
-							<td class="affimg" rowspan="2"><img class="affimg"
-								src="/upload/salon/${list.salonFilepath }"></td>
-							<td class="affcontent" colspan="2" rowspan="2">${list.salonInfo }</td>
-							<td class="td1"><a class="salonSelect"
-								href="selectSalon?salonName=${list.salonName }">${list.salonName }</a> <input
-								type="hidden" name="salonAddr" value="${ilst.salonAddr }">
-							</td>
-							</tr>
+					<a href="selectSalon?salonName=${list.salonName }">
+					<label>
+						<table class="tabb">
+
 							<tr>
-
-
-
-							<td class="statd"><c:if test="${list.reviewStar < 1 }">
-									<img class="sta" src="/upload/salon/star3.jpg">
-									<br> ${list.reviewStar }0점
+								<td class="affimg" rowspan="2"><img class="affimg"
+									src="/upload/salon/${list.salonFilepath }"></td>
+								<td colspan="2"  class="td1"><h1>${list.salonName }</h1>
+									<input type="hidden" name="salonAddr" value="${ilst.salonAddr }">
+								</td>
+									
+								<td class="statd"><c:if test="${list.reviewStar < 1 }">
+										<img class="sta" src="/upload/salon/star3.jpg">
+										<br> ${list.reviewStar }0점
 								</c:if> <c:if test="${list.reviewStar < 1 && list.reviewStar >0}">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar == 1}">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar < 2 && list.reviewStar >1}">
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar == 2}">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar < 3 && list.reviewStar >2}">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar == 3}">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar < 4 && list.reviewStar >3}">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar == 4}">
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar < 5 && list.reviewStar >4}">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star1.jpg">
-									<br> ${list.reviewStar }점
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star1.jpg">
+										<br> ${list.reviewStar }점
 								</c:if> <c:if test="${list.reviewStar == 5}">
 
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<img class="sta" src="/upload/salon/star2.jpg">
-									<br> ${list.reviewStar }점<br>
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<img class="sta" src="/upload/salon/star2.jpg">
+										<br> ${list.reviewStar }점<br>
 
-								</c:if></td>
+									</c:if></td>
+							</tr>
+							<tr>
+									<td class="affcontent" colspan="2" >${list.salonInfo }</td>
+									</tr>
+							
 
-						</tr>
 
 
 
-						<tr>
-							<td class="salonname"></td>
-						</tr>
+						
 
-				</table>
-				<br>
-					</c:forEach>
+
+
+							<tr>
+								<td class="salonname"></td>
+							</tr>
+
+						</table>
+
+					</label>
+</a>
+					<br>
+				</c:forEach>
 
 
 			</div>
