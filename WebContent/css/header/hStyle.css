@@ -181,13 +181,7 @@
 
 
         /*-----------------content-----------------------*/
-        .content {
-           /*-지우지마세요-*/
-            width: 1200px;
-            overflow: hidden;
-            margin: 0 auto;
-            margin-top: 130px;
-        }
+        
         .sidebar {
             position: fixed;
             top: 130px;

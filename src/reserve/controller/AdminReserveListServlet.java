@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import member.model.vo.Member;
 import reserve.service.ReserveService;
 import reserve.vo.Reserve;
 import reserve.vo.ReserveDetail;
@@ -41,7 +42,6 @@ public class AdminReserveListServlet extends HttpServlet {
 		int result = new ReserveService().deleteOldReserve();
 		ArrayList<Salon> slist = new SalonService().selectSalon();
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
-		request.setAttribute("noshow", result);
 		request.setAttribute("slist", slist);
 		rd.forward(request, response);	
 	}

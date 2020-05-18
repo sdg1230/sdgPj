@@ -22,6 +22,7 @@
 
 <title>Insert title here</title>
 <style>
+<<<<<<< HEAD
 .glyphicon {
 	margin-bottom: 10px;
 	margin-right: 10px;
@@ -32,6 +33,21 @@ small {
 	line-height: 1.428571429;
 	color: #999;
 }
+=======
+    /* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom:10px;
+	padding:0;
+}
+.homeIcon>img {
+	margin-top:5px;
+}
+.headermiddle{
+	padding-top:6px;
+}
+/* 헤더 제대로적용------------------------ */
+>>>>>>> master
 
 .content {
 	overflow: "hidden";
