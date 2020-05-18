@@ -251,6 +251,8 @@ public class SalonService {
 		return sd;
 	}
 
+	
+
 	public ArrayList<Salon> selectBestSalon() {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Salon> list = new SalonDao().selectBestSalon(conn);

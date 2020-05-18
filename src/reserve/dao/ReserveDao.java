@@ -194,7 +194,7 @@ public class ReserveDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Reserve>list = new ArrayList<Reserve>(); 
-		String query = "select * from member,reserve,designer,salon,reserve_detail where member.member_id=reserve.member_id and reserve.reserve_no=reserve_detail.reserve_no and reserve.designer_no=designer.designer_no and reserve.salon_name=salon.salon_name and member.member_id=? order by reserve_date desc";
+		String query = "select reserve_no,member_id,member_name,member_phone,reserve.salon_name,designer_no,designer_name,reserve_date,start_time,reserve_time,total_price,reserve_status,payment_status,reserve_review from reserve join member using(member_id) join designer using(designer_no) where member_id=? order by reserve_date desc, start_time desc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
@@ -411,6 +411,24 @@ public class ReserveDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return r;
+	}
+
+	public int deleteReserve1(Connection conn, int reserveNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from reserve where reserve_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 
