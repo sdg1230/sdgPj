@@ -246,22 +246,19 @@ function questionFunc(memberId){
             </div>
             <br><br>
             <h2 align="center">문의 목록</h2>
-            <table class="questionTable">
-                <tr>
-                    <th>작성자</th>
-                    <th>내용</th>
-                </tr>
-                
+            <div style="width: 100%; position: relative;">
                 <c:forEach items="${list }" var="q">
                 <c:if test="${q.questionWriter eq sessionScope.member.memberId || q.questionWriter eq 'admin' }">
-				<tr>
-					<td style="border-bottom: 0.1px solid #DDE3E9;">
-					${q.questionWriter }</td>
-					<td style="border-bottom: 0.1px solid #DDE3E9;"><a href="/questionDetail?questionNo=${q.questionNo}" style="font-weight: bold">${q.questionContent }</a></td>
-				</tr>
+                <c:if test="${q.questionWriter eq sessionScope.member.memberId}">
+					<div style="width: 40%; height: 100px; background-color: blue; text-align: center; left: 0; ">${q.questionContent }</div>
+                </c:if>
+            
+                <c:if test="${q.questionWriter eq 'admin' }">
+					<div style="width: 40%; height: 100px; background-color: green; text-align: center;display: flex; justify-content: flex-end;">${q.questionContent }</div>
+				</c:if>
 				</c:if>
 				</c:forEach>
-            </table>
+			</div>
             <div class="questionPageNavi">${pageNavi }</div>
             <div class="questionSearch">
             	<form action="/questionSearchTitle">
