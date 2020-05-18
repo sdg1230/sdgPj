@@ -62,7 +62,7 @@
 	text-align: center;
 	width: 50%;
 	height: 150px;
-	background-image: url(/upload/salon/juno1.jpg);
+	background-image: url(/imgs/juno1.jpg);
 	background-size: 100%;
 }
 
@@ -87,7 +87,7 @@
 	text-align: center;
 	width: 50%;
 	height: 150px;
-	background-image: url(/upload/salon/juno2.JPG);
+	background-image: url(/imgs/juno2.JPG);
 	background-size: 100%;
 }
 
@@ -134,7 +134,7 @@
 	text-align: center;
 	width: 50%;
 	height: 150px;
-	background-image: url(/upload/salon/juno4.jpg);
+	background-image: url(/imgs/juno4.jpg);
 	padding-top: 10px;
 	background-size: 100%;
 }
@@ -190,7 +190,7 @@
 	text-align: center;
 	width: 50%;
 	height: 150px;
-	background-image: url(/upload/salon/juno6.jpg);
+	background-image: url(/imgs/juno6.jpg);
 	padding-top: 10px;
 	background-size: 100%;
 }
@@ -276,7 +276,7 @@ pre>small {
         브랜드로 세계적인 명성을 얻어 가고 있습니다.</pre>
 			</div>
 			<div class="photograph">
-				<img src="/upload/salon/juno.JPG">
+				<img src="/imgs/juno.JPG">
 			</div>
 			<br>
 			<div>
@@ -307,7 +307,7 @@ pre>small {
 				<h1>해외 진출</h1>
 			</div>
 			<div class="photograph">
-				<img src="/upload/salon/juno3.jpg">
+				<img src="/imgs/juno3.jpg">
 			</div>
 			<div class="content1">
 				<span class="spanTitle">뷰티 교육 콘텐츠 선두 주자</span>
@@ -369,7 +369,7 @@ pre>small {
 			</div>
 
 			<div class="photograph">
-				<img src="/upload/salon/juno5.JPG">
+				<img src="/imgs/juno5.JPG">
 			</div>
 			<div>
 				<div class="titleBox">03</div>
@@ -383,7 +383,7 @@ pre>small {
         전반적인 패션,뷰티를 아우르는 앞선 트렌드를 선보이며 큰 호응을 얻고 있습니다.</pre>
 				</div>
 				<div class="photograph">
-					<img src="/upload/salon/juno7.JPG">
+					<img src="/imgs/juno7.JPG">
 				</div>
 			</div>
 			<div class="titleBox">04</div>
@@ -398,13 +398,13 @@ pre>small {
 			</div>
 
 			<div class="photograph">
-				<img src="/upload/salon/juno8.JPG">
+				<img src="/imgs/juno8.JPG">
 			</div>
 			<br>
 			<div class="titleBox">05</div>
 			<br>
 			<div class="photograph">
-				<img src="/upload/salon/juno9.JPG">
+				<img src="/imgs/juno9.JPG">
 			</div>
 			<div class="content1">
 				<pre>고객을 가족처럼 대하는 진심 어린 서비스로 
@@ -412,7 +412,7 @@ pre>small {
 			</div>
 
 			<div class="photograph">
-				<img src="/upload/salon/juno10.JPG">
+				<img src="/imgs/juno10.JPG">
 			</div>
 			<div class="content1">
 				<span class="spanTitel">항상 즐겁고 친근한 MEORIJOM HAIR Service</span>

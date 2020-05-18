@@ -52,12 +52,11 @@ public class BranchdeleteServlet extends HttpServlet {
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		Salon aff = new Salon();
 		String dd = mRequest.getParameter("dp");
-		System.out.println(dd);
+	
 		
 			
 			aff.setSalonName(mRequest.getParameter("salonName"));
-			
-			System.out.println(aff.getSalonName()+"ddddd아아");
+		
 			SalonList af = new	SalonService().selectdelete(aff.getSalonName());
 			
 			
@@ -72,7 +71,7 @@ public class BranchdeleteServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			if(af!=null) {
 				File delFile = new File(saveDirectory+"/"+oldFilepath);
-				System.out.println(delFile);
+				
 				delFile.delete();
 				request.setAttribute("msg", "삭제 성공!");
 				

@@ -52,7 +52,7 @@
 	font-size: 1.5em;
 	text-align: center;
 	height: 350px;
-	background-image: url("/upload/salon/lsit.jpg");
+	background-image: url("/imgs/lsit.jpg");
 	background-size: 100%;
 }
 
@@ -106,6 +106,7 @@
 }
 .affcontent{
 	font-size: 1.2em;
+	text-align: left;
 
 }
 
@@ -201,13 +202,16 @@ label:hover{
 		$("label").mouseenter(function() {
 			$(this).find(".tabb").css("border", "3px solid red");
 			$(this).find(".salonSelect").css("background-color", "red");
-			$(this).find("h1").css("font-size", "1.2em");
+			$(this).find("h1").css("font-size", "2.5em");
+			$(this).find("h1").css("color", "#EE1C24");
 			
 		});
 		$("label").mouseleave(function() {
 			$(this).find(".tabb").css("border", "1px solid white");
 			$(this).find(".salonSelect").css("background-color", "darkgray");
-			$(this).find("h1").css("background-color", "white");
+			$(this).find("h1").css("font-size", "2em");
+			$(this).find("h1").css("color", "black");
+			
 		});
 	});
 </script>
@@ -246,7 +250,7 @@ label:hover{
 						<td class="search1"><input type="text" id="search1"
 							name="search1" value="${key }"></td>
 						<td>
-							<button class="sub" id="sub" type="submit">조회</button>
+							<input class="sub" id="sub" type="submit" value="조회">
 						</td>
 					</table>
 				</form>
@@ -257,7 +261,7 @@ label:hover{
 
 				<c:forEach var="list" items="${list }" varStatus="status">
 
-					<a href="selectSalon?salonName=${list.salonName }">
+					<a href="selectSalon?salonName=${list.salonName }&reqPage=1">
 					<label>
 						<table class="tabb">
 
@@ -266,6 +270,7 @@ label:hover{
 									src="/upload/salon/${list.salonFilepath }"></td>
 								<td colspan="2"  class="td1"><h1>${list.salonName }</h1>
 									<input type="hidden" name="salonAddr" value="${ilst.salonAddr }">
+									
 								</td>
 									
 								<td class="statd"><c:if test="${list.reviewStar < 1 }">
@@ -330,14 +335,6 @@ label:hover{
 							<tr>
 									<td class="affcontent" colspan="2" >${list.salonInfo }</td>
 									</tr>
-							
-
-
-
-
-						
-
-
 
 							<tr>
 								<td class="salonname"></td>

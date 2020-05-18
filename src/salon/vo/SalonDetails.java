@@ -11,6 +11,7 @@ public class SalonDetails {
 	private ArrayList<Designer> DesignerList;
 	private ArrayList<SalonReview> ReviewList;
 	private SalonReview satr;
+
 	public SalonDetails() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -23,7 +24,9 @@ public class SalonDetails {
 		DesignerList = designerList;
 		ReviewList = reviewList;
 		this.satr = star;
+	
 	}
+	
 	
 	public SalonReview getSatr() {
 		return satr;

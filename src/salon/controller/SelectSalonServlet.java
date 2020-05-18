@@ -32,18 +32,22 @@ public class SelectSalonServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String salonName = request.getParameter("salonName");
+		System.out.println(salonName);
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+	System.out.println(reqPage);
+			
+			SalonDetails sd = new SalonService().salonDetails(salonName,reqPage);
+			
+			request.setAttribute("salon", sd.getAffilate());
+			
+			request.setAttribute("pageNavi", sd.getAgeNavi());
+			request.setAttribute("star", sd.getSatr());
+			
+			request.setAttribute("des", sd.getDesignerList());
+			request.setAttribute("rev", sd.getReviewList());
+			request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage="+reqPage).forward(request, response);
+	
 		
-		
-		SalonDetails sd = new SalonService().salonDetails(salonName);
-		
-		request.setAttribute("salon", sd.getAffilate());
-		
-		request.setAttribute("pageNavi", sd.getAgeNavi());
-		request.setAttribute("star", sd.getSatr());
-		System.out.println(sd.getSatr());
-		request.setAttribute("des", sd.getDesignerList());
-		request.setAttribute("rev", sd.getReviewList());
-		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage=1").forward(request, response);
 	}
 
 	/**

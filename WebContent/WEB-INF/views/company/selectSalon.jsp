@@ -20,9 +20,7 @@
 	background-color: white;
 	text-align: center;
 }
-.selectPage{
-	text-align: center;
-}
+
  .sidemenu1 {
  display: inline-block;
             width: 49.8%;
@@ -70,6 +68,23 @@
             float: left;
             
         }
+        #pageNavi{
+        text-align: center;
+        width:100%;
+        margin: 0 auto;
+        }
+        .selectPage{
+	text-align: center;
+	display: inline-block;
+}
+.btn{
+	
+	display: inline-block;
+	border: 1px solid black;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+}
         .salon1{
         
             width: 50%;
@@ -77,7 +92,7 @@
             float: right;
         }
          .salon2{
-        
+       		
             width: 50%;
             height: 100%;
             float: right;
@@ -96,9 +111,14 @@
         height: 100px;
         }
         .affimg{
-        	width: 100%;
+        	width: 250px;
         	height: 300px;
        
+        }
+        .djimg{
+        	width: 250px;
+        	padding: 0;
+        	margin: 0;
         }
         .tdrhd{
         	display: block;
@@ -116,13 +136,22 @@
 	height: 20px;
 }
 .djin{
-width: 250px;
+width: 200px;
 	height: 100px;
+	
 }
 .djin1{
-width: 250px;
-	height: 50px;
+
+width: 100%;
+	height: 15px;
 	 background-color: darkgray;
+	 font-size: 1.5em;
+}
+.djin2{
+width: 100%;
+	height: 50px;
+	 background-color:#998778 ;
+	  font-size: 1.2em;
 }
 .comm{
 	width: 100%;
@@ -137,15 +166,19 @@ width: 250px;
 	text-align:center;
 	display: block;
 	float: left;
-	height: 100px;
-	line-height:100px;
+	height: 120px;
+	padding-top:20px;
 	width: 75%;
+	overflow: hidden;
 }
 .dj{
 	margin: 0 auto;
 }
 .re{
 text-align: center;
+}
+.salonth{
+	width: 25%;
 }
 </style>
 
@@ -171,30 +204,30 @@ text-align: center;
 					<div id="map" style="width: 100%; height: 500px;"></div>
 				</div>
 				<div class="salon1">
-					<table>
+					<table class="salonTable">
 							
 							
 						<tr>
-							<th >주소</th>
+							<th class="salonth">주소</th>
 							<th colspan="2">${salon.salonAddr }</th>
 						</tr>
 						<tr>
-							<th>연락처</th>
+							<th class="salonth">연락처</th>
 							<td  colspan="2">${salon.salonPhone }</td>
 							
 						</tr>
 						<tr>
-							<th>영업시간</th>
+							<th class="salonth">영업시간</th>
 							<td  colspan="2">09:00 ~ 18:00</td>
 						</tr>
 						<tr>
-						<th class="addrtit">매장소개</th>
+						<th class="salonth">매장소개</th>
 						<td  colspan="2">${salon.salonInfo }</td>
 						</tr>
 						
 						<tr>
 						<tr>
-							<th>평점</th>
+							<th class="salonth">평점</th>
                             <td  class="statd">
                             <c:if
 									test="${empty star.reviewStars }">
@@ -302,18 +335,21 @@ text-align: center;
 					<c:forEach var="d" items="${des }">
 						<tr>
 							
-							<td colspan="1" rowspan="2"><img class="affimg"
+							<td colspan="1" rowspan="2" class="djimg"><img class="affimg"
 								src="/upload/designer/${d.designerFilepath }">
+								<br>
 								</td>
 								<td class="djin1">
 								${d.designerName }
+								</td>
+								<td>
 								</td>
 								</tr>
 								<tr>
 								
 							
 
-							<td class="djin1">${d.designerInfo }</td>
+							<td class="djin2" rowspan="1">${d.designerInfo }</td>
 						</tr>
 						
 						</c:forEach>

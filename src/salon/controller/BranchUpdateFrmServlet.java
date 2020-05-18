@@ -32,10 +32,10 @@ public class BranchUpdateFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String salonName = request.getParameter("salonName");
-		System.out.println(salonName);
+		
 		Salon aff = new SalonService().salonUpdateFrm(salonName);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchupdate.jsp");
-		System.out.println(aff.getSalonFilename()+"ddd");
+		
 		request.setAttribute("list", aff);
 		rd.forward(request, response);
 	}

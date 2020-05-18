@@ -70,13 +70,34 @@ public class SalonDao {
 		}
 		return result;
 	}
+	public int totalCountSalon(Connection conn, String salonName) {
+		PreparedStatement pstmt = null;
+		ResultSet res = null;
+		int result = 0;
+		String str = "select count(*) as cnt from salon_review where salon_name=?";
+		try {
+			pstmt = conn.prepareStatement(str);
+			pstmt.setString(1, salonName);
+			res = pstmt.executeQuery();
+			if(res.next()) {
+				result = res.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(res);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 	public  double selectSolonRevuew1(Connection conn,String salonName) {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
 		double star = 0;
 		ArrayList<SalonReview> list = new ArrayList<SalonReview>();
-		String str = "select avg(review_star) as star from salon_review where salon_name=? group by salon_name";
+		String str = "select round(avg(review_star),1) as star from salon_review where salon_name=? group by salon_name";
 		try {
 			pstmt = conn.prepareStatement(str);
 			pstmt.setString(1, salonName);
@@ -98,14 +119,14 @@ public class SalonDao {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
 		ArrayList<SalonReview> list = new ArrayList<SalonReview>();
-		String str = "select salon_name,avg(review_star) from salon_review where salon_name like ? group by salon_name";
+		String str = "select salon_name,round(avg(review_star),1) from salon_review where salon_name like ? group by salon_name";
 		try {
 			pstmt = conn.prepareStatement(str);
 			pstmt.setString(1, "%"+sq+"%");
 			res = pstmt.executeQuery();
 			while (res.next()) {
 				SalonReview s = new SalonReview();
-				s.setReviewStars(res.getDouble("avg(review_star)"));
+				s.setReviewStars(res.getDouble("round(avg(review_star),1)"));
 				s.setSalonName(res.getString("salon_name"));
 				
 				list.add(s);
@@ -258,7 +279,7 @@ public class SalonDao {
 	public int insertAffilatr(Connection conn, Salon aff) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println(aff.getSalonName());
+	
 		String str ="insert into salon values(SEQ_SALON_NO.NEXTVAL,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(str);
@@ -352,7 +373,7 @@ public class SalonDao {
 		ArrayList<Designer> ds = new ArrayList<Designer>();
 		Designer d = null;
 		String str = "select * from designer where salon_name=?";
-		System.out.println(salonName);
+		
 		try {
 			pstmt = conn.prepareStatement(str);
 			pstmt.setString(1, salonName);
@@ -365,7 +386,7 @@ public class SalonDao {
 				d.setDesignerName(res.getString("designer_name"));
 				d.setDesignerNo(res.getInt("designer_no"));
 				d.setSalonName(res.getString("salon_name"));
-				System.out.println(d.getSalonName());
+			
 				ds.add(d);
 			}
 		} catch (SQLException e) {
@@ -382,14 +403,14 @@ public class SalonDao {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
 		SalonReview s = null;
-		String str = "select salon_name,avg(review_star) from salon_review where salon_name=? group by salon_name";
+		String str = "select salon_name,round(avg(review_star),1) from salon_review where salon_name=? group by salon_name";
 		try {
 			pstmt = conn.prepareStatement(str);
 			pstmt.setString(1, salonName);
 			res = pstmt.executeQuery();
 			while (res.next()) {
 				 s = new SalonReview();
-				s.setReviewStars(res.getDouble("avg(review_star)"));
+				s.setReviewStars(res.getDouble("round(avg(review_star),1)"));
 				
 				
 				
@@ -439,7 +460,7 @@ public class SalonDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Salon> list = new ArrayList<Salon>();
-		String query = "select * from (select salon_name,avg(review_star) as review_star,row_number() over(order by avg(review_star)desc) as rank from salon_review group by salon_name) join salon using(salon_name)  where rank between 1 and 3  order by rank";
+		String query = "select * from (select salon_name,round(avg(review_star),1) as review_star,row_number() over(order by avg(review_star)desc) as rank from salon_review group by salon_name) join salon using(salon_name)  where rank between 1 and 3  order by rank";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();

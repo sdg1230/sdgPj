@@ -49,7 +49,7 @@ public class SalononeServlet extends HttpServlet {
 		request.setAttribute("type", type);
 		request.setAttribute("key", sq);
 		
-		System.out.println(type);
+
 		
 		
 		
