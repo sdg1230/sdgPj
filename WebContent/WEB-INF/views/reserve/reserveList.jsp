@@ -148,9 +148,9 @@ th {
 								<p>연락처 : ${userReserveList[0].memberPhone}</p>
 								<br>
 								<!-- Split button -->
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary">Social</button>
-									<button type="button" class="btn btn-primary dropdown-toggle"
+								<div class="btn-group" style="border:1px solid #999">
+									<button type="button" class="btn">Social</button>
+									<button type="button" class="btn dropdown-toggle"
 										data-toggle="dropdown">
 										<span class="caret"></span><span class="sr-only">Social</span>
 									</button>
@@ -229,7 +229,7 @@ th {
 									<!-- 여기서부터 리뷰를작성했냐 안했냐 갈라야함 -->
 									<td><button type="button"
 											onclick="reviewInsert('${u.reserveNo}','${u.salonName }','${sessionScope.member.memberId}');"
-											class="btn btn-primary" data-toggle="modal"
+											class="btn" data-toggle="modal" style="border:1px solid #999"
 											data-target="#exampleModal" data-whatever="@mdo">후기작성</button></td>
 
 
@@ -237,7 +237,7 @@ th {
 								</c:if>
 								<c:if test="${u.reserveReview==true}">
 									
-									<td><button type="button" class="btn btn-primary" readonly>후기작성완료</button></td>
+									<td><button type="button" class="btn" readonly style="background-color:#999">후기작성완료</button></td>
 									
 								</c:if>
 							</table>
@@ -301,9 +301,19 @@ th {
 								</c:forEach>
 								
 								<tr>
+								
 									<form action="/price" method="post">
-										<td><input type="submit" class="btn btn-primary"
+										
+										<td><input type="submit" class="btn" style="border:1px solid #999"
 											value="선결제"></td>
+										<td><input type="hidden" name="reserveNo"
+											value="${u.reserveNo }"></td>
+									</form>
+									</tr>
+									<tr>
+									<form action="/reserveDelete1" method="post" >
+										<td><input type="submit" class="btn" style="border:1px solid #999"
+											value="예약취소"></td>
 										<td><input type="hidden" name="reserveNo"
 											value="${u.reserveNo }"></td>
 									</form>
