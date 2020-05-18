@@ -318,7 +318,7 @@ th {
 								
 								<tr>
 								
-									<form action="/price" method="post">
+									<form action="/payPage" method="post">
 										
 										<td><input type="submit" class="btn" style="border:1px solid #999"
 											value="선결제"></td>

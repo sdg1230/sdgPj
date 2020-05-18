@@ -129,4 +129,16 @@ public class ReserveService {
 		return r;
 	}
 
+	public int DeleteReserve1(int reserveNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new ReserveDao().deleteReserve1(conn,reserveNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }
