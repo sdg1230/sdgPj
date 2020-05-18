@@ -39,7 +39,7 @@ small {
 	color: #999;
 }
 
-=======
+
 /* 헤더 제대로적용------------------------ */
 .headermiddle input[type="text"] {
 	height: 25px;
@@ -52,11 +52,11 @@ small {
 }
 
 .headermiddle {
+	lint-height:20px;
 	padding-top: 6px;
 }
 /* 헤더 제대로적용------------------------ */
->>>>>>>
-master
+
 .container {
 	overflow: "hidden";
 }

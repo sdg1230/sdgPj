@@ -7,6 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>머리좀 헤어</title>
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 24px;
+	margin-bottom: 10px;
+	padding: 0;
+}
+
+.homeIcon>img {
+	margin-top: 5px;
+}
+
+.headermiddle {
+	padding-top: 5px;
+}
+/* 헤더 제대로적용------------------------ */
 .cTitle {
 	margin-top: 130px;
 	padding-top: 50px;

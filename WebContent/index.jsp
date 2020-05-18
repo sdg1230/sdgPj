@@ -130,7 +130,8 @@
 	});
 
 	$(function() {
-		$.ajax({
+		$
+				.ajax({
 					url : "/selectBestSalon",
 					type : "get",
 					success : function(data) {
@@ -154,14 +155,18 @@
 					}
 				});
 
-		$.ajax({
+		$
+				.ajax({
 					url : "/selectBestDesigner",
 					type : "get",
 					success : function(data) {
 						var html = "";
 						html += "<div class='dInfo' style='width:70%;'>";
-						html += " <h2><span class='salonName'>"+ data.designerName + "</span>/"+ data.salonName + "</h2>";
-						html += " <div class='dIntroduce'>" + data.designerInfo+ "</div></div>";
+						html += " <h2><span class='salonName'>"
+								+ data.designerName + "</span>/"
+								+ data.salonName + "</h2>";
+						html += " <div class='dIntroduce'>" + data.designerInfo
+								+ "</div></div>";
 						html += " <div class='dPhoto' style='width:30%;'>";
 						html += " <img src='/upload/designer/"+data.designerFilepath+"'></div>";
 						$(".designer").append(html);
@@ -242,6 +247,7 @@
 .designer>div {
 	float: left;
 	height: 215px;
+	margin-bottom:150px;
 	border: 1px solid lightgray;
 }
 
@@ -263,11 +269,15 @@ h1>small {
 	float: left;
 	overflow: hidden;
 }
-
+.sort>h1{
+	padding-top:30px;
+	margin-bottom:20px;
+}
 .sortByStar {
 	width: 100%;
 	overflow: hidden;
-	margin-bottom:40px;
+	padding-bottom:40px;
+	border-bottom:1px solid gray;
 }
 
 .sBox {
@@ -337,6 +347,7 @@ h1>small {
 	width: 1200px;
 	overflow: hidden;
 	margin: 0 auto;
+	margin-top:50px;
 }
 
 .container {

@@ -13,6 +13,21 @@
 
 
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 24px;
+	margin-bottom: 10px;
+	padding: 0;
+}
+
+.homeIcon>img {
+	margin-top: 5px;
+}
+
+.headermiddle {
+	padding-top: 5px;
+}
+/* 헤더 제대로적용------------------------ */
 .content1 {
 	overflow: hidden;
 	margin: 130px auto;

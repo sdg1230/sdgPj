@@ -108,10 +108,11 @@
 				src="/imgs/home-icon.jpg"></span></a>
 	</div>
 	<div class="headermiddle">
-		<form action="/affilateone" method="get">
+		<form action="/salononeServlet" method="get">
 			<input type="text" placeholder="가고싶은 지점에 대해 알아보세요~!" name="search1"><input
 				type="submit" id="search"><label for="search"><img
 				src="/imgs/dotwhite.png"></label>
+				<input type="hidden"name="type" value="salonName2">
 		</form>
 	</div>
 	<div class="header2">
@@ -135,7 +136,7 @@
 	</div>
 	<div class="header3">
 		<ul class="hNavi">
-			<span class="meorijom" onclick="location.href = '/';">MEORIJOM HAIR</span>
+			<span class="meorijom" onclick="location.href = '/';" style="margin-right:200px;">MEORIJOM HAIR</span>
 			<li><a href="/company">회사소개</a></li>
 			<li><a href="/branchList?reqPage=1">지점소개</a></li>
 			<li><a href="/noticeList?reqPage=1">공지사항</a></li>

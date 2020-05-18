@@ -14,6 +14,7 @@
 	display: none;
 }
 
+
 input[type=radio], input[type=checkbox] {
 	display: none;
 }
