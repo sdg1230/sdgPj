@@ -405,6 +405,36 @@ public class SalonDao {
 		return s;
 	}
 
+	public ArrayList<Salon> selectSolonRevuewAddr(Connection conn, String sq) {
+		PreparedStatement pstmt = null;
+		ResultSet res = null;
+		ArrayList<Salon> list = new ArrayList<Salon>();
+		String str = "select * from salon where salon_addr like ?";
+		try {
+			pstmt=conn.prepareStatement(str);
+			pstmt.setString(1, "%"+sq+"%");
+			res = pstmt.executeQuery();
+			while(res.next()) {
+				Salon a = new Salon();
+				a.setSalonAddr(res.getString("salon_addr"));
+				a.setSalonFilename(res.getString("salon_filename"));
+				a.setSalonFilepath(res.getString("salon_filepath"));
+				a.setSalonInfo(res.getString("salon_info"));
+				a.setSalonName(res.getString("salon_name"));
+				a.setSalonNo(res.getInt("salon_no"));
+				a.setSalonPhone(res.getString("salon_phone"));
+				list.add(a);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(res);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
 	
 	
 }

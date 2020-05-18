@@ -64,13 +64,17 @@ public class SalonService {
 		return pd;
 	}
 
-	public SalonList selectAffilate(String sq) {
+	public ArrayList<Salon> selectAffilate(String sq) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Salon> list = new SalonDao().selectSolonRevuew(conn,sq);
-		ArrayList<SalonReview> reviewStar = new SalonDao().selectAffilate(conn,sq);
-		SalonList pd = new SalonList(list,null,reviewStar);
+		if(!list.isEmpty()) {
+			for(Salon s : list) {
+				s.setReviewStar(new SalonDao().selectSolonRevuew1(conn,s.getSalonName()));
+			}
+		}
+		
 		JDBCTemplate.close(conn);
-		return pd;
+		return list;
 	}
 
 	public SalonList selectAffilates(int reqPage) {
@@ -117,61 +121,64 @@ public class SalonService {
 	}
 
 	public SalonList selectdelete(String salonName) {
+		ArrayList<Salon> list = null;
+		String pageNavi = "";
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new SalonDao().salonDelete(conn,salonName);
+		System.out.println(result);
 		if(result>0) {
 			JDBCTemplate.commit(conn);
+			System.out.println("ddddd");
+			int reqPage =1;
+			int numPerPage = 10;
+			int totalCount = new SalonDao().totalCount(conn);
+			int totalPage =0;
+			if(totalCount%numPerPage == 0) {
+				totalPage = totalCount/numPerPage;
+			}else {
+				totalPage = totalCount/numPerPage+1;
+			}
+			
+			int start = (reqPage-1)*numPerPage+1;
+			int end = reqPage*numPerPage;
+			list = new SalonDao().selectAffilates(conn,start,end);
+			
+			int pageNaviSize = 5;
+			int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+			if(pageNo != 1) {
+				pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+(pageNo-pageNaviSize)+
+						"'>이전</a>";
+			}
+			for(int i=0;i<pageNaviSize;i++) {
+				if(reqPage == pageNo) {
+					pageNavi +="<span class='selectPage'>"+pageNo+"</span>";
+				}else {
+					pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+pageNo+"'>"+pageNo+"</a>";
+				}
+				pageNo++;
+				if(pageNo>totalPage) {
+					break;
+				}
+			}
+			if(pageNo <= totalPage) {
+				pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+pageNo+
+						"'>다음</a>";
+			}
+			
+			
 		}else {
+			System.out.println("ddddd");
 			JDBCTemplate.rollback(conn);
 		}
-		int reqPage =1;
-		int numPerPage = 10;
-		int totalCount = new SalonDao().totalCount(conn);
-		int totalPage =0;
-		if(totalCount%numPerPage == 0) {
-			totalPage = totalCount/numPerPage;
-		}else {
-			totalPage = totalCount/numPerPage+1;
-		}
-		
-		int start = (reqPage-1)*numPerPage+1;
-		int end = reqPage*numPerPage;
-		ArrayList<Salon> list = new SalonDao().selectAffilates(conn,start,end);
-		String pageNavi = "";
-		
-		int pageNaviSize = 5;
-		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
-		if(pageNo != 1) {
-			pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+(pageNo-pageNaviSize)+
-					"'>이전</a>";
-		}
-		for(int i=0;i<pageNaviSize;i++) {
-			if(reqPage == pageNo) {
-				pageNavi +="<span class='selectPage'>"+pageNo+"</span>";
-			}else {
-				pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+pageNo+"'>"+pageNo+"</a>";
-			}
-			pageNo++;
-			if(pageNo>totalPage) {
-				break;
-			}
-		}
-		if(pageNo <= totalPage) {
-			pageNavi +="<a class='btn' href='/branchmanagement?reqPage="+pageNo+
-					"'>다음</a>";
-		}
-		
-		
+		System.out.println(pageNavi+"1");
+		System.out.println(list+"1");
 		SalonList pd = new SalonList(list,pageNavi,null);
 		JDBCTemplate.close(conn);
 		return pd;
 		
 	}
 
-	public Salon salonUpdate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	public Salon salonUpdateFrm(String salonName) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -254,6 +261,19 @@ public class SalonService {
 		SalonReview star = new SalonDao().salonstar(conn,salonName);
 		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list,star);
 		return sd;
+	}
+
+	public ArrayList<Salon> selectAffilateAddr(String sq) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Salon> list = new SalonDao().selectSolonRevuewAddr(conn,sq);
+		if(!list.isEmpty()) {
+			for(Salon s : list) {
+				s.setReviewStar(new SalonDao().selectSolonRevuew1(conn,s.getSalonName()));
+			}
+		}
+		
+		JDBCTemplate.close(conn);
+		return list;
 	}
 
 }

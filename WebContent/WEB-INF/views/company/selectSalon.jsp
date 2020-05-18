@@ -16,8 +16,11 @@
 .content1 {
 	width: 1200px;
 	overflow: hidden;
-	margin: 0 auto;
+	margin: 130px;
 	background-color: white;
+	text-align: center;
+}
+.selectPage{
 	text-align: center;
 }
  .sidemenu1 {
@@ -68,34 +71,81 @@
             
         }
         .salon1{
+        
             width: 50%;
             height: 500px;
             float: right;
         }
+         .salon2{
+        
+            width: 50%;
+            height: 100%;
+            float: right;
+        }
+        
+        
         table{
+       border-collapse: collapse;
             width: 100%;
             height: 100%;
+            overflow: hidden;
         }
-        .addrtit{
-            border: 1px solid white;
-        }  
+        
         .hh{
         display: inline-block;
+        height: 100px;
         }
         .affimg{
-        	width: 250px;
-        	height: 250px;
-        	
+        	width: 100%;
+        	height: 300px;
+       
+        }
+        .tdrhd{
+        	display: block;
+        	border: 1px solid white;
         }
         .statd {
 	overflow: hidden;
-	width: 120px;
+	width: 200px;
 	text-align: center;
-	width: 120px;
+	
+	
 }
 .sta {
 	width: 20px;
 	height: 20px;
+}
+.djin{
+width: 250px;
+	height: 100px;
+}
+.djin1{
+width: 250px;
+	height: 50px;
+	 background-color: darkgray;
+}
+.comm{
+	width: 100%;
+	border: 1px solid black;
+	border-top-left-radius: 20px;
+	border-top-right-radius:  20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background-color: white;
+	}
+.comm1{
+	text-align:center;
+	display: block;
+	float: left;
+	height: 100px;
+	line-height:100px;
+	width: 75%;
+}
+.dj{
+	margin: 0 auto;
+}
+.re{
+text-align: center;
 }
 </style>
 
@@ -108,7 +158,7 @@
 
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
-		<div class="content">
+		
 			
 			<div class="content1">
 			<h1>${salon.salonName }</h1>
@@ -121,12 +171,12 @@
 					<div id="map" style="width: 100%; height: 500px;"></div>
 				</div>
 				<div class="salon1">
-					<table border="1">
+					<table>
+							
+							
 						<tr>
-							<th class="addrtit">주소</th>
-						</tr>
-						<tr>
-							<th colspan="3">${salon.salonAddr }</th>
+							<th >주소</th>
+							<th colspan="2">${salon.salonAddr }</th>
 						</tr>
 						<tr>
 							<th>연락처</th>
@@ -138,9 +188,11 @@
 							<td  colspan="2">09:00 ~ 18:00</td>
 						</tr>
 						<tr>
-						<th>매장소개</th>
+						<th class="addrtit">매장소개</th>
 						<td  colspan="2">${salon.salonInfo }</td>
 						</tr>
+						
+						<tr>
 						<tr>
 							<th>평점</th>
                             <td  class="statd">
@@ -213,8 +265,9 @@
 									
 								</c:if>
                             </td>
-                            <td>${star.reviewStars }점</td>
+                            <td >${star.reviewStars }점</td>
 						</tr>
+						
 					</table>
 				</div>
 				</div>
@@ -229,47 +282,43 @@
                 <div>◀목록으로</div></a>
             </div>
             
-			<div class="content1">
+			<div class="dj">
 				<div class="map">
 					<table>
 					<tr>
-							<td colspan="2">디자이너</td>
+							<td class="djin" colspan="2"><h1>디자이너</h1></td>
 							
 							
 
-							<td>전문</td>
+							
 						</tr>
 					<c:forEach var="d" items="${des }">
 						<tr>
 							
-							<td colspan="2" rowspan="2"><img class="affimg"
+							<td colspan="1" rowspan="2"><img class="affimg"
 								src="/upload/designer/${d.designerFilepath }">
 								</td>
-								<td>
-								<br>${d.designerName }
+								<td class="djin1">
+								${d.designerName }
 								</td>
 								</tr>
 								<tr>
 								
 							
 
-							<td>${d.designerInfo }</td>
+							<td class="djin1">${d.designerInfo }</td>
 						</tr>
 						
 						</c:forEach>
 					</table>
 				</div>
 				<h1 class="hh">머리안헤어 후기글</h1>
-				<div class="salon1">
-					<table>
+				<div class="salon2">
+					
 					<c:forEach var="star" items="${rev }">
-						<tr>
-							<td colspan="2" rowspan="5">${star.reviewComment }</td>
-							
-						</tr>
-						<tr>
-						<td>
-							<c:if test="${star.reviewStar == 1}">
+					<div class="comm">
+						<div class="comm1">${star.reviewComment }</div>
+						<div><c:if test="${star.reviewStar == 1}">
 									<img class="sta" src="/upload/salon/star2.jpg">
 
 
@@ -306,30 +355,28 @@
 									<img class="sta" src="/upload/salon/star2.jpg">
 									
 								</c:if>
-							</td>
+								<br>
+								${star.reviewStar }점
+																<br>
+								${star.reviewWriter }점
+																<br>
+								${star.reviewDate }
+																<br>
+								</div>
+								
+					</div>
 							
-							
-						</tr>
-						<tr>
-							<td>${star.reviewStar }점</td>
-						</tr>
-						<tr>
-							<th>${star.reviewWriter }</th>
-							
-						</tr>
-						<tr>
-							
-						<td>${star.reviewDate }</td>
-							
-						</tr>
+						
+						<br>
+						
 						</c:forEach>
-					</table>
+					
 					<div id="pageNavi">${pageNavi }</div>
 				</div>
 					
 			</div>
 
-		</div>
+	
 		
 </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />

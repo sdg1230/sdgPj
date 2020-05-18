@@ -1,5 +1,7 @@
 package salon.controller;
 
+import java.io.File;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,7 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import salon.service.SalonService;
+import salon.vo.Salon;
 import salon.vo.SalonList;
 
 /**
@@ -32,13 +40,58 @@ public class BranchdeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String salonName = request.getParameter("salonName");
-		SalonList af = new	SalonService().selectdelete(salonName);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchmanagement.jsp");
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			request.setAttribute("msg", "[enctype]확인");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			return;
+		}
+		String root = getServletContext().getRealPath("/");
+		String saveDirectory = root+"/upload/salon";
+		int maxSize = 10*1024*1024;
+		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory,maxSize,"UTF-8",new DefaultFileRenamePolicy());
+		Salon aff = new Salon();
+		String dd = mRequest.getParameter("dp");
+		System.out.println(dd);
+		if(dd.equals("삭제")) {
+			
+			aff.setSalonName(mRequest.getParameter("salonName"));
+			
+			aff.setSalonNo(Integer.parseInt(mRequest.getParameter("salonNo")));
+			SalonList af = new	SalonService().selectdelete(aff.getSalonName());
+			
+			
+			String oldFilepath = mRequest.getParameter("oldFilepath");
+			String oldFilename = mRequest.getParameter("oldFilename");
+			//기존 파일값을 유지하기 위한 설정
+			
+			
+			//3.비지니스로직
+			
+			//4.결과 처리
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			if(af!=null) {
+				File delFile = new File(saveDirectory+"/"+oldFilepath);
+				System.out.println(delFile);
+				delFile.delete();
+				request.setAttribute("msg", "삭제 성공!");
+				
+			}else {
+				request.setAttribute("msg", "삭제 실패!");
+			}
+			request.setAttribute("loc", "/branchmanagement?reqPage=1");
+			request.setAttribute("list", af.getAffilateList());
+			request.setAttribute("pageNavi", af.getPageNavi());
+			
+			rd.forward(request, response);
+		}else{
+			String salonName =  mRequest.getParameter("salonName");
+			System.out.println(salonName);
+			Salon af = new	SalonService().salonUpdateFrm(salonName);
+			request.setAttribute("list", af);
+			request.getRequestDispatcher("/WEB-INF/views/company/branchupdate.jsp").forward(request, response);
+		}
 		
-		request.setAttribute("list", af.getAffilateList());
-		request.setAttribute("pageNavi", af.getPageNavi());
-		rd.forward(request, response);
 	}
 
 	/**

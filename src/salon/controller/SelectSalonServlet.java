@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javafx.beans.binding.DoubleExpression;
+
 import salon.service.SalonService;
 import salon.vo.SalonDetails;
 
