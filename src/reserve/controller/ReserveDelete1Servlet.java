@@ -1,7 +1,6 @@
-package salon.controller;
+package reserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,23 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
-import salon.service.SalonService;
-import salon.vo.Salon;
-import salon.vo.SalonList;
+import reserve.service.ReserveService;
 
 /**
- * Servlet implementation class AffilateoneServlet
+ * Servlet implementation class ReserveDelete1Servlet
  */
-@WebServlet(name = "SalononeServlet", urlPatterns = { "/salononeServlet" })
-public class SalononeServlet extends HttpServlet {
+@WebServlet(name = "ReserveDelete1", urlPatterns = { "/reserveDelete1" })
+public class ReserveDelete1Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SalononeServlet() {
+    public ReserveDelete1Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,26 +30,20 @@ public class SalononeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String sq = request.getParameter("search1");
-		String type = request.getParameter("type");
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
-		if(type.equals("salonName2")) {
-			ArrayList<Salon> list = new SalonService().selectAffilate(sq);
-			request.setAttribute("list", list);
+		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
+		System.out.println("확인확인확인확인확인 : "+reserveNo);
+		int result = new ReserveService().DeleteReserve1(reserveNo);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			
+			request.setAttribute("msg", "예약취소 성공");
+			request.setAttribute("loc", "/");
 		}else {
-			ArrayList<Salon> list = new SalonService().selectAffilateAddr(sq);
-			request.setAttribute("list", list);
+			System.out.println("예약취소 실패");
+			request.setAttribute("loc", "/");
 		}
-		request.setAttribute("type", type);
-		request.setAttribute("key", sq);
-		
-
-		
-		
-		
 		rd.forward(request, response);
-		
 	}
 
 	/**

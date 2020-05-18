@@ -52,16 +52,15 @@ public class BranchregistrationServlet extends HttpServlet {
 		String roadAddr = mRequest.getParameter("roadAddr");
 		String jibunAddr = mRequest.getParameter("jibunAddr");
 		String detailAddr = mRequest.getParameter("detailAddr");
-		System.out.println(roadAddr);
-		System.out.println(jibunAddr);
-		System.out.println(detailAddr);
+		
 		Salon aff = new Salon();
 		aff.setSalonAddr(roadAddr+jibunAddr+detailAddr);
-		System.out.println(aff.getSalonAddr());
+		
 		aff.setSalonFilename(mRequest.getOriginalFileName("salonFilename"));
 		aff.setSalonFilepath(mRequest.getFilesystemName("salonFilename"));
 		aff.setSalonInfo(mRequest.getParameter("salonInfo"));
 		aff.setSalonName(mRequest.getParameter("salonName"));
+		
 		aff.setSalonPhone(mRequest.getParameter("salonPhone"));
 		
 		int result = new SalonService().insertAffilatr(aff);
