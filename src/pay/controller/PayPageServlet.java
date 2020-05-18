@@ -1,6 +1,7 @@
-package member.controller;
+package pay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
+import reserve.service.ReserveService;
+import reserve.vo.Reserve;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class PayPageServlet
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "PayPage", urlPatterns = { "/payPage" })
+public class PayPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public PayPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +32,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("memberId");
-		String memberPw=request.getParameter("memberPw");
-		Member m=new MemberService().selectOneMember(memberId,memberPw);
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		if(m!=null) {
-			HttpSession session =request.getSession();
-			session.setAttribute("member", m);
-			request.setAttribute("msg", "환영합니다.");
-			request.setAttribute("loc", "/");
-		}else {
-			request.setAttribute("msg", "아이디 또는 패스워드를 다시 입력해주세요");
-			request.setAttribute("loc", "/loginFrm");
+		int reserveNo = 1;
+		//String reserveNo = request.getParameter("reserveNo");
+		//Reserve r = new ReserveService();
+		
+		ArrayList<String> reserveDetail = new ReserveService().selectDetailList(reserveNo);
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<reserveDetail.size();i++) {
+			sb.append(reserveDetail.get(i)+",");
 		}
+		sb.deleteCharAt(sb.length()-1);
+
+		Reserve r = new ReserveService().selectOneReserve(reserveNo);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pay/payPage.jsp");
+		request.setAttribute("r", r);
+		request.setAttribute("detail", sb);
 		rd.forward(request, response);
-		
-		
 	}
 
 	/**

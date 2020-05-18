@@ -79,6 +79,29 @@ public class DesignerService {
 		return list;
 	}
 
+	public ArrayList<Designer> searchDesigner(String keyword, String salonName) {
+		Connection conn = JDBCTemplate.getConnection();
+		if(salonName.length()==0) {
+			if(keyword.equals("")) {
+				ArrayList<Designer> list = new DesignerDao().selectAllDesigner(conn);
+				return list;
+			}else {
+				ArrayList<Designer> list = new DesignerDao().searchDesignerName(conn, keyword);
+				return list;				
+			}
+			
+		}else {
+			if(keyword.equals("")) {
+				ArrayList<Designer> list= new DesignerDao().selectBySalon(conn, salonName);
+				return list;
+			}else {
+				ArrayList<Designer> list = new DesignerDao().searchDesignerTwoName(conn, keyword, salonName);
+				return list;				
+			}
+		}
+		
+	}
+
 	
 
 }

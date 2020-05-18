@@ -21,6 +21,11 @@
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
 </body>
+<script>
+$(function(){
+	  $(".sideicon").click();
+});
+</script>
 <style>
     /*-----------------content-----------------------*/
     .content2 {

@@ -9,6 +9,7 @@ public class Salon {
 	private String salonFilename;
 	private String salonFilepath;
 	private int reviewStar;
+	private double reviewStarAvg;
 	public Salon() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -73,6 +74,12 @@ public class Salon {
 	}
 	public void setSalonFilepath(String salonFilepath) {
 		this.salonFilepath = salonFilepath;
+	}
+	public double getReviewStarAvg() {
+		return reviewStarAvg;
+	}
+	public void setReviewStarAvg(double reviewStarAvg) {
+		this.reviewStarAvg = reviewStarAvg;
 	}
 	
 }

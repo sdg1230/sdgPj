@@ -359,5 +359,59 @@ public class ReserveDao {
 		return result;
 	}
 
+	public ArrayList<String> selectDetailList(Connection conn, int reserveNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> list = new ArrayList<String>(); 
+		String query = "select hair_name from reserve_detail where reserve_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(rset.getString(1));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public Reserve selectOneReserve(Connection conn, int reserveNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Reserve r = null;
+		String query = "select * from reserve join designer using(designer_no) where reserve_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reserveNo);
+			rset=pstmt.executeQuery();
+			
+			while(rset.next()) {
+				r = new Reserve();
+				r.setReserveNo(reserveNo);
+				r.setMemberId(rset.getString("member_id"));
+				r.setSalonName(rset.getString("salon_name"));
+				r.setDesignerName(rset.getString("designer_name"));
+				r.setReserveDate(rset.getString("reserve_date"));
+				r.setStartTime(rset.getInt("start_time"));
+				r.setTotalPrice(rset.getInt("total_price"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return r;
+	}
+
 
 }

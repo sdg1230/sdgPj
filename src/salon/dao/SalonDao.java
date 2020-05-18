@@ -382,6 +382,32 @@ public class SalonDao {
 		return ds;
 	}
 
+	public ArrayList<Salon> selectBestSalon(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Salon> list = new ArrayList<Salon>();
+		String query = "select * from (select salon_name,avg(review_star) as review_star,row_number() over(order by avg(review_star)desc) as rank from salon_review group by salon_name) join salon using(salon_name)  where rank between 1 and 3  order by rank";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				Salon s = new Salon();
+				s.setSalonFilepath(rset.getString("salon_filepath"));
+				s.setSalonName(rset.getString("salon_name"));
+				s.setSalonNo(rset.getInt("salon_no"));
+				s.setReviewStarAvg(rset.getDouble("review_star"));
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
 	
 	
 }
