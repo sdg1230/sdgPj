@@ -14,13 +14,13 @@
 
 <style>
 .content1 {
-	width: 1200px;
 	overflow: hidden;
 	margin: 130px auto;
+	margin-bottom: 0;
+	height: 100%;
 	background-color: white;
 	text-align: center;
 }
-
  .sidemenu1 {
  display: inline-block;
             width: 49.8%;
@@ -180,6 +180,23 @@ text-align: center;
 .salonth{
 	width: 25%;
 }
+.tit{
+	
+	height: 150px;
+	line-height: 150px;
+	
+}
+.tit>h1{
+
+	font-size: 3em;
+}
+.content {
+	width: 1200px;
+	overflow: hidden;
+	margin: 0 auto;
+	background-color: white;
+	text-align: center;
+}
 </style>
 
 
@@ -194,7 +211,14 @@ text-align: center;
 		
 			
 			<div class="content1">
+			<div class="tit">
+			
 			<h1>${salon.salonName }</h1>
+			<br>
+			</div>
+			<br>
+			</div>
+			<div class="content">
 			<input type="hidden" id="salonName" value="${salon.salonName }">
 				<input type="hidden" id="salonAddr" value="${salon.salonAddr }">
 				<div>

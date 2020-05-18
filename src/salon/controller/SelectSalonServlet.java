@@ -32,10 +32,9 @@ public class SelectSalonServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String salonName = request.getParameter("salonName");
-		System.out.println(salonName);
+		
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-	System.out.println(reqPage);
-			
+	
 			SalonDetails sd = new SalonService().salonDetails(salonName,reqPage);
 			
 			request.setAttribute("salon", sd.getAffilate());

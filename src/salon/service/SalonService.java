@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 import java.util.ArrayList;
 
-import javax.sound.midi.Synthesizer;
+
 
 import common.JDBCTemplate;
 import designer.model.vo.Designer;
@@ -263,7 +263,7 @@ public class SalonService {
 		}
 		ArrayList<Designer> designerList = new SalonDao().salondesigner(conn, salonName);
 		SalonReview star = new SalonDao().salonstar(conn,salonName);
-		System.out.println(pageNavi);
+		
 		SalonDetails sd =  new SalonDetails(sa, pageNavi, designerList, list,star);
 		return sd;
 	}

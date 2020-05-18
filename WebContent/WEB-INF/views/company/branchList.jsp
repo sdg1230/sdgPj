@@ -53,7 +53,8 @@
 	text-align: center;
 	height: 350px;
 	background-image: url("/imgs/lsit.jpg");
-	background-size: 100%;
+	background-size: 60%;
+	
 }
 
 .title>span {
@@ -95,9 +96,11 @@
 }
 
 .sub {
+display:block;
 	width: 100px;
-	height: 40px;
-	background-color: cornflowerblue;
+	height: 42px;
+	background-color:#998778 ;
+	padding: 0;
 }
 
 .affimg {
