@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import reserve.service.ReserveService;
 import reserve.vo.Reserve;
 
@@ -33,7 +35,10 @@ public class ReserveListFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String memberId = "user01";
+		HttpSession session = request.getSession(true);
+		Member m = (Member) session.getAttribute("member");
+		String memberId = m.getMemberId();
+		
 		ArrayList<Reserve>list = new ReserveService().reserveList(memberId);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
