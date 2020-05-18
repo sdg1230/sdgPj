@@ -40,7 +40,7 @@ public class BranchListServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
 		request.setAttribute("pageNavi", af.getPageNavi());
 		request.setAttribute("list", af.getAffilateList());
-		request.setAttribute("star", af.getReviewStar());
+		
 		rd.forward(request, response);
 		
 	}

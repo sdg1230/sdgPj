@@ -22,7 +22,7 @@ public class SalonDao {
 		ArrayList<Salon> list = new ArrayList<Salon>();
 		String str = "select * from " + 
 				"(select rownum as rnum,n.* from " + 
-				"(select * from salon order by salon_no desc)n) " + 
+				"(select * from salon order by salon_no asc)n) " + 
 				"where rnum BETWEEN ? and ?";
 		try {
 			pstmt=conn.prepareStatement(str);
@@ -71,21 +71,18 @@ public class SalonDao {
 		return result;
 	}
 
-	public  ArrayList<SalonReview> selectSolonRevuew(Connection conn) {
+	public  double selectSolonRevuew1(Connection conn,String salonName) {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
+		double star = 0;
 		ArrayList<SalonReview> list = new ArrayList<SalonReview>();
-		String str = "select salon_name,avg(review_star) from salon_review group by salon_name";
+		String str = "select avg(review_star) as star from salon_review where salon_name=? group by salon_name";
 		try {
 			pstmt = conn.prepareStatement(str);
+			pstmt.setString(1, salonName);
 			res = pstmt.executeQuery();
-			while (res.next()) {
-				SalonReview s = new SalonReview();
-				s.setReviewStars(res.getDouble("avg(review_star)"));
-				s.setSalonName(res.getString("salon_name"));
-				
-				list.add(s);
-				
+			if (res.next()) {
+				star = res.getDouble("star");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +91,7 @@ public class SalonDao {
 			JDBCTemplate.close(res);
 			JDBCTemplate.close(pstmt);
 		}
-		return list;
+		return star;
 	}
 
 	public ArrayList<SalonReview> selectAffilate(Connection conn, String sq) {
@@ -261,6 +258,7 @@ public class SalonDao {
 	public int insertAffilatr(Connection conn, Salon aff) {
 		PreparedStatement pstmt = null;
 		int result = 0;
+		System.out.println(aff.getSalonName());
 		String str ="insert into salon values(SEQ_SALON_NO.NEXTVAL,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(str);
@@ -327,15 +325,13 @@ public class SalonDao {
 			while (res.next()) {
 				s = new SalonReview();
 				s.setReserveNo(res.getInt("reserve_no"));
-				System.out.println(s.getReserveNo());
+				
 				s.setReviewComment(res.getString("review_comment"));
 				s.setReviewDate(res.getDate("review_date"));
 				s.setReviewStar(res.getInt("review_star"));
 				s.setReviewWriter(res.getString("review_writer"));
 				s.setSalonName(res.getString("salon_name"));
-				System.out.println(s.getReviewComment());
-				System.out.println(s.getReviewStar());
-				System.out.println("dd");
+				
 				sr.add(s);
 				
 				
@@ -369,7 +365,7 @@ public class SalonDao {
 				d.setDesignerName(res.getString("designer_name"));
 				d.setDesignerNo(res.getInt("designer_no"));
 				d.setSalonName(res.getString("salon_name"));
-				
+				System.out.println(d.getSalonName());
 				ds.add(d);
 			}
 		} catch (SQLException e) {
@@ -380,6 +376,63 @@ public class SalonDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return ds;
+	}
+
+	public SalonReview salonstar(Connection conn, String salonName) {
+		PreparedStatement pstmt = null;
+		ResultSet res = null;
+		SalonReview s = null;
+		String str = "select salon_name,avg(review_star) from salon_review where salon_name=? group by salon_name";
+		try {
+			pstmt = conn.prepareStatement(str);
+			pstmt.setString(1, salonName);
+			res = pstmt.executeQuery();
+			while (res.next()) {
+				 s = new SalonReview();
+				s.setReviewStars(res.getDouble("avg(review_star)"));
+				
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(res);
+			JDBCTemplate.close(pstmt);
+		}
+		return s;
+	}
+
+	public ArrayList<Salon> selectSolonRevuewAddr(Connection conn, String sq) {
+		PreparedStatement pstmt = null;
+		ResultSet res = null;
+		ArrayList<Salon> list = new ArrayList<Salon>();
+		String str = "select * from salon where salon_addr like ?";
+		try {
+			pstmt=conn.prepareStatement(str);
+			pstmt.setString(1, "%"+sq+"%");
+			res = pstmt.executeQuery();
+			while(res.next()) {
+				Salon a = new Salon();
+				a.setSalonAddr(res.getString("salon_addr"));
+				a.setSalonFilename(res.getString("salon_filename"));
+				a.setSalonFilepath(res.getString("salon_filepath"));
+				a.setSalonInfo(res.getString("salon_info"));
+				a.setSalonName(res.getString("salon_name"));
+				a.setSalonNo(res.getInt("salon_no"));
+				a.setSalonPhone(res.getString("salon_phone"));
+				list.add(a);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(res);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 
 	public ArrayList<Salon> selectBestSalon(Connection conn) {
@@ -397,6 +450,7 @@ public class SalonDao {
 				s.setSalonNo(rset.getInt("salon_no"));
 				s.setReviewStarAvg(rset.getDouble("review_star"));
 				list.add(s);
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -407,7 +461,4 @@ public class SalonDao {
 		}
 		return list;
 	}
-
-	
-	
 }

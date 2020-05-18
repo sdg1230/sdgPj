@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import salon.service.SalonService;
 import salon.vo.SalonDetails;
 
@@ -31,12 +32,15 @@ public class SelectSalonServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String salonName = request.getParameter("salonName");
+		
+		
 		SalonDetails sd = new SalonService().salonDetails(salonName);
 		
 		request.setAttribute("salon", sd.getAffilate());
 		
 		request.setAttribute("pageNavi", sd.getAgeNavi());
-		
+		request.setAttribute("star", sd.getSatr());
+		System.out.println(sd.getSatr());
 		request.setAttribute("des", sd.getDesignerList());
 		request.setAttribute("rev", sd.getReviewList());
 		request.getRequestDispatcher("/WEB-INF/views/company/selectSalon.jsp?reqPage=1").forward(request, response);
