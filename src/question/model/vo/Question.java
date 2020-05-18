@@ -6,21 +6,19 @@ public class Question {
 	private String questionContent;
 	private String questionFilename;
 	private String questionFilepath;
-	private int questionLevel;
 	private int questionRef;
 	public Question() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Question(int questionNo, String questionWriter, String questionContent, String questionFilename,
-			String questionFilepath, int questionLevel, int questionRef) {
+			String questionFilepath, int questionRef) {
 		super();
 		this.questionNo = questionNo;
 		this.questionWriter = questionWriter;
 		this.questionContent = questionContent;
 		this.questionFilename = questionFilename;
 		this.questionFilepath = questionFilepath;
-		this.questionLevel = questionLevel;
 		this.questionRef = questionRef;
 	}
 	public int getQuestionNo() {
@@ -52,12 +50,6 @@ public class Question {
 	}
 	public void setQuestionFilepath(String questionFilepath) {
 		this.questionFilepath = questionFilepath;
-	}
-	public int getQuestionLevel() {
-		return questionLevel;
-	}
-	public void setQuestionLevel(int questionLevel) {
-		this.questionLevel = questionLevel;
 	}
 	public int getQuestionRef() {
 		return questionRef;

@@ -14,16 +14,16 @@ import question.model.service.QuestionService;
 import question.model.vo.Question;
 
 /**
- * Servlet implementation class QuestionAnswerServlet
+ * Servlet implementation class QuestionListServlet
  */
-@WebServlet(name = "QuestionAnswer", urlPatterns = { "/questionAnswer" })
-public class QuestionAnswerServlet extends HttpServlet {
+@WebServlet(name = "QuestionList", urlPatterns = { "/questionList" })
+public class QuestionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionAnswerServlet() {
+    public QuestionListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +32,12 @@ public class QuestionAnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Question> list = new QuestionService().printQuestion();
+		String questionWriter = request.getParameter("questionWriter");
+		ArrayList<Question> list = new QuestionService().myQuestion(questionWriter);
 		request.setAttribute("list", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/question/questionAnswer.jsp");
+		System.out.println(list.size());
+		request.setAttribute("questionWriter", questionWriter);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/question/questionList.jsp");
 		rd.forward(request, response);
 	}
 

@@ -221,7 +221,7 @@ function questionFunc(memberId){
 		if(memberId=="admin"){
 			location.href="/questionAnswer";
 		}else{
-			location.href="/questionList";
+			location.href="/questionList?questionWriter=${sessionScope.member.memberId}";
 		}
 	}
 }

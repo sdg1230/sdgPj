@@ -253,7 +253,7 @@ function questionFunc(memberId){
                 </tr>
                 
                 <c:forEach items="${list }" var="q">
-				<c:if test="${q.questionWriter ne 'admin' }">
+                <c:if test="${q.questionWriter eq sessionScope.member.memberId || q.questionWriter eq 'admin' }">
 				<tr>
 					<td style="border-bottom: 0.1px solid #DDE3E9;">
 					${q.questionWriter }</td>
