@@ -267,7 +267,7 @@ th {
 					<c:if test="${u.reserveStatus==false}">
 						<div class="reserveno">
 							<div class="yes">
-								<h4>방문하지않음</h4>
+								<h4>예약중</h4>
 							</div>
 							<table>
 								<tr>
