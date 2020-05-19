@@ -89,7 +89,7 @@
 			<div>1:1문의</div>
 		</div>
 	</a> 
-	<a href="#">
+	<a href="/eventList">
 		<div class="sidemenu">
 			<img src="/imgs/event-icon.png">
 			<div>이벤트</div>

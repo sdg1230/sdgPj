@@ -38,10 +38,10 @@ public class ReserveDelete1Servlet extends HttpServlet {
 		if(result>0) {
 			
 			request.setAttribute("msg", "예약취소 성공");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/reserveListFrm");
 		}else {
 			System.out.println("예약취소 실패");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/reserveListFrm");
 		}
 		rd.forward(request, response);
 	}
