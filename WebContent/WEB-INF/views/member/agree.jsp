@@ -205,26 +205,30 @@ IP주소, 쿠키, 서비스 이용기록, 방문기록 등
         }
         #nextBtn{
             color: white;
-            background-color: red;
-            margin-top: 50px;
+            background-color: #CD3C41;
             margin-left: 320px;
             width: 150px;
             height: 40px;
+             margin-top: 50px;
         }
+        
         #cancel{
             background-color: black;
             color: white;
             margin-left: 20px;
             width: 150px;
             height: 40px; 
+             margin-top: 50px;
         }
         #bottomBtn{
             width:98%;
             margin: 0 auto;
             margin-left: 0px;
             border-top: 1px solid black;
-            margin-top: 20px;
+            margin-top: 50px;
         }
+        
+        
         #bottomBtn>button{
             
             border-radius: 5px;
