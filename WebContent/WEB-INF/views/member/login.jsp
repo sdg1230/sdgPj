@@ -20,14 +20,16 @@
                          <tr>
                              <td class="loginfont">아이디</td>
                              <td><input type="text" id="id" name="memberId" ></td>
-                             <td rowspan="2"><button type="submit" id="btn" >로그인</button></td>
+                             <!--  <td rowspan="2"><button type="submit" id="btn" >로그인</button></td>-->
                          </tr>
                          <tr>
                              <td class="loginfont">비밀번호</td>
                              <td><input type="password" id="pw" name="memberPw"></td>
                          </tr>
                          
-                    </table>   
+                    </table>
+                       <button type="submit" id="btn" >로그인</button>
+                       <button type="button" id="idsearchbtn" ><a href="/idSearchFrm" >아이디찾기</a></button>
                     </form>
                 </div>
         </div>
@@ -89,8 +91,9 @@
            padding: 10px;
         }
         #btn{
-            width: 150px;
-            height: 100px;
+        	margin-left:80px;
+            width: 310px;
+            height: 50px;
             border-radius: 6px;
             border:1px;
             background-color: red;
@@ -98,6 +101,19 @@
             font-size: 20px;
             padding: 10px;
             
+        }
+        
+        #idsearchbtn{
+        	margin-left:80px;
+            width: 310px;
+            height: 50px;
+            border-radius: 6px;
+            border:1px;
+            background-color: #2E2E2E;
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+        
         }
         .loginfont{
             font-size: 20px;
