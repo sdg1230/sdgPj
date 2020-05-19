@@ -35,7 +35,7 @@ public class ReserveListFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 		Member m = (Member) session.getAttribute("member");
 		String memberId = m.getMemberId();
 		

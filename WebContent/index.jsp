@@ -80,7 +80,7 @@
 			<div class="sortByStar"></div>
 			<div class="sort notice">
 				<h1 class="meorijom">
-					# Notice<small>공지사항을 확인하세요</small>
+					# Notice<small>클릭하시면 상세보기가 가능합니다.</small>
 				</h1>
 
 				<div id="myCarousel2" class="carousel slide" data-ride="carousel">
@@ -130,7 +130,8 @@
 	});
 
 	$(function() {
-		$.ajax({
+		$
+				.ajax({
 					url : "/selectBestSalon",
 					type : "get",
 					success : function(data) {
@@ -138,7 +139,7 @@
 						for (var i = 0; i < data.length; i++) {
 							html += "<a href='/selectSalon?salonName="
 									+ data[i].salonName
-									+ "'><div class='sBox'>"
+									+ "&reqPage=1'><div class='sBox'>"
 							html += "<img src='upload/salon/"+data[i].salonFilepath+"'>"
 							html += "<div class='rank meorijom'>" + (i + 1)
 									+ ".</div>"
@@ -154,7 +155,8 @@
 					}
 				});
 
-		$.ajax({
+		$
+				.ajax({
 					url : "/selectBestDesigner",
 					type : "get",
 					success : function(data) {
@@ -166,7 +168,7 @@
 						html += " <div class='dIntroduce'>" + data.designerInfo
 								+ "</div></div>";
 						html += " <div class='dPhoto' style='width:30%;'>";
-						html += " <img src='/upload/designer/"+data.designerFilepath+"'></div>"
+						html += " <img src='/upload/designer/"+data.designerFilepath+"'></div>";
 						$(".designer").append(html);
 					}
 				});
@@ -179,16 +181,18 @@
 				for (var i = 0; i < data.length; i++) {
 					if(i==0){
 						html += " <div class='item active' id='item'>";
-						html += " <a href='#'><div class='nTitle'>"
+						html += " <a href='/noticeDetail?noticeNo="+data[i].noticeNo+"'><div class='nTitle'>"
 								+ data[i].noticeTitle
 								+ "</div> <div class='nContent'>"
 								+ data[i].noticeContent + "</div></a></div>";	
+						html += " <div class='moreNotice'></div>"
 					}else{
 						html += " <div class='item' id='item'>";
-						html += " <a href='#'><div class='nTitle'>"
+						html += " <a href='/noticeDetail?noticeNo="+data[i].noticeNo+"'><div class='nTitle'>"
 								+ data[i].noticeTitle
 								+ "</div> <div class='nContent'>"
-								+ data[i].noticeContent + "</div></a></div>";	
+								+ data[i].noticeContent + "</div></a></div>";
+						html += " <div class='moreNotice'></div>";
 					}
 					
 				}
@@ -216,10 +220,12 @@
     text-overflow: ellipsis;
 	height: 80%;
 	font-size: 15px;
-	width:70%;
+	width:60%;
 	margin :0 auto;
 }
-
+.item>a:hover{
+	cursor:pointer;
+}
 #item {
 	height: 215px;
 	width: 100%;
@@ -241,6 +247,7 @@
 .designer>div {
 	float: left;
 	height: 215px;
+	margin-bottom:150px;
 	border: 1px solid lightgray;
 }
 
@@ -262,10 +269,15 @@ h1>small {
 	float: left;
 	overflow: hidden;
 }
-
+.sort>h1{
+	padding-top:30px;
+	margin-bottom:20px;
+}
 .sortByStar {
 	width: 100%;
 	overflow: hidden;
+	padding-bottom:40px;
+	border-bottom:1px solid gray;
 }
 
 .sBox {
@@ -335,6 +347,7 @@ h1>small {
 	width: 1200px;
 	overflow: hidden;
 	margin: 0 auto;
+	margin-top:50px;
 }
 
 .container {

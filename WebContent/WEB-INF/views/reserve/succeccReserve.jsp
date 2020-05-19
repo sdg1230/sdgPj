@@ -65,6 +65,7 @@ h1,p {
         margin-bottom: 50px;
         font-size: 20px;
         font-weight: bold;
+        margin-bottom: 0;
     }
     h1{
        text-decoration-line: underline;
@@ -81,6 +82,22 @@ table td {
 	width: 150px;
 	height: 40px;
     border-bottom: 1px solid lightgray;
+}
+.subBtns{
+    margin: 0 auto;
+    width: 300px;
+}
+.subBtn{
+    float: left;
+    display: block;
+    margin: 25px;
+	width: 100px;
+    height: 50px;
+    background-color: #CD3C41;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 15px;
 }
 </style>
 </head>
@@ -109,11 +126,72 @@ table td {
 						</tr>
 						<tr>
 							<td>예약시간</td>
-							<td>${reserveInfo1.startTime }</td>
+							<td>
+							<c:if test="${reserveInfo1.startTime==1 }">
+								10:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==2 }">
+								10:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==3 }">
+								11:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==4 }">
+								11:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==5 }">
+								12:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==6 }">
+								12:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==7 }">
+								13:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==8 }">
+								13:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==9 }">
+								14:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==10 }">
+								14:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==11 }">
+								15:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==12 }">
+								15:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==13}">
+								16:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==14}">
+								16:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==15}">
+								17:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==16}">
+								17:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==17}">
+								18:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==18}">
+								18:30
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==19}">
+								19:00
+							</c:if>
+							<c:if test="${reserveInfo1.startTime==20}">
+								19:30
+							</c:if>
+                            </td>
 						</tr>
 						<tr>
 							<td>금액</td>
-							<td>${reserveInfo1.totalPrice }</td>
+							<td>${reserveInfo1.totalPrice }원</td>
 						</tr>
 					</table>
 					<p>마이페이지에 가서 선결제를 하시면 할인된 금액으로 결제가능합니다</p>
@@ -121,6 +199,10 @@ table td {
 				<c:if test="${msg=='예약실패' }">
 					<h1>${msg }</h1>
 				</c:if>
+				<div class="subBtns">
+					<a class="subBtn" href="/">메인페이지</a>
+					<a class="subBtn" href="/reserveListFrm">예약 내역</a>
+				</div>
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />

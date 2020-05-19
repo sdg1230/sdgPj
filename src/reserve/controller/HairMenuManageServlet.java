@@ -1,6 +1,7 @@
 package reserve.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,18 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import reserve.service.ReserveService;
+import reserve.vo.HairMenu;
 
 /**
- * Servlet implementation class ReserveDelete1Servlet
+ * Servlet implementation class HairMenuManageServlet
  */
-@WebServlet(name = "ReserveDelete1", urlPatterns = { "/reserveDelete1" })
-public class ReserveDelete1Servlet extends HttpServlet {
+@WebServlet(name = "HairMenuManage", urlPatterns = { "/hairMenuManage" })
+public class HairMenuManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReserveDelete1Servlet() {
+    public HairMenuManageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +32,7 @@ public class ReserveDelete1Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
-		System.out.println("확인확인확인확인확인 : "+reserveNo);
-		int result = new ReserveService().DeleteReserve1(reserveNo);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
-		if(result>0) {
-			
-			request.setAttribute("msg", "예약취소 성공");
-			request.setAttribute("loc", "/reserveListFrm");
-		}else {
-			System.out.println("예약취소 실패");
-			request.setAttribute("loc", "/reserveListFrm");
-		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/hairMenuManage.jsp");
 		rd.forward(request, response);
 	}
 

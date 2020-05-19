@@ -13,6 +13,21 @@
 
 
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 24px;
+	margin-bottom: 10px;
+	padding: 0;
+}
+
+.homeIcon>img {
+	margin-top: 5px;
+}
+
+.headermiddle {
+	padding-top: 5px;
+}
+/* 헤더 제대로적용------------------------ */
 .content1 {
 	overflow: hidden;
 	margin: 130px auto;
@@ -336,7 +351,7 @@ text-align: center;
 				</div>
 				</div>
 			<div>
-                <a href="/reserveFrm">
+                <a href="javascript:void(0);" onclick="goToReserveFrm('${sessionScope.member.memberId}');">
                 <div class="sidemenu2">
 			<img src="/imgs/reserve-icon.png">
 			<div>예약하기</div>
@@ -471,7 +486,18 @@ text-align: center;
         console.log(longitude);
     }
     
-   
+   function goToReserveFrm(memberId){
+	   if(memberId==""){
+		   	alert("로그인이 필요합니다");
+			location.href="/loginFrm";
+		}else{
+			if(memberId=="admin"){
+				location.href="/adminReserveList";
+			}else{
+				location.href="/reserveFrm";
+			}
+		}
+   }
         
         
 		$(function(){

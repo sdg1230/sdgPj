@@ -1,27 +1,27 @@
 package reserve.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import reserve.service.ReserveService;
 
 /**
- * Servlet implementation class ReserveDelete1Servlet
+ * Servlet implementation class ModifyHairMenuServlet
  */
-@WebServlet(name = "ReserveDelete1", urlPatterns = { "/reserveDelete1" })
-public class ReserveDelete1Servlet extends HttpServlet {
+@WebServlet(name = "ModifyHairMenu", urlPatterns = { "/modifyHairMenu" })
+public class ModifyHairMenuServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReserveDelete1Servlet() {
+    public ModifyHairMenuServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +30,11 @@ public class ReserveDelete1Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
-		System.out.println("확인확인확인확인확인 : "+reserveNo);
-		int result = new ReserveService().DeleteReserve1(reserveNo);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
-		if(result>0) {
-			
-			request.setAttribute("msg", "예약취소 성공");
-			request.setAttribute("loc", "/reserveListFrm");
-		}else {
-			System.out.println("예약취소 실패");
-			request.setAttribute("loc", "/reserveListFrm");
-		}
-		rd.forward(request, response);
+		int hairNo = Integer.parseInt(request.getParameter("hairNo"));
+		int hairPay = Integer.parseInt(request.getParameter("nHairPay"));
+		int result = new ReserveService().modifyHairMenu(hairNo,hairPay);
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(result,response.getWriter());
 	}
 
 	/**

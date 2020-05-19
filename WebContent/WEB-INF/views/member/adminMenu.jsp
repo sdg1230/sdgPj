@@ -16,7 +16,7 @@
             <a href="#"><span class="menuBox"><img src="/imgs/questionMan.jpg"><div>1:1문의</div></span></a><br>
             <a href="/branchmanagement?reqPage=1"><span class="menuBox"><img src="/imgs/company.png"><div>지점 관리</div></span></a>
             <a href="/designerList"><span class="menuBox"><img src="/imgs/designerIcon.png"><div>디자이너 관리</div></span></a>
-            
+            <a href="/hairMenuManage"><span class="menuBox"><img src="/imgs/hairmenu-icon.png"><div>시술 목록 관리</div></span></a>
         </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </div>
