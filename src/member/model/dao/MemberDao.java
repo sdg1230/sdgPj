@@ -197,5 +197,58 @@ public class MemberDao {
 		return list;
 	}
 
+	public Member idSearch(Connection conn, String memberName, String memberPhone) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		Member m=null;
+		String query="select member_id from  member where member_name=? and member_phone=?";
+		
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,memberName);
+			pstmt.setString(2, memberPhone);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				m=new Member();
+				m.setMemberId(rset.getString("member_id"));
+				System.out.println(m.getMemberId());
+			}	
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+			
+		}
+		
+		return m;
+	}
+
+	public int pwSearch(Connection conn, String memberId, String memberPhone) {
+		PreparedStatement pstmt=null;
+		int m=0;
+		
+		String query="select member_pw from  member where member_id=? and member_phone=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2,memberPhone);
+			
+			m=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return m;
+	}
+
 	
 }

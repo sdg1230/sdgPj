@@ -98,7 +98,7 @@
                     success:function(data){
                         if(data==1){
                         	comments[0].innerHTML="아이디가 중복됩니다.";
-                        	//$("#id").focus();
+                          //$("#id").focus();
                         	count[0]=false;
                         	
                         }else{

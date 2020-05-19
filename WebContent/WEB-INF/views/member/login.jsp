@@ -30,6 +30,7 @@
                     </table>
                        <button type="submit" id="btn" >로그인</button>
                        <button type="button" id="idsearchbtn" ><a href="/idSearchFrm" >아이디찾기</a></button>
+                        <button type="button" id="pwsearchbtn" ><a href="/pwSearchFrm" >비밀번호찾기</a></button>
                     </form>
                 </div>
         </div>
@@ -105,11 +106,33 @@
         
         #idsearchbtn{
         	margin-left:80px;
-            width: 310px;
+            width: 150px;
             height: 50px;
             border-radius: 6px;
             border:1px;
-            background-color: #2E2E2E;
+            background-color:#505050;
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+        
+        }
+        #idsearchbtn>a{
+        
+         color: white;
+        }
+        #pwsearchbtn>a{
+        	color:white;
+        }
+        
+        #pwsearchbtn{
+        	
+        	margin-top:3px;
+        	margin-left:5px;
+            width: 150px;
+            height: 50px;
+            border-radius: 6px;
+            border:1px;
+            background-color: #505050;
             color: white;
             font-size: 20px;
             padding: 10px;
@@ -123,7 +146,7 @@
             margin-left: 360px;
             width: 50%;
             height: 200px;
-            border-bottom: 1px solid black;
+            
             
         }
 </style>

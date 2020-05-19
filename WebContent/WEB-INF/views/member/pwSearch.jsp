@@ -5,17 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <img src="../../../imgs/backImg1.jpg" id="img1">
-    
-    <div class="content">
-    <h1>아이디 찾기</h1>
+    	<div class="content">
+    	<h1>비밀번호 찾기</h1>
 	 			<table id="table">
+	 			
                         <tr>
-                             <td class="loginfont">이름</td>
-                             <td><input type="text" id="name" name="memberName" ></td>
+                             <td class="loginfont">아이디</td>
+                             <td><input type="text" id="id" name="memberId" ></td>
                              <!--  <td rowspan="2"><button type="submit" id="btn" >로그인</button></td>-->
                         </tr>
                         <tr>
@@ -26,50 +27,48 @@
                         
                          
                 </table>
-                		 <button id="btn" >확인</button>
-                		 
-                		 <div>
-                		<input type="text" id="result"> 
-                		</div>
+                		<button id="btn" >확인</button>
+                		<form action="/pwSearchUpdate" method="post">
+                		
+                		<div id="result"></div>
+                		</form>
+                		
                 
   </div>
  
-  <jsp:include page="/WEB-INF/views/common/footer.jsp" />               
-           
-	
+    
+    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />        
+    
 </body>
-<script>
-	$(function(){
-		$("#btn").click(function(){
-			
-		
-		
-		var memberName=$("#name").val();
-		var memberPhone=$("#phone").val();
-		$.ajax({
-			url:"/idSearch",
-			type:"get",
-			data:{memberName:memberName,memberPhone:memberPhone},
-			
-			success:function(data){
-				$("#result").val(data);
-				
-			
-			}
-			
+	<script>
+		$(function(){
+			$("#btn").click(function(){
+				var memberId=$("#id").val();
+				var memberPhone=$("#phone").val();
+				$("#result").html("");
+			$.ajax({
+				url:"/pwSearch",
+				type:"get",
+				data:{memberId:memberId,memberPhone:memberPhone},
+				success:function(data){
+					if(data==1){
+						
+						$("#result").html("새로운 비밀번호<input type='text' id='name'><br>"
+					               +"새로운 비밀번호 확인<input type='text' id='name'>"+
+					               "<button>실행</button>");
+					}else{
+						$("#result").html("일지하는 정보가 없습니다.");
+					}
+				}
+			});	
+			});
 		});
-		
-		});
-			
-	});
 	
-</script>
-
-
-
-
-<style>
-.content {
+	</script>
+	
+	<style>
+	.content {
             /*-지우지마세요-*/
             width: 1200px;
             overflow: hidden;
@@ -88,17 +87,5 @@
         #table{
         	margin:0 auto;
         }
-        #btn{
-        	margin-left:80px;
-            width: 100px;
-            height: 50px;
-            border-radius: 6px;
-            border:1px;
-            background-color: red;
-            color: white;
-            font-size: 20px;
-            padding: 10px;
-            
-        }
-</style>
+	</style>
 </html>

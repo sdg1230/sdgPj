@@ -1,24 +1,28 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class LogOutServlet
+ * Servlet implementation class PwSearchServlet
  */
-@WebServlet(name = "LogOut", urlPatterns = { "/logOut" })
-public class LogOutServlet extends HttpServlet {
+@WebServlet(name = "PwSearch", urlPatterns = { "/pwSearch" })
+public class PwSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogOutServlet() {
+    public PwSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,11 +31,18 @@ public class LogOutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if(session!=null) {
-			session.invalidate();
+		String memberId=request.getParameter("memberId");
+		String memberPhone=request.getParameter("memberPhone");
+		System.out.println(memberId);
+		System.out.println(memberPhone);
+		int m=new MemberService().pwSearch(memberId,memberPhone);
+		PrintWriter out=response.getWriter();
+		if(m>0) {
+			
+			out.print(1);
+		}else {
+			out.print(0);
 		}
-		response.sendRedirect("/");
 	}
 
 	/**
