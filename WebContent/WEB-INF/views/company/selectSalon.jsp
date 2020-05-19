@@ -351,12 +351,22 @@ text-align: center;
 				</div>
 				</div>
 			<div>
+			<c:if test="${sessionScope.member.memberId == 'admin' }">
+                <a href="javascript:void(0);" onclick="goToReserveFrm('${sessionScope.member.memberId}');">
+                <div class="sidemenu2">
+			<img src="/imgs/reserve-icon.png">
+			<div>예약관리</div>
+		</div>
+			</a>
+			</c:if>
+			<c:if test="${sessionScope.member.memberId != 'admin' }">
                 <a href="javascript:void(0);" onclick="goToReserveFrm('${sessionScope.member.memberId}');">
                 <div class="sidemenu2">
 			<img src="/imgs/reserve-icon.png">
 			<div>예약하기</div>
 		</div>
 			</a>
+			</c:if>
 			<a class="sidemenu1"href="/branchList?reqPage=1">
                 <div>◀목록으로</div></a>
             </div>
