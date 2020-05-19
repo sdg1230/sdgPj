@@ -7,6 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>머리좀 헤어</title>
 <style>
+/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 24px;
+	margin-bottom: 10px;
+	padding: 0;
+}
+
+.homeIcon>img {
+	margin-top: 5px;
+}
+
+.headermiddle {
+	padding-top: 5px;
+}
+/* 헤더 제대로적용------------------------ */
 .cTitle {
 	margin-top: 130px;
 	padding-top: 50px;
@@ -57,31 +72,44 @@ p{
 	border-bottom: 1px solid #e5e5e5;
 }
 
+.listtable th:nth-child(1){
+	width:5%;
+}
+.listtable th:nth-child(2){
+	width:9%;
+}
+.listtable th:nth-child(3){
+	width:13%;
+}
+.listtable th:nth-child(4){
+	width:10%;
+}
+.listtable th:nth-child(5){
+	width:14%;
+}
+.listtable th:nth-child(6){
+	width:12%;
+}
+.listtable th:nth-child(7){
+	width:9%;
+}
+.listtable th:nth-child(8){
+	width:14%;
+}
+.listtable th:nth-child(9){
+	width:5%;
+}
+.listtable th:nth-child(10){
+	width:5%;
+}
+.listtable th:nth-child(11){
+	width:5%;
+}
+
 .listtable th {
-	width: 12%;
 	line-height:40px;
 	padding:0;
 	text-align:center;
-}
-
-.listtable th:nth-child(1) {
-	width: 5%;
-}
-
-.listtable th:nth-child(2) {
-	width: 7%;
-}
-
-.listtable th:nth-child(4) {
-	width: 17%;
-}
-
-.listtable th:nth-child(7) {
-	width: 6%;
-}
-
-.listtable th:nth-child(9) {
-	width: 5%;
 }
 
 .listtable th>input, #selectSalon {
@@ -91,21 +119,22 @@ p{
 	box-sizing: border-box;
 }
 
-.status-button {
-	height: 30px;
-	width: 80px;
-}
-
 #searchDate{
-	width:50px;
+	width:100%;
 }
 .statusBtn{
-	color: white;
+	color: black;
     font-size: 15px;
-    background-color: #998778;
-    width: 80px;
+    background-color: #f5f5f5;
+    border:none;
     height: 30px;
-    box-shadow: 2px 2px 2px gray;
+    box-shadow: lightgray 0px 0px 2px 2px;
+    border-radius: 5px;
+}
+.statusBtn:hover{
+	cursor: pointer;
+    color: white;
+    background-color: #998778;
 }
 </style>
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
@@ -196,7 +225,10 @@ p{
 					for(var i=0; i<data.length; i++){
 						var html2 = "";
 						for(var j=0; j<data[i].menuList.length; j++){
-							html2 += data[i].menuList[j].hairName+", ";
+							html2 += data[i].menuList[j].hairName;
+							if(j<data[i].menuList.length-1){
+								html2 += ",";
+							}
 						}
 						html += "<tr class='list-tr'>";
 						html += "<th class='reserveNo'>"+data[i].reserveNo+"</th>";
@@ -278,9 +310,11 @@ p{
 						}
 						html += "<th class='pay'>"+paymentStatus+"</th>";
 						if(data[i].reserveStatus=="false"){
-							html += "<th><button class='statusBtn stat' onclick='changefunc("+data[i].reserveNo+");'>방문</button></tr>"
+							html += "<th><button class='statusBtn stat' onclick='changefunc("+data[i].reserveNo+");'>방문</button>"
+							html += "<th><button onclick='deleteReserve("+data[i].reserveNo+");' class='statusBtn stat'>취소</button></tr>"
 						}else{
-							html += "<th class='stat'>방문함</th></tr>";
+							html += "<th class='stat'>방문함</th>";
+							html += "<th></th></tr>";
 						}
 					}
 					$(".reserveList").html(html);
@@ -308,6 +342,28 @@ p{
 			}
 		});
 	}
+	
+	function deleteReserve(reserveNo){
+		if(confirm("예약을 취소시키겠습니까?")){
+			var param = {reserveNo:reserveNo};
+			$.ajax({
+				url : "/adminDeleteReserve",
+				data : param,
+				type : "post",
+				dataType : "json",
+				success : function(data){
+					if(data==0){
+						alert("삭제실패");
+					}else{
+						$("#selectStatus").change();
+					}
+				},
+				error : function(data){
+					alert("실패");
+				}
+			});
+		}
+	}
 </script>
 </head>
 <body>
@@ -327,6 +383,7 @@ p{
 					<th>시술 목록</th>
 					<th>선결제</th>
 					<th>상태</th>
+					<th>취소</th>
 				</tr>
 				<tr>
 					<th></th>
@@ -338,7 +395,7 @@ p{
 						</c:forEach>
 					</select></th>
 					<th></th>
-					<th><input type="date" id=searchDate style="width:130px;"></th>
+					<th><input type="date" id=searchDate></th>
 					<th></th>
 					<th></th>
 					<th></th>

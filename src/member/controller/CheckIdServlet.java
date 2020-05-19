@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,16 +32,19 @@ public class CheckIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("checkId");
-		Member m=new MemberService().selectOneMember(memberId);
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/member/checkId.jsp");
-		if(m!=null) {
-			request.setAttribute("result",false);
-		}else {
-			request.setAttribute("result", true);
-		}
-		request.setAttribute("checkId", memberId);
-		rd.forward(request, response);
+		String memberId=request.getParameter("memberId");
+		System.out.println(memberId);
+		int m=new MemberService().selectOneMembers(memberId);
+		System.out.println(m);
+		PrintWriter out = response.getWriter();
+		
+	      if(m>0) {
+	         //아이디 사용가능 할때
+	         out.print(1);
+	      }else {
+	         //불가능 할때
+	         out.print(0);
+	      }
 	}
 
 	/**

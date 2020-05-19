@@ -208,4 +208,28 @@ public class NoticeDao {
 		return result;
 	}
 
+	public ArrayList<Notice> selectMainNotice(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		String query = "select * from (select row_number() over(order by notice_no desc) as rnum, notice_title,notice_content, notice_no  from notice ) where rnum between 1 and 5";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Notice n = new Notice();
+				n.setNoticeContent(rset.getString("notice_content"));
+				n.setNoticeNo(rset.getInt("notice_no"));
+				n.setNoticeTitle(rset.getString("notice_title"));
+				list.add(n);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
 }

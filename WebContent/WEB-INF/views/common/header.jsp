@@ -14,7 +14,7 @@
 	function up() {
 		window.scrollTo(0, 0);
 	}
-	$(function() {
+	$(function() {false
 		//사이드 아이콘 클릭
 		$(".sideicon").click(function() {
 			if (($(this).parent().css("right")) == "0px") {
@@ -55,6 +55,7 @@
 	function reserveFunc(memberId){
 		if(memberId==""){
 			alert("로그인이 필요합니다");
+			location.href="/loginFrm";
 		}else{
 			if(memberId=="admin"){
 				location.href="/adminReserveList";
@@ -108,10 +109,11 @@
 				src="/imgs/home-icon.jpg"></span></a>
 	</div>
 	<div class="headermiddle">
-		<form action="/" method="get">
-			<input type="text" placeholder="가고싶은 지점에 대해 알아보세요~!" name="keyword"><input
+		<form action="/salononeServlet" method="get">
+			<input type="text" placeholder="가고싶은 지점에 대해 알아보세요~!" name="search1"><input
 				type="submit" id="search"><label for="search"><img
 				src="/imgs/dotwhite.png"></label>
+				<input type="hidden"name="type" value="salonName2">
 		</form>
 	</div>
 	<div class="header2">
@@ -128,14 +130,14 @@
 				<li><a href="/adminMenu">${sessionScope.member.memberName }</a></li>
 				</c:if>
 				<c:if test="${sessionScope.member.memberId ne 'admin' }">
-				<li><a href="#">${sessionScope.member.memberName }님</a></li>
+				<li><a href="/mypage">${sessionScope.member.memberName }님</a></li>
 				</c:if>
 			</c:if>
 		</ul>
 	</div>
 	<div class="header3">
 		<ul class="hNavi">
-			<span class="meorijom" onclick="location.href = '/';">MEORIJOM HAIR</span>
+			<span class="meorijom" onclick="location.href = '/';" style="margin-right:200px;">MEORIJOM HAIR</span>
 			<li><a href="/company">회사소개</a></li>
 			<li><a href="/branchList?reqPage=1">지점소개</a></li>
 			<li><a href="/noticeList?reqPage=1">공지사항</a></li>

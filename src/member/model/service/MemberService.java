@@ -1,6 +1,7 @@
 package member.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import member.model.dao.MemberDao;
@@ -21,5 +22,59 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return member;
 	}
+
+	public int insertMember(Member m) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new MemberDao().insertMember(conn,m);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int selectOneMembers(String memberId) {
+		Connection conn=JDBCTemplate.getConnection();
+		int member=new MemberDao().selectOneMembers(conn,memberId);
+		
+		
+		JDBCTemplate.close(conn);
+		return member;
+	}
+
+	public int update(Member m) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result = new MemberDao().update(conn,m);
+		JDBCTemplate.close(conn);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int deleteMember(String memberId) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new MemberDao().deleteMember(conn,memberId);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public ArrayList<Member> selectAllMember() {
+		Connection conn=JDBCTemplate.getConnection();
+		ArrayList<Member> list= new MemberDao().selectAllMember(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	
+
+	
 
 }

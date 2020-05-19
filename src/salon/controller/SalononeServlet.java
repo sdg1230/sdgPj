@@ -1,6 +1,7 @@
 package salon.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,13 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
+import member.model.vo.Member;
 import salon.service.SalonService;
+import salon.vo.Salon;
 import salon.vo.SalonList;
 
 /**
  * Servlet implementation class AffilateoneServlet
  */
-@WebServlet(name = "Affilateone", urlPatterns = { "/affilateone" })
+@WebServlet(name = "SalononeServlet", urlPatterns = { "/salononeServlet" })
 public class SalononeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,11 +37,21 @@ public class SalononeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String sq = request.getParameter("search1");
-		
-		SalonList af = new	SalonService().selectAffilate(sq);
+		String type = request.getParameter("type");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/company/branchList.jsp");
-		request.setAttribute("list", af.getAffilateList());
-		request.setAttribute("star", af.getReviewStar());
+		if(type.equals("salonName2")) {
+			ArrayList<Salon> list = new SalonService().selectAffilate(sq);
+			request.setAttribute("list", list);
+		}else {
+			ArrayList<Salon> list = new SalonService().selectAffilateAddr(sq);
+			request.setAttribute("list", list);
+		}
+		request.setAttribute("type", type);
+		request.setAttribute("key", sq);
+		
+
+		
+		
 		
 		rd.forward(request, response);
 		

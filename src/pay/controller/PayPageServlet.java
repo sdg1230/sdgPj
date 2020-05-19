@@ -32,9 +32,7 @@ public class PayPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reserveNo = 1;
-		//String reserveNo = request.getParameter("reserveNo");
-		//Reserve r = new ReserveService();
+		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
 		
 		ArrayList<String> reserveDetail = new ReserveService().selectDetailList(reserveNo);
 		StringBuilder sb = new StringBuilder();

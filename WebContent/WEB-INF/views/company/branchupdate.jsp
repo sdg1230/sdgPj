@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>Insert title here</title>
 <style>
 .content2 {
@@ -84,6 +86,13 @@
             height: 100%;
             
         }
+        .butt{
+	width: 200px;
+	height: 50px;
+}
+.form-control{
+	text-align: left;
+}
 </style>
 <script>
 
@@ -114,6 +123,18 @@ $("#file1").change(function() {
     $(".delFile").show();
 })
 });
+function addrSearch(){
+	
+	new daum.Postcode({
+		oncomplete:function(data){
+			$("#postCode").val(data.zonecode);
+			$("#roadAddr").val(data.roadAddress);
+			$("#jibunAddr").val(data.jibunAddress);
+			 
+		}
+	}).open();
+	return false;
+}
 
     </script>
 </head>
@@ -123,11 +144,11 @@ $("#file1").change(function() {
 
 		<div class="content2 cTitle">designer</div>
 		<div class="content1">
-        <form action="/branchupdate" method="post" enctype="multipart/form-data" id="updateFrm">
             <div class="div3">
                 <h1>가맹점 수정</h1>
             </div>
 
+        <form action="/branchupdate" method="post" enctype="multipart/form-data" id="updateFrm">
             <table border="1">
 
                 <tr>
@@ -137,7 +158,23 @@ $("#file1").change(function() {
                 </tr>
                 <tr>
                     <th class="th1">주소</th>
-                    <td class="td1"><input class="inp"type="text" name="salonAddr" value="${list.salonAddr }"></td>
+                    <td class="td1">
+							<ul>
+								<li class="form-control"><input type="text" id="postCode"
+									style="width: 200px;height: 25px; display: inline-block;"
+									 placeholder="우편번호" readonly>
+									<button id="addrSearchBtn" onclick="return addrSearch();" style="height: 30px;"
+										>주소 검색</button></li>
+								<li class="form-control"><input id="roadAddr" name="roadAddr"
+									style="width: 48%;height: 25px;" type="text"
+									 placeholder="도로명 주소"> <input
+									id="jibunAddr" name="jibunAddr" style="width: 50%;height: 25px; "
+									type="text"  placeholder="지번 주소"></li>
+								<li class="form-control"><input id="detailAddr" name="detailAddr"
+									style="width: 99.1%;height: 25px;" type="text"
+									placeholder="상세 주소" value="${list.salonAddr }"></li>
+							</ul>
+						</td>
                 </tr>
                 <tr>
                     <th class="th1">전화번호</th>
@@ -175,7 +212,9 @@ $("#file1").change(function() {
                     <td class="td3" ><textarea id="salonInfo"name="salonInfo" rows="3" style="width: 99%;height:100%"> ${list.salonInfo }</textarea></td>
                 </tr>
                 <tr>
-                    <th colspan="2" style="text-align: center"><button type="submit">수정하기</button><button type="reset">초기화</button></th>
+                    <th colspan="2" style="text-align: center">
+                    <button class="butt"type="submit">수정하기</button><button class="butt"type="reset">초기화</button>
+                    </th>
 
                 </tr>
             </table>

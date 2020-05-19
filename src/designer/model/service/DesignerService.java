@@ -102,6 +102,13 @@ public class DesignerService {
 		
 	}
 
+	public Designer selectBestDesigner() {
+		Connection conn = JDBCTemplate.getConnection();
+		Designer d = new DesignerDao().selectBestDesigner(conn);
+		JDBCTemplate.close(conn);
+		return d;
+	}
+
 	
 
 }
