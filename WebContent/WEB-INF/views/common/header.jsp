@@ -55,6 +55,7 @@
 	function reserveFunc(memberId){
 		if(memberId==""){
 			alert("로그인이 필요합니다");
+			location.href="/loginFrm";
 		}else{
 			if(memberId=="admin"){
 				location.href="/adminReserveList";
