@@ -95,6 +95,7 @@
         	width:100%;
         	text-align: center;
         	border-bottom: 3px solid grey;
+        	margin-bottom: 100px;
         }
         
         .questionTable>tbody>tr>th{
@@ -257,21 +258,11 @@ function questionFunc(memberId){
 				<tr>
 					<td style="border-bottom: 0.1px solid #DDE3E9;">
 					${q.questionWriter }</td>
-					<td style="border-bottom: 0.1px solid #DDE3E9;"><a href="/questionDetail?questionNo=${q.questionNo}" style="font-weight: bold">${q.questionContent }</a></td>
+					<td style="border-bottom: 0.1px solid #DDE3E9;"><a href="/questionList?questionWriter=${q.questionWriter }" style="font-weight: bold">${q.questionContent }</a></td>
 				</tr>
 				</c:if>
 				</c:forEach>
             </table>
-            <div class="questionPageNavi">${pageNavi }</div>
-            <div class="questionSearch">
-            	<form action="/questionSearchTitle">
-            		<select name="searchType" class="selectBox">
-            			<option value="questionWriter" selected>아이디</option>
-            		</select>
-            		<input type="text" class="questionSearchInput" name="searchTitle">
-            		<button type="submit" class="questionSearchBtn">검색</button>
-            	</form>
-            </div>
         </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>

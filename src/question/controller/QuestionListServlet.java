@@ -35,7 +35,6 @@ public class QuestionListServlet extends HttpServlet {
 		String questionWriter = request.getParameter("questionWriter");
 		ArrayList<Question> list = new QuestionService().myQuestion(questionWriter);
 		request.setAttribute("list", list);
-		System.out.println(list.size());
 		request.setAttribute("questionWriter", questionWriter);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/question/questionList.jsp");
 		rd.forward(request, response);

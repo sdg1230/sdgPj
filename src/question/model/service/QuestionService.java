@@ -23,4 +23,26 @@ public class QuestionService {
 		return list;
 	}
 
+	public int insertQuestion(Question q) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new QuestionDao().insertQuestion(conn,q);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int insertAnswer(Question q) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new QuestionDao().insertAnswer(conn,q);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }

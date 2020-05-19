@@ -217,11 +217,12 @@
 	overflow: hidden;
 	background-color: #E8EDF0;
 	padding-top: 20px;
+	
 }
 
 .line {
 	width: 100%;
-	height: 100px;
+	
 }
 
 .sendQuestion{
@@ -231,11 +232,11 @@
 	text-align: center; 
 	float: left;
 	border-radius: 25px;
-    
     position: relative;
     margin-left: 70px;
     color: black;
-    
+    margin-bottom: 10px;
+    line-height: 80px;
 }
 .sendQuestion:after{
 	 
@@ -251,12 +252,11 @@
 
 .receiveQuestion{
 	width: 600px; 
-	height: 80px; 
 	background-color: #fef01b; 
 	text-align: center; 
 	float: right;
 	border-radius: 25px;
-    
+    margin-bottom: 10px;
     position: relative;
     margin-right: 70px;
     color: black;
@@ -384,34 +384,69 @@
 			<h2 align="center">문의 목록</h2>
 			<div class="chatting">
 				<c:forEach items="${list }" var="q">
-					<c:if test="${q.questionWriter eq sessionScope.member.memberId || q.questionWriter eq 'admin' }">
-					<c:if test="${q.questionWriter eq 'admin' }">
+					
+					<c:if test="${q.questionRef == 1}">
 						<div class="line">
-								<div class="sendQuestion">${q.questionContent }</div>
+							<div class="sendQuestion">${q.questionContent }</div>
 						</div>
 					</c:if>
-					</c:if>
-					<c:if test="${q.questionWriter eq sessionScope.member.memberId || q.questionWriter eq 'admin' }">
-					<c:if test="${q.questionWriter eq sessionScope.member.memberId}">
+					
+					<c:if test="${q.questionRef == 0}">
 						<div class="line">
-							<div class="receiveQuestion">${q.questionContent }</div>
+							<div class="receiveQuestion">
+								<c:if test="${not empty q.questionFilename }">
+								<div style="height: 300px; width: 500px; margin: 0 auto; margin-top: 20px;">
+									<img src="/ckstorage/question/${q.questionFilename }" width="100%" height="100%"> 
+								</div>
+								</c:if>
+								<div style="height: 80px; line-height: 80px;">
+									${q.questionContent }
+								</div>
+							</div>
 						</div>
 					</c:if>
-					</c:if>
+					
 				</c:forEach>
 			</div>
-			<form action="/">
+			<c:if test="${sessionScope.member.memberId ne 'admin' }">
+			<form action="/insertQuestion" method="post" enctype="multipart/form-data">
 			<div class="sendArea">
 				<div class="filebox">
 					<input class="upload-name" value="파일선택" disabled="disabled">
+					<c:forEach items="${list }" var="q">
+						<input type="hidden" value="${sessionScope.member.memberId}" name="questionWriter">
+						<input type="hidden" value="0" name="questionRef">
+					</c:forEach>
+					
 					
 					<label for="upload_file">사진등록</label> 
-					<input type="file" id="upload_file" class="upload-hidden"> 
+					<input type="file" id="upload_file" class="upload-hidden" name="questionFilename"> 
 				</div>
-				<input type="text" placeholder="     상담하실 내용을 입력해주세요." style="width: 800px; height: 35px; margin-left: 5px;">
-				<button type="submit" style="width: 20px;">전송</button>
+				<input type="text" placeholder="     상담하실 내용을 입력해주세요." style="width: 800px; height: 35px; margin-left: 5px;" name="questionContent">
+				<button type="submit" style="width: 60px; height: 40px; border: none; background-color: #fef01b; color: black; font-weight: bold; font-size: 15px;">전송</button>
 			</div>
 			</form>
+			</c:if>
+			
+			<c:if test="${sessionScope.member.memberId eq 'admin' }">
+			<form action="/insertAnswer" method="post" enctype="multipart/form-data">
+			<div class="sendArea">
+				<div class="filebox">
+					<input class="upload-name" value="파일선택" disabled="disabled">
+					<c:forEach items="${list }" var="q">
+						<input type="hidden" value="${questionWriter}" name="questionWriter1">
+						<input type="hidden" value="1" name="questionRef1">
+					</c:forEach>
+					
+					
+					<label for="upload_file">사진등록</label> 
+					<input type="file" id="upload_file" class="upload-hidden" name="questionFilename1"> 
+				</div>
+				<input type="text" placeholder="     답변하실 내용을 입력해주세요." style="width: 800px; height: 35px; margin-left: 5px;" name="questionContent1">
+				<button type="submit" style="width: 60px; height: 40px; border: none; background-color: #fef01b; color: black; font-weight: bold; font-size: 15px;">전송</button>
+			</div>
+			</form>
+			</c:if>
 		</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
