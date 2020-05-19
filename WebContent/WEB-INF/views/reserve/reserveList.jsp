@@ -253,14 +253,19 @@ th {
 
 
 									<tr>
-
+									<c:if test="${u.paymentStatus=='true'}">
+										<td><input type="button" class="btn"
+												style="border: 1px solid #999" value="결제완료"></td>
+									</c:if>
+									<c:if test="${u.paymentStatus=='false'}">
 										<form action="/payPage" method="post">
-
+											
 											<td><input type="submit" class="btn"
 												style="border: 1px solid #999" value="선결제"></td>
 											<td><input type="hidden" name="reserveNo"
 												value="${u.reserveNo }"></td>
 										</form>
+									</c:if>
 									</tr>
 									<tr>
 										<form action="/reserveDelete1" method="post">
@@ -281,6 +286,9 @@ th {
 				<div class="col-md-6">
 					<h4 style="text-align: center">
 						방문완료 목록
+						
+						
+						
 						<c:set var="falseCnt" value="0" />
 						<c:forEach items="${userReserveList}" var='uuu' varStatus="status">
 							<c:if test="${(uuu.reserveStatus==true)}">
@@ -297,8 +305,10 @@ th {
 							<c:set var="falseCnt" value="0" />
 							<c:forEach items="${userReserveList}" var='uuu'
 								varStatus="status">
+								<c:if test="${uuu.reserveStatus==true}">
 								<c:if test="${(uuu.reserveReview==false)}">
 									<c:set var="falseCnt" value="${falseCnt + 1}" />
+								</c:if>
 								</c:if>
 							</c:forEach>
 
@@ -309,8 +319,9 @@ th {
 					</h4>
 					<br> <br>
 					<c:forEach items="${userReserveList}" var='u'>
-
+						
 						<c:if test="${u.reserveStatus==true}">
+						<c:if test="${u.reserveReview==false}">
 							<div class="reserveok">
 								<div class="no"></div>
 								<table>
@@ -373,6 +384,76 @@ th {
 								</table>
 								<hr>
 							</div>
+							</c:if>
+						</c:if>
+					</c:forEach>
+					<c:forEach items="${userReserveList}" var='u'>
+						
+						<c:if test="${u.reserveStatus==true}">
+						<c:if test="${u.reserveReview==true}">
+							<div class="reserveok">
+								<div class="no"></div>
+								<table>
+									<tr>
+										<th>예약지점 : <span>${u.salonName}</span></th>
+										<th>예약날짜 : <span>${u.reserveDate}</span></th>
+									</tr>
+
+									<tr>
+										<th>예약 디자이너 : <span>${u.designerName}</span></th>
+										<th>예약 시간 : <span> <c:if test="${u.startTime==1}">10:00</c:if>
+												<c:if test="${u.startTime==2}">10:30</c:if> <c:if
+													test="${u.startTime==3}">11:00</c:if> <c:if
+													test="${u.startTime==4}">11:30</c:if> <c:if
+													test="${u.startTime==5}">12:00</c:if> <c:if
+													test="${u.startTime==6}">12:30</c:if> <c:if
+													test="${u.startTime==7}">13:00</c:if> <c:if
+													test="${u.startTime==8}">13:30</c:if> <c:if
+													test="${u.startTime==9}">14:00</c:if> <c:if
+													test="${u.startTime==10}">14:30</c:if> <c:if
+													test="${u.startTime==11}">15:00</c:if> <c:if
+													test="${u.startTime==12}">15:30</c:if> <c:if
+													test="${u.startTime==13}">16:00</c:if> <c:if
+													test="${u.startTime==14}">16:30</c:if> <c:if
+													test="${u.startTime==15}">17:00</c:if> <c:if
+													test="${u.startTime==16}">17:30</c:if> <c:if
+													test="${u.startTime==17}">18:00</c:if> <c:if
+													test="${u.startTime==18}">19:30</c:if> <c:if
+													test="${u.startTime==19}">19:00</c:if> <c:if
+													test="${u.startTime==20}">20:30</c:if>
+
+										</span></th>
+									</tr>
+									<tr>
+										<th>예약 가격 : <span> ${u.totalPrice}</span></th>
+										<th>예약 시술 : <c:forEach items="${u.menuList}" var='uu'>
+												<span>${uu.hairName}</span>
+											</c:forEach>
+										</th>
+									</tr>
+
+									<c:if test="${u.reserveReview==false}">
+
+										<!-- 여기서부터 리뷰를작성했냐 안했냐 갈라야함 -->
+										<td><button type="button"
+												onclick="reviewInsert('${u.reserveNo}','${u.salonName }','${sessionScope.member.memberId}');"
+												class="btn" data-toggle="modal"
+												style="border: 1px solid #999" data-target="#exampleModal"
+												data-whatever="@mdo">후기작성</button></td>
+
+
+										<%-- $바로위에 {u.memberId }값에 ${sessionScope.member.memberId }들어가야함 지금은 session이 없음으로 이렇게 대채 --%>
+									</c:if>
+									<c:if test="${u.reserveReview==true}">
+
+										<td><button type="button" class="btn" readonly
+												style="background-color: #f5f5f5">후기작성완료</button></td>
+
+									</c:if>
+								</table>
+								<hr>
+							</div>
+							</c:if>
 						</c:if>
 					</c:forEach>
 				</div>
