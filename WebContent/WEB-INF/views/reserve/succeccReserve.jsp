@@ -201,7 +201,7 @@ table td {
 				</c:if>
 				<div class="subBtns">
 					<a class="subBtn" href="/">메인페이지</a>
-					<a class="subBtn" href="/myPage">마이페이지</a>
+					<a class="subBtn" href="/reserveListFrm">예약 내역</a>
 				</div>
 			</div>
 		</div>

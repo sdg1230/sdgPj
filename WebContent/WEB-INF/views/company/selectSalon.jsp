@@ -351,7 +351,7 @@ text-align: center;
 				</div>
 				</div>
 			<div>
-                <a href="/reserveFrm">
+                <a href="javascript:void(0);" onclick="goToReserveFrm('${sessionScope.member.memberId}');">
                 <div class="sidemenu2">
 			<img src="/imgs/reserve-icon.png">
 			<div>예약하기</div>
@@ -486,7 +486,18 @@ text-align: center;
         console.log(longitude);
     }
     
-   
+   function goToReserveFrm(memberId){
+	   if(memberId==""){
+		   	alert("로그인이 필요합니다");
+			location.href="/loginFrm";
+		}else{
+			if(memberId=="admin"){
+				location.href="/adminReserveList";
+			}else{
+				location.href="/reserveFrm";
+			}
+		}
+   }
         
         
 		$(function(){

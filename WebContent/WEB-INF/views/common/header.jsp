@@ -55,6 +55,7 @@
 	function reserveFunc(memberId){
 		if(memberId==""){
 			alert("로그인이 필요합니다");
+			location.href="/loginFrm";
 		}else{
 			if(memberId=="admin"){
 				location.href="/adminReserveList";
@@ -89,7 +90,7 @@
 			<div>1:1문의</div>
 		</div>
 	</a> 
-	<a href="#">
+	<a href="/eventList">
 		<div class="sidemenu">
 			<img src="/imgs/event-icon.png">
 			<div>이벤트</div>
