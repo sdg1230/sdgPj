@@ -185,6 +185,20 @@
         }
         
 </style>
+<script>
+function questionFunc(memberId){
+	if(memberId==""){
+		alert("로그인이 필요합니다");
+		location.href="/loginFrm";
+	}else{
+		if(memberId=="admin"){
+			location.href="/questionAnswer";
+		}else{
+			location.href="/questionList?questionWriter=${sessionScope.member.memberId}";
+		}
+	}
+}
+</script>
 </head>
 <body>
 <div class="wrapper">
@@ -227,7 +241,9 @@
             	</ul>
             </div>
             <br><br>
-            <a href="/eventWriteFrm" class="eventWriteBtn">글쓰기</a>
+            <c:if test="${sessionScope.member.memberId eq 'admin' }">
+            	<a href="/eventWriteFrm" class="eventWriteBtn">글쓰기</a>
+            </c:if>
             <br><hr>
             <div style="width: 100%; ">
             <c:forEach items="${list }" var="e">

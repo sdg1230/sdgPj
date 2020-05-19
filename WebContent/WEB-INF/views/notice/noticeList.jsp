@@ -268,7 +268,9 @@ function questionFunc(memberId){
 							
 				</c:forEach>
             </table>
+            <c:if test="${sessionScope.member.memberId eq 'admin' }">
             <a href="/noticeWrite" class="noticeWriteBtn">글쓰기</a>
+            </c:if>
             <div class="noticePageNavi">${pageNavi }</div>
             <div class="noticeSearch">
             	<form action="/noticeSearchTitle">

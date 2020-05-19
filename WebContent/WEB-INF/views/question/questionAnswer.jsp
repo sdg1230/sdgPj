@@ -239,7 +239,7 @@ function questionFunc(memberId){
                 	<span class="spanbarSmall"></span>
                     <h1 align="center">1:1 문의</h1>
                     <ul>
-                        <li><a href="/questionList?reqPage=1">공지사항</a></li>
+                        <li><a href="/noticeList?reqPage=1">공지사항</a></li>
                         <li><a href="/eventList">이벤트</a></li>
                         <li><a href="javascript:void(0);" onclick="questionFunc('${sessionScope.member.memberId}');">1:1문의</a></li>
                     </ul>

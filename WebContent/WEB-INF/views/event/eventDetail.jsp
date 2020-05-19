@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -165,6 +166,20 @@
         	width: 1200px;
         }
 </style>
+<script>
+function questionFunc(memberId){
+	if(memberId==""){
+		alert("로그인이 필요합니다");
+		location.href="/loginFrm";
+	}else{
+		if(memberId=="admin"){
+			location.href="/questionAnswer";
+		}else{
+			location.href="/questionList?questionWriter=${sessionScope.member.memberId}";
+		}
+	}
+}
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -185,12 +200,12 @@
                     </ul>
                 </div>
             </div>
-            
+            <c:if test="${sessionScope.member.memberId eq 'admin' }">
             <div align="right" style="margin-top: 120px;">
             	<a href="/modifyEventFrm?eventNo=${e.eventNo}" class="adminEventBtn">수정하기</a>
             	<a href="javascript:void(0)" class="adminEventBtn" onclick="deleteEvent('${e.eventNo}')">종료하기</a>
             </div>
-            
+            </c:if>
             <div class="eventDetailContent" >
             	<br><br><hr style="border: 2px solid black;">
             	<h1 align="center">${e.eventTitle}</h1>
