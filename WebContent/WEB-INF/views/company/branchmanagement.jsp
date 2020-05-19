@@ -164,7 +164,7 @@
                             <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
                             <input type="hidden" name="salonName" value="${list.salonName }">
 					<button class="btn1" name="dp"
-						type="submit" value="삭제">삭제</button>
+						type="submit" value="삭제" href="javascript:void(0);"onclick="return deleteSalon();">삭제</button>
             </form>
 				</td>
 			</tr>
@@ -177,6 +177,20 @@
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	</div>
+<script>
 
+		function deleteSalon() {			
+			if (confirm("삭제 하시겠습니까??")) {
+				
+				return true;
+			}else{
+				return false;				
+				
+			}
+			
+		}
+		
+	
+</script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 	function up() {
 		window.scrollTo(0, 0);
 	}
-	$(function() {
+	$(function() {false
 		//사이드 아이콘 클릭
 		$(".sideicon").click(function() {
 			if (($(this).parent().css("right")) == "0px") {
