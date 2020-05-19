@@ -144,7 +144,7 @@ table {
 						<th class="th1">가맹이름</th>
 						<td class="td1"><input type="hidden" name="salonNo"
 							id="salonNo"><input class="inp" type="text"
-							name="salonName" value="${list.salonName }"></td>
+							name="salonName"  required></td>
 					</tr>
 					<tr>
 						<th class="th1">주소</th>
@@ -152,7 +152,7 @@ table {
 							<ul>
 								<li class="form-control"><input type="text" id="postCode"
 									style="width: 200px;height: 25px; display: inline-block;"
-									 placeholder="우편번호" readonly>
+									 placeholder="우편번호" required>
 									<button id="addrSearchBtn" onclick="return addrSearch();" style="height: 30px;"
 										>주소 검색</button></li>
 								<li class="form-control"><input id="roadAddr" name="roadAddr"
@@ -162,14 +162,14 @@ table {
 									type="text"  placeholder="지번 주소"></li>
 								<li class="form-control"><input id="detailAddr" name="detailAddr"
 									style="width: 99.1%;height: 25px;" type="text"
-									placeholder="상세 주소"></li>
+									placeholder="상세 주소"required></li>
 							</ul>
 						</td>
 					</tr>
 					<tr>
 						<th class="th1">전화번호</th>
 						<td class="td1"><input class="inp" type="text"
-							name="salonPhone"></td>
+							name="salonPhone" placeholder="예시 000-0000-0000"required></td>
 					</tr>
 					<tr>
 						<th class="th1">첨부파일</th>
@@ -190,7 +190,7 @@ table {
 					<tr>
 						<th class="th1">소개글</th>
 						<td class="td3"><textarea id="salonInfo" name="salonInfo"
-								rows="3" style="width: 99%; height: 100%"></textarea></td>
+								rows="3" style="width: 99%; height: 100%" required></textarea></td>
 					</tr>
 					<tr>
 						<th colspan="2" style="text-align: center"><button class="butt"
