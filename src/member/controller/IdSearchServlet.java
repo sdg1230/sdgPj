@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class JoinCompleteServlet
+ * Servlet implementation class IdSearchServlet
  */
-@WebServlet(name = "JoinComplete", urlPatterns = { "/joinComplete" })
-public class JoinCompleteServlet extends HttpServlet {
+@WebServlet(name = "IdSearch", urlPatterns = { "/idSearch" })
+public class IdSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinCompleteServlet() {
+    public IdSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,8 @@ public class JoinCompleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/joinComplete.jsp").forward(request, response);;
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

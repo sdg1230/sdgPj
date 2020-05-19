@@ -130,7 +130,7 @@
 				<li><a href="/adminMenu">${sessionScope.member.memberName }</a></li>
 				</c:if>
 				<c:if test="${sessionScope.member.memberId ne 'admin' }">
-				<li><a href="#">${sessionScope.member.memberName }님</a></li>
+				<li><a href="/mypage">${sessionScope.member.memberName }님</a></li>
 				</c:if>
 			</c:if>
 		</ul>
