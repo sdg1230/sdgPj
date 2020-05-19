@@ -35,11 +35,11 @@
                         
                     </tr>
                      <tr class="tr">
-                        <td class="title">휴대폰번호</td><td><input type="text" id="phone" name="phone" class="t-con"><span class="comment"></span></td>
+                        <td class="title">휴대폰번호</td><td><input type="text" id="phone" name="phone" class="t-con"value="${member.memberPhone }" required><span class="comment"></span></td>
                         
                     </tr>
                     <tr class="tr">
-                        <td class="title">주소</td><td><input type="text" id="addr" name="address" class="t-con" readonly>
+                        <td class="title">주소</td><td><input type="text" id="addr" name="address" class="t-con" value="${member.address }" >
                         <input type="button" value="주소검색" id="addrSearchBtn" onclick="addrSearch();">
                         
                         <span class="comment"></span></td>
@@ -76,13 +76,18 @@
             }).open();
         }
     
+        
+    	
+    
     
     $(function(){
-    	 var count=[false,false,false];
+    	 var count=[false,false];
     	 var comments = document.getElementsByClassName("comment");
     	 for(var i=0; i<comments.length; i++){
              comments[i].innerHTML="";
          }
+    	 
+    	 
     	 /*
     	 $('#name').focusout(function(){
              var nameReg=/^[가-힣]{1,5}$/;
@@ -103,11 +108,13 @@
          });
     	 
     	 */
+    	 
+    	 
+    	 
     	 $('#pw').focusout(function(){
              var pwReg=/^[a-zA-Z0-9]{8,12}/;
              if(!pwReg.test($(this).val())){
                  comments[0].innerHTML="대문자,소문자,숫자로 8~12글자";
-                 
                  
                  count[0]=false;
                 
@@ -125,17 +132,22 @@
                  count[1]=true;
                  console.log("a");
              }else{
-             	comments[2].innerHTML="비밀번호를 확인해주세요";
+             	comments[1].innerHTML="비밀번호를 확인해주세요";
              	count[1]=false;
              }
               $(this).focus(function(){
                      comments[1].innerHTML="";
                  });
          });
-         $('#phone').focusout(function(){
+         
+         
+         
+         
+         $('#phone').change(function(){
             var phoneReg=/^(010)-?([0-9]{3,4})-?([0-9]{4})$/;
              if(!phoneReg.test($(this).val())){
                  comments[2].innerHTML="0xx-xxxx-xxxx로 입력해주세요";
+                 $(this).val("");
                  count[2]=false;
              }else{
              	count[2]=true;
@@ -146,7 +158,7 @@
                  });
          });
          
-         
+  
          $("form").submit(function(){
              var num=0;
              for(var i=0; i<count.length; i++){
@@ -273,7 +285,7 @@
         }
         #update{
             color: white;
-            background-color: red;
+            background-color:#CD3C41;
             margin-top: 20px;
             margin-left: 450px;
             width: 200px;
@@ -286,6 +298,13 @@
             margin-left: 20px;
             width: 150px;
             height: 40px; 
+        }
+         #update:hover{
+        	background-color:red;
+        }
+         #cancel:hover{
+        	background-color:#969696;
+        	color:black;
         }
        #bottomBtn>main{
          margin-top:0px;

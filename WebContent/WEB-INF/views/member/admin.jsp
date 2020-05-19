@@ -20,6 +20,7 @@
     		
     	</ul>
     </div>
+    <button id="allReserve" value="전체조회"><a href="/adminReserveList">전체예약</a></button>
     <div>
     	<table class="mtable">
     		<!-- <tr id="title">
@@ -39,7 +40,7 @@
 	    			<td id="age"class="age">${m.age }</td>
 	    			<td class="date">${m.enrollDate }</td>
 	    			<td class="del"><button id="delBtn" onclick="location.href='/adminDeleteMembe?memberId=${m.memberId }'">삭제</button>
-	    			<button><a href="/adminReserveList">예약확인</a></button>
+	    			
 	    			</td>
 	    		</tr>
     		</c:forEach>
@@ -69,7 +70,7 @@
             width: 1200px;
             overflow: hidden;
             margin: 0px auto 0 auto;
-            
+          
             
         }
         #img1{
@@ -79,9 +80,23 @@
         }
          .content>h1{
         	font-size:40px;
+        	background-color:white;
         	
         }
-        
+        #allReserve{
+        	width:100px;
+        	height:40px;
+        	float:right;
+        	background-color: #CD3C41;
+        	margin-bottom:20px;
+        	border:1px;
+        	color:white;
+        	  box-shadow: 2px;
+        }
+        #allReserve>a{
+        	color:white;
+        	display:block;
+        }
       #ul>li{
             display: inline-block;
         }
@@ -138,8 +153,8 @@
         }
 		#top{
 	        height: 150px;
-	       
-	        margin-bottom: 50px;
+	         
+	        margin-bottom:20px;
 	        border-top:1px solid black;
 	        border-bottom:1px solid black;
         
@@ -151,6 +166,7 @@
         #searchText{
         	width:400px;
         	height:40px;
+        	border:3px;
         }
         
         .mtable{

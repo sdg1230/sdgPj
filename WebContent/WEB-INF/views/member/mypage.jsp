@@ -20,7 +20,7 @@
                         <td id="top-c2"><p>님</p></td>
                         <td id="top-c3"><a href="#">예약확인</a></td>
                         <td id="top-c4"><a href="#">1:1문의</a></td>
-                        <td> <a id="updatebtn" href="/updateFrm">정보변경</a></td>
+                        <td id="updatebtn"> <a href="/updateFrm">정보변경</a></td>
                     </tr>
                 </table>
             
@@ -130,7 +130,12 @@
         	/* height:50px;
         	 display:block;
         	 color:#bebebf;*/
-        	 width:150px;
+        	width:80px;
+			height:200px;       
+			       
+        }
+        #updatebtn>a{
+         width:150px;
         	height:100px;
         	 background-color: #F2F2F2;
         	 display:block;
@@ -138,8 +143,11 @@
         	 line-height: 100px;
         	 border-radius:20px;
         	 margin-left: 10px;
-			       
         }
+         #updatebtn>a:hover{
+         	background-color: #CD3C41;
+         color:white;
+         }
         #top-c2>p{
         	margin-top:50px;
         	font-size:20px;
@@ -149,7 +157,11 @@
         	width:160px;
 			height:200px;
 			
-			
+		#updatebtn:hober{
+		 background-color: #CD3C41;
+         color:white;
+		
+		}	
         }#top-c3>a{
         	width:150px;
         	height:100px;
@@ -159,6 +171,10 @@
         	 line-height: 100px;
         	 border-radius:20px;
         }
+         #top-c3>a:hover{
+         background-color: #CD3C41;
+         color:white;
+         }
         #top-c4>a{
         	width:150px;
         	height:100px;
@@ -168,7 +184,13 @@
         	 line-height: 100px;
         	 border-radius:20px;
         }
-        
+         #top-c4>a:hover{
+         	
+         }
+         #top-c4>a:hover{
+         background-color: #CD3C41;
+         color:white;
+         }
         #t-con{
             width: 400px;
            
@@ -219,7 +241,7 @@
             
             width: 150px;
             border-radius: 5px;
-            border: 1px solid black;
+           
            
         }
         #main{
@@ -232,12 +254,20 @@
             width: 150px;
             height: 40px;
         }
+        #main:hover{
+        	background-color:red;
+        }
         #delete{
             background-color: black;
             color: white;
             margin-left: 20px;
             width: 150px;
             height: 40px; 
+            border:1px;
+        }
+        #delete:hover{
+        	background-color:#969696;
+        	color:black;
         }
 </style>
 </html>
