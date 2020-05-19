@@ -10,17 +10,29 @@ public class SalonDetails {
 	private String ageNavi;
 	private ArrayList<Designer> DesignerList;
 	private ArrayList<SalonReview> ReviewList;
+	private SalonReview satr;
+
 	public SalonDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public SalonDetails(Salon affilate, String ageNavi, ArrayList<Designer> designerList,
-			ArrayList<SalonReview> reviewList) {
+			ArrayList<SalonReview> reviewList,SalonReview star) {
 		super();
 		this.affilate = affilate;
 		this.ageNavi = ageNavi;
 		DesignerList = designerList;
 		ReviewList = reviewList;
+		this.satr = star;
+	
+	}
+	
+	
+	public SalonReview getSatr() {
+		return satr;
+	}
+	public void setSatr(SalonReview satr) {
+		this.satr = satr;
 	}
 	public Salon getAffilate() {
 		return affilate;

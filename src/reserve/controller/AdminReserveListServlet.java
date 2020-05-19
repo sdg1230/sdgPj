@@ -43,7 +43,8 @@ public class AdminReserveListServlet extends HttpServlet {
 		ArrayList<Salon> slist = new SalonService().selectSalon();
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/adminReserveList.jsp");
 		request.setAttribute("slist", slist);
-		rd.forward(request, response);	
+		rd.forward(request, response);
+
 	}
 
 	/**

@@ -14,6 +14,7 @@
 	display: none;
 }
 
+
 input[type=radio], input[type=checkbox] {
 	display: none;
 }
@@ -196,15 +197,16 @@ input[type=radio], input[type=checkbox] {
 }
 /* 헤더 제대로적용------------------------ */
 .headermiddle input[type="text"] {
-	height: 25px;
+	height: 23px;
 	margin-bottom:10px;
 	padding:0;
+	padding-top:1px;
 }
 .homeIcon>img {
 	margin-top:5px;
 }
 .headermiddle{
-	padding-top:4px;
+	padding-top:5px;
 }
 /* 헤더 제대로적용------------------------ */
 </style>

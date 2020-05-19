@@ -90,6 +90,13 @@ table {
 	width: 100%;
 	height: 100%;
 }
+.butt{
+	width: 200px;
+	height: 50px;
+}
+.form-control{
+	text-align: left;
+}
 </style>
 <script>
 	function loadImg(f) {
@@ -137,32 +144,32 @@ table {
 						<th class="th1">가맹이름</th>
 						<td class="td1"><input type="hidden" name="salonNo"
 							id="salonNo"><input class="inp" type="text"
-							name="salonName" value="${list.salonName }"></td>
+							name="salonName"  required></td>
 					</tr>
 					<tr>
 						<th class="th1">주소</th>
 						<td class="td1">
 							<ul>
-								<li><input type="text" id="postCode"
-									style="width: 200px; display: inline-block;"
-									class="form-control" placeholder="우편번호" readonly>
-									<button id="addrSearchBtn" onclick="return addrSearch();"
+								<li class="form-control"><input type="text" id="postCode"
+									style="width: 200px;height: 25px; display: inline-block;"
+									 placeholder="우편번호" required>
+									<button id="addrSearchBtn" onclick="return addrSearch();" style="height: 30px;"
 										>주소 검색</button></li>
-								<li><input id="roadAddr" name="roadAddr"
-									style="width: 48%;" type="text"
+								<li class="form-control"><input id="roadAddr" name="roadAddr"
+									style="width: 48%;height: 25px;" type="text"
 									 placeholder="도로명 주소"> <input
-									id="jibunAddr" name="jibunAddr" style="width: 48%; "
+									id="jibunAddr" name="jibunAddr" style="width: 50%;height: 25px; "
 									type="text"  placeholder="지번 주소"></li>
-								<li><input id="detailAddr" name="detailAddr"
-									style="width: 99%;" type="text"
-									placeholder="상세 주소"></li>
+								<li class="form-control"><input id="detailAddr" name="detailAddr"
+									style="width: 99.1%;height: 25px;" type="text"
+									placeholder="상세 주소"required></li>
 							</ul>
 						</td>
 					</tr>
 					<tr>
 						<th class="th1">전화번호</th>
 						<td class="td1"><input class="inp" type="text"
-							name="salonPhone"></td>
+							name="salonPhone" placeholder="예시 000-0000-0000"required></td>
 					</tr>
 					<tr>
 						<th class="th1">첨부파일</th>
@@ -183,12 +190,12 @@ table {
 					<tr>
 						<th class="th1">소개글</th>
 						<td class="td3"><textarea id="salonInfo" name="salonInfo"
-								rows="3" style="width: 99%; height: 100%"></textarea></td>
+								rows="3" style="width: 99%; height: 100%" required></textarea></td>
 					</tr>
 					<tr>
-						<th colspan="2" style="text-align: center"><button
+						<th colspan="2" style="text-align: center"><button class="butt"
 								type="submit">등록하기</button>
-							<button type="reset">초기화</button></th>
+							<button class="butt" type="reset">초기화</button></th>
 
 					</tr>
 				</table>

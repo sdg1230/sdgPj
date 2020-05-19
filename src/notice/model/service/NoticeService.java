@@ -116,5 +116,13 @@ public class NoticeService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	//예진
+	public ArrayList<Notice> selectMainNotice() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Notice> list = new NoticeDao().selectMainNotice(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 
 }

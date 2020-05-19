@@ -141,25 +141,50 @@
                 </tr>
                 <c:forEach var="list" items="${list }">
                 <tr>
-				<td>${list.salonNo }</td>
+				<td>
+                            <input type="hidden" name="salonNo" value="${list.salonNo }">
+				${list.salonNo }</td>
 				<td>${list.salonName }</td>
 				<td>
-					<button class="btn1"
-						onclick="location.href='/branchUpdateFrm?salonName=${list.salonName }'">수정</button>
+				
+				<input type="hidden" name="oldFilename" value="${list.salonFilename }">
+                            <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
+					<button class="btn1" name="dp"
+						onclick="location.href='/branchUpdateFrm?salonName=${list.salonName}'">수정</button>
 				</td>
                     <td>
-					<button class="btn1"
-						onclick="location.href='/branchdelete?salonName=${list.salonName }'">삭제</button>
+            <form  action="/branchdelete" method="post" enctype="multipart/form-data" id="updateFrm">
+				<input type="hidden" name="oldFilename" value="${list.salonFilename }">
+                            <input type="hidden" name="oldFilepath" value="${list.salonFilepath }">
+                            <input type="hidden" name="salonName" value="${list.salonName }">
+					<button class="btn1" name="dp"
+						type="submit" value="삭제" href="javascript:void(0);"onclick="return deleteSalon();">삭제</button>
+            </form>
 				</td>
 			</tr>
 			</c:forEach>
             </table>
+           
         </div>
 
 		<div id="pageNavi">${pageNavi }</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	</div>
+<script>
 
+		function deleteSalon() {			
+			if (confirm("삭제 하시겠습니까??")) {
+				
+				return true;
+			}else{
+				return false;				
+				
+			}
+			
+		}
+		
+	
+</script>
 </body>
 </html>
