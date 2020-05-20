@@ -317,7 +317,7 @@ pre>small {
 			</div>
 			<div>
 				<div class="div1">
-					<h1>준오만의 경쟁력</h1>
+					<h1>MEORIJOM HAIR만의 경쟁력</h1>
 				</div>
 				<div class="titleBox">01</div>
 				<br>
@@ -356,7 +356,7 @@ pre>small {
 			<div class="titleBox">02</div>
 			<br>
 			<div class="content1">
-				<span class="spanTitle">최고의 아름다움을 리드하는 준오의 전문성 MEORIJOM HAIR
+				<span class="spanTitle">최고의 아름다움을 리드하는 MEORIJOM HAIR의 전문성 MEORIJOM HAIR
 					Expertise</span>
 				<pre>
         MEORIJOM HAIR는 세계적인 코스메틱 브랜드 Wella가 선정한 세계10대 헤어 브랜드입니다.
