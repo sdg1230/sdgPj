@@ -68,12 +68,16 @@
 				data:{memberName:memberName,memberPhone:memberPhone},
 				
 				success:function(data){
-					$("#result").val("Id는 "+data+"입니다.");
-					$(".subBtnWrapper").show();
-				
+					if(data!=null){
+						$("#result").val("Id는 "+data.memberId+"입니다.");
+						$(".subBtnWrapper").show();
+					}else{
+						$("#result").val("이름 또는 전화번호를 확인해주세요");
+						$(".subBtnWrapper").hide();
+					}
+
 				},error:function(){
-					$("#result").val("이름 또는 전화번호를 확인해주세요");
-					$(".subBtnWrapper").hide();
+					
 				}
 				
 			});

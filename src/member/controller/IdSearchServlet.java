@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -37,9 +39,9 @@ public class IdSearchServlet extends HttpServlet {
 		//System.out.println(memberName);
 		//System.out.println(memberPhone);
 		Member m= new MemberService().idSearch(memberName,memberPhone);
-		//System.out.println(m.getMemberId());
-		PrintWriter out=response.getWriter();
-		out.print(m.getMemberId());
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		new Gson().toJson(m,response.getWriter());
 		
 		
 		
