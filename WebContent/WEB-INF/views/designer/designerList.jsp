@@ -198,6 +198,11 @@ $("#salonName").change(function(){
 $("input[name=keyword]").keyup(function(){
    var keyword = $(this).val();
    var salonName = $("#salonName").val();
+   if(keyword==""){
+	   $(".cBody2").html("");
+	   fn_more(1);
+	   $("#more-btn").show();
+   }else{
 	   $.ajax({
 			url : "/searchDesigner",
 			data : {keyword : keyword, salonName : salonName},
@@ -218,17 +223,10 @@ $("input[name=keyword]").keyup(function(){
 				  
 			}
 	   });
+   }
    
 });
-$("input[name=keyword]").focusout(function(){
-	var keyword = $(this).val();
-	var salonName = $("#salonName").val();
-	if(keyword=="" && salonName==""){
-		$(".cBody2").html("");
-		fn_more(1);
-		 $("#more-btn").show();
-	}
-})
+
 
 function insertFunc(){
 	if($("#insertSalonName").val()==""){
