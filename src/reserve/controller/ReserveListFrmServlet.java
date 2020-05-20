@@ -47,8 +47,9 @@ public class ReserveListFrmServlet extends HttpServlet {
 			
 			request.setAttribute("userReserveList", list);
 			
+		}else {
+			request.setAttribute("userReserveList", list);
 		}
-		System.out.println(list.get(0));
 		rd.forward(request, response);
 		
 	}
