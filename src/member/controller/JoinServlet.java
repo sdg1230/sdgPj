@@ -38,11 +38,11 @@ public class JoinServlet extends HttpServlet {
 		m.setMemberPw(request.getParameter("memberPw"));
 		m.setMemberPhone(request.getParameter("phone"));
 		m.setGender(request.getParameter("gender"));
-		System.out.println(m.getGender());
+		//System.out.println(m.getGender());
 		m.setAge(Integer.parseInt(request.getParameter("age")));
-		System.out.println(m.getAge());
+		//System.out.println(m.getAge());
 		m.setAddress(request.getParameter("address"));
-		System.out.println(m.getAddress());
+		//System.out.println(m.getAddress());
 		
 		int result=new MemberService().insertMember(m);
 		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");

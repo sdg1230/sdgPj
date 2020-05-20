@@ -58,7 +58,7 @@
                  </table>
                  <div id="bottomBtn">
                      <button type="submit" id="update" value="확인">확인</button>
-                     <button type="reset" id="cancel" value="취소">취소</button>
+                     <button type="button" id="cancel" value="취소">취소</button>
                  </div>
             </form>
         </div>
@@ -88,27 +88,6 @@
          }
     	 
     	 
-    	 /*
-    	 $('#name').focusout(function(){
-             var nameReg=/^[가-힣]{1,5}$/;
-             if(!nameReg.test($(this).val())){
-                 comments[0].innerHTML="한글(다섯 글자 이하)로 입력해주세요";
-                 count[0]=false;
-                 
-             }else{
-             	count[0]=true;
-             	console.log("a");
-             }
-             $(this).focus(function(){
-                     comments[0].innerHTML="";
-                    
-                 });
-              
-             
-         });
-    	 
-    	 */
-    	 
     	 
     	 
     	 $('#pw').focusout(function(){
@@ -120,7 +99,6 @@
                 
              }else{
              	count[0]=true;
-             	console.log("a");
              }
               $(this).focus(function(){
                      comments[0].innerHTML="";
@@ -130,7 +108,6 @@
              if($(this).val()==$("#pw").val()){
                  comments[1].innerHTML="";
                  count[1]=true;
-                 console.log("a");
              }else{
              	comments[1].innerHTML="비밀번호를 확인해주세요";
              	count[1]=false;
@@ -151,7 +128,6 @@
                  count[2]=false;
              }else{
              	count[2]=true;
-             	console.log("a");
              }
               $(this).focus(function(){
                      comments[2].innerHTML="";
@@ -174,6 +150,11 @@
              	
                  return false;
              }
+         });
+         
+         $("#cancel").click(function(){
+        	 console.log("a");
+        	 location.href="/mypage";
          });
     });
     

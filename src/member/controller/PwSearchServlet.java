@@ -33,8 +33,8 @@ public class PwSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId=request.getParameter("memberId");
 		String memberPhone=request.getParameter("memberPhone");
-		System.out.println(memberId);
-		System.out.println(memberPhone);
+		//System.out.println(memberId);
+		//System.out.println(memberPhone);
 		int m=new MemberService().pwSearch(memberId,memberPhone);
 		PrintWriter out=response.getWriter();
 		if(m>0) {

@@ -27,7 +27,7 @@
 			                        </tr>
 			                        <tr>
 			                             <td class="title">전화번호</td>
-			                             <td><input type="text" id="phone" name="memberPhone" class="input"></td>
+			                             <td><input type="text" id="phone" name="memberPhone" class="input" placeholder="ex)010-0000-0000"></td>
 			                         </tr>
 			                     </table>    
 			                       
@@ -43,7 +43,11 @@
                 		
                 		 
                 		 <div >
-                		<input type="text" id="result">
+                		<input type="text" id="result" readonly>
+                		</div>
+                		<div class="subBtnWrapper">
+	                		<button class="gotologin subBtn">로그인</button>
+	                		<button class="gotopwsearch subBtn">비밀번호 찾기</button>
                 		</div>
                 
   </div>
@@ -55,24 +59,33 @@
 <script>
 	$(function(){
 		$("#btn").click(function(){
-			
-		
-		
-		var memberName=$("#name").val();
-		var memberPhone=$("#phone").val();
-		$.ajax({
-			url:"/idSearch",
-			type:"get",
-			data:{memberName:memberName,memberPhone:memberPhone},
-			
-			success:function(data){
-				$("#result").val(data+"입니다.");
+
+			var memberName=$("#name").val();
+			var memberPhone=$("#phone").val();
+			$.ajax({
+				url:"/idSearch",
+				type:"get",
+				data:{memberName:memberName,memberPhone:memberPhone},
 				
-			
-			}
-			
+				success:function(data){
+					$("#result").val("Id는 "+data+"입니다.");
+					$(".subBtnWrapper").show();
+				
+				},error:function(){
+					$("#result").val("이름 또는 전화번호를 확인해주세요");
+					$(".subBtnWrapper").hide();
+				}
+				
+			});
+		
 		});
 		
+		$(".gotologin").click(function(){
+			location.href="/loginFrm";
+		});
+		
+		$(".gotopwsearch").click(function(){
+			location.href="/pwSearchFrm";
 		});
 			
 	});
@@ -140,10 +153,23 @@
        
         #result{
         margin-left:500px;
-        	width:250px;
+        	width:300px;
         	height:30px;
         	font-size:20px;
         	border-style:none;
+        }
+        .subBtn{
+			height:40px; 
+			background-color:#CD3C41;
+			border-radius:5px;
+			border:1px;  
+			color:white;
+			font-size:15px;
+        }
+        .subBtnWrapper{
+        	width: 200px;
+        	margin: 0 auto;
+        	display:none;
         }
 </style>
 </html>

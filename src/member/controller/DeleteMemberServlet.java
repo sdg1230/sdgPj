@@ -38,6 +38,9 @@ public class DeleteMemberServlet extends HttpServlet {
 		int result=new MemberService().deleteMember(memberId);
 		RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
 		if(result>0) {
+			if(session!=null) {
+				session.invalidate();
+			}
 			request.setAttribute("msg", "탈퇴되셨습니다");
 			request.setAttribute("loc", "/");
 		}else {

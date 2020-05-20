@@ -203,7 +203,7 @@ public class ReserveDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Reserve r = new Reserve();
-				System.out.println("test");
+				//System.out.println("test");
 				r.setDesignerNo(rset.getInt("designer_no"));
 				r.setDesignerName(rset.getString("designer_name"));
 				r.setMemberId(rset.getString("member_id"));
@@ -264,11 +264,11 @@ public class ReserveDao {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, reserveNo);
-			System.out.println(reserveNo);
+			//System.out.println(reserveNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Reserve r = new Reserve();
-				System.out.println("test");
+				//System.out.println("test");
 				r.setDesignerNo(rset.getInt("designer_no"));
 				r.setDesignerName(rset.getString("designer_name"));
 				r.setMemberId(rset.getString("member_id"));

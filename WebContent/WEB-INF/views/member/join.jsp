@@ -104,7 +104,6 @@
                         }else{
                         	comments[0].innerHTML="사용가능합니다.";
                         	count[0]=true;
-                        	console.log("a");
                         }
                     }
                 });
@@ -121,7 +120,6 @@
                 
             }else{
             	count[1]=true;
-            	console.log("a");
             }
             $(this).focus(function(){
                     comments[1].innerHTML="";
@@ -137,7 +135,6 @@
                 count[2]=false;
             }else{
             	count[2]=true;
-            	console.log("a");
             }
              $(this).focus(function(){
                     comments[2].innerHTML="";
@@ -147,7 +144,6 @@
             if($(this).val()==$("#pw").val()){
                 comments[3].innerHTML="";
                 count[3]=true;
-                console.log("a");
             }else{
             	comments[3].innerHTML="비밀번호를 확인해주세요";
             	count[3]=false;
@@ -163,38 +159,12 @@
                 count[4]=false;
             }else{
             	count[4]=true;
-            	console.log("a");
             }
              $(this).focus(function(){
                     comments[4].innerHTML="";
                 });
         });
         
-        //var genderNum=$('input:radio[name:"gender"]').length;
-        
-        
-        
-        /*
-        
-         $("input:radio[name='gender']:checked")
-        var genderNum=$("input:radio[name='gender']:checked").length;
-        if(genderNum==0){
-            comments[6].innerHTML="성별을 체크해주세요";
-            count[5]=false;
-        }else{
-            count[5]=true;
-            console.log("a");
-        }
-      
-        
-        if($("#address").val()==""){
-        	
-        	count[6]=false;
-        }else{
-        	count[6]=true;
-        }
-        
-        */
         
         $('#age').focusout(function(){
             var ageReg=/^[0-9]{1,3}$/;
@@ -203,7 +173,6 @@
                 count[5]=false;
             }else{
             	count[5]=true;
-            	console.log("a");
             }
              $(this).focus(function(){
                     comments[7].innerHTML="";
@@ -222,7 +191,6 @@
                count[5]=false;
            }else{
                count[5]=true;
-               console.log("a");
            }
            
            
