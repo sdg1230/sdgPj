@@ -90,6 +90,17 @@ public class MemberService {
 		return m;
 	}
 
+	public int pwUpdate(Member m) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new MemberDao().pwUpdate(conn,m);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 	
 
 	

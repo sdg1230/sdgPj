@@ -97,6 +97,9 @@
         	color:white;
         	display:block;
         }
+        #allReserve:hover{
+        	background-color:red;
+        }
       #ul>li{
             display: inline-block;
         }
@@ -148,8 +151,8 @@
         #ul>li>input{
         	width:400px;
         	height:30px;
-        	border-radius:5px;
-        	border:1px solid gray;
+        	border-radius:7px;
+        	border:4px solid #2E2E2E;
         }
 		#top{
 	        height: 150px;
@@ -166,7 +169,7 @@
         #searchText{
         	width:400px;
         	height:40px;
-        	border:3px;
+        	border:5px solid #2E2E2E;
         }
         
         .mtable{
@@ -195,6 +198,18 @@
         	
         	height:55px;
         	display: inline-block; 
+        	
+        }
+        #delBtn{
+        	background-color: #998778;
+        	border:1px;
+        	color:white;
+        	width:60px;
+        	height:30px;
+        }
+        #delBtn:hover{
+        	background-color:#E6E6E6;
+        	color:black;
         	
         }
         </style>

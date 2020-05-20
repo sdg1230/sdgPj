@@ -250,5 +250,28 @@ public class MemberDao {
 		return m;
 	}
 
+	public int pwUpdate(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String query="update member set member_pw=? where member_id=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberPw());
+			pstmt.setString(2, m.getMemberId());
+			result=pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 	
 }
