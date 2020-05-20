@@ -215,7 +215,7 @@ function questionFunc(memberId){
             	</div>
             	<br><hr style="border: 2px solid black;">
             	
-            	<div style="text-align: center; width: 100%" class="eventContentTable0">
+            	<div style="text-align: center; width: 100%; margin-top: 50px; margin-bottom: 50px;" class="eventContentTable0">
             		${e.eventContent }
             	</div>
             	<hr>

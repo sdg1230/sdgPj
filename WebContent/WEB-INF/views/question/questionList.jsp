@@ -214,7 +214,8 @@
 
 .chatting {
 	width: 100%;
-	overflow: hidden;
+	height : 800px;
+	overflow: scroll;
 	background-color: #E8EDF0;
 	padding-top: 20px;
 	

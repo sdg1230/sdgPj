@@ -259,7 +259,7 @@ function questionFunc(memberId){
             		</div>
             		<div class="eventListPart2">
             			<div style="width: 150px; height: 50px; background-color: red; text-align: center; margin: 0 auto;">
-            				<span style="line-height: 50px; color: white; font-weight: bold;">NOTICE</span>
+            				<span style="line-height: 50px; color: white; font-weight: bold;">EVENT</span>
             			</div>
             			<div style="margin: 0 auto; text-align: center; padding-top: 140px;">
             				<a style="font-size: 30px; color: red; font-weight: bold;" href="/eventDetail?eventNo=${e.eventNo }">상세보기  →</a>

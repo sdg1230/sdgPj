@@ -64,6 +64,18 @@
 			}
 		}
 	}
+	function questionFunc(memberId){
+		if(memberId==""){
+			alert("로그인이 필요합니다");
+			location.href="/loginFrm";
+		}else{
+			if(memberId=="admin"){
+				location.href="/questionAnswer";
+			}else{
+				location.href="/questionList?questionWriter=${sessionScope.member.memberId}";
+			}
+		}
+	}
 </script>
 
 <div class="sidebar">
@@ -84,7 +96,7 @@
 			</c:if>
 		</div>
 	</a> 
-	<a href="/reserveListFrm">
+	<a href="javascript:void(0);" onclick="questionFunc('${sessionScope.member.memberId}');">
 		<div class="sidemenu">
 			<img src="/imgs/question-icon.png">
 			<div>1:1문의</div>
