@@ -46,7 +46,7 @@ public class InsertPayServlet extends HttpServlet {
 		
 		int result = new PayService().insertPayment(p);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		request.setAttribute("loc", "/");
+		request.setAttribute("loc", "/reserveListFrm");
 		if(result==2) {
 			request.setAttribute("msg", "결제가 완료되었습니다.");
 		}else {
