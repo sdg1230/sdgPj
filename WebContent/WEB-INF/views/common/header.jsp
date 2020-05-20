@@ -84,7 +84,7 @@
 			</c:if>
 		</div>
 	</a> 
-	<a href="/reserveListFrm">
+	<a href="#">
 		<div class="sidemenu">
 			<img src="/imgs/question-icon.png">
 			<div>1:1문의</div>
