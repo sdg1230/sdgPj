@@ -47,7 +47,7 @@
                 		
                 		 
                 		 <form action="/pwSearchUpdate" method="post">
-                		<div type="text" id="result" ></div>
+                		<div type="text" id="result"></div>
                 		</form>
                 
   </div>
