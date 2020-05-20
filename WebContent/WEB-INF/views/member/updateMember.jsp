@@ -58,7 +58,7 @@
                  </table>
                  <div id="bottomBtn">
                      <button type="submit" id="update" value="확인">확인</button>
-                     <button type="reset" id="cancel" value="취소">취소</button>
+                     <button type="button" id="cancel" value="취소">취소</button>
                  </div>
             </form>
         </div>
@@ -87,27 +87,6 @@
              comments[i].innerHTML="";
          }
     	 
-    	 
-    	 /*
-    	 $('#name').focusout(function(){
-             var nameReg=/^[가-힣]{1,5}$/;
-             if(!nameReg.test($(this).val())){
-                 comments[0].innerHTML="한글(다섯 글자 이하)로 입력해주세요";
-                 count[0]=false;
-                 
-             }else{
-             	count[0]=true;
-             	console.log("a");
-             }
-             $(this).focus(function(){
-                     comments[0].innerHTML="";
-                    
-                 });
-              
-             
-         });
-    	 
-    	 */
     	 
     	 
     	 
@@ -171,6 +150,11 @@
              	
                  return false;
              }
+         });
+         
+         $("#cancel").click(function(){
+        	 console.log("a");
+        	 location.href="/mypage";
          });
     });
     

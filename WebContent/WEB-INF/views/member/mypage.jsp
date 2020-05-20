@@ -18,14 +18,8 @@
                     <tr>
                         <td id="top-c1"><p id="nameF">${sessionScope.member.memberName }</p></td>
                         <td id="top-c2"><p>님</p></td>
-<<<<<<< HEAD
-                        <td id="top-c3"><a href="#">예약확인</a></td>
-                        <td id="top-c4"><a href="#">1:1문의</a></td>
-=======
                         <td id="top-c3"><a href="/reserveListFrm">예약확인</a></td>
-                        <td id="top-c4"><a href="javascript:void(0);"
-							onclick="questionFunc('${sessionScope.member.memberId}');">1:1문의</a></td>
->>>>>>> 64f3da4e452295dce01c0e3e3561989f14e55e06
+                        <td id="top-c4"><a href="javascript:void(0);" onclick="questionFunc('${sessionScope.member.memberId}');">1:1문의</a></td>
                         <td id="updatebtn"> <a href="/updateFrm">정보변경</a></td>
                     </tr>
                 </table>

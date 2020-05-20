@@ -116,68 +116,8 @@
 			});	
 				 
 			});
-			
-				
-				
-				
-			
-			});
-			
-			
-	
-			/*function pwupbtn(){
-			var count=[false,false];
-			var pw=document.getElementById("pw").value;
-			 var rePw = document.getElementById("rePw").value;
-			  var comments = document.getElementsByClassName("comment");
-		        for(var i=0; i<comments.length;i++){
-		            comments[i].innerHTML="";
-		        }
-		        return false;
-				
-		            var pwReg=/^[a-zA-Z0-9]{8,12}/;
-		            if(!pwReg.test(pw)){
-		                comments[0].innerHTML="대문자,소문자,숫자로 8~12글자";
-		                count[0]=false;
-		            }else{
-		            	count[0]=true;
-		            	console.log("a");
-		            }
-		            
-		        
-		    
-		            if(!pw.test(rePw)){
-		                comments[1].innerHTML="";
-		            	count[1]=false;
-		                console.log("a");
-		            }else{
-		            	comments[1].innerHTML="비밀번호를 확인해주세요";
-		                count[1]=true;
-		            }
-		            
-		      
-		        
-		             return false;
 
-	            var num=0;
-	            for(var i=0; i<count.length; i++){
-	                if(count[i]==false){
-	                    num++;
-	                }
-	            }
-	            console.log(num);
-	            if(num==0){
-	            	alert("ddd");
-	                return true;
-	            }else{
-	            	alert("비밀번호가 일치하지 않습니다.");
-	                return false;
-	            }
-	      
-	        
-				
-				
-			}*/ 
+			});
 			
 	
 	</script>
