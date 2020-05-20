@@ -212,6 +212,20 @@
 		
 		
 </style>
+<script>
+function questionFunc(memberId){
+	if(memberId==""){
+		alert("로그인이 필요합니다");
+		location.href="/loginFrm";
+	}else{
+		if(memberId=="admin"){
+			location.href="/questionAnswer";
+		}else{
+			location.href="/questionList?questionWriter=${sessionScope.member.memberId}";
+		}
+	}
+}
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -228,7 +242,7 @@
                     <ul>
                         <li><a href="/noticeList?reqPage=1">공지사항</a></li>
                         <li><a href="/eventList">이벤트</a></li>
-                        <li><a href="#">1:1문의</a></li>
+                        <li><a href="javascript:void(0);" onclick="questionFunc('${sessionScope.member.memberId}');">1:1문의</a></li>
                     </ul>
                 </div>
             </div>
@@ -254,7 +268,9 @@
 							
 				</c:forEach>
             </table>
+            <c:if test="${sessionScope.member.memberId eq 'admin' }">
             <a href="/noticeWrite" class="noticeWriteBtn">글쓰기</a>
+            </c:if>
             <div class="noticePageNavi">${pageNavi }</div>
             <div class="noticeSearch">
             	<form action="/noticeSearchTitle">

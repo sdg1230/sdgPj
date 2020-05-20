@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <style>
@@ -165,6 +165,20 @@
         	width: 1200px;
         }
 </style>
+<script>
+function questionFunc(memberId){
+	if(memberId==""){
+		alert("로그인이 필요합니다");
+		location.href="/loginFrm";
+	}else{
+		if(memberId=="admin"){
+			location.href="/questionAnswer";
+		}else{
+			location.href="/questionList?questionWriter=${sessionScope.member.memberId}";
+		}
+	}
+}
+</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -181,17 +195,18 @@
                     <ul>
                         <li><a href="/noticeList?reqPage=1">공지사항</a></li>
                         <li><a href="/eventList">이벤트</a></li>
-                        <li><a href="#">1:1문의</a></li>
+                        <li><a href="javascript:void(0);" onclick="questionFunc('${sessionScope.member.memberId}');">1:1문의</a></li>
                     </ul>
                 </div>
             </div>
-            
+            <c:if test="${sessionScope.member.memberId eq 'admin' }">
             <div align="right" style="margin-top: 120px;">
-            	<a href="/modifyNoticeFrm?noticeNo=${n.noticeNo}" class="adminNoticeBtn">수정하기</a>
-            	<!-- <a href="/deleteNotice?noticeNo=${n.noticeNo}" class="adminNoticeBtn" onclick="deleteNotice()">삭제하기</a> -->
-            	<a href="javascript:void(0)" class="adminNoticeBtn" onclick="deleteNotice('${n.noticeNo}')">삭제하기</a>
-            </div>
             
+            	<a href="/modifyNoticeFrm?noticeNo=${n.noticeNo}" class="adminNoticeBtn">수정하기</a>
+            	<a href="javascript:void(0)" class="adminNoticeBtn" onclick="deleteNotice('${n.noticeNo}')">삭제하기</a>
+            
+            </div>
+            </c:if>
             <div class="noticeDetailContent" >
             	<br><br><hr style="border: 2px solid black;">
             	<h1 align="center">${n.noticeTitle}</h1>
@@ -201,7 +216,7 @@
             	</div>
             	<br><hr style="border: 2px solid black;">
             	
-            	<div style="text-align: center; width: 100%" class="noticeContentTable0">
+            	<div style="width: 100%; margin-top: 50px; margin-bottom: 50px;" class="noticeContentTable0">
             		${n.noticeContent }
             	</div>
             	<hr>

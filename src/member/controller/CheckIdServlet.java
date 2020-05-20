@@ -33,9 +33,9 @@ public class CheckIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId=request.getParameter("memberId");
-		System.out.println(memberId);
+		//System.out.println(memberId);
 		int m=new MemberService().selectOneMembers(memberId);
-		System.out.println(m);
+		//System.out.println(m);
 		PrintWriter out = response.getWriter();
 		
 	      if(m>0) {

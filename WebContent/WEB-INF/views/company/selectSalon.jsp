@@ -514,28 +514,20 @@ text-align: center;
 			
 			addr = $("#salonAddr").val();
 			name = $("#salonName").val();
-			console.log(addr);
-		
-		console.log(addr+"dd");
 		
 		
 		naver.maps.Service.geocode({
 			address : addr
 		}, function(status, response) {
-			console.log(addr);
 			if (status !== naver.maps.Service.Status.OK) {
 				return alert('Something wrong!');
 			}
-			console.log(addr);
 			var result = response.result, // 검색 결과의 컨테이너
 			items = result.items;
 			console.log(items);
 			add = items[1].point;
 			xx = add.x;
 			yy = add.y;
-			console.log(xx);
-			console.log(xx);
-			console.log(yy);
 			var map = new naver.maps.Map('map', {
 				center : new naver.maps.LatLng(yy, xx),
 

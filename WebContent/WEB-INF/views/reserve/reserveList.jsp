@@ -165,7 +165,7 @@ th {
 					<div class="col-sm-4 col-md-4">
 						<h2>고객 정보</h2>
 						<h6>
-							회원 이름 : ${userReserveList[0].memberName}
+							회원 이름 : ${sessionScope.member.memberName}
 							<div class="btn-group col-4">
 								<button type="button" class="btn">
 									<h5>Social</h5>
@@ -183,8 +183,8 @@ th {
 								</ul>
 							</div>
 						</h6>
-						<p>회원 아이디 : ${userReserveList[0].memberId}</p>
-						<p>연락처 : ${userReserveList[0].memberPhone}</p>
+						<p>회원 아이디 : ${sessionScope.member.memberId}</p>
+						<p>연락처 : ${sessionScope.member.memberPhone}</p>
 
 						<!-- Split button -->
 					</div>
@@ -473,10 +473,6 @@ th {
 		});
 
 		function reviewInsert(reserveNo, salonName, memberId) {
-			console.log(reserveNo);
-			console.log(salonName);
-			console.log(memberId);
-
 			var param = {
 				reserveNo : reserveNo
 			};
@@ -639,5 +635,22 @@ th {
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<<<<<<< HEAD
+=======
+	<script>
+		$(function() {
+			$('.btn-secondary').click(function() {
+				
+				$('.selected-rating').val("");
+				$('.form-control').val("");
+				
+				$(".bold rating-header").val("");
+
+			});
+		});
+
+	</script>
+
+>>>>>>> 64f3da4e452295dce01c0e3e3561989f14e55e06
 </body>
 </html>

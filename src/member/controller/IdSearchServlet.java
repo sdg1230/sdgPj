@@ -34,8 +34,8 @@ public class IdSearchServlet extends HttpServlet {
 		String memberName=request.getParameter("memberName");
 		String memberPhone=request.getParameter("memberPhone");
 	
-		System.out.println(memberName);
-		System.out.println(memberPhone);
+		//System.out.println(memberName);
+		//System.out.println(memberPhone);
 		Member m= new MemberService().idSearch(memberName,memberPhone);
 		//System.out.println(m.getMemberId());
 		PrintWriter out=response.getWriter();
