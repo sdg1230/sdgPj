@@ -72,7 +72,7 @@
 						$("#result").html("<input type='hidden' id='id' name='memberId' value="+memberId+"><br>"
 								+"새로운 비밀번호<input type='text' id='pw' name='newPw'><br>"
 					               +"비밀번호 확인<input type='text' id='pw' name='newPw'>"+
-					               "<button >실행</button>");
+					               "<button id='btn2'>실행</button>");
 					}else{
 						$("#result").html("일지하는 정보가 없습니다.");
 					}
@@ -101,6 +101,15 @@
 			 border:1px;  
 			 color:white;
 			 font-size:15px;
+        }
+        #btn2{
+        	width:50px;
+        	height:30px;
+        	background-color:#CD3C41;
+        	color:white;
+        	border-radius:5px;
+        	border:1px;
+        	margin-left:10px;
         }
         .content>h1{
         	font-size:40px;
