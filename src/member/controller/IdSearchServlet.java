@@ -39,14 +39,6 @@ public class IdSearchServlet extends HttpServlet {
 		//System.out.println(memberName);
 		//System.out.println(memberPhone);
 		Member m= new MemberService().idSearch(memberName,memberPhone);
-		if(m==null) {
-			System.out.println("asd");
-		}else {
-			System.out.println(m.getMemberId());
-		}
-		
-//		PrintWriter out=response.getWriter();
-//		out.print(m.getMemberId());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		new Gson().toJson(m,response.getWriter());
