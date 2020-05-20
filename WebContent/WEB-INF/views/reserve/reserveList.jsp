@@ -163,7 +163,7 @@ th {
 					<div class="col-sm-4 col-md-4">
 						<h2>고객 정보</h2>
 						<h6>
-							회원 이름 : ${userReserveList[0].memberName}
+							회원 이름 : ${sessionScope.member.memberName}
 							<div class="btn-group col-4">
 								<button type="button" class="btn">
 									<h5>Social</h5>
@@ -181,8 +181,8 @@ th {
 								</ul>
 							</div>
 						</h6>
-						<p>회원 아이디 : ${userReserveList[0].memberId}</p>
-						<p>연락처 : ${userReserveList[0].memberPhone}</p>
+						<p>회원 아이디 : ${sessionScope.member.memberId}</p>
+						<p>연락처 : ${sessionScope.member.memberPhone}</p>
 
 						<!-- Split button -->
 					</div>
