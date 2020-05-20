@@ -120,7 +120,6 @@
                 
              }else{
              	count[0]=true;
-             	console.log("a");
              }
               $(this).focus(function(){
                      comments[0].innerHTML="";
@@ -130,7 +129,6 @@
              if($(this).val()==$("#pw").val()){
                  comments[1].innerHTML="";
                  count[1]=true;
-                 console.log("a");
              }else{
              	comments[1].innerHTML="비밀번호를 확인해주세요";
              	count[1]=false;
@@ -151,7 +149,6 @@
                  count[2]=false;
              }else{
              	count[2]=true;
-             	console.log("a");
              }
               $(this).focus(function(){
                      comments[2].innerHTML="";

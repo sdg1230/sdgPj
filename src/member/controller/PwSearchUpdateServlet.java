@@ -39,7 +39,7 @@ public class PwSearchUpdateServlet extends HttpServlet {
 		
 		m.setMemberPw(request.getParameter("newPw"));
 		
-		System.out.println(m.getMemberId());
+		//System.out.println(m.getMemberId());
 		int result=new MemberService().pwUpdate(m);
 		
 		

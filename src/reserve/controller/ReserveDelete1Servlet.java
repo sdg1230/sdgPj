@@ -31,7 +31,7 @@ public class ReserveDelete1Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
-		System.out.println("확인확인확인확인확인 : "+reserveNo);
+		//System.out.println("확인확인확인확인확인 : "+reserveNo);
 		int result = new ReserveService().DeleteReserve1(reserveNo);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
@@ -40,7 +40,7 @@ public class ReserveDelete1Servlet extends HttpServlet {
 			request.setAttribute("msg", "예약취소 성공");
 			request.setAttribute("loc", "/reserveListFrm");
 		}else {
-			System.out.println("예약취소 실패");
+			request.setAttribute("msg", "예약취소 실패");
 			request.setAttribute("loc", "/reserveListFrm");
 		}
 		rd.forward(request, response);

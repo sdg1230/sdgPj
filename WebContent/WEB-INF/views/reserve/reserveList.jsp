@@ -482,10 +482,6 @@ th {
 		});
 
 		function reviewInsert(reserveNo, salonName, memberId) {
-			console.log(reserveNo);
-			console.log(salonName);
-			console.log(memberId);
-
 			var param = {
 				reserveNo : reserveNo
 			};
@@ -660,29 +656,13 @@ th {
 			$('.btn-secondary').click(function() {
 				
 				$('.selected-rating').val("");
-				/* $('.btnrating').attr(""); */
 				$('.form-control').val("");
 				
 				$(".bold rating-header").val("");
-				
-				
-				/* 
-				 var previous_value = 0;
-
-				 var selected_value = 0;
-
-				 $(".selected-rating").empty();
-				 $(".selected-rating").html(selected_value); */
 
 			});
 		});
 
-		/* $(function() {
-			$('#exampleModal').on('shown.bs.modal',function(e) {
-				 console.log('modal close');
-				$(this).find('.form-control').val("")
-			});
-		}); */
 	</script>
 
 </body>

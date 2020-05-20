@@ -37,18 +37,18 @@ public class ReserveSearchSevlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
-		System.out.println("여기확인좀"+reserveNo);
+		//System.out.println("여기확인좀"+reserveNo);
 		ArrayList<Reserve> list = new ReserveService().searchReserve(reserveNo);
 		
 //		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reserve/reserveList.jsp");
 		if(!list.isEmpty()) {
-			System.out.println("여기확인");
+			//System.out.println("여기확인");
 			request.setAttribute("searchReserveList", list);
 		}
 		
-		System.out.println(list.get(0));
-		System.out.println("크기:" +list.size());
-		System.out.println("성공했어");
+		//System.out.println(list.get(0));
+		//System.out.println("크기:" +list.size());
+		//System.out.println("성공했어");
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(list,response.getWriter());
