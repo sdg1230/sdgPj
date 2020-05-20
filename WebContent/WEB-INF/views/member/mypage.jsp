@@ -19,7 +19,8 @@
                         <td id="top-c1"><p id="nameF">${sessionScope.member.memberName }</p></td>
                         <td id="top-c2"><p>님</p></td>
                         <td id="top-c3"><a href="/reserveListFrm">예약확인</a></td>
-                        <td id="top-c4"><a href="#">1:1문의</a></td>
+                        <td id="top-c4"><a href="javascript:void(0);"
+							onclick="questionFunc('${sessionScope.member.memberId}');">1:1문의</a></td>
                         <td id="updatebtn"> <a href="/updateFrm">정보변경</a></td>
                     </tr>
                 </table>
@@ -79,6 +80,20 @@
     			}
     		}
     </script>
+    <script>
+function questionFunc(memberId){
+	if(memberId==""){
+		alert("로그인이 필요합니다");
+		location.href="/loginFrm";
+	}else{
+		if(memberId=="admin"){
+			location.href="/questionAnswer";
+		}else{
+			location.href="/questionList?questionWriter=${sessionScope.member.memberId}";
+		}
+	}
+}
+</script>
 </body>
 <style>
 
