@@ -57,7 +57,7 @@
     
 </body>
 	<script>
-			 var i = 0;
+			
 		$(function(){
 			$("#btn").click(function(){
 				var memberId=$("#id").val();
@@ -80,24 +80,29 @@
 					}else{
 						$("#result").html("일지하는 정보가 없습니다.");
 					}
+					 var cont = [false,false]
 				 $("#pw").focusout(function () {
 				 var pwReg=/^[a-zA-Z0-9]{8,12}/;
 			
 					
 				 if(!pwReg.test($("#pw").val())){
 					 $(".comment1").html("8~12자리로 입력해주세요.");
+					cont[0]=false;
 		            }else{
-		                i++;
-		            	
+		            	$(".comment1").html("");
+		                cont[0]=true;
+		            
 		            }
+				 
 				 
 				 });
 				 $('#rePw').focusout(function(){
 			            if($('#rePw').val()==$("#pw").val()){
-			              i++;
+			            	$(".comment2").html("");
+			            	cont[1]=true;
 			            }else{
 			            	$(".comment2").html("비밀번호를 확인해주세요");
-			            	
+			              cont[1]=false;
 			            	
 			            }
 			           
@@ -105,12 +110,26 @@
 				 
 				 $("form").submit(function () {
 					 console.log(i);
-					if(i==2){
-						return true;
-					}else{
-						return false;
-						
-					}
+					 
+					 var num=0;
+			            for(var i=0; i<cont.length; i++){
+			                if(cont[i]==false){
+			                    num++;
+			                }
+			            }
+			            console.log(num);
+			            if(num==0){
+			            	if($('#rePw').val()==$("#pw").val()){
+				            	
+			                return true;
+				            }else{
+				            	alert("비밀번호를 확인하세요");
+				            	return false;
+				            }
+			            }else{
+			            	alert("비밀번호를 확인하세요");
+			                return false;
+			            }
 				})
 				}
 			});	
