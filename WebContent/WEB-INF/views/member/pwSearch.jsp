@@ -35,7 +35,7 @@
                         <td>
                         
 												                        
-                        	 <span ><button type="submit" id="btn" >확인</button></span>
+                        	 <span ><button  id="btn" >확인</button></span>
                         	 
                         	 
                         </td>
@@ -57,6 +57,7 @@
     
 </body>
 	<script>
+			 var i = 0;
 		$(function(){
 			$("#btn").click(function(){
 				var memberId=$("#id").val();
@@ -70,16 +71,114 @@
 					if(data==1){
 						
 						$("#result").html("<input type='hidden' id='id' name='memberId' value="+memberId+"><br>"
-								+"새로운 비밀번호<input type='text' id='pw' name='newPw'><br>"
-					               +"비밀번호 확인<input type='text' id='pw' name='newPw'>"+
-					               "<button id='btn2'>실행</button>");
+								+"새로운 비밀번호<input type='text' id='pw' name='newPw'><br><span class='comment1'></span><br>"
+					               +"비밀번호 확인<input type='text' id='rePw' name='newPw'><span class='comment2'></span>"+
+					               "<button id='btn2' type='submit'>실행</button>");
+						
+						
+						
 					}else{
 						$("#result").html("일지하는 정보가 없습니다.");
 					}
+				 $("#pw").focusout(function () {
+				 var pwReg=/^[a-zA-Z0-9]{8,12}/;
+			
+					
+				 if(!pwReg.test($("#pw").val())){
+					 $(".comment1").html("8~12자리로 입력해주세요.");
+		            }else{
+		                i++;
+		            	
+		            }
+				 
+				 });
+				 $('#rePw').focusout(function(){
+			            if($('#rePw').val()==$("#pw").val()){
+			              i++;
+			            }else{
+			            	$(".comment2").html("비밀번호를 확인해주세요");
+			            	
+			            	
+			            }
+			           
+			        });
+				 
+				 $("form").submit(function () {
+					 console.log(i);
+					if(i==2){
+						return true;
+					}else{
+						return false;
+						
+					}
+				})
 				}
 			});	
+				 
 			});
-		});
+			
+				
+				
+				
+			
+			});
+			
+			
+	
+			/*function pwupbtn(){
+			var count=[false,false];
+			var pw=document.getElementById("pw").value;
+			 var rePw = document.getElementById("rePw").value;
+			  var comments = document.getElementsByClassName("comment");
+		        for(var i=0; i<comments.length;i++){
+		            comments[i].innerHTML="";
+		        }
+		        return false;
+				
+		            var pwReg=/^[a-zA-Z0-9]{8,12}/;
+		            if(!pwReg.test(pw)){
+		                comments[0].innerHTML="대문자,소문자,숫자로 8~12글자";
+		                count[0]=false;
+		            }else{
+		            	count[0]=true;
+		            	console.log("a");
+		            }
+		            
+		        
+		    
+		            if(!pw.test(rePw)){
+		                comments[1].innerHTML="";
+		            	count[1]=false;
+		                console.log("a");
+		            }else{
+		            	comments[1].innerHTML="비밀번호를 확인해주세요";
+		                count[1]=true;
+		            }
+		            
+		      
+		        
+		             return false;
+
+	            var num=0;
+	            for(var i=0; i<count.length; i++){
+	                if(count[i]==false){
+	                    num++;
+	                }
+	            }
+	            console.log(num);
+	            if(num==0){
+	            	alert("ddd");
+	                return true;
+	            }else{
+	            	alert("비밀번호가 일치하지 않습니다.");
+	                return false;
+	            }
+	      
+	        
+				
+				
+			}*/ 
+			
 	
 	</script>
 	
