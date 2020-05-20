@@ -212,6 +212,7 @@ public class MemberDao {
 			if(rset.next()) {
 				m=new Member();
 				m.setMemberId(rset.getString("member_id"));
+				
 				//System.out.println(m.getMemberId());
 			}	
 			
