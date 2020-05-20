@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import event.model.service.EventService;
-import evnet.model.vo.Event;
+import event.model.vo.Event;
 
 /**
  * Servlet implementation class EventListServlet
@@ -34,7 +34,7 @@ public class EventListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Event> list = new EventService().selectEventList();
 		request.setAttribute("list", list);
-		System.out.println(list.size());
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/event/eventList.jsp");
 		rd.forward(request, response);
 	}

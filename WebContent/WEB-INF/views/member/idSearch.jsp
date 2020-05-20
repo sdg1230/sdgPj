@@ -9,43 +9,141 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <img src="../../../imgs/backImg1.jpg" id="img1">
-    <form action="/idSearch" method="post"></form>
+    
     <div class="content">
-	 			<table>
-                        <tr>
-                             <td class="loginfont">이름</td>
-                             <td><input type="text" id="id" name="memberId" ></td>
-                             <!--  <td rowspan="2"><button type="submit" id="btn" >로그인</button></td>-->
-                        </tr>
-                        <tr>
-                             <td class="loginfont">전화번호</td>
-                             <td><input type="password" id="phone" name="memberPhone"></td>
-                         </tr>
-                         
+	    <div id="top">
+	    <h1>아이디 찾기</h1>
+	    </div >	
+	    	
+	    	<div id="d1">
+	    		<table id="t1">
+	    			<tr>	
+	    				<td>
+				 				<table id="t2">
+			                        <tr>
+			                             <td class="title">이름</td>
+			                             <td><input type="text" id="name" name="memberName" class="input"></td>
+			                             <!--  <td rowspan="2"><button type="submit" id="btn" >로그인</button></td>-->
+			                        </tr>
+			                        <tr>
+			                             <td class="title">전화번호</td>
+			                             <td><input type="text" id="phone" name="memberPhone" class="input"></td>
+			                         </tr>
+			                     </table>    
+			                       
+                        </td>
+                        <td>
+                        	 <span class="a"><button id="btn" >확인</button></span>
+                        </td>
+                        
+                      </tr>   
+                
                 </table>
+             </div>
+                		
+                		 
+                		 <div >
+                		<input type="text" id="result">
+                		</div>
                 
   </div>
-  </form>
+ 
   <jsp:include page="/WEB-INF/views/common/footer.jsp" />               
            
 	
 </body>
+<script>
+	$(function(){
+		$("#btn").click(function(){
+			
+		
+		
+		var memberName=$("#name").val();
+		var memberPhone=$("#phone").val();
+		$.ajax({
+			url:"/idSearch",
+			type:"get",
+			data:{memberName:memberName,memberPhone:memberPhone},
+			
+			success:function(data){
+				$("#result").val(data+"입니다.");
+				
+			
+			}
+			
+		});
+		
+		});
+			
+	});
+	
+</script>
+
+
+
+
 <style>
 .content {
             /*-지우지마세요-*/
             width: 1200px;
             overflow: hidden;
             margin: 0px auto 0 auto;
-            height: 1200px;
+            height: 500px;
            
+        }
+       
+        #btn{
+			width:90px;
+			height:70px; 
+			 background-color:#CD3C41;
+			 border-radius:5px;
+			 border:1px;  
+			 color:white;
+			 font-size:15px;
         }
         .content>h1{
         	font-size:40px;
+        	margin: 0px auto;
         }
         #img1{
            
             width: 100%;
             height: 450px;
+        } 
+        #top{
+        	width:200px;
+	        height: 50px;
+	        margin: 0px auto;
+	       
+	        margin-top: 70px;
+	        margin-bottom: 50px;
+	        
+        
+        }
+        .input{
+       		width:200px;
+	        height: 30px;
+        	border:1px solid black;
+        	border-radius:5px;
+        }
+        .title{
+        	margin: 0px auto;
+        	margin-left:100px;
+        	font-size:20px;
+        }
+        #t1{
+        	margin-left:400px;
+        }
+        #t2{
+        	margin:0 auto;
+        }
+       
+        #result{
+        margin-left:500px;
+        	width:250px;
+        	height:30px;
+        	font-size:20px;
+        	border-style:none;
         }
 </style>
 </html>

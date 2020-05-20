@@ -13,7 +13,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import event.model.service.EventService;
-import evnet.model.vo.Event;
+import event.model.vo.Event;
 
 /**
  * Servlet implementation class InsertEventServlet

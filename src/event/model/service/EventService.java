@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import event.model.dao.EventDao;
-import evnet.model.vo.Event;
+import event.model.vo.EndEvent;
+import event.model.vo.Event;
 
 public class EventService {
 
@@ -26,6 +27,51 @@ public class EventService {
 		ArrayList<Event> list = new EventDao().selectEventList(conn);
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public Event eventDetail(int eventNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Event e = new EventDao().eventDetail(conn,eventNo);
+		JDBCTemplate.close(conn);
+		return e;
+	}
+
+	public int deleteEvent(int eventNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new EventDao().deleteEvent(conn,eventNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<EndEvent> selectEndList() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<EndEvent> endlist = new EventDao().selectEndList(conn);
+		JDBCTemplate.close(conn);
+		return endlist;
+	}
+
+	public Event selectEventOne(int eventNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Event e = new EventDao().selectEventOne(conn,eventNo);
+		JDBCTemplate.close(conn);
+		return e;
+	}
+
+	public int modifyEvent(int eventNo, Event e) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new EventDao().modifyEvent(conn,eventNo,e);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }
