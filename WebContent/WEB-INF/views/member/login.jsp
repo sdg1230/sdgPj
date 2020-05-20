@@ -29,8 +29,8 @@
                          
                     </table>
                        <button type="submit" id="btn" >로그인</button>
-                       <button type="button" id="idsearchbtn" ><a href="/idSearchFrm" >아이디찾기</a></button>
-                        <button type="button" id="pwsearchbtn" ><a href="/pwSearchFrm" >비밀번호찾기</a></button>
+                       <button type="button" id="idsearchbtn" >아이디찾기</button>
+                        <button type="button" id="pwsearchbtn" >비밀번호찾기</button>
                     </form>
                 </div>
         </div>
@@ -39,7 +39,13 @@
 		
 </body>
 	<script>
+		$("#idsearchbtn").click(function(){
+			location.href="/idSearchFrm";
+		});
 		
+		$("#pwsearchbtn").click(function(){
+			location.href="/pwSearchFrm";
+		});
 	</script>
 <style>
 /* 헤더 제대로적용------------------------ */
@@ -103,6 +109,10 @@
             padding: 10px;
             
         }
+        #btn:hover{
+        	background-color: #CD3C41;
+        	cursor:pointer;
+        }
         
         #idsearchbtn{
         	margin-left:80px;
@@ -114,14 +124,10 @@
             color: white;
             font-size: 20px;
             padding: 10px;
-        
         }
-        #idsearchbtn>a{
-        
-         color: white;
-        }
-        #pwsearchbtn>a{
-        	color:white;
+        #idsearchbtn:hover{
+        	 background-color:black;
+        	cursor:pointer;
         }
         
         #pwsearchbtn{
@@ -138,6 +144,10 @@
             padding: 10px;
         
         }
+         #pwsearchbtn:hover{
+        	 background-color:black;
+         	cursor:pointer;
+         }
         .loginfont{
             font-size: 20px;
         }

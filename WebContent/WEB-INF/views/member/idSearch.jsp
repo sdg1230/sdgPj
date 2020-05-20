@@ -118,6 +118,10 @@
 			 color:white;
 			 font-size:15px;
         }
+        #btn:hover{
+        	cursor:pointer;
+        	background-color:red;
+        }
         .content>h1{
         	font-size:40px;
         	margin: 0px auto;
@@ -169,6 +173,10 @@
 			border:1px;  
 			color:white;
 			font-size:15px;
+        }
+        .subBtn:hover{
+        	cursor:pointer;
+        	background-color:red;
         }
         .subBtnWrapper{
         	width: 200px;
