@@ -40,6 +40,8 @@ function questionFunc(memberId){
 </script>
 <style>
     /*-----------------content-----------------------*/
+
+
     .content2 {
         /*-지우지마세요-*/
         width: 1200px;
