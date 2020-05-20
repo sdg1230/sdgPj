@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>MY PAGE</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
