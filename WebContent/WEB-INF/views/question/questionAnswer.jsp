@@ -251,6 +251,7 @@ function questionFunc(memberId){
                 <tr>
                     <th>작성자</th>
                     <th>내용</th>
+                    <th>답변 확인</th>
                 </tr>
                 
                 <c:forEach items="${list }" var="q">
@@ -258,8 +259,19 @@ function questionFunc(memberId){
 				<tr>
 					<td style="border-bottom: 0.1px solid #DDE3E9;">
 					${q.questionWriter }</td>
-					<td style="border-bottom: 0.1px solid #DDE3E9;"><a href="/questionList?questionWriter=${q.questionWriter }" style="font-weight: bold">${q.questionContent }</a></td>
+					<td style="border-bottom: 0.1px solid #DDE3E9; width:700px;"><a href="/questionList?questionWriter=${q.questionWriter }" style="font-weight: bold">${q.questionContent }</a></td>
+					<c:if test="${q.questionRef eq 1 }">
+					<td style="border-bottom: 0.1px solid #DDE3E9;">
+						<span style="color: ghostwhite; font-weight: bold; background-color: #03a6ff; width: 120px; height: 40px; border-radius: 15px; display: block; line-height: 40px; margin-left: 62px;">답변 완료</span>
+					</td>
+					</c:if>
+					<c:if test="${q.questionRef eq 0 }">
+					<td style="border-bottom: 0.1px solid #DDE3E9;">
+						<span style="color: ghostwhite; font-weight: bold; background-color: #e85a71; width: 120px; height: 40px; border-radius: 15px; display: block; line-height: 40px; margin-left: 62px;">답변 대기</span>
+					</td>
+					</c:if>
 				</tr>
+					
 				</c:if>
 				</c:forEach>
             </table>

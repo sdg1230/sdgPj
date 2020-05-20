@@ -14,7 +14,7 @@ public class QuestionDao {
 	public ArrayList<Question> printQuestion(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select question_content, question_writer, question_date from question q1 where q1.QUESTION_DATE=(select max(question_date) from question q2 where q1.question_writer=q2.question_writer)";
+		String query = "select question_content, question_writer, question_date, question_ref from question q1 where q1.QUESTION_DATE=(select max(question_date) from question q2 where q1.question_writer=q2.question_writer)";
 		ArrayList<Question> list = new ArrayList<Question>();
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -23,6 +23,7 @@ public class QuestionDao {
 				Question q = new Question();
 				q.setQuestionContent(rset.getString("question_content"));
 				q.setQuestionWriter(rset.getString("question_writer"));
+				q.setQuestionRef(rset.getInt("question_ref"));
 				list.add(q);
 				
 			}
