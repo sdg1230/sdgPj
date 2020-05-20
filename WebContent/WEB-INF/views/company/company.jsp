@@ -270,9 +270,9 @@ pre>small {
 				<span class="spanTitle">MEORIJOM HAIR는 다른 미용 프렌차이즈 기업들과 달리 직영</span>
 				<pre>시스템으로 운영되는 5개의 매장과 140명의 직원이 함꼐하는 30여 년의 역사를 가집 미용기업 입니다.
         2005년 글로벌 브랜드 웰라가 선정한 세계 10대 헤어 브랜드에서 일본의 아르테 재팬에 이어 세계 2위를 차지 하였으며,
-        2006년 강남에 최고급 살롱 애브뉴 준오를 오픈하면서 많은 언론으로부터 규모와 시설이 해외 유명 살롱과 견주어 손색이 
+        2006년 강남에 최고급 살롱 애브뉴 MEORIJOM HAIR를 오픈하면서 많은 언론으로부터 규모와 시설이 해외 유명 살롱과 견주어 손색이 
         없다는 호평을 받았습니다.
-        지난 2007년 스페인 바르셀로나에서 개최된 인터내셔널 트렌드 비전 어워드에서는 대회 최고 영예인 골드 트로피를 수상하며 대한민국 
+        지난 2007년 스페인 바르셀로나에서 개최된 인터내셔널 트렌드 비전 어워드에서는 대회 최고 연예인 골드 트로피를 수상하며 대한민국 
         브랜드로 세계적인 명성을 얻어 가고 있습니다.</pre>
 			</div>
 			<div class="photograph">
@@ -317,7 +317,7 @@ pre>small {
 			</div>
 			<div>
 				<div class="div1">
-					<h1>준오만의 경쟁력</h1>
+					<h1>MEORIJOM HAIR만의 경쟁력</h1>
 				</div>
 				<div class="titleBox">01</div>
 				<br>
@@ -356,7 +356,7 @@ pre>small {
 			<div class="titleBox">02</div>
 			<br>
 			<div class="content1">
-				<span class="spanTitle">최고의 아름다움을 리드하는 준오의 전문성 MEORIJOM HAIR
+				<span class="spanTitle">최고의 아름다움을 리드하는 MEORIJOM HAIR의 전문성 MEORIJOM HAIR
 					Expertise</span>
 				<pre>
         MEORIJOM HAIR는 세계적인 코스메틱 브랜드 Wella가 선정한 세계10대 헤어 브랜드입니다.

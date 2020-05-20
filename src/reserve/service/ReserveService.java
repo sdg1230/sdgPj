@@ -57,7 +57,7 @@ public class ReserveService {
 				rlist.setMenuList(new ReserveDao().reserveDetailList(conn, rlist.getReserveNo()));				
 			}						
 		}
-		System.out.println(list.size());
+		//System.out.println(list.size());
 		JDBCTemplate.close(conn);
 		return list;
 	}

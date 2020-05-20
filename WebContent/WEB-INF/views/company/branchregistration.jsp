@@ -100,7 +100,6 @@ table {
 </style>
 <script>
 	function loadImg(f) {
-		console.log(f.files);
 		if (f.files.length != 0 && f.files[0] != 0) {
 			var reader = new FileReader();
 			reader.readAsDataURL(f.files[0]);

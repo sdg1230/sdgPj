@@ -36,7 +36,7 @@ public class InsertPayServlet extends HttpServlet {
 		int paymentPrice = Integer.parseInt(request.getParameter("paymentPrice"));
 		String paymentId = request.getParameter("paymentId");
 		String paymentNo = request.getParameter("paymentNo");
-		System.out.println(memberId+"/"+reserveNo+"/"+paymentPrice+"/"+paymentId+"/"+paymentNo);
+		//System.out.println(memberId+"/"+reserveNo+"/"+paymentPrice+"/"+paymentId+"/"+paymentNo);
 		Pay p = new Pay();
 		p.setMemberId(memberId);
 		p.setReserveNo(reserveNo);
