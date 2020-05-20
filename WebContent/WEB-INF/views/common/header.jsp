@@ -96,11 +96,7 @@
 			</c:if>
 		</div>
 	</a> 
-<<<<<<< HEAD
-	<a href="/reserveListFrm">
-=======
 	<a href="javascript:void(0);" onclick="questionFunc('${sessionScope.member.memberId}');">
->>>>>>> 64f3da4e452295dce01c0e3e3561989f14e55e06
 		<div class="sidemenu">
 			<img src="/imgs/question-icon.png">
 			<div>1:1문의</div>
