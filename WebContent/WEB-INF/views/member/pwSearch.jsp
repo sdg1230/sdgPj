@@ -5,14 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <img src="../../../imgs/backImg1.jpg" id="img1">
-    
-    <div class="content">
+    	<div class="content">
 	    <div id="top">
-	    <h1>아이디 찾기</h1>
+	    <h1>비밀번호 찾기</h1>
 	    </div >	
 	    	
 	    	<div id="d1">
@@ -21,19 +21,23 @@
 	    				<td>
 				 				<table id="t2">
 			                        <tr>
-			                             <td class="title">이름</td>
-			                             <td><input type="text" id="name" name="memberName" class="input"></td>
-			                             <!--  <td rowspan="2"><button type="submit" id="btn" >로그인</button></td>-->
+			                             <td class="title">아이디</td>
+			                             <td><input type="text" id="id" name="memberId" class="input"></td>
+			                            
 			                        </tr>
 			                        <tr>
 			                             <td class="title">전화번호</td>
-			                             <td><input type="text" id="phone" name="memberPhone" class="input"></td>
+			                             <td><input type="text" id="phone" name="memberPhone" class="input" placeholder="ex)010-0000-0000"></td>
 			                         </tr>
 			                     </table>    
 			                       
                         </td>
                         <td>
-                        	 <span class="a"><button id="btn" >확인</button></span>
+                        
+												                        
+                        	 <span ><button type="submit" id="btn" >확인</button></span>
+                        	 
+                        	 
                         </td>
                         
                       </tr>   
@@ -42,48 +46,60 @@
              </div>
                 		
                 		 
-                		 <div >
-                		<input type="text" id="result">
-                		</div>
+                		 <form action="/pwSearchUpdate" method="post">
+                		<div type="text" id="result" ></div>
+                		</form>
                 
   </div>
- 
-  <jsp:include page="/WEB-INF/views/common/footer.jsp" />               
-           
-	
+    
+    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />        
+    
 </body>
-<script>
-	$(function(){
-		$("#btn").click(function(){
-			
-		
-		
-		var memberName=$("#name").val();
-		var memberPhone=$("#phone").val();
-		$.ajax({
-			url:"/idSearch",
-			type:"get",
-			data:{memberName:memberName,memberPhone:memberPhone},
-			
-			success:function(data){
-				$("#result").val(data+"입니다.");
-				
-			
-			}
-			
+	<script>
+		$(function(){
+			$("#btn").click(function(){
+				var memberId=$("#id").val();
+				var memberPhone=$("#phone").val();
+				$("#result").html("");
+			$.ajax({
+				url:"/pwSearch",
+				type:"get",
+				data:{memberId:memberId,memberPhone:memberPhone},
+				success:function(data){
+					if(data==1){
+						
+						$("#result").html("<input type='hidden' id='id' name='memberId' value="+memberId+"><br>"
+								+"새로운 비밀번호<input type='text' id='pw' name='newPw'><br>"
+					               +"비밀번호 확인<input type='text' id='pw' name='newPw'>"+
+					               "<button id='btn2'>실행</button>");
+					}else{
+						$("#result").html("일지하는 정보가 없습니다.");
+					}
+				}
+			});	
+			});
 		});
-		
-		});
-			
-	});
 	
-</script>
+	</script>
+	
+	<style>
+	/* 헤더 제대로적용------------------------ */
+.headermiddle input[type="text"] {
+	height: 25px;
+	margin-bottom: 10px;
+	padding: 0;
+}
 
+.homeIcon>img {
+	margin-top: 5px;
+}
 
-
-
-<style>
-.content {
+.headermiddle {
+	padding-top: 4px;
+}
+/* 헤더 제대로적용------------------------ */
+	.content {
             /*-지우지마세요-*/
             width: 1200px;
             overflow: hidden;
@@ -100,6 +116,15 @@
 			 border:1px;  
 			 color:white;
 			 font-size:15px;
+        }
+        #btn2{
+        	width:50px;
+        	height:30px;
+        	background-color:#CD3C41;
+        	color:white;
+        	border-radius:5px;
+        	border:1px;
+        	margin-left:10px;
         }
         .content>h1{
         	font-size:40px;
@@ -143,7 +168,7 @@
         	width:250px;
         	height:30px;
         	font-size:20px;
-        	border-style:none;
+        	
         }
-</style>
+	</style>
 </html>

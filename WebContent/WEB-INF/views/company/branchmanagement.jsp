@@ -67,12 +67,10 @@
 	line-height: 50px;
 }
 .branchBox{
-            border: 1px solid white;
-            display: inline-block;
+            border-bottom:1px solid lightgray;
             text-align: center;
-            width: 800px;
-            height: 100px;
-            line-height: 100px;
+            font-weight:bold;
+            line-height: 80px;
             font-size: 2em;
         }
         .content1{
@@ -88,6 +86,7 @@
              border-collapse: collapse;
             padding: 0;
             margin: 0 auto;
+            margin-bottom:20px;
             text-align: center;
             background-color: white;
         }
@@ -115,12 +114,19 @@
             height: 40px;
         }
         .branch1{
+        padding:10px;
         	text-align: right;
         	
         }
         .branchbtn{
         	width: 105px;
         	height: 40px;
+        	border:none;
+        	color: white;
+			background-color: #998778;
+        }
+        .branchbtn:hover, .btn1:hover{
+        	cursor:pointer;
         }
 </style>
 </head>
@@ -128,7 +134,7 @@
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-		<div class="content2 cTitle">designer</div>
+		<div class="content2 cTitle meorijom" style="font-size:50px;"># Salon Management</div>
 		 <div class="content1">
             <div class="branchBox">지점 관리</div>
             <div class="branch1"><button class="branchbtn" onclick="location.href='/branchregistrationFrm'">지점등록</button></div>

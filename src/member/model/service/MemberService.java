@@ -1,6 +1,7 @@
 package member.model.service;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
@@ -71,6 +72,33 @@ public class MemberService {
 		ArrayList<Member> list= new MemberDao().selectAllMember(conn);
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public Member idSearch(String memberName, String memberPhone) {
+		Connection conn=JDBCTemplate.getConnection();
+		Member m=new MemberDao().idSearch(conn,memberName,memberPhone);
+		JDBCTemplate.close(conn);
+		return m;
+		
+	}
+
+	public int pwSearch(String memberId, String memberPhone) {
+		Connection conn=JDBCTemplate.getConnection();
+		int m= new MemberDao().pwSearch(conn,memberId,memberPhone);
+		JDBCTemplate.close(conn);
+		
+		return m;
+	}
+
+	public int pwUpdate(Member m) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new MemberDao().pwUpdate(conn,m);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
 	}
 
 	
