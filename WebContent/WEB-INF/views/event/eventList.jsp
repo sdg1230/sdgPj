@@ -257,15 +257,19 @@ function questionFunc(memberId){
             		<div class="eventDate" >
             			${e.eventDate }
             		</div>
-            		<div class="eventListPart2">
+            		
+            		<div class="eventListPart2" onclick="eventDetail();">
             			<div style="width: 150px; height: 50px; background-color: red; text-align: center; margin: 0 auto;">
             				<span style="line-height: 50px; color: white; font-weight: bold;">EVENT</span>
             			</div>
             			<div style="margin: 0 auto; text-align: center; padding-top: 140px;">
-            				<a style="font-size: 30px; color: red; font-weight: bold;" href="/eventDetail?eventNo=${e.eventNo }">상세보기  →</a>
+            			
+            				<a style="font-size: 30px; color: red; font-weight: bold;" href="/eventDetail?eventNo=${e.eventNo }" id="eventA">상세보기  →</a>
+            			
             			</div>
             			
             		</div>
+            		
             	</div>
             	
             </c:forEach>
@@ -273,6 +277,5 @@ function questionFunc(memberId){
          </div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
-	
 </body>
 </html>

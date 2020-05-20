@@ -322,8 +322,9 @@
             border: 1px;
         }
         #addrSearchBtn:hover{
-        	cursor:hover;
+        	cursor: pointer;
         	background-color: #1391FF;
+        	opacity: 0.8;
         }
     
         #bottomBtn{

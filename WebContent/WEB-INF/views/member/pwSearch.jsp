@@ -78,7 +78,7 @@
 						
 						
 					}else{
-						$("#result").html("일지하는 정보가 없습니다.");
+						$("#result").html("일치하는 정보가 없습니다.");
 					}
 				 $("#pw").focusout(function () {
 					 var pwReg=/^[a-zA-Z0-9]{8,12}/;
