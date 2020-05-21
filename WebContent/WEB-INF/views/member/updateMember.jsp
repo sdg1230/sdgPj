@@ -102,7 +102,7 @@
              }
               $(this).focus(function(){
                      comments[0].innerHTML="";
-                 });
+                });
          });
          $('#rePw').focusout(function(){
              if($(this).val()==$("#pw").val()){
@@ -137,12 +137,13 @@
   
          $("form").submit(function(){
              var num=0;
+             $('#pw').focusout();
+             $('#rePw').focusout();
              for(var i=0; i<count.length; i++){
                  if(count[i]==false){
                      num++;
                  }
              }
-             console.log(num);
              if(num==0){
                  return true;
              }else{
@@ -153,7 +154,6 @@
          });
          
          $("#cancel").click(function(){
-        	 console.log("a");
         	 location.href="/mypage";
          });
     });

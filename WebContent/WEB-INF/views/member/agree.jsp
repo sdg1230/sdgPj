@@ -211,14 +211,21 @@ IP주소, 쿠키, 서비스 이용기록, 방문기록 등
             height: 40px;
              margin-top: 50px;
         }
-        
+        #nextBtn:hover{
+        	cursor:pointer;
+        	background-color: red;
+        }
         #cancel{
-            background-color: black;
+            background-color: gray;
             color: white;
             margin-left: 20px;
             width: 150px;
             height: 40px; 
              margin-top: 50px;
+        }
+        #cancel:hover{
+        	cursor:pointer;
+        	background-color: black;
         }
         #bottomBtn{
             width:98%;

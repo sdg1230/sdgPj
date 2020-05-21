@@ -168,17 +168,17 @@
 
 	function viewFunc1() {
 		window.open("/view/agree1.html", "_blank",
-				"width=500,height=500,top=100,left=400");
+				"width=400,height=400,top=100,left=400");
 		$("#agree1").attr("checked", true);
 	}
 	function viewFunc2() {
 		window.open("/view/agree2.html", "_blank",
-				"width=500,height=500,top=100,left=400");
+				"width=400,height=400,top=100,left=400");
 		$("#agree2").attr("checked", true);
 	}
 	function viewFunc3() {
 		window.open("/view/agree3.html", "_blank",
-				"width=500,height=500,top=100,left=400");
+				"width=400,height=400,top=100,left=400");
 		$("#agree3").attr("checked", true);
 	}
 

@@ -321,7 +321,11 @@
             border-radius: 3px;
             border: 1px;
         }
-        
+        #addrSearchBtn:hover{
+        	cursor: pointer;
+        	background-color: #1391FF;
+        	opacity: 0.8;
+        }
     
         #bottomBtn{
             width:98%;
@@ -339,18 +343,26 @@
         }
         #joinBtn{
             color: white;
-            background-color: red;
+            background-color: #CD3C41;
             margin-top: 30px;
             margin-left: 400px;
             width: 150px;
             height: 40px;
         }
+        #joinBtn:hover{
+        	cursor:pointer;
+        	background-color:red;
+        }
         #cancel{
-            background-color: black;
+            background-color: gray;
             color: white;
             margin-left: 20px;
             width: 150px;
             height: 40px; 
+        }
+        #cancel:hover{
+        	cursor:pointer;
+        	background-color: black;
         }
 	</style>
 </html>

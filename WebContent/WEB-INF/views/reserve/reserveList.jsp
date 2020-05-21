@@ -20,10 +20,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Insert title here</title>
+<title>내 예약 내역</title>
 <style>
-<<<<<<<
-HEAD
+
 .glyphicon {
 	margin-bottom: 10px;
 	margin-right: 10px;
@@ -84,9 +83,6 @@ small {
 	background-color: #f5f5f5;
 }
 
-.ctitle p {
-	font-size: 60px;
-}
 
 .reserveno {
 	box-shadow: 5px 5px 15px grey;
