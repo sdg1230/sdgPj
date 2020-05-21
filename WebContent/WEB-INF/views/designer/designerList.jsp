@@ -167,6 +167,7 @@ $("#fileDelBtn").click(function(){
 //지점명별 검색..
 $("#salonName").change(function(){
 	var salonName =$(this).val();
+	$("input[name=keyword]").val("");
 	if(salonName==""){
 		location.href="/designerList";
 	}else{
@@ -198,7 +199,7 @@ $("#salonName").change(function(){
 $("input[name=keyword]").keyup(function(){
    var keyword = $(this).val();
    var salonName = $("#salonName").val();
-   if(keyword==""){
+   if(keyword==""&&salonName==""){
 	   $(".cBody2").html("");
 	   fn_more(1);
 	   $("#more-btn").show();
