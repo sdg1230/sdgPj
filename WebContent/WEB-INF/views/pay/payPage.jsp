@@ -148,7 +148,7 @@
 		$("#dcPrice").html(dcPrice + "원");
 		payPrice = Number('${r.totalPrice }') - dcPrice;
 		$("#payPrice").append(payPrice + "원");
-		$("#dc").html(dcPrice + "원");
+		$("#dc").html('${r.totalPrice }' + "원");
 	});
 
 	$("#chk").click(function() {

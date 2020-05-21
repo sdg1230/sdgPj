@@ -448,9 +448,9 @@ text-align: center;
 									
 								</c:if>
 								<br>
-								${star.reviewStar }점
+								${star.reviewStar } 점
 																<br>
-								${star.reviewWriter }점
+								[ ${star.reviewWriter } ] 님 
 																<br>
 								${star.reviewDate }
 																<br>

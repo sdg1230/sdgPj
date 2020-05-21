@@ -141,7 +141,7 @@ function addrSearch(){
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-		<div class="content2 cTitle">designer</div>
+		<div class="content2 cTitle meorijom" style="font-size: 50px;"># Salon Management</div>
 		<div class="content1">
             <div class="div3">
                 <h1>가맹점 수정</h1>

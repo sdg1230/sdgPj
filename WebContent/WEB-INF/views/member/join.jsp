@@ -153,7 +153,7 @@
                 });
         });
         $('#phone').focusout(function(){
-           var phoneReg=/^(010)-?([0-9]{3,4})-?([0-9]{4})$/;
+           var phoneReg=/^(010)-\d{4}-\d{4}$/;
             if(!phoneReg.test($(this).val())){
                 comments[4].innerHTML="0xx-xxxx-xxxx로 입력해주세요";
                 count[4]=false;

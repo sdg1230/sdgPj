@@ -56,7 +56,7 @@ public class InsertQuestionServlet extends HttpServlet {
 			request.setAttribute("msg", "관리자의 답변을 기다려 주세요.");
 			request.setAttribute("loc", "/questionList?questionWriter="+q.getQuestionWriter());
 		}else {
-			request.setAttribute("msg", "문의 등록 실패");
+			request.setAttribute("msg", "문의 등록 실패. 내용을 입력하세요.");
 			request.setAttribute("loc", "/questionList");
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");

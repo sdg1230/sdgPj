@@ -31,6 +31,7 @@
     		 	<li class="name">이름</li><li class="id">아이디</li><li class="gender">성별</li><li class="phone">휴대폰번호</li><li class="addr">주소</li><li class="age">나이</li><li class="date">가입일</li><li id="m" class="del">정보수정</li>
     		 </ul>
     		<c:forEach items="${list}" var="m" >
+    		<c:if test="${m.memberId ne 'admin' }">
 	    		<tr id="tr">
 	    			<td class="id">${m.memberName }</td>
 	    			<td class="name">${m.memberId }</td>
@@ -43,6 +44,7 @@
 	    			
 	    			</td>
 	    		</tr>
+	    	</c:if>
     		</c:forEach>
     	</table>
     </div>

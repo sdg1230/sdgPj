@@ -56,7 +56,7 @@ public class InsertAnswerServlet extends HttpServlet {
 			request.setAttribute("msg", "답변등록 성공");
 			request.setAttribute("loc", "/questionAnswer");
 		}else {
-			request.setAttribute("msg", "답변 등록 실패");
+			request.setAttribute("msg", "답변 등록 실패. 내용을 입력하세요.");
 			request.setAttribute("loc", "/questionList");
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");

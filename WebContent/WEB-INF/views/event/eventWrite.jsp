@@ -186,7 +186,7 @@ function questionFunc(memberId){
 		<table width="100%">
 			<tr>
 				<th style="width: 200px; height: 50px; border-top: 2px solid red; background-color: #DDE3E9;">*제목</th> 
-				<td style="border-top: 2px solid red;"><input type="text" id="eventTitle" name="eventTitle" placeholder=" 제목을 입력하세요"></td> 
+				<td style="border-top: 2px solid red;"><input type="text" id="eventTitle" name="eventTitle" placeholder=" 제목을 입력하세요" required></td> 
 			</tr>
 			<tr>
 				<th style="width: 200px; height: 50px; background-color: #DDE3E9;">썸네일 등록</th> 

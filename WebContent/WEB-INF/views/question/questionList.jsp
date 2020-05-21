@@ -423,7 +423,7 @@
 					<label for="upload_file">사진등록</label> 
 					<input type="file" id="upload_file" class="upload-hidden" name="questionFilename"> 
 				</div>
-				<input type="text" placeholder="     상담하실 내용을 입력해주세요." style="width: 800px; height: 35px; margin-left: 5px;" name="questionContent">
+				<input type="text" placeholder="     상담하실 내용을 입력해주세요." style="width: 800px; height: 35px; margin-left: 5px;" name="questionContent" required>
 				<button type="submit" style="width: 60px; height: 40px; border: none; background-color: #fef01b; color: black; font-weight: bold; font-size: 15px;">전송</button>
 			</div>
 			</form>
@@ -444,7 +444,7 @@
 					<input type="file" id="upload_file" class="upload-hidden" name="questionFilename1"> 
 				</div>
 				<input type="text" placeholder="     답변하실 내용을 입력해주세요." style="width: 800px; height: 35px; margin-left: 5px;" name="questionContent1">
-				<button type="submit" style="width: 60px; height: 40px; border: none; background-color: #fef01b; color: black; font-weight: bold; font-size: 15px;">전송</button>
+				<button type="submit" style="width: 60px; height: 40px; border: none; background-color: #fef01b; color: black; font-weight: bold; font-size: 15px;" required>전송</button>
 			</div>
 			</form>
 			</c:if>

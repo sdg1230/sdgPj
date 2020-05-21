@@ -128,7 +128,7 @@ table {
 	<div class="wrapper">
 		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-		<div class="content2 cTitle">designer</div>
+		<div class="content2 cTitle meorijom" style="font-size: 50px;"># Salon Management</div>
 		<div class="content1">
 			<form action="/branchregistration" method="post"
 				enctype="multipart/form-data" id="updateFrm">

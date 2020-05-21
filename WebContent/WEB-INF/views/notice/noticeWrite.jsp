@@ -159,7 +159,7 @@ function questionFunc(memberId){
 		<table width="100%">
 			<tr>
 				<th style="width: 200px; height: 50px; border-top: 2px solid red; background-color: #DDE3E9;">*제목</th> 
-				<td style="border-top: 2px solid red;"><input type="text" id="noticeTitle" name="noticeTitle" placeholder=" 제목을 입력하세요"></td> 
+				<td style="border-top: 2px solid red;"><input type="text" id="noticeTitle" name="noticeTitle" placeholder=" 제목을 입력하세요" required></td> 
 			</tr> 
 			<tr> 
 				<th style="background-color: #DDE3E9;">*내용</th> 
