@@ -196,6 +196,13 @@
            
            
         	
+            if($("#rePw").val()==$("#pw").val()){
+                comments[3].innerHTML="";
+            	return true;
+            }else{
+            	comments[3].innerHTML="비밀번호를 확인해주세요";
+                return false;
+            }
             var num=0;
             for(var i=0; i<count.length; i++){
                 if(count[i]==false){
