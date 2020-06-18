@@ -116,7 +116,7 @@ $("#fileDelBtn").click(function() {
     $("input[name=status]").val('delete');
     $("#img-view").attr("src", "");
 });
-$("#file1").change(function() {
+$("#file").change(function() {
 
     $("#fileDelBtn").show();
     $(".delFile").show();
